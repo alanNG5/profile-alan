@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        body {
+            background-color: #D5D5D5;
+            font-family: system-ui;
+        }
+
+        .container {
+            background-color: #E9E7EA;
+            width: 1000px;
+            max-width: 100%;
+            margin: auto;
+            padding: 50px;
+            box-shadow: 0 10px 50px #858585;
+            display: grid;
+            grid-template-columns: 35% 60%;
+            column-gap: 5%;
+            row-gap: 30px;
+        }
+
+        .avatar img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .avatar {
+            display: flex;
+            justify-content: end;
+        }
+
+        .name {
+            padding-left: 30px;
+            border-left: 1px solid #000;
+        }
+
+        .name h1 {
+            font-weight: 300;
+            font-size: xxx-large;
+            margin: 0 0 5px;
+        }
+
+        .name .specialize {
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 3px;
+        }
+
+        .name .contact {
+            padding: 0;
+            list-style: none;
+        }
+
+        .name .contact span {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: small;
+            margin-right: 20px;
+        }
+
+        .name .contact li {
+            padding: 5px 0;
+            transform: translate(-40px);
+            /* 30px as padding-left + 20px as width of span divided by 2 */
+            background-color: #E9E7EA;
+        }
+
+        .info ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-align:right;
+            line-height: 30px;
+        }
+
+        .intro {
+            padding-left: 30px;
+            border-left: 1px solid #000;
+            text-align: justify;
+        }
+
+        h2 {
+            padding: 0;
+            margin: 0 0 20px;
+        }
+
+        .exp {
+            text-align: right;
+        }
+
+        .exp h4 {
+            margin: 20px 0 10px;
+        }
+
+        .skills {
+            margin-top: 50px;
+        }
+
+        .exp ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            line-height: 35px;
+        }
+
+        .project {
+            padding-left: 30px;
+            text-align: justify;
+            border-left: 1px solid #000;
+        }
+
+        .project .web {
+            color: green;
+            padding: 10px 0;
+        }
+
+        .project .location {
+            font-weight: 500;
+            padding: 10px 0;
+        }
+
+        .project .item {
+            position: relative;
+        }
+
+        .project .item::before {
+            content: "";
+            position: absolute;
+            width: 13px;
+            height: 13px;
+            background-color: #000;
+            border-radius: 50%;
+            left: -37px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="avatar">
+            <img src="" alt="" />
+        </div>
+        <div class="name">
+            <h1>Alan Ng</h1>
+            <div class="specialize">
+                Playmaker
+            </div>
+            <ul class="contact">
+                <li>
+                    <span>M</span>61775789
+                </li>
+                <li>
+                    <span>E</span>ng_lc5@hotmail.com
+                </li>
+                <li>
+                    <span>G</span>alanNG5.github.io
+                </li>
+            </ul>
+        </div>
+        <div class="info">
+            <ul>
+                <li>
+                    From <b>Hong Kong</b> - ThisNation
+                </li>
+                <li>
+                    28/10/1990
+                </li>
+                <li>
+                    Programmer
+                </li>
+            </ul>
+        </div>
+        <div class="intro">
+            <h2>INTRO</h2>
+            A versatile and highly talented player in the media, he plays mainly as a attacking or an central midfielder but can also operate in several other positions and has been used as a winger or second striker. He has even been deployed in a deeper creative midfield position and on occasion, a box-to-box role or as a false 9. He is often described by pundits as one of the best and most complete modern day advanced playmakers due to his technique, skill, athleticism, work-rate off the ball, vision, crossing accuracy, wide range of passing, and powerful long-range shooting ability with either foot.
+        </div>
+        <div class="exp">
+            <h2>EXPERIENCE</h2>
+
+            <div class="item">
+                <h4>Genk</h4>
+                <div class="time">
+                    <span>
+                        2008 - 2012
+                    </span>
+                    <span>
+                        Attacking Midfielder
+                    </span>
+                </div>
+                <div class="desc">App 97; Goal 16</div>
+            </div>
+
+            <div class="item">
+                <h4>Werder Bremen</h4>
+                <div class="time">
+                    <span>
+                        2012 - 2013
+                    </span>
+                    <span>
+                        Attacking Midfielder
+                    </span>
+                </div>
+                <div class="desc">App 33; Goal 10</div>
+            </div>
+
+            <div class="item">
+                <h4>Chelsea</h4>
+                <div class="time">
+                    <span>
+                        2013
+                    </span>
+                    <span>
+                        Winger
+                    </span>
+                </div>
+                <div class="desc">App 3; Goal 0</div>
+            </div>
+
+            <div class="item">
+                <h4>VfL Wolfsburg</h4>
+                <div class="time">
+                    <span>
+                        2013 - 2015
+                    </span>
+                    <span>
+                        Attacking Midfielder
+                    </span>
+                </div>
+                <div class="desc">App 52; Goal 13</div>
+            </div>
+
+            <div class="item">
+                <h4>Manchester City</h4>
+                <div class="time">
+                    <span>
+                        2015 - 2024
+                    </span>
+                    <span>
+                        Midfielder
+                    </span>
+                </div>
+                <div class="desc">App 257; Goal 68</div>
+            </div>
+
+            <h2 class="skills">Skills</h2>
+            <ul>
+                <li>Playmaker</li>
+                <li>Set Piece</li>
+                <li>Long Shots</li>
+                <li>Crossing</li>
+                <li>Dribbling</li>
+                <li>box-to-box</li>
+                <li>Leadership</li>
+                <li>Versatility</li>
+            </ul>
+
+        </div>
+
+        <div class="project">
+            <h2>Honours</h2>
+
+            <div class="item">
+                <h4>Professional Competition</h4>
+                <div class="time">2008 - 2024</div>
+                <div class="web">Titles Won</div>
+                <div class="location">Belgium, Germany and England</div>
+                <div class="desc">The biggest achievement was the completion of continental treble in the season of 2022-2023.
+                    <ul>
+                        <li>Belgian Pro League</li>
+                        <li>Belgian Cup</li>
+                        <li>Belgian Super Cup</li>
+                        <li>DFB-Pokal</li>
+                        <li>DFL-Supercup</li>
+                        <li>Premier League</li>
+                        <li>FA Cup</li>
+                        <li>EFL Cup</li>
+                        <li>FA Community Shield</li>
+                        <li>UEFA Champions League</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>International Competition</h4>
+                <div class="time">2010 - 2024</div>
+                <div class="web">National Performance</div>
+                <div class="location">Belgium</div>
+                <div class="desc">Appearance for 105 times; Scoring 28.
+                    <ul>
+                        <li>FIFA World Cup - third place</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="item">
+                <h4>Individual Awards</h4>
+                <div class="time">2012 - 2024</div>
+                <div class="web">Personal Award, Team of the Year</div>
+                <div class="location">League, UEFA & FIFA</div>
+                <div class="desc">De Bruyne was ranked the fourth-best footballer in the world by The Guardian in 2017[209] and the twelfth-best in 2019.
+                    <ul>
+                        <li>Germany Footballer of the Year</li>
+                        <li>PFA Player's Player of the Year</li>
+                        <li>UEFA Champions League Midfielder of the Season</li>
+                        <li>PFA Premier League Team of the Year</li>
+                        <li>FIFA World Cup Dream Team</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+</html>

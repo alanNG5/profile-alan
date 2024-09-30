@@ -1,0 +1,80 @@
+# Visualize on https://erd.surge.sh
+#
+# Relationship Types
+#  -    - one to one
+#  -<   - one to many
+#  >-   - many to one
+#  >-<  - many to many
+#  -0   - one to zero or one
+#  0-   - zero or one to one
+#  0-0  - zero or one to zero or one
+#  -0<  - one to zero or many
+#  >0-  - zero or many to one
+#
+////////////////////////////////////
+
+
+
+users
+----
+id
+username varchar
+email varchar
+password_hash varchar
+is_admin boolean
+created_at timestamp
+updated_at timestamp
+
+products
+--------
+id
+brand varchar
+model_name varchar
+model_no varchar
+current_price integer
+description varchar
+stock_qtn integer
+is_pre_owned boolean
+created_at timestamp
+updated_at timestamp
+
+sales
+-----
+id
+product_id fk - products.id
+user_id fk >- users.id
+selling_price integer
+recipient varchar
+contact_no varchar
+shipping_address varchar
+payment_method enum(visa,paypal)
+order_status enum(shipment_arranging,delivered)
+created_at timestamp
+updated_at timestamp
+
+return
+------
+id
+sales_order_id fk - sales.id
+reason_of_return text
+request_status enum(pending,refunded,rejected)
+created_at timestamp
+updated_at timestamp
+
+product_images
+-------------
+id
+product_id integer fk - products.id
+image_path varchar
+created_at timestamp
+updated_at timestamp
+
+
+
+# users (238, -1345)
+# view: (-146, -1697)
+# zoom: 0.789
+# products (-73, -1399)
+# sales (211, -1660)
+# return (570, -1599)
+# product_image (-80, -1660)

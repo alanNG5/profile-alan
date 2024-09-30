@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impetus Display</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/frame.css">
+    <style>
+
+        main {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            perspective: 10px;
+        }
+
+        main .backdrop {
+            position: relative;
+            display: flex;
+            height: 100%;
+            transform-style: preserve-3d;
+            z-index: -99;
+            justify-content: center;
+            align-items: center;
+        }
+
+        main .backdrop img {
+            position: absolute;
+            z-index: -99;
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transform: translateZ(-10px) scale(2);
+        }
+
+        main .carousel {
+            font-size: 3rem;
+            background-color: #222;
+            color: white;
+            padding: 100px;
+            height: fit-content;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar style-for-centering">
+            <a href="#" class="logo">
+                Impetus
+            </a>
+            <ul id="navList">
+                <li><a href="" class="active">Home</a></li>
+                <li><a href="">Catalogue</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+
+            <div class="login-btn">
+                <button>Login</button>
+            </div>
+
+            <div class="toggle-btn" id="toggleBtn">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="backdrop">
+            <img src="images/cht-master-px1.jpg" alt="">
+        </div>
+        <div class="carousel">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit quis mollitia est esse enim omnis voluptatem blanditiis ipsa, ad ducimus rerum molestiae eum aliquid, sequi id excepturi accusantium culpa nemo voluptatibus obcaecati dolor et quibusdam. Esse a quis, sint soluta maiores facilis eveniet nisi quos error dicta ab explicabo mollitia, eos dignissimos accusamus eligendi delectus quaerat corporis sapiente eius ipsum aperiam placeat nesciunt. Optio minima, similique expedita tenetur ex asperiores, molestias obcaecati deleniti aut perferendis nihil sequi temporibus modi quod nemo enim nesciunt rem corporis in accusantium. Deleniti accusantium fugiat a unde. Quaerat in eos magnam harum repellendus omnis quasi mollitia porro autem.
+        </div>
+        <div class="backdrop">
+            <img src="images/gearconcept23.jpg" alt="">
+
+        </div>
+        <div class="carousel">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis laborum atque ex! Voluptas perferendis ipsum fugit enim natus numquam reiciendis saepe dicta! Beatae dicta minus itaque in a provident nulla!
+        </div>
+    </main>
+
+<script>
+    // navbar toggle
+    let navList = document.getElementById("navList");
+    let toggleBtn = document.getElementById("toggleBtn");
+
+    toggleBtn.addEventListener("click", () => {
+        navList.classList.toggle("show");
+    });
+
+</script>
+</body>
+</html>
+
+const allOrdersTable = document.getElementById("allOrders");
+
+async function getAllOrders() {
+  let res = await fetch(`/admin/request/all`);
+  let json = await res.json();
+
+  if (json.error) {
+    alert(json.error);
+    return;
+  }
+
+  let fields = [
+    "id",
+    "name",
+    "location",
+    "category_type",
+    "type",
+    "reporter",
+    "phone_number",
+    "create_time",
+    "assign_time",
+    "complete_time",
+  ];
+
+  for (let order of json.orders) {
+    let tr = document.createElement("tr");
+
+    for (let key of fields) {
+      let value = order[key];
+
+      let td = document.createElement("td");
+
+      if (key == "id") {
+        let a = document.createElement("a");
+        a.href = "user_request.html?id=" + order.id;
+        a.textContent = value;
+        td.appendChild(a);
+      } else if (key.endsWith("_time")) {
+        td.textContent = value ? new Date(value).toLocaleDateString() : "-";
+      } else {
+        td.textContent = value;
+      }
+
+      tr.appendChild(td);
+    }
+    allOrdersTable.appendChild(tr);
+  }
+}
+getAllOrders();

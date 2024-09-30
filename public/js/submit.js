@@ -1,0 +1,29 @@
+let checkbox = document.getElementById("pre-owned-checkBox");
+checkbox.value = checkbox.checked;
+checkbox.addEventListener("change", () => {
+  checkbox.value = checkbox.checked;
+});
+
+
+document.getElementById("create-item-form").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const formData = new FormData(form);
+
+    const res = await fetch("/admin/newItem", {
+        method: form.method,
+        headers: {
+            Accept: "application/json",
+        },
+        body: formData,
+    });
+
+    const result = await res.json();
+
+    if (result.error) {
+        alert(result.error);
+        return;
+    }
+    alert("Item was created successfully.");
+});

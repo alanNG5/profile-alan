@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Create New Item</h2>
+    <form id="create-item-form" action="/newItem" enctype="multipart/form-data" method="post">
+      <div>Brand: <input type="text" name="brand_entry" required="required"/></div>
+      <div>Model Name: <input type="text" name="model_name_entry" required="required"/></div>
+      <div>Model Number: <input type="text" name="model_no_entry" required="required"/></div>
+      <div>Price: <input type="number" name="current_price_entry" min="1000" step="10" required="required"/></div>
+      <div>Details: <input type="text" name="description_entry" /></div>
+      <div>Stock Quantity: <input type="number" name="stock_qtn_entry" required="required" /></div>
+      <div>Pre-owned: <input type="checkbox" id="pre-owned-checkBox" name="is_pre_owned_entry" /></div>
+
+      <div>File: <input type="file" name="image_entry" multiple="multiple" required="required"/></div>
+      <input type="submit" value="Upload" />
+    </form>
+
+<script src="./js/submit.js"></script>
+</body>
+</html>
