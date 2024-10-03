@@ -18,7 +18,6 @@ const closeBtn = document.getElementById("close");
 
 closeBtn.onclick = () => {
     loginModal.style.display = "none";
-    console.log("close");
 };
 
 window.onclick = function (event) {
@@ -40,6 +39,25 @@ shiftToLoginBtn.addEventListener("click", () => {
     modalStatus.classList.toggle("active");
 });
 
+// logout popup
+const logoutBtn = document.getElementById("user-info");
+const logoutModal = document.getElementById("logout-modal");
+
+logoutBtn.addEventListener("click", () => {
+    logoutModal.style.display = "block";
+});
+
+const cancelLogoutBtn = document.getElementById("cancel-btn");
+
+cancelLogoutBtn.onclick = () => {
+    logoutModal.style.display = "none";
+}
+
+// window.onclick = function (event) {
+//     if (event.target === logoutModal) {
+//         logoutModal.style.display = "none";
+//     };
+// };
 
 const header = document.querySelector("header");
 const scrollWatcher = document.createElement("div");

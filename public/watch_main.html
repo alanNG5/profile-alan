@@ -36,7 +36,6 @@
 
         section p {
             font-size: 1.6rem;;
-            text-align: justify;
             color: var(--color-supp);
             line-height: 30px;
             margin: 10px 20px;
@@ -256,7 +255,6 @@
         }
 
         .hexagons-board-bkg {
-            /* background: linear-gradient(in lch, rgba(0, 0, 0, 0.6), rgba(255, 255, 255, 0.2)); */
             background: linear-gradient(90deg,
                 rgba(255, 255, 255, 0.3) 0%,
                 rgba(255, 255, 255, 0.1) 15%    ,
@@ -402,6 +400,16 @@
 
         @media (max-width: 1024px) {
 
+            section h1 {
+                line-height: 0px;
+                margin: 40px 0px;
+            }
+
+            section p {
+                line-height: 20px;
+                margin: 30px 10px;
+            }
+
             .carousel-container {
                 flex-direction: column;
             }
@@ -429,31 +437,81 @@
             }
         }
 
-        @media (max-width: 485px) {
+        @media (max-width: 650px) {
+            .hexagons-board {
+                min-width: 100dvw;
+                overflow: auto;
+            }
+
+            .hexagons {
+                height: 120%;
+            }
+
+            main .backdrop:nth-last-child(1) {
+            height: 15dvh;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            section h1 {
+                font-size: 2.6rem;
+                line-height: 23px;
+                text-align: center;
+                margin: 0;
+            }
+
+            section p {
+                text-align: left;
+            }
+
+            .circle {
+                shape-outside: none;
+                width: 350px;
+                height: 350px;
+            }
+
             .img-caption {
                 position: fixed;
                 width: 100%;
                 inset: 0 0 200% 0;
                 height: fit-content;
             }
+
+            .hexagons div:nth-last-child(1), .hexagons div:nth-last-child(2) {
+                display: none;
+            }
+
+            .hexagons {
+                height: 140%;
+            }
+
         }
     </style>
 </head>
 <body>
     <header>
         <div class="navbar style-for-centering">
-            <div class="logo">
-                <img src="images/logoIMP.png" alt="logo">
-                <span>WATCH STORE</span>
-            </div>
+            <a href="watch_main.html">
+                <div class="logo">
+                    <img src="images/logoIMP.png" alt="logo">
+                    <span>WATCH STORE</span>
+                </div>
+            </a>
             <ul id="navList">
-                <li><a href="" class="active">Home</a></li>
-                <li><a href="">Catalogue</a></li>
-                <li><a href="">About</a></li>
+                <li><a href="watch_main.html" class="active">Home</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
 
             <div>
                 <button id="login-btn">Login</button>
+                <div id="user-info">
+                    <i class='bx bxs-user-circle'></i>
+                    <span id="role-info">role</span>
+                    <span> | </span>
+                    <span id="name-info">name</span>
+                </div>
             </div>
 
             <div class="toggle-btn" id="toggleBtn">
@@ -548,22 +606,26 @@
     </main>
 
     <div id="login-modal" class="modal">
-        <div class="modal-content">
 
+        <div class="modal-content">
             <span id="close">&times;</span>
 
             <div class="form-container form-login">
                 <h1>Login</h1>
-                <form action="">
+                <form id="login-form" action="/user/login" method="POST">
+
                     <div class="input-box">
-                        <input type="text" placeholder="Username" minlength="6" required/>
+                        <input type="text" name="username" placeholder="Username" minlength="6" required/>
                         <i class='bx bxs-user'></i>
                     </div>
+
                     <div class="input-box">
-                        <input type="password" placeholder="Password" minlength="8" required/>
+                        <input type="password" name="password" placeholder="Password" minlength="8" required/>
                         <i class='bx bxs-lock-alt' ></i>
                     </div>
-                    <input type="submit" id="login-submit" value="Login">
+
+                    <input type="submit" class="submit-btn" value="Login">
+
                     <div class="account-status">
                         <p>Don't have an account? <a href="#" id="register-link">Register Now</a></p>
                     </div>
@@ -571,9 +633,8 @@
             </div>
 
             <div class="form-container  form-register">
-
                 <h1>Register</h1>
-                <form action="">
+                <form id="register-form">
                     <div class="input-box">
                         <input type="text" placeholder="Username" minlength="6" required/>
                         <i class='bx bxs-user'></i>
@@ -587,13 +648,23 @@
                         <input type="password" placeholder="Password" minlength="8" required/>
                         <i class='bx bxs-lock-alt' ></i>
                     </div>
-                    <input type="submit" id="login-submit" value="Register">
+
+                    <input type="submit" class="submit-btn" value="Register">
+
                     <div class="account-status">
                         <p>Already have an account? <a href="#" id="login-link">Login</a></p>
                     </div>
                 </form>
             </div>
 
+        </div>
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <p>Do you want to logout?</p>
+            <button id="logout-btn">Logout</button>
+            <button id="cancel-btn">Stay Logged In</button>
         </div>
     </div>
 
@@ -623,11 +694,11 @@
         <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
     </footer>
 
-
 <script src="./js/general.js"></script>
-<script src="./js/fetch.js"></script>
+<script src="./js/auth.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
+<script src="./js/fetch.js"></script>
 <script>
     // fetch product data
     response();

@@ -11,7 +11,7 @@ document.getElementById("create-item-form").addEventListener("submit", async fun
     const form = event.target;
     const formData = new FormData(form);
 
-    const res = await fetch("/admin/newItem", {
+    const res = await fetch(form.action, {
         method: form.method,
         headers: {
             Accept: "application/json",

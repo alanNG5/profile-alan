@@ -35,4 +35,14 @@
         scroll-behavior: auto !important;
       }
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    a:hover {
+      text-decoration:none;
+      cursor:pointer;
+    }
   }

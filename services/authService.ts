@@ -4,14 +4,16 @@ import { hashPassword, checkPassword } from "../utils/hash";
 export class AuthService {
   public constructor(private knex: Knex) {}
 
-  table() {
-    return this.knex("users");
-  }
+  // table() {
+  //     return this.knex("users");
+  // }
 
-  async login(name_input: string, password_input: string) {
-    let userInfoQuery = await this.table()
-      .select("*")
-      .where("username", name_input);
+  async login(username_input: string, password_input: string) {
+    // let userInfoQuery = await this.table()
+    let userInfoQuery = await this.knex
+      .select("username", "is_admin", "users.id", "password_hash")
+      .from("users")
+      .where("users.username", username_input);
 
     if (userInfoQuery.length > 0) {
       let pwd_hash_query = userInfoQuery[0].password_hash;
@@ -22,13 +24,13 @@ export class AuthService {
       });
 
       if (compareResult) {
-        console.log(`Login as ${userInfoQuery[0].username}successfully.`);
+        console.log(`Login as " ${userInfoQuery[0].username} " successfully.`);
 
         return {
           flag: true,
           loginID: userInfoQuery[0].id,
           loginUsername: userInfoQuery[0].username,
-          loginRole: userInfoQuery[0].is_admin,
+          loginAdmin: userInfoQuery[0].is_admin,
         };
       } else {
         return {
