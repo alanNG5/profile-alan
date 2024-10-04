@@ -13,13 +13,24 @@ app.use(sessionMiddleware);
 dotenv.config();
 const port = process.env.PORT;
 
+app.get("/", (req: Request, res: Response) => {
+  console.log(
+    "server.ts@@@ CHECKING req.session: ",
+    req.session.username,
+    req.session.userid,
+    req.session.admin_role,
+    req.session.id
+  );
+  const isLoggedIn = req.session.username ? true : false;
+  res.sendFile(path.resolve("public", "watch_main.html"), {
+    headers: { "X-Is-Logged-In": isLoggedIn },
+  });
+  // res.sendFile(path.resolve("public", "watch_main.html"));
+  // return;
+});
+
 import { routes } from "./routers";
 app.use("/", routes);
-
-app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.resolve("public", "watch_main.html"));
-  return;
-});
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));

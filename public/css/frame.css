@@ -204,14 +204,13 @@ header * {
     cursor: pointer;
 }
 
-.navbar div #user-info i {
-    font-size: 3.2rem;
-}
-
-.navbar div #user-info span {
+.navbar div #user-info {
     font-size: 2.3rem;
 }
 
+.navbar div #user-info i {
+    font-size: 3.2rem;
+}
 
 .toggle-btn {
     display: none;
@@ -448,7 +447,6 @@ input:focus:invalid {
 }
 
 #logout-modal .modal-content button {
-    /* border: 2px solid var(--theme-sec); */
     border: none;
     outline: none;
     border-radius: 10px;
@@ -457,12 +455,12 @@ input:focus:invalid {
     margin-top: 20px;
 }
 
-#logout-modal .modal-content #logout-btn {
+/* #logout-modal .modal-content #logout-btn {
     background: var(--theme-main);
     color: var(--color-ter);
     margin-right: 20px;
     box-shadow: rgba(255, 255, 255, .3) 0 0 6px;
-}
+} */
 
 .footer {
     position: relative;

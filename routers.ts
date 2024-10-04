@@ -26,3 +26,5 @@ const authService = new AuthService(knex);
 const authController = new AuthController(authService);
 
 routes.post("/user/login", authController.login);
+routes.get("/user", authController.checkVisitorStatus);
+routes.post("/user/logout", authController.logout);

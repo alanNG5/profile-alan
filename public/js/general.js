@@ -6,6 +6,21 @@ toggleBtn.addEventListener("click", () => {
     navList.classList.toggle("show");
 });
 
+
+// scroll down effect
+const header = document.querySelector("header");
+const scrollWatcher = document.createElement("div");
+
+scrollWatcher.setAttribute("data-scroll-watcher", "");
+header.before(scrollWatcher);
+
+const navObserver = new IntersectionObserver((entries) => {
+    // console.log(entries);
+    header.classList.toggle("scroll-down", !entries[0].isIntersecting)
+}, {rootMargin: "350px 0px 0px 0px"});
+
+navObserver.observe(scrollWatcher);
+
 // login popup
 const loginBtn = document.getElementById("login-btn");
 const loginModal = document.getElementById("login-modal");
@@ -18,12 +33,6 @@ const closeBtn = document.getElementById("close");
 
 closeBtn.onclick = () => {
     loginModal.style.display = "none";
-};
-
-window.onclick = function (event) {
-    if (event.target === loginModal) {
-        loginModal.style.display = "none";
-    };
 };
 
 // toggle for login-register
@@ -40,10 +49,10 @@ shiftToLoginBtn.addEventListener("click", () => {
 });
 
 // logout popup
-const logoutBtn = document.getElementById("user-info");
+const logoutBox = document.getElementById("user-info");
 const logoutModal = document.getElementById("logout-modal");
 
-logoutBtn.addEventListener("click", () => {
+logoutBox.addEventListener("click", () => {
     logoutModal.style.display = "block";
 });
 
@@ -53,20 +62,17 @@ cancelLogoutBtn.onclick = () => {
     logoutModal.style.display = "none";
 }
 
-// window.onclick = function (event) {
-//     if (event.target === logoutModal) {
-//         logoutModal.style.display = "none";
-//     };
-// };
+window.onclick = function (event) {
+    if (event.target === logoutModal) {
+        logoutModal.style.display = "none";
+    };
+};
 
-const header = document.querySelector("header");
-const scrollWatcher = document.createElement("div");
-
-scrollWatcher.setAttribute("data-scroll-watcher", "");
-header.before(scrollWatcher);
-
-const navObserver = new IntersectionObserver((entries) => {
-    header.classList.toggle("scroll-down", !entries[0].isIntersecting)
-}, {rootMargin: "250px 0px 0px 0px"});
-
-navObserver.observe(scrollWatcher);
+// close modal by clicking outside
+window.onclick = function (event) {
+    if (event.target === loginModal) {
+        loginModal.style.display = "none";
+    } else if (event.target === logoutModal) {
+        logoutModal.style.display = "none";
+    };
+};

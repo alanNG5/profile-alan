@@ -1,4 +1,5 @@
 document.getElementById("login-form").addEventListener("submit", submitLogin);
+document.getElementById("logout-form").addEventListener("submit", submitLogout);
 
 async function submitLogin(event) {
   event.preventDefault();
@@ -27,25 +28,59 @@ async function submitLogin(event) {
     return;
   };
 
+  document.getElementById("login-modal").style.display = "none";
+  loadVisitorRole();
+};
 
-  if(json.name) {
-    document.getElementById("login-modal").style.display = "none";
+async function submitLogout(event) {
+  event.preventDefault();
+  event.stopPropagation();
+
+  let form = event.target;
+
+  let res = await fetch(form.action, {
+    method: form.method,
+    headers: {
+      Accept: 'application/json',
+    },
+    });
+
+  let json = await res.json();
+  if (json.error) {
+    alert(json.error);
+    return;
+  };
+
+  document.getElementById("logout-modal").style.display = "none";
+  alert(json.message);
+  loadVisitorRole();
+};
+
+async function loadVisitorRole () {
+
+  let res = await fetch("/user");
+  let json = await res.json();
+
+  if (json.visitor != "guest") {
+
     document.getElementById("login-btn").style.display = "none";
 
     document.getElementById("user-info").style.display = "flex";
-    document.getElementById("role-info").textContent = json.admin ? "Admin." : "User";
-    document.getElementById("name-info").textContent = json.name;
-    }
+    document.getElementById("role-info").textContent = json.visitor;
+    document.getElementById("name-info").textContent = json.username;
+  } else {
+    document.getElementById("login-btn").style.display = "inline-block";
+    document.getElementById("user-info").style.display = "none";
+  };
+};
+
+loadVisitorRole();
 
   // location.href = "/";
-
-      // document.getElementById('logout-form').hidden = false;
-      // document.getElementById('username').textContent = json.name;
 
 
     // submitMessage.textContent = 'Login successfully'
     // loadRole();
-  };
 
   // async function submitLogout(event) {
   //   event.preventDefault()
