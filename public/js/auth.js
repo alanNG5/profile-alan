@@ -1,3 +1,5 @@
+const Swal = window.Swal;
+
 document.getElementById("login-form").addEventListener("submit", submitLogin);
 document.getElementById("logout-form").addEventListener("submit", submitLogout);
 
@@ -29,6 +31,15 @@ async function submitLogin(event) {
   };
 
   document.getElementById("login-modal").style.display = "none";
+
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: json.success,
+    showConfirmButton: false,
+    timer: 2500
+  });
+
   loadVisitorRole();
 };
 
@@ -46,13 +57,21 @@ async function submitLogout(event) {
     });
 
   let json = await res.json();
-  if (json.error) {
-    alert(json.error);
+  if (json.logoutError) {
+    alert(json.logoutError);
     return;
   };
 
   document.getElementById("logout-modal").style.display = "none";
-  alert(json.message);
+
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: json.logoutMessage,
+    showConfirmButton: false,
+    timer: 2500
+  });
+
   loadVisitorRole();
 };
 
@@ -76,66 +95,14 @@ async function loadVisitorRole () {
 
 loadVisitorRole();
 
-  // location.href = "/";
 
+// window.addEventListener("load", function(){
+//   alert("Welcome to Impetus Watch Store!");
+//   console.log("Welcome to Impetus Watch Store!");
 
-    // submitMessage.textContent = 'Login successfully'
-    // loadRole();
-
-  // async function submitLogout(event) {
-  //   event.preventDefault()
-  //   let form = event.target
-  //   let submitMessage = form.querySelector('.message')
-  //   let res = await fetch(form.action, {
-  //     method: form.method,
-  //     headers: {
-  //       Accept: 'application/json',
-  //     },
-  //   })
-  //   let json = await res.json()
-  //   if (json.error) {
-  //     submitMessage.textContent = json.error
-  //     return
-  //   }
-  //   submitMessage.textContent = 'Logout successfully'
-  //   loadRole()
-  // }
-
-  // async function loadRole() {
-  //   let res = await fetch('/role')
-  //   let json = await res.json()
-  //   loginForm.hidden = json.role != 'guest'
-  //   logoutForm.hidden = json.role == 'guest'
-  //   // document.body.setAttribute('data-role', json.role)
-  //   document.body.dataset.role = json.role
-  //   if (json.role == 'user') {
-  //     logoutForm.querySelector('.username').textContent = json.username
-  //   }
-  // }
-  // loadRole();
-
-  // userRouter.get("/userinfo.js", async (req, res, next) => {
-  //   if (req.session.username) {
-  //     res.write("let userinfo = ");
-  //     if (!req.session.username) {
-  //       res.write("{}");
-  //     } else {
-  //       res.write(JSON.stringify({ username: req.session.username, userrole: formatRole(req.session.role) }));
-  //     }
-  //   } else {
-  //     res.write("location.href = '/login.html'");
-  //   }
-  //   res.end();
-  // });
-
-  // function formatRole(role: string) {
-  //   switch (role) {
-  //     case "admin":
-  //       return "Administrator";
-  //     case "cfu":
-  //       return "Technician";
-  //     case "user":
-  //       return "Department";
-  //   }
-  //   return "unknown";
-  // }
+// Swal.fire({
+// title: "Good job!",
+// text: "You clicked the button!",
+// icon: "success"
+// })
+// });

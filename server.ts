@@ -13,6 +13,9 @@ app.use(sessionMiddleware);
 dotenv.config();
 const port = process.env.PORT;
 
+import { routes } from "./routers";
+app.use("/", routes);
+
 app.get("/", (req: Request, res: Response) => {
   console.log(
     "server.ts@@@ CHECKING req.session: ",
@@ -28,9 +31,6 @@ app.get("/", (req: Request, res: Response) => {
   // res.sendFile(path.resolve("public", "watch_main.html"));
   // return;
 });
-
-import { routes } from "./routers";
-app.use("/", routes);
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));

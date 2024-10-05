@@ -16,7 +16,9 @@ class AuthController {
       req.session.admin_role = result.loginAdmin;
 
       res.status(200);
-      res.json({});
+      res.json({
+        success: "You have logged in successfully!",
+      });
     } else {
       res.status(400).json({ error: result.message });
     }
@@ -36,9 +38,9 @@ class AuthController {
   logout = (req: Request, res: Response) => {
     req.session.destroy((err) => {
       if (err) {
-        res.status(400).json({ error: "Failed to log out" });
+        res.status(400).json({ logoutError: "Failed to log out" });
       } else {
-        res.json({ message: "You are successfully logged out!" });
+        res.json({ logoutMessage: "You have logged out." });
       }
     });
   };

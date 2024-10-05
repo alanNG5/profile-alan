@@ -18,6 +18,8 @@ export class AuthService {
     if (userInfoQuery.length > 0) {
       let pwd_hash_query = userInfoQuery[0].password_hash;
 
+      console.log("@@@ check all user info: ", userInfoQuery);
+
       let compareResult = await checkPassword({
         plainPassword: password_input,
         hashedPassword: pwd_hash_query,

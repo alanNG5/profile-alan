@@ -161,7 +161,7 @@ header * {
 }
 
 #login-btn {
-    display: inline-block;
+    display: none;
     outline: none;
     cursor: pointer;
     font-size: 2rem;
