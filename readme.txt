@@ -1,5 +1,6 @@
 Hashed password
 
+Using "Invalid password or username." as an error message got from POST of login is better than separation of messages of "Username not found." and "Invalid password.", based on consideration for security of user account.
 
 Based on MVP
 

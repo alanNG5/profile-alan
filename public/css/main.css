@@ -460,6 +460,11 @@ main .backdrop:nth-last-child(1) {
         height: 350px;
     }
 
+    .circle .inner-circle::before {
+        height: 520px;
+        left: 30%;
+    }
+
     .img-caption {
         position: fixed;
         width: 100%;

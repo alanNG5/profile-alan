@@ -56,17 +56,11 @@ logoutBox.addEventListener("click", () => {
     logoutModal.style.display = "block";
 });
 
-const cancelLogoutBtn = document.getElementById("cancel-btn");
+const cancelLogout = document.getElementById("cancel-logout");
 
-cancelLogoutBtn.onclick = () => {
+cancelLogout.onclick = () => {
     logoutModal.style.display = "none";
 }
-
-window.onclick = function (event) {
-    if (event.target === logoutModal) {
-        logoutModal.style.display = "none";
-    };
-};
 
 // close modal by clicking outside
 window.onclick = function (event) {

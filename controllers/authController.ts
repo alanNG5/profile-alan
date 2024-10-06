@@ -8,23 +8,23 @@ class AuthController {
   login = async (req: Request, res: Response) => {
     let { username, password } = req.body;
 
-    let result = await this.authService.login(username, password);
+    let validationResult = await this.authService.login(username, password);
 
-    if (result.flag) {
-      req.session.userid = result.loginID;
-      req.session.username = result.loginUsername;
-      req.session.admin_role = result.loginAdmin;
+    if (validationResult.flag) {
+      req.session.userid = validationResult.loginID;
+      req.session.username = validationResult.loginUsername;
+      req.session.admin_role = validationResult.loginAdmin;
 
       res.status(200);
       res.json({
         success: "You have logged in successfully!",
       });
     } else {
-      res.status(400).json({ error: result.message });
+      res.status(400).json({ error: validationResult.message });
     }
   };
 
-  checkVisitorStatus = (req: Request, res: Response) => {
+  checkVisitorStatus = async (req: Request, res: Response) => {
     if (req.session.username) {
       res.json({
         visitor: req.session.admin_role ? "admin" : "member",
@@ -35,7 +35,7 @@ class AuthController {
     }
   };
 
-  logout = (req: Request, res: Response) => {
+  logout = async (req: Request, res: Response) => {
     req.session.destroy((err) => {
       if (err) {
         res.status(400).json({ logoutError: "Failed to log out" });
@@ -44,6 +44,8 @@ class AuthController {
       }
     });
   };
+
+  //   register = async (req: Request, res: Response) => {
 }
 
 export { AuthController };

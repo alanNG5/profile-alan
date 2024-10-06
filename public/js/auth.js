@@ -1,14 +1,15 @@
 const Swal = window.Swal;
 
-document.getElementById("login-form").addEventListener("submit", submitLogin);
+let loginForm = document.getElementById("login-form");
+
+loginForm.addEventListener("submit", submitLogin);
 document.getElementById("logout-form").addEventListener("submit", submitLogout);
+// document.getElementById("register-form").addEventListener("submit", submitRegister);
 
 async function submitLogin(event) {
   event.preventDefault();
 
   let form = event.target;
-
-  // let submitMessage = form.querySelector('.message')
 
   let res = await fetch(form.action, {
       method: form.method,
@@ -25,8 +26,16 @@ async function submitLogin(event) {
   let json = await res.json();
 
   if (json.error) {
-    alert(json.error);
-    // submitMessage.textContent = json.error
+
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: json.error,
+      showConfirmButton: true,
+    });
+
+    loginForm.reset();
+
     return;
   };
 
@@ -37,7 +46,7 @@ async function submitLogin(event) {
     icon: "success",
     title: json.success,
     showConfirmButton: false,
-    timer: 2500
+    timer: 2000
   });
 
   loadVisitorRole();
@@ -69,7 +78,7 @@ async function submitLogout(event) {
     icon: "success",
     title: json.logoutMessage,
     showConfirmButton: false,
-    timer: 2500
+    timer: 2000
   });
 
   loadVisitorRole();
@@ -96,13 +105,20 @@ async function loadVisitorRole () {
 loadVisitorRole();
 
 
-// window.addEventListener("load", function(){
-//   alert("Welcome to Impetus Watch Store!");
-//   console.log("Welcome to Impetus Watch Store!");
+// async function submitRegister(event) {
+//   event.preventDefault();
 
-// Swal.fire({
-// title: "Good job!",
-// text: "You clicked the button!",
-// icon: "success"
-// })
-// });
+//   let form = event.target;
+
+//   let res = await fetch(form.action, {
+//     method: form.method,
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify({
+//       username: form.username.value,
+//       email: form.email.value,
+//       password: form.password.value,
+//     }),
+//   });
+// };

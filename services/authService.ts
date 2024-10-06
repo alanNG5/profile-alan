@@ -9,7 +9,7 @@ export class AuthService {
   // }
 
   async login(username_input: string, password_input: string) {
-    // let userInfoQuery = await this.table()
+
     let userInfoQuery = await this.knex
       .select("username", "is_admin", "users.id", "password_hash")
       .from("users")
@@ -17,8 +17,6 @@ export class AuthService {
 
     if (userInfoQuery.length > 0) {
       let pwd_hash_query = userInfoQuery[0].password_hash;
-
-      console.log("@@@ check all user info: ", userInfoQuery);
 
       let compareResult = await checkPassword({
         plainPassword: password_input,
@@ -37,13 +35,13 @@ export class AuthService {
       } else {
         return {
           flag: false,
-          message: "Invalid user name or password.",
+          message: "Invalid password or username.",
         };
       }
     } else {
       return {
         flag: false,
-        message: "Invalid or missing user name or password.",
+        message: "Invalid password or username.",
       };
     }
   }

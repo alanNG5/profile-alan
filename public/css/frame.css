@@ -35,7 +35,7 @@ body {
 }
 
 header {
-    z-index: 8000;
+    z-index: 800;
     background-color: var(--theme-sec);
     width: 100%;
     position: fixed;
@@ -145,6 +145,7 @@ header * {
     transition: 0.3s;
     position: absolute;
 }
+
 .navbar ul a:hover::after, header.scroll-down .navbar ul a:hover::after {
     background: linear-gradient(to right, var(--theme-main-alt) 0%, var(--theme-sec) 100%);
     background-size: 200%;
@@ -202,9 +203,6 @@ header * {
     align-items: center;
     gap: 1.6rem;
     cursor: pointer;
-}
-
-.navbar div #user-info {
     font-size: 2.3rem;
 }
 
@@ -227,62 +225,10 @@ header * {
     border-radius: 5px;
 }
 
-@media(max-width: 1024px) {
-    .navbar .logo span {
-        font-size: 1.4rem;
-    }
-
-    .navbar ul li {
-        margin: 0 10px;
-    }
-
-    .navbar ul a {
-        font-size: 2.3rem;
-    }
-
-    #login-btn {
-        font-size: 1.6rem;
-    }
-}
-
-@media(max-width: 900px) {
-    .toggle-btn {
-        display: flex;
-}
-
-    .navbar {
-        z-index: 9;
-    }
-
-    .navbar ul {
-        display: none;
-        position: absolute;
-        max-width: 600px;
-        width: clamp(300px, 400px, 50%);
-        align-items:first baseline;
-        flex-direction: column;
-        padding: 2rem;
-        gap: 45px;
-        top: 100px;
-        right: 0;
-        border-radius: 15px;
-        background: var(--theme-sec);
-        border: 3px solid var(--theme-main-alt);
-    }
-
-    .navbar ul.show {
-        display: flex;
-    }
-
-    .navbar .logo span {
-        display: none;
-    }
-}
-
 .modal {
     display: none;
     position: fixed;
-    z-index: 9000;
+    z-index: 900;
     left: 0;
     top: 0;
     width: 100%;
@@ -387,7 +333,7 @@ input:focus:invalid {
     cursor: pointer;
     top: 5%;
     right: 5%;
-    z-index: 9100;
+    z-index: 1000;
 }
 
 #close:hover {
@@ -439,28 +385,52 @@ input:focus:invalid {
     font-weight: 500;
 }
 
-#logout-modal .modal-content {
+#logout-modal .modal-content .form-container {
     text-align: center;
     font-size: 2.2rem;
     letter-spacing: 0.2rem;
     font-weight: 300;
 }
 
-#logout-modal .modal-content button {
-    border: none;
-    outline: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    cursor: pointer;
-    margin-top: 20px;
+#logout-modal #logout-form {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    width: 80%;
+    gap: 10%;
 }
 
-/* #logout-modal .modal-content #logout-btn {
-    background: var(--theme-main);
+#logout-modal #logout-form > * {
+    height: 80px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    padding: 10px 20px;
+    line-height: 150%;
+    cursor: pointer;
+    box-shadow: rgba(0, 0, 0, 0.6) 3px 0 12px;
+}
+
+#logout-modal #logout-form input[type="submit"] {
+    width: 40%;
+    background: mediumvioletred;
     color: var(--color-ter);
-    margin-right: 20px;
-    box-shadow: rgba(255, 255, 255, .3) 0 0 6px;
-} */
+}
+
+#logout-modal #logout-form input[type="submit"]:hover,
+#logout-modal #logout-form input[type="submit"]:focus {
+    background: rgba(241, 48, 170, 0.9);
+    box-shadow: rgba(0, 0, 0, 0.4) 0 0 10px;
+    transition: 0.5s;
+    font-weight: 500;
+}
+
+#logout-modal .modal-content .form-container #logout-form #cancel-logout {
+    width: 50%;
+    background: var(--theme-sec);
+    color: var(--color-basic);
+    font-size: 1.8rem;
+}
 
 .footer {
     position: relative;
@@ -507,4 +477,97 @@ input:focus:invalid {
     font-size: 1.2rem;
     font-weight: 300;
     letter-spacing: 0.2rem;
+}
+
+@media(max-width: 1240px) {
+
+    .navbar ul a {
+        font-size: 2.3rem;
+    }
+
+    .navbar ul li {
+        margin: 0 10px;
+    }
+
+    .navbar div #user-info {
+        gap: 0.5rem;
+        font-size: 1.8rem;
+    }
+
+    .navbar div #user-info i{
+        gap: 0.5rem;
+        font-size: 2.6rem;
+    }
+}
+
+@media(max-width: 1024px) {
+
+    .navbar div #user-info span{
+        display: none;
+    }
+
+    .navbar .logo span {
+        font-size: 1.4rem;
+    }
+
+    .navbar ul li {
+        margin: 0 10px;
+    }
+
+    #login-btn {
+        font-size: 1.6rem;
+    }
+}
+
+@media(max-width: 900px) {
+
+    .navbar div #user-info {
+        font-size: 2.3rem;
+        word-break: break-all;
+    }
+
+    .navbar div #user-info i {
+        font-size: 3.2rem;
+    }
+
+    .toggle-btn {
+        display: flex;
+    }
+
+    .navbar ul {
+        display: none;
+        position: absolute;
+        max-width: 600px;
+        width: clamp(300px, 400px, 50%);
+        align-items:first baseline;
+        flex-direction: column;
+        padding: 2rem;
+        gap: 45px;
+        top: 100px;
+        right: 0;
+        border-radius: 15px;
+        background: var(--theme-sec);
+        border: 3px solid var(--theme-main-alt);
+    }
+
+    .navbar ul.show {
+        display: flex;
+    }
+
+    .navbar .logo span {
+        display: none;
+    }
+
+    #logout-modal .modal-content .form-container #logout-form {
+        flex-direction: column;
+        width: 100%;
+        gap: 40px;
+    }
+
+    #logout-modal .modal-content .form-container #logout-form input[type="submit"], #logout-modal .modal-content .form-container #logout-form #cancel-logout {
+        width: 80%;
+        height: 80px;
+        padding: 30px 10px;
+        line-height: 100%;
+    }
 }

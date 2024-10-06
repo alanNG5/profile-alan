@@ -28,3 +28,4 @@ const authController = new AuthController(authService);
 routes.post("/user/login", authController.login);
 routes.post("/user/logout", authController.logout);
 routes.get("/user", authController.checkVisitorStatus);
+// routes.get("/user/register", authController.register);

@@ -159,18 +159,18 @@
 
             <div class="form-container  form-register">
                 <h1>Register</h1>
-                <form id="register-form">
+                <form id="register-form" action="/user/register" method="POST">
                     <div class="input-box">
-                        <input type="text" placeholder="Username" minlength="6" required/>
+                        <input type="text" name="username" placeholder="Username" minlength="6" required/>
                         <i class='bx bxs-user'></i>
                     </div>
                     <div class="input-box">
-                        <input type="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required/>
+                        <input type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required/>
                         <i class='bx bx-envelope'></i>
                     </div>
 
                     <div class="input-box">
-                        <input type="password" placeholder="Password" minlength="8" required/>
+                        <input type="password" name="password" placeholder="Password" minlength="8" required/>
                         <i class='bx bxs-lock-alt' ></i>
                     </div>
 
@@ -188,10 +188,10 @@
     <div id="logout-modal" class="modal">
         <div class="modal-content">
             <div class="form-container">
+                <h3>Are you sure to logout?</h3>
                 <form id="logout-form" action="/user/logout" method="POST">
-                <p>Are you sure to logout?</p>
-                    <input type="submit" class="submit-btn" value="Logout">
-                    <button id="cancel-btn">Stay Logged In</button>
+                    <input type="submit" value="Logout">
+                    <div id="cancel-logout">Stay Logged In</div>
                 </form>
             </div>
         </div>
@@ -233,7 +233,6 @@
 <script>
     // fetch product data
     response();
-
 </script>
 </body>
 </html>
