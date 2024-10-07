@@ -4,7 +4,7 @@ let loginForm = document.getElementById("login-form");
 
 loginForm.addEventListener("submit", submitLogin);
 document.getElementById("logout-form").addEventListener("submit", submitLogout);
-// document.getElementById("register-form").addEventListener("submit", submitRegister);
+document.getElementById("register-form").addEventListener("submit", submitRegister);
 
 async function submitLogin(event) {
   event.preventDefault();
@@ -105,20 +105,46 @@ async function loadVisitorRole () {
 loadVisitorRole();
 
 
-// async function submitRegister(event) {
-//   event.preventDefault();
+async function submitRegister(event) {
+  event.preventDefault();
 
-//   let form = event.target;
+  let form = event.target;
 
-//   let res = await fetch(form.action, {
-//     method: form.method,
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({
-//       username: form.username.value,
-//       email: form.email.value,
-//       password: form.password.value,
-//     }),
-//   });
-// };
+  let res = await fetch(form.action, {
+    method: form.method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      username: form.username.value,
+      email: form.email.value,
+      password: form.password.value,
+    }),
+  });
+
+  let json = await res.json();
+
+  if(json.error) {
+
+    Swal.fire({
+      position: "center",
+      icon: "error",
+      title: json.error,
+      showConfirmButton: true,
+    });
+
+  return;
+  };
+
+  document.getElementById("login-modal").style.display = "none";
+
+  Swal.fire({
+    position: "center",
+    icon: "success",
+    title: json.success,
+    showConfirmButton: false,
+    timer: 2000
+  });
+
+  loadVisitorRole();
+};

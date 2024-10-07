@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import { AuthService } from "../services/authService";
 import "../utils/session";
 
@@ -15,8 +15,7 @@ class AuthController {
       req.session.username = validationResult.loginUsername;
       req.session.admin_role = validationResult.loginAdmin;
 
-      res.status(200);
-      res.json({
+      res.status(200).json({
         success: "You have logged in successfully!",
       });
     } else {
@@ -45,7 +44,24 @@ class AuthController {
     });
   };
 
-  //   register = async (req: Request, res: Response) => {
+  register = async (req: Request, res: Response) => {
+    let { username, email, password } = req.body;
+    let registrationResult = await this.authService.register(
+      username,
+      email,
+      password
+    );
+
+    if (registrationResult.flag) {
+      req.session.userid = registrationResult.loginID;
+      req.session.username = registrationResult.loginUsername;
+      req.session.admin_role = registrationResult.loginAdmin;
+
+      res.status(201).json({ success: registrationResult.message });
+    } else {
+      res.status(400).json({ error: registrationResult.message });
+    }
+  };
 }
 
 export { AuthController };

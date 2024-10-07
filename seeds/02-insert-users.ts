@@ -8,15 +8,15 @@ export async function seed(knex: Knex): Promise<void> {
   let usersList = [
     {
       username: "controller",
-      email: "",
-      password: "itisimage",
+      email: "null@impetus.go",
+      password: "itisimage8",
       is_admin: true,
     },
 
     {
       username: "client101",
       email: "client101@tecky.com",
-      password: "clientserver",
+      password: "clientserver0",
       is_admin: false,
     },
 

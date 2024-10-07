@@ -98,7 +98,7 @@ class ProductsController {
         is_pre_owned_entry,
         imagePath
       );
-      res.json({ message: "success" });
+      res.status(201).json({ message: "success" });
     } catch (error) {
       console.log("Error occurred during inserting new item:", error);
       res

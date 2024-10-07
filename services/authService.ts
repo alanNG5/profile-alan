@@ -43,6 +43,50 @@ export class AuthService {
         flag: false,
         message: "Invalid password or username.",
       };
-    }
-  }
-}
+    };
+  };
+
+  async register (username_input: string, email_input: string, password_input: string) {
+
+    let queryForUsername = await this.knex
+      .select("username")
+      .from("users")
+      .where("username", username_input);
+
+    let queryForEmail = await this.knex
+      .select("email")
+      .from("users")
+      .where("email", email_input);
+
+    if (queryForUsername.length > 0) {
+      return {
+        flag: false,
+        message: `The username of "${username_input}" already in use.`}
+    } else if (queryForEmail.length > 0) {
+      return {
+        flag: false,
+        message: `The email of "${email_input}" is already registered.`}
+    } else {
+      await this.knex("users").insert({
+        username: username_input,
+        email: email_input,
+        password_hash: await hashPassword(password_input),
+      });
+
+      let instantQuery = await this.knex
+        .select("*")
+        .from("users")
+        .where("username", username_input);
+
+      return {
+        flag: true,
+        message: `Username, "${username_input}" has been registered successfully.`,
+
+        // return user info for automatic login after registration
+        loginID: instantQuery[0].id,
+        loginUsername: instantQuery[0].username,
+        loginAdmin: instantQuery[0].is_admin,
+      };
+    };
+  };
+};

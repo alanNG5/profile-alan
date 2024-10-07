@@ -1,6 +1,8 @@
-Hashed password
+Hashed password is adopted with the use of package of "bcryptjs".
 
 Using "Invalid password or username." as an error message got from POST of login is better than separation of messages of "Username not found." and "Invalid password.", based on consideration for security of user account.
+
+Validation of user registry is proceeded at front end.
 
 Based on MVP
 

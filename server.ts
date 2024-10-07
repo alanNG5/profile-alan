@@ -17,6 +17,11 @@ import { routes } from "./routers";
 app.use("/", routes);
 
 app.get("/", (req: Request, res: Response) => {
+  res.sendFile(path.resolve("public", "index.html"));
+  return;
+});
+
+app.get("/watch_main.html", (req: Request, res: Response) => {
   console.log(
     "server.ts@@@ CHECKING req.session: ",
     req.session.username,
@@ -28,9 +33,9 @@ app.get("/", (req: Request, res: Response) => {
   res.sendFile(path.resolve("public", "watch_main.html"), {
     headers: { "X-Is-Logged-In": isLoggedIn },
   });
-  // res.sendFile(path.resolve("public", "watch_main.html"));
-  // return;
+  return;
 });
+
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));
