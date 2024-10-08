@@ -5,6 +5,9 @@
 
 @import url('https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css');
 
+@import url("https://fonts.cdnfonts.com/css/ica-rubrik-black");
+
+
 :root {
     font-size: 62.5%;
     font-family: "Montserrat", sans-serif;
@@ -48,8 +51,9 @@ header.scroll-down {
 }
 
 header.scroll-down .navbar ul a {
-    color: var(--color-ter);
+    color: inherit;
 }
+
 header.scroll-down .navbar ul .active::after {
     background: var(--color-sec);
 }
@@ -69,6 +73,10 @@ header.scroll-down .navbar div #login-btn {
 header.scroll-down .navbar div #login-btn:hover {
     transform: scale(1);
     animation: flash-invert 1.5s infinite;
+}
+
+header.scroll-down .toggle-btn .bar {
+    background: var(--color-ter);
 }
 
 @keyframes flash-invert {
@@ -434,6 +442,7 @@ input:focus:invalid {
 
 .footer {
     position: relative;
+    bottom: 0;
     width: 100%;
     background: linear-gradient(in lch, #1090d0 20%,#2612aa 100%);
     min-height: 80px;
@@ -554,7 +563,16 @@ input:focus:invalid {
         display: flex;
     }
 
-    .navbar .logo span {
+    header.scroll-down .navbar ul {
+        color: var(--theme-main-alt);
+        font-weight: 500;
+    }
+
+    header.scroll-down .navbar ul .active {
+        color: var(--color-pri);
+    }
+
+    header.scroll-down .navbar ul .active::after {
         display: none;
     }
 
@@ -569,5 +587,11 @@ input:focus:invalid {
         height: 80px;
         padding: 30px 10px;
         line-height: 100%;
+    }
+}
+
+@media(max-width: 600px) {
+    .navbar .logo span {
+        display: none;
     }
 }

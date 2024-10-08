@@ -1,6 +1,6 @@
 let response = async function displayProductsAtHomePage () {
 
-    await fetch("http://localhost:8900/watch/hotProducts")
+    await fetch("/watch/hotProducts")
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -25,7 +25,7 @@ let response = async function displayProductsAtHomePage () {
         });
     };
 
-    await fetch("http://localhost:8900/watch/newArrivals")
+    await fetch("watch/newArrivals")
         .then((response) => {
             if (response.ok) {
                 return response.json();

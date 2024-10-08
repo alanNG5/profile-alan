@@ -2,61 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="My Portfolio">
+    <meta name="keywords" content="Demo for watch e-store">
+    <meta name="author" content="Alan Ng">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impetus Display</title>
+    <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/catalogue.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <style>
 
-        main {
-            height: 100vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            perspective: 10px;
-        }
-
-        main .backdrop {
+        h1 {
+            font-family: "ICA Rubrik";
+            font-size: 10rem;
+            /* line-height: 1em; */
+            color: #d2d2d2;
             position: relative;
-            display: flex;
-            height: 100%;
-            transform-style: preserve-3d;
-            z-index: -99;
-            justify-content: center;
-            align-items: center;
+            letter-spacing: 2.3rem;
         }
 
-        main .backdrop img {
+        /* h1::after {
             position: absolute;
-            z-index: -99;
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-            transform: translateZ(-10px) scale(2);
-        }
+            inset: 0 0 0 0;
+            z-index: 2;
+            -webkit-text-stroke: 3px #25283B;
+            color: transparent;
+        } */
 
-        main .carousel {
-            font-size: 3rem;
-            background-color: #222;
-            color: white;
-            padding: 100px;
-            height: fit-content;
-        }
     </style>
 </head>
+
 <body>
     <header>
         <div class="navbar style-for-centering">
-            <a href="#" class="logo">
-                Impetus
+            <a href="watch_main.html">
+                <div class="logo">
+                    <img src="images/logoIMP.png" alt="logo">
+                    <span>WATCH STORE</span>
+                </div>
             </a>
             <ul id="navList">
-                <li><a href="" class="active">Home</a></li>
-                <li><a href="">Catalogue</a></li>
-                <li><a href="">About</a></li>
+                <li><a href="watch_main.html">Home</a></li>
+                <li><a href="catalogue.html"  class="active">Catalogue</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
 
-            <div class="login-btn">
-                <button>Login</button>
+            <div>
+                <button id="login-btn">Login</button>
+                <div id="user-info">
+                    <i class='bx bxs-user-circle'></i>
+                    <span id="role-info">role</span>
+                    <span> | </span>
+                    <strong id="name-info">name</strong>
+                </div>
             </div>
 
             <div class="toggle-btn" id="toggleBtn">
@@ -68,32 +70,145 @@
     </header>
 
 
-    <main>
-        <div class="backdrop">
-            <img src="images/cht-master-px1.jpg" alt="">
+
+    <div class="backdrop">
+        <div class="backdrop-container">
+            <img src="images/bkg-blue-wave.jpeg" class="background" alt="">
+            <img src="images/watch-sample.png" class="foreground" alt="">
+            <h1 class="title">Exhibition</h1>
         </div>
-        <div class="carousel">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Impedit quis mollitia est esse enim omnis voluptatem blanditiis ipsa, ad ducimus rerum molestiae eum aliquid, sequi id excepturi accusantium culpa nemo voluptatibus obcaecati dolor et quibusdam. Esse a quis, sint soluta maiores facilis eveniet nisi quos error dicta ab explicabo mollitia, eos dignissimos accusamus eligendi delectus quaerat corporis sapiente eius ipsum aperiam placeat nesciunt. Optio minima, similique expedita tenetur ex asperiores, molestias obcaecati deleniti aut perferendis nihil sequi temporibus modi quod nemo enim nesciunt rem corporis in accusantium. Deleniti accusantium fugiat a unde. Quaerat in eos magnam harum repellendus omnis quasi mollitia porro autem.
-        </div>
-        <div class="backdrop">
-            <img src="images/gearconcept23.jpg" alt="">
+        <section class="style-for-centering">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam fugiat fugit quae maiores, ipsum ex tempora laudantium, natus, ipsam numquam error vero? Nihil nobis quasi eaque quidem aut, officiis esse.
+            Odio quaerat minima, velit sit necessitatibus eius doloribus quibusdam ut? Vel dolor labore, quam ea numquam voluptatem enim eaque minus sunt tenetur suscipit voluptatum! Doloremque earum ad esse atque quos!
+            Non asperiores reprehenderit similique aperiam laborum pariatur optio fugit sint, nam incidunt iusto sunt voluptas esse, quae illum voluptatibus dicta? Non consectetur, odit autem excepturi aliquid consequuntur nulla earum nemo?
+            Sit rerum facere vero consectetur magni aperiam, alias pariatur, est sequi ullam blanditiis, sint optio tempore. Assumenda rem accusantium, itaque possimus, aut quibusdam cumque rerum neque amet voluptates consequatur illum.
+            In cupiditate commodi deserunt consequuntur, praesentium corporis, expedita repellendus inventore officia laboriosam sint quidem molestias sapiente blanditiis aspernatur, magni iusto veniam pariatur? Possimus quas dignissimos excepturi adipisci ducimus! Provident, ipsa.
+            Minus impedit quas, commodi dignissimos ducimus a voluptas. Dolorem placeat architecto amet quidem soluta optio distinctio, dolor corrupti accusamus, nihil officia veniam nulla culpa atque corporis mollitia quia nobis cupiditate.
+            Officiis, expedita distinctio enim error corporis optio atque cum. Quaerat, consequuntur numquam! Vel aperiam, sapiente in voluptatibus ducimus nisi esse iure, iste ex quo debitis neque at, consequatur pariatur incidunt.
+            Ab enim reprehenderit animi beatae illo numquam ipsum voluptates. Fugit, distinctio reiciendis ad minima sequi, perferendis consectetur odit id asperiores harum aperiam excepturi nemo consequatur tenetur incidunt exercitationem, quasi adipisci.
+            Delectus voluptatibus placeat harum est repudiandae consectetur totam aliquam voluptatem architecto illum veritatis blanditiis accusamus sequi minus animi soluta labore quisquam ab qui officiis nemo quidem nesciunt, mollitia ducimus. Facilis.
+            Error eos eaque at iusto excepturi unde officiis doloribus voluptatibus totam, laudantium ex debitis, deleniti id. Iure architecto impedit, beatae fuga provident accusantium, eum quibusdam atque reiciendis eveniet fugiat hic.
+
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit repellat recusandae nostrum mollitia est tempora veniam, nihil soluta. Magni voluptatum iste, nesciunt sit amet molestiae fugit dignissimos exercitationem nulla.
+            Sit vel cupiditate placeat minus fugiat odio atque deserunt veritatis nemo esse? Nihil debitis a velit praesentium aliquam? Nesciunt in non molestias et eum ut provident nemo optio neque velit.
+            Explicabo accusamus, incidunt ad ullam repudiandae porro. Explicabo adipisci culpa nobis iure cupiditate, cumque non officia unde, quis labore quod! Magni ullam debitis tenetur iure excepturi, sequi deleniti vel illum.
+            Ullam aut odio pariatur nulla maiores! Odio temporibus ex culpa ipsam adipisci obcaecati. Eaque, quisquam. Deleniti maxime numquam obcaecati recusandae. Accusamus quibusdam in, consequuntur beatae at sit exercitationem placeat quod.
+            Quisquam placeat maiores id sint, soluta labore dolorem sunt nisi debitis vel est excepturi quos? Molestiae inventore optio pariatur dolor ut aliquam atque nemo. Nam hic ut minus totam earum?
+            Mollitia reiciendis dolorum neque inventore tempore nihil! Officia aperiam minima rerum eveniet, earum possimus. Explicabo reiciendis, commodi, provident blanditiis magnam tempora ipsam ratione dolores non laudantium aliquid repellat ab debitis?
+            Voluptates at qui cupiditate soluta? Sint modi quaerat nostrum culpa! Ex, velit repudiandae. Possimus fuga assumenda ad atque libero tempore, deserunt adipisci, sint pariatur ex animi perferendis, laudantium qui commodi?
+            Adipisci earum vel illum, dicta consequatur blanditiis harum culpa, similique, quis cupiditate veniam est iure! Facere doloremque hic quos tenetur est. Quod temporibus deleniti magni ratione molestias incidunt, provident laboriosam.
+            Dolorum deleniti, natus aliquid beatae dolorem tenetur? Expedita nemo repellat illo. Alias repudiandae ipsum tenetur laboriosam praesentium delectus accusamus quos laudantium sed voluptas molestias, minima, mollitia sapiente adipisci rerum eos?
+            Quaerat nobis voluptas corporis corrupti repudiandae optio beatae assumenda magni eum accusantium eligendi numquam error accusamus earum, pariatur animi dolores perferendis sequi libero cupiditate! In temporibus nisi delectus. Sit, delectus.
+        </section>
+    </div>
+
+
+
+    <div id="login-modal" class="modal">
+
+        <div class="modal-content">
+            <span id="close">&times;</span>
+
+            <div class="form-container form-login">
+                <h1>Login</h1>
+                <form id="login-form" action="/user/login" method="POST">
+
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Login">
+
+                    <div class="account-status">
+                        <p>Don't have an account? <a href="#" id="register-link">Register Now</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container  form-register">
+                <h1>Register</h1>
+                <form id="register-form" action="/user/register" method="POST">
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" pattern="[a-zA-Z0-9]{6,14}$" title="Must contain either digit or letter, with a length between 6 and 14 characters" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must be email format. '@' and '.' should appear" required/>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,}$" title="Must contain at least 1 digit and 1 letter, and not contain character other than digit and letter, and at least 6 or more characters" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Register">
+
+                    <div class="account-status">
+                        <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
 
         </div>
-        <div class="carousel">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Veritatis laborum atque ex! Voluptas perferendis ipsum fugit enim natus numquam reiciendis saepe dicta! Beatae dicta minus itaque in a provident nulla!
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <div class="form-container">
+                <h3>Are you sure to logout?</h3>
+                <form id="logout-form" action="/user/logout" method="POST">
+                    <input type="submit" value="Logout">
+                    <div id="cancel-logout">Stay Logged In</div>
+                </form>
+            </div>
         </div>
-    </main>
+    </div>
+
+
+    <footer class="footer">
+        <abbr title="FOR DEMO ONLY">
+            <ul class="social-icon">
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+            </ul>
+        </abbr>
+        <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
+    </footer>
+
+<!-- CDN for popup-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="./js/fetch.js"></script>
+
+<script src="./js/general.js"></script>
+<script src="./js/auth.js"></script>
+<script src="../swal.mjs"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
 <script>
-    // navbar toggle
-    let navList = document.getElementById("navList");
-    let toggleBtn = document.getElementById("toggleBtn");
-
-    toggleBtn.addEventListener("click", () => {
-        navList.classList.toggle("show");
-    });
 
 </script>
 </body>
 </html>
-

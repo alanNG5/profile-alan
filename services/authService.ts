@@ -61,7 +61,8 @@ export class AuthService {
     if (queryForUsername.length > 0) {
       return {
         flag: false,
-        message: `The username of "${username_input}" already in use.`}
+        message: `The username of "${username_input}" is already in use.`,
+      };
     } else if (queryForEmail.length > 0) {
       return {
         flag: false,

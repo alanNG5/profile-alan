@@ -335,7 +335,12 @@ main .backdrop:nth-last-child(1) {
     display: inline-block;
     font-size:initial;
     clip-path: polygon(var(--horizontal-clip) 0, calc(100% - var(--horizontal-clip)) 0,100% var(--vertical-clip),100% calc(100% - var(--vertical-clip)), calc(100% - var(--horizontal-clip)) 100%,var(--horizontal-clip) 100%,0 calc(100% - var(--vertical-clip)),0 var(--vertical-clip));
-    background: linear-gradient(in lch, var(--theme-main-alt), var(--theme-sec));
+    background: linear-gradient(
+        315deg,
+        rgb(16, 20, 32) 15%,
+        rgb(68, 98, 142) 45%,
+        var(--theme-sec) 100%
+        );
     margin-bottom: calc(var(--margin-vertical) - var(--vertical-clip));
 }
 
@@ -373,6 +378,7 @@ main .backdrop:nth-last-child(1) {
     padding: 15px;
     border: 2px solid var(--theme-sec);
     opacity: 0;
+    z-index: 810;
 }
 
 .img-caption h2 {

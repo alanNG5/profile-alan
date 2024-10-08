@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="My Portfolio">
+    <meta name="keywords" content="Demo watch e-store">
+    <meta name="author" content="Alan Ng">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impetus Display</title>
+    <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
+    <link rel="stylesheet" href="./css/reset.css">
+        <link rel="stylesheet" href="./css/frame.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+    </style>
+</head>
+<body>
+    <header>
+        <div class="navbar style-for-centering">
+            <a href="watch_main.html">
+                <div class="logo">
+                    <img src="images/logoIMP.png" alt="logo">
+                    <span>WATCH STORE</span>
+                </div>
+            </a>
+            <ul id="navList">
+                <li><a href="watch_main.html" >Home</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </ul>
+
+            <div>
+                <button id="login-btn">Login</button>
+                <div id="user-info">
+                    <i class='bx bxs-user-circle'></i>
+                    <span id="role-info">role</span>
+                    <span> | </span>
+                    <strong id="name-info">name</strong>
+                </div>
+            </div>
+
+            <div class="toggle-btn" id="toggleBtn">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div id="login-modal" class="modal">
+
+        <div class="modal-content">
+            <span id="close">&times;</span>
+
+            <div class="form-container form-login">
+                <h1>Login</h1>
+                <form id="login-form" action="/user/login" method="POST">
+
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Login">
+
+                    <div class="account-status">
+                        <p>Don't have an account? <a href="#" id="register-link">Register Now</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container  form-register">
+                <h1>Register</h1>
+                <form id="register-form" action="/user/register" method="POST">
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" pattern="[a-zA-Z0-9]{6,14}$" title="Must contain either digit or letter, with a length between 6 and 14 characters" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must be email format. '@' and '.' should appear" required/>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,}$" title="Must contain at least 1 digit and 1 letter, and not contain character other than digit and letter, and at least 6 or more characters" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Register">
+
+                    <div class="account-status">
+                        <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <div class="form-container">
+                <h3>Are you sure to logout?</h3>
+                <form id="logout-form" action="/user/logout" method="POST">
+                    <input type="submit" value="Logout">
+                    <div id="cancel-logout">Stay Logged In</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="footer">
+        <abbr title="FOR DEMO ONLY">
+            <ul class="social-icon">
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+            </ul>
+        </abbr>
+        <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
+    </footer>
+
+<!-- CDN for popup-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="./js/general.js"></script>
+<script src="./js/auth.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+<script>
+</script>
+</body>
+</html>
