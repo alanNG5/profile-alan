@@ -17,7 +17,7 @@ header.before(scrollWatcher);
 const navObserver = new IntersectionObserver((entries) => {
     console.log(entries);
     header.classList.toggle("scroll-down", !entries[0].isIntersecting)
-}, {rootMargin: "250px 0px 0px 0px"});
+}, {rootMargin: "200px 0px 0px 0px"});
 
 navObserver.observe(scrollWatcher);
 
