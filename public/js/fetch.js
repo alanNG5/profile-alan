@@ -84,6 +84,49 @@ async function displayWatches () {
         .catch((error) => console.log("Fetching error: ", error));
 
     function handlingDataOfWatches (data) {
+        const displayBoard = document.getElementById("display-board");
+
+        data.forEach( (watch) => {
+            const watchCard = document.createElement("div");
+            const itemDiv = document.createElement("div");
+            const viewBtn = document.createElement("button");
+
+            const itemDoc = document.createElement("div");
+            const watchImage = document.createElement("img");
+
+            const watchBrand = document.createElement("h2");
+            const watchModel = document.createElement("p");
+            const watchPrice = document.createElement("h1");
+
+            displayBoard.appendChild(watchCard);
+            watchCard.appendChild(itemDiv);
+            watchCard.appendChild(viewBtn);
+
+            itemDiv.appendChild(watchImage);
+            itemDiv.appendChild(itemDoc);
+
+            itemDoc.appendChild(watchBrand);
+            itemDoc.appendChild(watchModel);
+            itemDoc.appendChild(watchPrice);
+
+            watchCard.classList.add("watch-card");
+            watchCard.setAttribute("data-brand", watch.brand);
+
+            itemDiv.classList.add("watch-item");
+            watchImage.src = `http://localhost:8900/${watch.image_path}`;
+            // watchImage.src = `https://impetus-go.me/${watch.image_path}`;
+            watchImage.alt = `${watch.brand} ${watch.model_name}`;
+            itemDoc.classList.add("watch-info");
+
+            watchBrand.innerHTML = watch.brand;
+            watchModel.innerHTML = watch.model_name;
+            watchPrice.innerHTML = "HK$ " + watch.current_price;
+            viewBtn.innerHTML = "View Details";
+        });
+
+
+
+
         let retrieveBrands = [...new Set (data.map( (watch) => watch.brand ))];
         const listOfBrands = document.getElementById("brand-list");
 
@@ -100,38 +143,18 @@ async function displayWatches () {
             brandText.innerHTML = brand;
             effectDiv.classList.add("wave");
 
-            brandText.setAttribute("data-brand", brand);
             brandText.addEventListener("click", (e) => {
-                let brandName = e.target.getAttribute("data-brand");
+                let brandName = e.target.textContent;
                 let filteredWatches = data.filter( (watch) => watch.brand === brandName);
                 console.log(filteredWatches);
+                // let selectedBrand = document.querySelectorAll(`.watch-card[data-brand="${brandName}"]`);
+
+                // document.querySelectorAll(".watch-card").style.display = "none";
+                // selectedBrand.style.display = "block";
+
+                document.getElementById("undo-filter").style.display = "block";
             });
         });
 
-        const displayBoard = document.getElementById("display-board");
-        data.forEach( (watch) => {
-            const watchCard = document.createElement("div");
-            const watchImage = document.createElement("img");
-            const watchCaption = document.createElement("div");
-            const watchBrand = document.createElement("h2");
-            const watchModel = document.createElement("p");
-            const watchPrice = document.createElement("p");
-
-            displayBoard.appendChild(watchCard);
-            watchCard.appendChild(watchImage);
-            watchCard.appendChild(watchCaption);
-            watchCaption.appendChild(watchBrand);
-            watchCaption.appendChild(watchModel);
-            watchCaption.appendChild(watchPrice);
-
-            watchCard.classList.add("watch-card");
-            watchImage.src = `http://localhost:8900/${watch.image_path}`;
-
-            watchImage.alt = `${watch.brand} ${watch.model_name}`;
-            watchCaption.classList.add("watch-caption");
-            watchBrand.innerHTML = watch.brand;
-            watchModel.innerHTML = watch.model_name;
-            watchPrice.innerHTML = watch.current_price;
-        });
     };
 };
