@@ -17,7 +17,7 @@ import { routes } from "./routers";
 app.use("/", routes);
 
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(path.resolve("public", "watch_main.html"));
+  res.sendFile(path.resolve("public", "index.html"));
   return;
 });
 

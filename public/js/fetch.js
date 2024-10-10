@@ -20,7 +20,8 @@ let response = async function displayProductsAtHomePage () {
         const watchBrand = document.querySelectorAll(".carousel .product-line .item .brand");
 
         data.forEach( (watch, index) => {
-            watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
+            // watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
+            watchImages[index].src = `http://impetus-go.me/${watch.image_path}`;
             watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
             watchCaption[index].setAttribute("data-text", `${watch.model_name}`);
             watchBrand[index].innerHTML = `${watch.brand}`;
@@ -48,7 +49,8 @@ let response = async function displayProductsAtHomePage () {
         const captionModel = document.querySelector(".img-caption p");
 
         data.forEach( (watch, index) => {
-            hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
+            // hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
+            hexagons[index].src = `https://impetus-go.me/${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
             hexagons[index].addEventListener("mouseenter", (e) => {
                 caption.setAttribute("style", "opacity: 1");
@@ -124,6 +126,7 @@ async function displayWatches () {
 
             watchCard.classList.add("watch-card");
             watchImage.src = `http://localhost:8900/${watch.image_path}`;
+
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
             watchCaption.classList.add("watch-caption");
             watchBrand.innerHTML = watch.brand;

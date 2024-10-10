@@ -1,4 +1,6 @@
 const Swal = window.Swal;
+// import Swal from 'sweetalert2';
+// const Swal = require('sweetalert2');
 
 let loginForm = document.getElementById("login-form");
 
