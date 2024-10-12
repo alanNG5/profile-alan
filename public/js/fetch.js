@@ -83,16 +83,22 @@ async function displayWatches () {
         })
         .catch((error) => console.log("Fetching error: ", error));
 
+
     function handlingDataOfWatches (data) {
-        const displayBoard = document.getElementById("display-board");
+
+        const mainboard = document.getElementById("catalogue");
+        const displayBoard = document.createElement("div");
+        mainboard.appendChild(displayBoard);
+        displayBoard.setAttribute("id", "display-board");
+        displayBoard.classList.add("style-for-centering");
 
         data.forEach( (watch) => {
             const watchCard = document.createElement("div");
             const itemDiv = document.createElement("div");
             const viewBtn = document.createElement("button");
 
-            const itemDoc = document.createElement("div");
             const watchImage = document.createElement("img");
+            const itemDoc = document.createElement("div");
 
             const watchBrand = document.createElement("h2");
             const watchModel = document.createElement("p");
@@ -110,13 +116,13 @@ async function displayWatches () {
             itemDoc.appendChild(watchPrice);
 
             watchCard.classList.add("watch-card");
-            watchCard.setAttribute("data-brand", watch.brand);
-
             itemDiv.classList.add("watch-item");
+            itemDoc.classList.add("watch-info");
+
+
             // watchImage.src = `http://localhost:8900/${watch.image_path}`;
             watchImage.src = `https://impetus-go.me/${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
-            itemDoc.classList.add("watch-info");
 
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
@@ -125,10 +131,12 @@ async function displayWatches () {
         });
 
 
-
-
         let retrieveBrands = [...new Set (data.map( (watch) => watch.brand ))];
-        const listOfBrands = document.getElementById("brand-list");
+        const filterTriggers = document.getElementById("brand-filter");
+        const listOfBrands = document.createElement("div");
+        filterTriggers.appendChild(listOfBrands);
+        listOfBrands.setAttribute("id", "brand-list");
+        listOfBrands.classList.add("style-for-centering");
 
         retrieveBrands.forEach( (brand) => {
             const brandTag = document.createElement("button");
@@ -147,10 +155,13 @@ async function displayWatches () {
                 let brandName = e.target.textContent;
                 let filteredWatches = data.filter( (watch) => watch.brand === brandName);
                 console.log(filteredWatches);
-                // let selectedBrand = document.querySelectorAll(`.watch-card[data-brand="${brandName}"]`);
+                document.getElementById("brand-list").remove();
+                document.getElementById("display-board").remove();
 
-                // document.querySelectorAll(".watch-card").style.display = "none";
-                // selectedBrand.style.display = "block";
+                handlingDataOfWatches(filteredWatches);
+
+                // let selectedBrand = document.querySelectorAll(`.watch-card[data-brand="${brandName}"]`);
+                // console.log(selectedBrand);
 
                 document.getElementById("undo-filter").style.display = "block";
             });

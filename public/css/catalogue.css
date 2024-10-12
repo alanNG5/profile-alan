@@ -47,6 +47,7 @@
     background-image: url("../images/bluex03230936.jpg");
     background-repeat: no-repeat;
     background-size: cover;
+    margin-bottom: 50px;
 }
 
 .anti-hero main div {
@@ -55,19 +56,10 @@
     color: var(--color-ter);
 }
 
-.catalogue {
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center;
-    align-items: center; */
-    gap: 10px;
-}
-
 #brand-list {
     display:flex;
     flex-direction: row;
     justify-content: flex-start;
-    /* align-items: center; */
     flex-wrap: wrap;
     gap: 10px 20px;
     margin-top: 20px;
@@ -142,9 +134,9 @@
     }
 }
 
-main #brand-list #undo-filter {
+/* #brand-list #undo-filter {
     display: none;
-}
+} */
 
 #display-board {
     display: grid;
