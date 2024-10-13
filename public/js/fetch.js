@@ -118,8 +118,8 @@ async function displayWatches () {
             itemDoc.classList.add("watch-info");
 
 
-            watchImage.src = `http://localhost:8900/${watch.image_path}`;
-            // watchImage.src = `https://impetus-go.me/${watch.image_path}`;
+            // watchImage.src = `http://localhost:8900/${watch.image_path}`;
+            watchImage.src = `https://impetus-go.me/${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
 
             watchBrand.innerHTML = watch.brand;
