@@ -1,4 +1,3 @@
-
 let response = async function displayProductsAtHomePage () {
 
     await fetch("/watch/hotProducts")
@@ -37,7 +36,6 @@ let response = async function displayProductsAtHomePage () {
             }
         })
         .then( fetchedData => {
-            // console.log(fetchedData.data);
             displayNewArrivals(fetchedData.data);
         })
         .catch((error) => console.error("Fetching error: ", error));
@@ -78,13 +76,13 @@ async function displayWatches () {
             }
         })
         .then( fetchedData => {
-            // console.log(fetchedData.data);
-            handlingDataOfWatches(fetchedData.data);
+            renderingWatches(fetchedData.data);
+            setBrandFilter(fetchedData.data);
+            rankPrice(fetchedData.data);
         })
         .catch((error) => console.log("Fetching error: ", error));
 
-
-    function handlingDataOfWatches (data) {
+    function renderingWatches (data) {
 
         const mainboard = document.getElementById("catalogue");
         const displayBoard = document.createElement("div");
@@ -120,8 +118,8 @@ async function displayWatches () {
             itemDoc.classList.add("watch-info");
 
 
-            // watchImage.src = `http://localhost:8900/${watch.image_path}`;
-            watchImage.src = `https://impetus-go.me/${watch.image_path}`;
+            watchImage.src = `http://localhost:8900/${watch.image_path}`;
+            // watchImage.src = `https://impetus-go.me/${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
 
             watchBrand.innerHTML = watch.brand;
@@ -129,12 +127,13 @@ async function displayWatches () {
             watchPrice.innerHTML = "HK$ " + watch.current_price;
             viewBtn.innerHTML = "View Details";
         });
+    };
 
-
+    function setBrandFilter (data) {
         let retrieveBrands = [...new Set (data.map( (watch) => watch.brand ))];
-        const filterTriggers = document.getElementById("brand-filter");
+        const brandFilter = document.getElementById("brand-filter");
         const listOfBrands = document.createElement("div");
-        filterTriggers.appendChild(listOfBrands);
+        brandFilter.appendChild(listOfBrands);
         listOfBrands.setAttribute("id", "brand-list");
         listOfBrands.classList.add("style-for-centering");
 
@@ -152,20 +151,63 @@ async function displayWatches () {
             effectDiv.classList.add("wave");
 
             brandText.addEventListener("click", (e) => {
+                document.getElementById("undo-filter")?.remove();
+
                 let brandName = e.target.textContent;
                 let filteredWatches = data.filter( (watch) => watch.brand === brandName);
-                console.log(filteredWatches);
-                document.getElementById("brand-list").remove();
                 document.getElementById("display-board").remove();
 
-                handlingDataOfWatches(filteredWatches);
+                renderingWatches(filteredWatches);
 
-                // let selectedBrand = document.querySelectorAll(`.watch-card[data-brand="${brandName}"]`);
-                // console.log(selectedBrand);
+                const resetBtn = document.createElement("button");
+                listOfBrands.appendChild(resetBtn);
+                resetBtn.innerHTML = "Reset";
+                resetBtn.setAttribute("id", "undo-filter");
+                resetBtn.classList.add("brand");
 
-                document.getElementById("undo-filter").style.display = "block";
+                resetBtn.addEventListener("click", () => {
+                    document.getElementById("display-board").remove();
+                    renderingWatches(data);
+                    resetBtn.remove();
+                });
             });
         });
-
     };
+
+    function rankPrice (data) {
+
+        let selectMenu = document.getElementById("select-menu");
+        selectMenu.addEventListener("change", selectSort);
+
+        function selectSort () {
+            const switchValue = this.value;
+            switch (switchValue) {
+                case "low-to-high":
+                    sortPriceAsc(data);
+                    break;
+                case "high-to-low":
+                    sortPriceDesc(data);
+                    break;
+                default:
+                    return;
+            };
+        };
+
+        // let selectValue = e.target.value;
+        // if (selectValue === "low-to-high")
+        function sortPriceAsc (value) {
+            let sortedData = value.sort( ( x, y ) => x.current_price - y.current_price );
+
+            document.getElementById("display-board")?.remove();
+            renderingWatches(sortedData);
+        };
+
+        function sortPriceDesc (value) {
+            let sortedData = value.sort( ( x, y ) => y.current_price - x.current_price);
+
+            document.getElementById("display-board")?.remove();
+            renderingWatches(sortedData);
+        };
+    };
+
 };

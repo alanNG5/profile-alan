@@ -21,7 +21,7 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
-    z-index: -1;
+    z-index: -9;
 }
 
 .background {
@@ -48,12 +48,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     margin-bottom: 50px;
-}
-
-.anti-hero main div {
-    font-size: 2rem;
-    padding: 15px;
-    color: var(--color-ter);
+    min-height: 50dvh;
 }
 
 #brand-list {
@@ -134,14 +129,11 @@
     }
 }
 
-/* #brand-list #undo-filter {
-    display: none;
-} */
-
 #display-board {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 10px;
+    gap: 15px;
+    padding: 50px 0;
 }
 
 .watch-card {
@@ -149,6 +141,7 @@
     display: flex;
     flex-direction: column;
     padding: 0;
+    margin-bottom: 50px;
 }
 
 .watch-item {
@@ -178,7 +171,6 @@
     color: var(--color-ter);
     text-align: right;
     text-wrap: wrap;
-
 }
 
 .watch-item .watch-info h2 {
