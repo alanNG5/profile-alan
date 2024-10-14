@@ -11,7 +11,7 @@ export class ProductsService {
         "model_name",
         "model_no",
         "current_price",
-        "description",
+        // "description",
         "image_path"
       )
       .from("products")

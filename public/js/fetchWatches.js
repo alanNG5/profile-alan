@@ -1,4 +1,4 @@
-let response = async function displayProductsAtHomePage () {
+async function displayProductsAtHomePage () {
 
     await fetch("/watch/hotProducts")
         .then((response) => {
@@ -19,8 +19,8 @@ let response = async function displayProductsAtHomePage () {
         const watchBrand = document.querySelectorAll(".carousel .product-line .item .brand");
 
         data.forEach( (watch, index) => {
-            // watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
-            watchImages[index].src = `http://impetus-go.me/${watch.image_path}`;
+            watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
+            // watchImages[index].src = `http://impetus-go.me/${watch.image_path}`;
             watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
             watchCaption[index].setAttribute("data-text", `${watch.model_name}`);
             watchBrand[index].innerHTML = `${watch.brand}`;
@@ -47,8 +47,8 @@ let response = async function displayProductsAtHomePage () {
         const captionModel = document.querySelector(".img-caption p");
 
         data.forEach( (watch, index) => {
-            // hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
-            hexagons[index].src = `https://impetus-go.me/${watch.image_path}`;
+            hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
+            // hexagons[index].src = `https://impetus-go.me/${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
             hexagons[index].addEventListener("mouseenter", (e) => {
                 caption.setAttribute("style", "opacity: 1");
@@ -67,6 +67,7 @@ let response = async function displayProductsAtHomePage () {
 };
 
 async function displayWatches () {
+
     await fetch ("/watch")
         .then((response) => {
             if (response.ok) {
@@ -117,9 +118,8 @@ async function displayWatches () {
             itemDiv.classList.add("watch-item");
             itemDoc.classList.add("watch-info");
 
-
-            // watchImage.src = `http://localhost:8900/${watch.image_path}`;
-            watchImage.src = `https://impetus-go.me/${watch.image_path}`;
+            watchImage.src = `http://localhost:8900/${watch.image_path}`;
+            // watchImage.src = `https://impetus-go.me/${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
 
             watchBrand.innerHTML = watch.brand;
@@ -158,6 +158,7 @@ async function displayWatches () {
                 document.getElementById("display-board").remove();
 
                 renderingWatches(filteredWatches);
+                rankPrice(filteredWatches);
 
                 const resetBtn = document.createElement("button");
                 listOfBrands.appendChild(resetBtn);
@@ -168,46 +169,36 @@ async function displayWatches () {
                 resetBtn.addEventListener("click", () => {
                     document.getElementById("display-board").remove();
                     renderingWatches(data);
+                    rankPrice(data);
                     resetBtn.remove();
                 });
             });
         });
     };
 
-    function rankPrice (data) {
+    function rankPrice (value) {
 
         let selectMenu = document.getElementById("select-menu");
         selectMenu.addEventListener("change", selectSort);
 
         function selectSort () {
             const switchValue = this.value;
-            switch (switchValue) {
-                case "low-to-high":
-                    sortPriceAsc(data);
-                    break;
-                case "high-to-low":
-                    sortPriceDesc(data);
-                    break;
-                default:
-                    return;
+
+            if (switchValue === "low-to-high") {
+                document.getElementById("display-board")?.remove();
+
+                let sortedData = value.sort( ( x, y ) => x.current_price - y.current_price );
+                renderingWatches(sortedData);
+
+            } else if (switchValue === "high-to-low") {
+                document.getElementById("display-board")?.remove();
+
+                let sortedData = value.sort( ( x, y ) => y.current_price - x.current_price);
+                renderingWatches(sortedData);
+
+            } else {
+                return;
             };
         };
-
-        // let selectValue = e.target.value;
-        // if (selectValue === "low-to-high")
-        function sortPriceAsc (value) {
-            let sortedData = value.sort( ( x, y ) => x.current_price - y.current_price );
-
-            document.getElementById("display-board")?.remove();
-            renderingWatches(sortedData);
-        };
-
-        function sortPriceDesc (value) {
-            let sortedData = value.sort( ( x, y ) => y.current_price - x.current_price);
-
-            document.getElementById("display-board")?.remove();
-            renderingWatches(sortedData);
-        };
     };
-
 };
