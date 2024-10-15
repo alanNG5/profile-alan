@@ -440,7 +440,6 @@ input:focus:invalid {
 
 .footer {
     position: relative;
-    bottom: 0;
     width: 100%;
     background: linear-gradient(in lch, #1090d0 20%,#2612aa 100%);
     min-height: 80px;

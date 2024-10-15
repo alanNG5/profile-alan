@@ -22,10 +22,21 @@ class ProductsController {
       let product = await this.productsService.selectProductById(
         parseInt(targetId)
       );
+
+      if (!product) {
+        console.log("@@@: Product not found");
+        return res.redirect("/404.html");
+        // res.status(404).json({ message: "Product not found" });
+        // return res.status(404).redirect("/404.html");
+        // return res.status(404).json({ error: "Product not found" });
+        // res.write("location.href = '/404.html'");
+      }
+
       res.status(200).json({ data: product });
+
     } catch (error) {
       console.log(error);
-      res.status(400).json({ message: "Invalid product ID" });
+      res.status(500).json({ message: "Internal server error" });
     }
   };
 

@@ -1,3 +1,7 @@
+// let urlCurrent = "http://localhost:8900/";
+let urlCurrent = "https://impetus-go.me/";
+
+
 async function displayProductsAtHomePage () {
 
     await fetch("/watch/hotProducts")
@@ -20,7 +24,7 @@ async function displayProductsAtHomePage () {
 
         data.forEach( (watch, index) => {
             // watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
-            watchImages[index].src = `http://impetus-go.me/${watch.image_path}`;
+            watchImages[index].src = `${urlCurrent}${watch.image_path}`;
             watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
             watchCaption[index].setAttribute("data-text", `${watch.model_name}`);
             watchBrand[index].innerHTML = `${watch.brand}`;
@@ -48,7 +52,7 @@ async function displayProductsAtHomePage () {
 
         data.forEach( (watch, index) => {
             // hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
-            hexagons[index].src = `https://impetus-go.me/${watch.image_path}`;
+            hexagons[index].src = `${urlCurrent}${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
             hexagons[index].addEventListener("mouseenter", (e) => {
                 caption.setAttribute("style", "opacity: 1");
@@ -119,12 +123,12 @@ async function displayWatches () {
             itemDoc.classList.add("watch-info");
 
             // watchImage.src = `http://localhost:8900/${watch.image_path}`;
-            watchImage.src = `https://impetus-go.me/${watch.image_path}`;
+            watchImage.src = `${urlCurrent}${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
 
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
-            watchPrice.innerHTML = "HK$ " + watch.current_price;
+            watchPrice.innerHTML = watch.current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
             viewBtn.innerHTML = "View Details";
         });
     };
