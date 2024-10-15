@@ -12,7 +12,7 @@ window.onload = async () => {
                 // window.location.href = "/404.html";
 
                 console.log("@@@ : 404 error. Page not found.");
-                location.href = "/404.html";
+                window.location.href = "/404.html";
 
             } else {
                 throw new Error("Network error. No response from server.");
@@ -21,9 +21,14 @@ window.onload = async () => {
         .then(fetchedData => {
             renderingDetails(fetchedData.data)
         })
-        .catch((error) => console.log("Fetching error: ", error));
+        .catch((error) => {
+            console.log("Fetching error: ", error);
+            console.log("Response status: ", error.response.status);
+            console.log("Response text: ", error.response.json().message);
+        });
     } else {
         console.log("No ID provided in URL.");
+        window.location.href = "/404.html";
     };
 
     function renderingDetails (data) {
