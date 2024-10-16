@@ -136,6 +136,10 @@ async function displayWatches () {
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
             watchPrice.innerHTML = watch.current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
+
+            btn.addEventListener("click", () => {
+                window.location.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
+            });
         });
     };
 
@@ -149,16 +153,11 @@ async function displayWatches () {
 
         retrieveBrands.forEach( (brand) => {
             const brandTag = document.createElement("div");
-            // const brandText = document.createElement("span");
-            // const effectDiv = document.createElement("div");
 
             listOfBrands.appendChild(brandTag);
-            // brandTag.appendChild(brandText);
-            // brandTag.appendChild(effectDiv);
 
             brandTag.classList.add("brand");
             brandTag.innerHTML = brand;
-            // effectDiv.classList.add("wave");
 
             brandTag.addEventListener("click", (e) => {
 

@@ -10,135 +10,10 @@
     <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/details.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        #overlay {
-            background: rgba(147, 135, 242, 0.9);
-            /* #F3F8F2 */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100dvw;
-            height: 100dvh;
-            z-index: -1;
-        }
-
-        main {
-            display: grid;
-            place-items: center;
-            position: relative;
-            height: 100dvh;
-            overflow: scroll;
-        }
-
-        main .card {
-            position: absolute;
-            transform: translate(0, 10%);
-            overflow-y: scroll;
-
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: clamp(1rem, 5cqi, 2rem);
-            width: clamp(300px, 68%, 960px);
-            padding: clamp(1rem, 5cqi, 3rem);
-            background-color: var(--theme-sec);
-            border-radius: 16px;
-        }
-
-        .card img {
-            display: block;
-        }
-
-        .card-content {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .tag {
-            background-color: var(--theme-main-alt);
-            color: var(--color-ter);
-            width: fit-content;
-            padding: 3px 8px;
-            font-size: 1rem;
-            border-radius: 40px;
-        }
-
-        #card-brand {
-            font-size: 4.8rem;
-            letter-spacing: 0.3rem;
-            line-height: 110%;
-        }
-
-        #card-brand:not(:first-child) {
-            margin-block-start: 0.5rem;
-        }
-
-        #card-model-name {
-            font-size: 2.8rem;
-            font-weight: 800;
-            letter-spacing: 0.2rem;
-            line-height: 80%;
-        }
-
-        #card-model-no {
-            font-size: 1.6rem;
-        }
-
-        #more-info {
-            font-size: 1.4rem;
-            font-style: italic;
-            letter-spacing: 0.1rem;
-            opacity: 0.65;
-        }
-
-        .visually-hidden {
-            clip: rect(0 0 0 0);
-            clip-path: inset(50%);
-            height: 1px;
-            overflow: hidden;
-            position: absolute;
-            white-space: nowrap;
-            width: 1px;
-        }
-
-        #price-current {
-            font-size: 6rem;
-            font-weight: 800;
-            letter-spacing: 0.4rem;
-            line-height: 1;
-            font-family: "Italiano", sans-serif;
-        }
-
-        .price, .button-box {
-            display: flex;
-            width: 100%;
-            justify-content: flex-end;
-        }
-
-        .button-buy {
-            font-size: 1.6rem;
-            font-weight: 500;
-            letter-spacing: 0.2rem;
-            cursor: pointer;
-            width: 300px;
-            height: 50px;
-            color: var(--color-ter);
-            border: 3px solid var(--theme-main-alt);
-            background-image: -webkit-linear-gradient(30deg, var(--theme-main-alt) 50%, transparent 50%);
-            background-image: linear-gradient(30deg, var(--theme-main-alt) 50%, transparent 50%);
-            background-size: 600px;
-            background-repeat: no-repeat;
-            background-position: 0%;
-            -webkit-transition: background 300ms ease-in-out;
-            transition: background 300ms ease-in-out;
-            box-shadow: rgba(0, 200, 255, 0.5) 2px 3px 8px;
-        }
-
-        .button-buy:is(:hover, :focus-visible) {
-            background-position: 100%;
-            color: var(--theme-main-alt);
-        }
     </style>
 </head>
 <body>
@@ -178,7 +53,11 @@
     <main>
         <div class="card">
 
-            <div id="image-zoom">
+            <div id="image-zoom" style="
+                --url: none;
+                --zoom-x: 0%;
+                --zoom-y: 0%;
+                --display: none;">
             </div>
 
             <div class="card-content">
