@@ -1,6 +1,5 @@
-// let urlCurrent = "http://localhost:8900/";
-let urlCurrent = "https://impetus-go.me/";
-
+let urlCurrent = "http://localhost:8900/";
+// urlCurrent = "https://impetus-go.me/";
 
 async function displayProductsAtHomePage () {
 
@@ -18,16 +17,17 @@ async function displayProductsAtHomePage () {
         .catch((error) => console.error("Fetching error: ", error));
 
      function displayTopSold (data) {
-        const watchImages = document.querySelectorAll(".carousel .product-line .item img");
-        const watchCaption = document.querySelectorAll(".carousel .product-line .item");
-        const watchBrand = document.querySelectorAll(".carousel .product-line .item .brand");
+        const watchImages = document.querySelectorAll(".carousel .product-line .item a img");
+        const imageLinks = document.querySelectorAll(".carousel .product-line .item a");
+        const watchCaptions = document.querySelectorAll(".carousel .product-line .item");
+        const watchBrands = document.querySelectorAll(".carousel .product-line .item .brand");
 
         data.forEach( (watch, index) => {
-            // watchImages[index].src = `http://localhost:8900/${watch.image_path}`;
             watchImages[index].src = `${urlCurrent}${watch.image_path}`;
             watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
-            watchCaption[index].setAttribute("data-text", `${watch.model_name}`);
-            watchBrand[index].innerHTML = `${watch.brand}`;
+            imageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
+            watchCaptions[index].setAttribute("data-text", `${watch.model_name}`);
+            watchBrands[index].innerHTML = `${watch.brand}`;
         });
     };
 
@@ -45,7 +45,8 @@ async function displayProductsAtHomePage () {
         .catch((error) => console.error("Fetching error: ", error));
 
     function displayNewArrivals (data) {
-        const hexagons = document.querySelectorAll(".hexagons div img");
+        const hexagons = document.querySelectorAll(".hexagons div a img");
+        const hexaImageLinks = document.querySelectorAll(".hexagons div a");
         const caption = document.querySelector(".img-caption");
         const captionBrand = document.querySelector(".img-caption h2");
         const captionModel = document.querySelector(".img-caption p");
@@ -54,6 +55,7 @@ async function displayProductsAtHomePage () {
             // hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
             hexagons[index].src = `${urlCurrent}${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
+            hexaImageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
             hexagons[index].addEventListener("mouseenter", (e) => {
                 caption.setAttribute("style", "opacity: 1");
 
@@ -98,7 +100,9 @@ async function displayWatches () {
         data.forEach( (watch) => {
             const watchCard = document.createElement("div");
             const itemDiv = document.createElement("div");
-            const viewBtn = document.createElement("button");
+            const btn = document.createElement("button");
+            const btnText = document.createElement("span");
+            const effectDiv = document.createElement("div");
 
             const watchImage = document.createElement("img");
             const itemDoc = document.createElement("div");
@@ -109,7 +113,9 @@ async function displayWatches () {
 
             displayBoard.appendChild(watchCard);
             watchCard.appendChild(itemDiv);
-            watchCard.appendChild(viewBtn);
+            watchCard.appendChild(btn);
+            btn.appendChild(btnText);
+            btn.appendChild(effectDiv);
 
             itemDiv.appendChild(watchImage);
             itemDiv.appendChild(itemDoc);
@@ -121,6 +127,9 @@ async function displayWatches () {
             watchCard.classList.add("watch-card");
             itemDiv.classList.add("watch-item");
             itemDoc.classList.add("watch-info");
+            btn.classList.add("view-btn");
+            btnText.innerHTML = "View Details";
+            effectDiv.classList.add("wave");
 
             // watchImage.src = `http://localhost:8900/${watch.image_path}`;
             watchImage.src = `${urlCurrent}${watch.image_path}`;
@@ -129,7 +138,6 @@ async function displayWatches () {
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
             watchPrice.innerHTML = watch.current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
-            viewBtn.innerHTML = "View Details";
         });
     };
 
@@ -137,24 +145,25 @@ async function displayWatches () {
         let retrieveBrands = [...new Set (data.map( (watch) => watch.brand ))];
         const brandFilter = document.getElementById("brand-filter");
         const listOfBrands = document.createElement("div");
+        brandFilter.classList.add("style-for-centering");
         brandFilter.appendChild(listOfBrands);
         listOfBrands.setAttribute("id", "brand-list");
-        listOfBrands.classList.add("style-for-centering");
 
         retrieveBrands.forEach( (brand) => {
-            const brandTag = document.createElement("button");
-            const brandText = document.createElement("span");
-            const effectDiv = document.createElement("div");
+            const brandTag = document.createElement("div");
+            // const brandText = document.createElement("span");
+            // const effectDiv = document.createElement("div");
 
             listOfBrands.appendChild(brandTag);
-            brandTag.appendChild(brandText);
-            brandTag.appendChild(effectDiv);
+            // brandTag.appendChild(brandText);
+            // brandTag.appendChild(effectDiv);
 
             brandTag.classList.add("brand");
-            brandText.innerHTML = brand;
-            effectDiv.classList.add("wave");
+            brandTag.innerHTML = brand;
+            // effectDiv.classList.add("wave");
 
-            brandText.addEventListener("click", (e) => {
+            brandTag.addEventListener("click", (e) => {
+
                 document.getElementById("undo-filter")?.remove();
 
                 let brandName = e.target.textContent;

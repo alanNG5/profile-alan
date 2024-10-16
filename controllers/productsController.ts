@@ -24,16 +24,26 @@ class ProductsController {
       );
 
       if (!product) {
-        console.log("@@@: Product not found");
-        return res.redirect("/404.html");
+        // Setting headers to prevent caching:
+        // res.setHeader(
+        //   "Cache-Control",
+        //   "no-store, no-cache, must-revalidate, private"
+        // );
+
+        return res.status(404).json({ error: "Product not found" });
         // res.status(404).json({ message: "Product not found" });
         // return res.status(404).redirect("/404.html");
         // return res.status(404).json({ error: "Product not found" });
         // res.write("location.href = '/404.html'");
       }
 
-      res.status(200).json({ data: product });
+      // Setting headers to prevent caching:
+      // res.setHeader(
+      //   "Cache-Control",
+      //   "no-store, no-cache, must-revalidate, private"
+      // );
 
+      res.status(200).json({ data: product });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error" });

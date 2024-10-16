@@ -1,5 +1,13 @@
+/* body {
+    background-image: url("../images/bluex03230936.jpg");
+} */
+
+main {
+    transform: translate(0, -5%);
+}
+
 .anti-hero {
-    height: 150dvh;
+    height: 100dvh;
     overflow-y: auto;
     overflow-x: hidden;
     perspective: 10px;
@@ -51,6 +59,12 @@
     min-height: 50dvh;
 }
 
+#brand-filter {
+    display: flex;
+    justify-content: center;
+    z-index: 100;
+}
+
 #brand-list {
     display:flex;
     flex-direction: row;
@@ -60,80 +74,79 @@
     margin-top: 20px;
 }
 
-.brand {
-    position: relative;
-    padding: 15px 50px;
-    display: block;
-    text-decoration: none;
+#brand-list .brand {
+    display: inline-flex;
+    cursor: pointer;
+    width: fit-content;
+
+    font-size: 2.6rem;
+    letter-spacing: 0.2rem;
     text-transform: uppercase;
-    width: 200px;
-    overflow: hidden;
-    border-radius: 15px;
-}
 
-.brand span {
-    position: relative;
+    padding: 10px 25px;
+    background-color: transparent;
     color: var(--color-ter);
-    font-size: 20px;
-    letter-spacing: 2px;
-    z-index: 1;
+    border-right: 2px solid white;
+    border-radius: 35px;
+
+    box-shadow: 0 0 10px var(--theme-main);
 }
 
-.brand .wave {
+#catalogue {
+    position: relative;
+}
+
+#data-structuring-panel {
     position: absolute;
-    top: -80px;
-    left: 0;
-    width: 200px;
-    height: 200px;
-    background: #4973ff;
-    /* box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); */
-    box-shadow: inset 0 0 15px var(--theme-sec);
-    transition: 0.5s;
-    overflow: hidden;
+    right: 10%;
+    margin: 15px;
 }
 
-.brand .wave::after,
-.brand .wave::before {
-    content: '';
-    width: 200%;
-    height: 200%;
+#data-structuring-panel select {
+    background-color: #0563af;
+    color: var(--color-ter);
+    padding: 12px;
+    width: 400px;
+    border: none;
+    font-size: 1.8rem;
+    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 25px;
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+}
+
+#data-structuring-panel::before {
+    content: "\eab6";
+    font-family: boxicons;
     position: absolute;
     top: 0;
-    left: 50%;
-    transform: translate(-50%, -75%);
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    font-size: 2.8rem;
+    line-height: 45px;
+    color: var(--color-ter);
+    background-color: var(--theme-main);
+    pointer-events: none;
 }
 
-.brand .wave::before {
-    border-radius: 45%;
-    background: rgba(20, 20, 20, 1);
-    animation: flow 5s linear infinite;
+#data-structuring-panel:hover::before {
+    color: var(--theme-main);
+    background-color: var(--theme-sec);
 }
 
-.brand .wave::after {
-    border-radius: 40%;
-    background: rgba(20, 20, 20, 0.5);
-    animation: flow 10s linear infinite;
-}
-
-.brand:hover .wave{
-    top: -120px;
-    cursor: pointer;
-}
-
-@keyframes flow {
-    0% {
-      transform: translate(-50%, -75%) rotate(0deg);
-    }
-    100% {
-      transform: translate(-50%, -75%) rotate(360deg);
-    }
+#data-structuring-panel label {
+    margin-right: 15px;
+    font-size: 1.6rem;
+    color: var(--color-ter);
 }
 
 #display-board {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
-    padding: 50px 0;
+    padding: 90px 0;
 }
 
 .watch-card {
@@ -185,19 +198,83 @@
     font-size: 2.8rem;
 }
 
-#display-board .watch-card button {
-    width: 80%;
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: var(--theme-main);
-    color: var(--color-ter);
-    border: none;
-    border-radius: 5px;
-    font-size: 1.6rem;
-    letter-spacing: 0.2rem;
-    cursor: pointer;
+.view-btn {
     position: relative;
-    left: 50%;
-    transform: translateX(-50%);
+    padding: 15px;
+    display: block;
+    text-decoration: none;
+    width: 200px;
+    overflow: hidden;
+    border-radius: 25px;
+    margin-top: 10px;
 }
 
+.view-btn span {
+    position: relative;
+    color: var(--color-ter);
+    font-size: 1.6rem;
+    font-weight: 500;
+    letter-spacing: 0.2rem;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.view-btn .wave {
+    position: absolute;
+    top: -80px;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    background: #4973ff;
+    /* box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); */
+    box-shadow: inset 0 0 15px var(--theme-sec);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.view-btn .wave::after,
+.view-btn .wave::before {
+    content: '';
+    width: 200%;
+    height: 200%;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -75%);
+}
+
+.view-btn .wave::before {
+    border-radius: 45%;
+    background: rgba(20, 20, 20, 1);
+    animation: flow 5s linear infinite;
+}
+
+.view-btn .wave::after {
+    border-radius: 40%;
+    background: rgba(20, 20, 20, 0.5);
+    animation: flow 10s linear infinite;
+}
+
+.view-btn:hover .wave{
+    top: -120px;
+    cursor: pointer;
+}
+
+@keyframes flow {
+    0% {
+      transform: translate(-50%, -75%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -75%) rotate(360deg);
+    }
+}
+
+/* .backdrop {
+    background-image: url("../images/bg_water_casio.jpg");
+    width: 100%;
+    min-height: 100dvh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+} */

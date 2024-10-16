@@ -378,7 +378,7 @@ main .backdrop:nth-last-child(1) {
     padding: 15px;
     border: 2px solid var(--theme-sec);
     opacity: 0;
-    z-index: 810;
+    z-index: 890;
 }
 
 .img-caption h2 {
@@ -445,6 +445,12 @@ main .backdrop:nth-last-child(1) {
     main .backdrop:nth-last-child(1) {
     height: 15dvh;
     }
+
+    .img-caption {
+        position: absolute;
+        bottom: 0;
+        display: none;
+    }
 }
 
 @media (max-width: 500px) {
@@ -469,13 +475,6 @@ main .backdrop:nth-last-child(1) {
     .circle .inner-circle::before {
         height: 520px;
         left: 30%;
-    }
-
-    .img-caption {
-        position: fixed;
-        width: 100%;
-        inset: 0 0 200% 0;
-        height: fit-content;
     }
 
     .hexagons div:nth-last-child(1), .hexagons div:nth-last-child(2) {

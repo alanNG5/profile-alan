@@ -1,17 +1,21 @@
+let urlCurrent = "http://localhost:8900/";
+// urlCurrent = "https://impetus-go.me/";
+
 window.onload = async () => {
 
     const searchParams = new URLSearchParams(location.search);
     const id = searchParams.get("id");
 
     if(id) {
+        // adding a cache-busting parameter to URL:
+        // fetch(`/watch/${id}?_=${new Date().getTime()}`)
+
         await fetch(`/watch/${id}`)
         .then((response) => {
             if(response.ok) {
                 return response.json();
             } else if (response.status === 404) {
-                // window.location.href = "/404.html";
 
-                console.log("@@@ : 404 error. Page not found.");
                 window.location.href = "/404.html";
 
             } else {
@@ -23,8 +27,8 @@ window.onload = async () => {
         })
         .catch((error) => {
             console.log("Fetching error: ", error);
-            console.log("Response status: ", error.response.status);
-            console.log("Response text: ", error.response.json().message);
+            console.log("Response status: ", error.response?.status);
+            console.log("Response text: ", error.response.json());
         });
     } else {
         console.log("No ID provided in URL.");
@@ -32,10 +36,6 @@ window.onload = async () => {
     };
 
     function renderingDetails (data) {
-
-        // if(data[0].description) {
-        // console.log(data[0])}
-        // else { console.log("description: null")};
 
         const cardBrand = document.getElementById("card-brand");
         const cardModelName = document.getElementById("card-model-name");
@@ -47,8 +47,7 @@ window.onload = async () => {
         const createImg = document.createElement("img");
         photo.appendChild(createImg);
 
-        createImg.src = `https://impetus-go.me/${data[0].image_path}`;
-        // createImg.src = `http://localhost:8900/${data[0].image_path}`;
+        createImg.src = `${urlCurrent}${data[0].image_path}`;
         createImg.alt = data[0].brand + " " + data[0].model_name;
         document.body.style.backgroundImage = `url(\"${createImg.src}\")`;
 
