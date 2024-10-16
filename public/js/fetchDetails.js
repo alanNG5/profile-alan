@@ -1,5 +1,5 @@
 let urlCurrent = "http://localhost:8900/";
-// urlCurrent = "https://impetus-go.me/";
+urlCurrent = "https://impetus-go.me/";
 
 window.onload = async () => {
 

@@ -1,5 +1,5 @@
 let urlCurrent = "http://localhost:8900/";
-// urlCurrent = "https://impetus-go.me/";
+urlCurrent = "https://impetus-go.me/";
 
 async function displayProductsAtHomePage () {
 
@@ -52,7 +52,6 @@ async function displayProductsAtHomePage () {
         const captionModel = document.querySelector(".img-caption p");
 
         data.forEach( (watch, index) => {
-            // hexagons[index].src = `http://localhost:8900/${watch.image_path}`;
             hexagons[index].src = `${urlCurrent}${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
             hexaImageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
@@ -131,7 +130,6 @@ async function displayWatches () {
             btnText.innerHTML = "View Details";
             effectDiv.classList.add("wave");
 
-            // watchImage.src = `http://localhost:8900/${watch.image_path}`;
             watchImage.src = `${urlCurrent}${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
 
