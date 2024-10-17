@@ -1,3 +1,10 @@
+/* @property --standardwidth {
+    syntax: "<standardwidth>";
+    inherits: false;
+    initial-value: 320px;
+} */
+
+
 #overlay {
     background: var(--theme-main-alt);
     opacity: 0.8;
@@ -15,6 +22,8 @@ main {
     position: relative;
     height: 100dvh;
     overflow: scroll;
+
+    --standardwidth: 320px;
 }
 
 main .card {
@@ -23,26 +32,18 @@ main .card {
     overflow-y: scroll;
 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: clamp(1rem, 5cqi, 2rem);
-    width: clamp(300px, 68%, 960px);
+    grid-template-columns: repeat(auto-fit, minmax(var(--standardwidth), 1fr));
+    gap: clamp(1rem, 2cqi, 3rem);
+    width: clamp(var(--standardwidth), 65%, 960px);
     padding: clamp(1rem, 5cqi, 3rem);
     background-color: var(--theme-sec);
     border-radius: 16px;
 }
 
-.card img {
-    display: block;
-
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: 0 0;
-}
-
 .card-content {
     display: grid;
-    gap: 1rem;
+    gap: 2rem;
+    padding: 10px;
 }
 
 .tag {
@@ -58,6 +59,7 @@ main .card {
     font-size: 4.8rem;
     letter-spacing: 0.3rem;
     line-height: 110%;
+    font-weight: 800;
 }
 
 #card-brand:not(:first-child) {
@@ -131,19 +133,19 @@ main .card {
 }
 
 #image-zoom {
-    width: 300px;
+    width: var(--standardwidth);
     height: auto;
-    /* border: 5px solid #0ef; */
-
     position: relative;
-    /* set it as relative and pseudo element as absolute respectively can make the zooming image to cover the original one while hovering. */
+    /* set it as relative and pseudo element as absolute respectively can make the zooming image cover the original one while hovering. */
+    transform: translateX(10%);
+
 }
 
 #image-zoom img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: 0 0;
+    /* object-position: 0 0; */
 }
 
 #image-zoom::after {
@@ -160,4 +162,65 @@ main .card {
     left: 0;
     top: 0;
     pointer-events: none;
+}
+
+
+@media (max-width: 1240px) {
+    main {
+        --standardwidth: 300px;
+    }
+
+    #card-brand {
+        font-size: 4.2rem;
+        font-weight: 600;
+    }
+
+    #card-model-name {
+        font-size: 2.6rem;
+        font-weight: 600;
+        letter-spacing: 0.2rem;
+    }
+
+    #price-current {
+        font-size: 5rem;
+        font-weight: 700;
+        letter-spacing: 0.2rem;
+        font-family: "Italiano", sans-serif;
+    }
+}
+
+@media (max-width: 1050px) {
+    main {
+        justify-content: center;
+    }
+    .price, .button-box {
+        justify-content: flex-start;
+    }
+
+    #more-info {
+        font-size: 1.6rem;
+        width: var(--standardwidth);
+    }
+}
+
+@media (min-width: 800px) and (max-width: 1050px) {
+    #image-zoom, .card-content {
+        transform: translate(20%, 0);
+    }
+}
+
+@media(max-width: 600px) {
+    #card-brand, #price-current {
+        font-size: 4rem;
+    }
+
+    .button-buy {
+        width: 260px;
+        height: 65px;
+        font-size: 1.6rem;
+    }
+
+    #image-zoom, .card-content {
+        transform: translate(0, 0);
+    }
 }

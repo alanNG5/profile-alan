@@ -121,7 +121,7 @@ main .backdrop {
 
 main .backdrop:nth-last-child(1) {
     height: 35dvh;
-    filter: opacity(100%);
+    filter: opacity(78%);
 }
 
 @media only screen and (max-device-width: 1366px) {

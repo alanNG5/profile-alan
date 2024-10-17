@@ -135,7 +135,7 @@ async function displayWatches () {
 
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
-            watchPrice.innerHTML = watch.current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
+            watchPrice.innerHTML = "HK$ " + watch.current_price.toLocaleString();
 
             btn.addEventListener("click", () => {
                 window.location.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
@@ -170,17 +170,17 @@ async function displayWatches () {
                 renderingWatches(filteredWatches);
                 rankPrice(filteredWatches);
 
-                const resetBtn = document.createElement("button");
-                listOfBrands.appendChild(resetBtn);
-                resetBtn.innerHTML = "Reset";
-                resetBtn.setAttribute("id", "undo-filter");
-                resetBtn.classList.add("brand");
+                const reset = document.createElement("div");
+                listOfBrands.appendChild(reset);
+                reset.innerHTML = "Reset";
+                reset.setAttribute("id", "undo-filter");
+                reset.classList.add("brand");
 
-                resetBtn.addEventListener("click", () => {
+                reset.addEventListener("click", () => {
                     document.getElementById("display-board").remove();
                     renderingWatches(data);
                     rankPrice(data);
-                    resetBtn.remove();
+                    reset.remove();
                 });
             });
         });

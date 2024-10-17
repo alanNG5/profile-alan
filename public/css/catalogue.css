@@ -1,5 +1,12 @@
-main {
+.anti-hero main {
     transform: translate(0, -5%);
+}
+
+body {
+    background-image: url("../images/gearblue102.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
 }
 
 .anti-hero {
@@ -34,17 +41,38 @@ main {
 
 .foreground {
     transform: translatez(-5px) scale(1.5);
-    width: 500px;
+    width: auto;
+    height: 300px;
     object-fit: contain;
+    position: relative;
+}
+
+.foreground:first-child {
+    height: 180px;
+}
+
+.foreground:last-child {
+    display: none;
+    width: 80%;
+}
+
+.foreground-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
 }
 
 .title {
+    position: absolute;
     font-family: "ICA Rubrik", "Montserrat", sans-serif;
-    font-size: 10rem;
+    font-size: 8.5rem;
     color: var(--color-ter);
-    text-shadow: 0 0 10px var(--theme-main);
+    text-shadow: var(--theme-main) 0 0 15px;
     letter-spacing: 1.6rem;
     text-align: center;
+    transform: translatez(4px) scale(0.9);
+    text-wrap: wrap;
 }
 
 .anti-hero main {
@@ -74,18 +102,19 @@ main {
     display: inline-flex;
     cursor: pointer;
     width: fit-content;
-
     font-size: 2.6rem;
     letter-spacing: 0.2rem;
     text-transform: uppercase;
-
     padding: 10px 25px;
     background-color: transparent;
     color: var(--color-ter);
-    border-right: 2px solid white;
-    border-radius: 35px;
+    border-right: 2px groove var(--color-ter);
+    font-weight: 600;
+    text-shadow: var(--color-basic) 4px 0 9px;
+}
 
-    box-shadow: 0 0 10px var(--theme-main);
+#brand-list .brand#undo-filter {
+    color: var(--color-supp);
 }
 
 #catalogue {
@@ -117,7 +146,7 @@ main {
     position: absolute;
     top: 0;
     right: 0;
-    width: 20%;
+    width: 15%;
     height: 100%;
     text-align: center;
     font-size: 2.8rem;
@@ -163,7 +192,7 @@ main {
 .watch-item img {
     height: 250px;
     object-fit: contain;
-    transform: translateX(-25%);
+    transform: translateX(-20%);
 }
 
 .watch-item img:hover {
@@ -202,7 +231,8 @@ main {
     width: 200px;
     overflow: hidden;
     border-radius: 25px;
-    margin-top: 10px;
+    margin-top: 28px;
+    transform: translateX(50%);
 }
 
 .view-btn span {
@@ -222,7 +252,6 @@ main {
     width: 200px;
     height: 200px;
     background: #4973ff;
-    /* box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5); */
     box-shadow: inset 0 0 15px var(--theme-sec);
     transition: 0.5s;
     overflow: hidden;
@@ -265,12 +294,95 @@ main {
     }
 }
 
-/* .backdrop {
-    background-image: url("../images/bg_water_casio.jpg");
-    width: 100%;
-    min-height: 100dvh;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-} */
+
+@media (min-width: 1440px) {
+    #display-board {
+        gap: 80px;
+    }
+}
+
+@media (min-width: 1105px) and (max-width: 1360px) {
+    #display-board {
+        gap: 60px;
+    }
+
+    .watch-item img {
+        transform: translateX(-10%);
+    }
+}
+
+@media (min-width: 730px) and (max-width: 900px) {
+    #display-board {
+        gap: 50px;
+    }
+
+    .watch-item img {
+        transform: translateX(-5%);
+    }
+}
+
+@media (max-width: 1160px) {
+    .title {
+        font-size: 5.8rem;
+        letter-spacing: 0.6rem;
+    }
+
+    .foreground {
+        height: 220px;
+    }
+
+    .foreground:first-child {
+        height: 130px;
+    }
+}
+
+@media (max-width: 800px) {
+
+    .foreground-container img{
+        display: none;
+    }
+
+    .foreground:last-child {
+        transform: translateY(-68px);
+        display: block;
+    }
+
+    .title {
+        font-size: 4.6rem;
+        letter-spacing: 0.3rem;
+    }
+
+    #brand-list .brand {
+        font-size: 1.9rem;
+        letter-spacing: 0;
+    }
+}
+
+@media (max-width: 680px) {
+    .title {
+        font-size: 3.9rem;
+        transform: translatez(3px) scale(0.8);
+    }
+
+
+    #data-structuring-panel select {
+        justify-content: center;
+    }
+
+    #data-structuring-panel select {
+        width: 285px;
+        font-size: 1.6rem;
+    }
+
+    #data-structuring-panel::before {
+        width: 10%;
+        font-size: 2.3rem;
+    }
+
+    #data-structuring-panel label {
+        font-size: 1.2rem;
+        position: absolute;
+        left: 5%;
+    }
+
+}
