@@ -196,9 +196,9 @@ export async function seed(knex: Knex): Promise<void> {
   const [{ id: id10 }]: Array<{ id: number }> = await knex
     .insert({
       brand: "Omega",
-      model_name: "Seamaster Aqua Terra",
+      model_name: "Seamaster Aqua Terra 150M",
       model_no: "220.50.41.21.10.001",
-      current_price: 365500,
+      current_price: 307800,
       description:
         "18k Moonshine gold case, 41mm x 13.4mm, 150m water-resistance, sapphire crystal on both sides, gold bracelet",
       stock_qtn: 3,

@@ -4,6 +4,7 @@ import { ProductsController } from "./controllers/productsController";
 import { ProductsService } from "./services/productsService";
 import { AuthController } from "./controllers/authController";
 import { AuthService } from "./services/authService";
+// import { requireLogin, requireAdmin } from "./utils/guard";
 
 const knexConfigs = require("./knexfile");
 const configMode = process.env.NODE_ENV || "production";

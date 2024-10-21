@@ -1,6 +1,4 @@
 const Swal = window.Swal;
-// import Swal from 'sweetalert2';
-// const Swal = require('sweetalert2');
 
 let loginForm = document.getElementById("login-form");
 
@@ -51,6 +49,24 @@ async function submitLogin(event) {
     timer: 2000
   });
 
+  // const Toast = Swal.mixin({
+  //   toast: true,
+  //   position: "center",
+  //   showConfirmButton: false,
+  //   timer: 2000,
+  //   timerProgressBar: true,
+  //   allowOutsideClick: true,
+  //   allowEscapeKey: true,
+  //   didOpen: (toast) => {
+  //     toast.onmouseenter = Swal.stopTimer;
+  //     toast.onmouseleave = Swal.resumeTimer;
+  //   }
+  // });
+  // Toast.fire({
+  //   icon: "success",
+  //   title: json.success
+  // });
+
   loadVisitorRole();
 };
 
@@ -85,26 +101,6 @@ async function submitLogout(event) {
 
   loadVisitorRole();
 };
-
-async function loadVisitorRole () {
-
-  let res = await fetch("/user");
-  let json = await res.json();
-
-  if (json.visitor != "guest") {
-
-    document.getElementById("login-btn").style.display = "none";
-
-    document.getElementById("user-info").style.display = "flex";
-    document.getElementById("role-info").textContent = json.visitor;
-    document.getElementById("name-info").textContent = json.username;
-  } else {
-    document.getElementById("login-btn").style.display = "inline-block";
-    document.getElementById("user-info").style.display = "none";
-  };
-};
-
-loadVisitorRole();
 
 
 async function submitRegister(event) {
@@ -150,3 +146,24 @@ async function submitRegister(event) {
 
   loadVisitorRole();
 };
+
+
+async function loadVisitorRole () {
+
+  let res = await fetch("/user");
+  let json = await res.json();
+
+  if (json.visitor != "guest") {
+
+    document.getElementById("login-btn").style.display = "none";
+
+    document.getElementById("user-info").style.display = "flex";
+    document.getElementById("role-info").textContent = json.visitor;
+    document.getElementById("name-info").textContent = json.username;
+  } else {
+    document.getElementById("login-btn").style.display = "inline-block";
+    document.getElementById("user-info").style.display = "none";
+  };
+};
+
+loadVisitorRole();

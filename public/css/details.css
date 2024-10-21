@@ -224,3 +224,209 @@ main .card {
         transform: translate(0, 0);
     }
 }
+
+
+/* form submission for purchase */
+
+#buy-modal .x-cl-btn {
+    top: -10%;
+    right: -10%;
+}
+
+#buy-form {
+width: clamp(320px, 50dvw, 960px);
+padding: 20px 30px;
+margin: 0 auto;
+background-color: #fff;
+border-radius: 4.2px;
+box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 10px 1px;
+font-family: Arial, sans-serif;
+font-size: 1.6rem;
+color: #b9b9b9;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+
+.form-row h4 {
+color: #f0a500;
+}
+
+.form-row {
+zoom: 1;
+}
+
+.form-row:before,
+.form-row:after {
+content: "";
+display: table;
+}
+
+.form-row:after {
+clear: both;
+}
+
+input,
+input[type="radio"] + label
+{
+width: 100%;
+padding: 10px;
+background-color: #f9f9f9;
+border: 1px solid #e5e5e5;
+border-radius: 3px;
+-webkit-transition: 0.35s ease-in-out;
+-moz-transition: 0.35s ease-in-out;
+-o-transition: 0.35s ease-in-out;
+transition: 0.35s ease-in-out;
+transition: all 0.35s ease-in-out;
+}
+
+input:focus {
+outline: 0;
+border-color: #bd8200;
+}
+
+input:focus + .input-icon i {
+color: #f0a500;
+}
+
+input:focus + .input-icon:after {
+border-right-color: #f0a500;
+}
+
+.input-group {
+margin-bottom: 15px;
+zoom: 1;
+}
+
+.input-group:before,
+.input-group:after {
+content: "";
+display: table;
+}
+
+.input-group:after {
+clear: both;
+}
+
+.input-group-icon {
+position: relative;
+}
+
+.input-group-icon input {
+padding-left: 80px;
+}
+
+.input-group-icon .input-icon {
+position: absolute;
+top: 0px;
+left: 0;
+width: 60px;
+height: 100%;
+line-height: 50px;
+text-align: center;
+pointer-events: none;
+}
+
+.input-group-icon .input-icon:after {
+position: absolute;
+height: 100%;
+top: 0;
+right: 0;
+display: block;
+border-right: 2px solid #e5e5e5;
+content: "";
+-webkit-transition: 0.35s ease-in-out;
+-moz-transition: 0.35s ease-in-out;
+-o-transition: 0.35s ease-in-out;
+transition: 0.35s ease-in-out;
+transition: all 0.35s ease-in-out;
+}
+
+.input-group-icon .input-icon i {
+-webkit-transition: 0.35s ease-in-out;
+-moz-transition: 0.35s ease-in-out;
+-o-transition: 0.35s ease-in-out;
+transition: 0.35s ease-in-out;
+transition: all 0.35s ease-in-out;
+}
+
+input[type="radio"] {
+display: none;
+}
+
+input[type="radio"] + label {
+display: block;
+width: 50%;
+text-align: center;
+float: left;
+border-radius: 0;
+}
+
+input[type="radio"] + label:first-of-type {
+border-top-left-radius: 5px;
+border-bottom-left-radius: 5px;
+}
+
+input[type="radio"] + label:last-of-type {
+border-top-right-radius: 5px;
+border-bottom-right-radius: 5px;
+}
+
+input[type="radio"]:checked + label,
+input:checked + label:before {
+background-color: #f0a500;
+color: #fff;
+border-color: #bd8200;
+}
+
+.col-to-half {
+display: inline-block;
+width: 50%;
+}
+
+.col-to-half:last-of-type {
+float: right;
+display: inline-flex;
+justify-content: end;
+}
+
+.col-to-half span {
+font-size: 1.4rem;
+padding: 10px 10px 0 10px;
+}
+
+.col-to-half:last-of-type .input-group {
+display: inline-flex;
+}
+
+.col-to-half:last-of-type .input-group input{
+text-align: center;
+font-size: 1.2rem;
+}
+
+/* To hide the arrows in number input */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media only screen and (max-width: 800px) {
+.col-to-half {
+  width: 100%;
+}
+
+#buy-modal .x-cl-btn {
+    top: -6%;
+    right: 0;
+}
+.col-to-half:last-of-type {
+  float: none;
+  display: inline-flex;
+  width: 80%;
+  font-size: 0.5rem;
+}
+}
+

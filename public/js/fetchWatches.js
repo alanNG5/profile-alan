@@ -1,5 +1,5 @@
 let urlCurrent = "http://localhost:8900/";
-urlCurrent = "https://impetus-go.me/";
+// urlCurrent = "https://impetus-go.me/";
 
 async function displayProductsAtHomePage () {
 
@@ -26,6 +26,7 @@ async function displayProductsAtHomePage () {
             watchImages[index].src = `${urlCurrent}${watch.image_path}`;
             watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
             imageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
+            imageLinks[index].setAttribute("tabindex", "-1");
             watchCaptions[index].setAttribute("data-text", `${watch.model_name}`);
             watchBrands[index].innerHTML = `${watch.brand}`;
         });

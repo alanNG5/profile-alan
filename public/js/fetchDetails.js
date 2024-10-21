@@ -1,5 +1,7 @@
 let urlCurrent = "http://localhost:8900/";
-urlCurrent = "https://impetus-go.me/";
+// urlCurrent = "https://impetus-go.me/";
+
+let infoPurchaseAction = {};
 
 window.onload = async () => {
 
@@ -23,7 +25,7 @@ window.onload = async () => {
             }
         })
         .then(fetchedData => {
-            renderingDetails(fetchedData.data)
+            renderingDetails(fetchedData.data);
         })
         .catch((error) => {
             console.log("Fetching error: ", error);
@@ -50,13 +52,21 @@ window.onload = async () => {
         createImg.alt = data[0].brand + " " + data[0].model_name;
         document.body.style.backgroundImage = `url(\"${createImg.src}\")`;
         document.body.style.backgroundSize = "contain";
+        document.body.style.backgroundPosition = "-25% 0%";
 
         cardBrand.innerHTML = data[0].brand;
         cardModelName.innerHTML = data[0].model_name;
         cardModelNo.innerHTML = data[0].model_no;
         price.innerHTML = data[0].current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
-
         moreInfo.innerHTML = data[0].description;
+
+        // infoPurchaseAction = {
+        //     brand: data[0].brand,
+        //     model_name: data[0].model_name,
+        //     model_no: data[0].model_no,
+        //     current_price: data[0].current_price
+        // };
+        infoPurchaseAction = data[0];
 
 
         // setting up the zoom effect on the image:
@@ -84,3 +94,38 @@ window.onload = async () => {
 
     };
 };
+
+const buyModal = document.getElementById("buy-modal");
+document.getElementById("buy-form-popup-btn").addEventListener("click", forMemberActionOnly);
+
+async function forMemberActionOnly() {
+    let res = await fetch("/user");
+    let json = await res.json();
+
+    if ( json.visitor != "member" ) {
+        Swal.fire({
+            position: "center",
+            icon: "info",
+            iconColor: "var(--color-supp)",
+            title: "Please login as a member to proceed.",
+            showConfirmButton: true,
+          });
+    } else {
+        // console.log(json);
+        buyModal.style.display = "block";
+        document.getElementById("acname").innerHTML = json.username;
+        document.getElementById("purchase-item").innerHTML = infoPurchaseAction.brand + " " + infoPurchaseAction.model_name + " " + infoPurchaseAction.model_no;
+        document.getElementById("purchase-price").innerHTML = infoPurchaseAction.current_price;
+
+        infoPurchaseAction = {
+            ...infoPurchaseAction,
+            ...json
+        };
+
+        console.log("data transfer:", infoPurchaseAction);
+    };
+};
+
+document.getElementById("buy-cancel").addEventListener("click", () => {
+    buyModal.style.display = "none";
+});

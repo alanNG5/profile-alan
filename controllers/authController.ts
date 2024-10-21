@@ -28,6 +28,7 @@ class AuthController {
       res.json({
         visitor: req.session.admin_role ? "admin" : "member",
         username: req.session.username,
+        accountId: req.session.userid,
       });
     } else {
       res.json({ visitor: "guest" });

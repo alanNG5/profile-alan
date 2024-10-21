@@ -330,19 +330,22 @@ input:not(:placeholder-shown):invalid {
 input:focus:invalid {
     border: 2px solid var(--color-sec);
 }
-
-#close {
-    color: var(--color-ter);
-    position: absolute;
-    font-size: 3.2rem;
-    font-weight: bold;
-    cursor: pointer;
+#login-modal .modal-content .x-cl-btn {
     top: 5%;
     right: 5%;
-    z-index: 1000;
 }
 
-#close:hover {
+.x-cl-btn {
+    color: var(--color-ter);
+    position: absolute;
+    font-size: 4.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1000;
+    text-shadow: rgba(0, 0, 0, 0.8) 0 0 13px ;
+}
+
+.x-cl-btn:hover {
     color: var(--color-supp);
     font-size: 4rem;
     transition: 0.5s;

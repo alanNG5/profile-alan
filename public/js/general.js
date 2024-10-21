@@ -1,3 +1,11 @@
+// global error handler to listen for unhandled fetch errors:
+window.addEventListener("unhandledrejection", event => {
+    console.error('Unhandled promise rejection:', event.reason);
+    window.location.href = "/404.html";
+    });
+
+
+
 // navbar toggle
 let navList = document.getElementById("navList");
 let toggleBtn = document.getElementById("toggleBtn");
@@ -27,6 +35,7 @@ const loginModal = document.getElementById("login-modal");
 
 loginBtn.onclick = () => {
     loginModal.style.display = "block";
+    document.querySelector("#login-form .input-box input").focus();
 };
 
 const closeBtn = document.getElementById("close");
@@ -66,7 +75,10 @@ cancelLogout.onclick = () => {
 window.onclick = function (event) {
     if (event.target === loginModal) {
         loginModal.style.display = "none";
-    } else if (event.target === logoutModal) {
+    } if (event.target === logoutModal) {
         logoutModal.style.display = "none";
-    };
+    } else if (event.target === buyModal) {
+        buyModal.style.display = "none";
+        // buyModal is declared in fetchDetails.js
+    }
 };
