@@ -49,24 +49,6 @@ async function submitLogin(event) {
     timer: 2000
   });
 
-  // const Toast = Swal.mixin({
-  //   toast: true,
-  //   position: "center",
-  //   showConfirmButton: false,
-  //   timer: 2000,
-  //   timerProgressBar: true,
-  //   allowOutsideClick: true,
-  //   allowEscapeKey: true,
-  //   didOpen: (toast) => {
-  //     toast.onmouseenter = Swal.stopTimer;
-  //     toast.onmouseleave = Swal.resumeTimer;
-  //   }
-  // });
-  // Toast.fire({
-  //   icon: "success",
-  //   title: json.success
-  // });
-
   loadVisitorRole();
 };
 

@@ -4,6 +4,9 @@ import { ProductsController } from "./controllers/productsController";
 import { ProductsService } from "./services/productsService";
 import { AuthController } from "./controllers/authController";
 import { AuthService } from "./services/authService";
+import { SalesController } from "./controllers/salesController";
+import { SalesService } from "./services/salesService";
+
 // import { requireLogin, requireAdmin } from "./utils/guard";
 
 const knexConfigs = require("./knexfile");
@@ -30,3 +33,8 @@ routes.post("/user/login", authController.login);
 routes.post("/user/logout", authController.logout);
 routes.get("/user", authController.checkVisitorStatus);
 routes.post("/user/register", authController.register);
+
+const salesService = new SalesService(knex);
+const salesController = new SalesController(salesService);
+
+routes.post("/sales/newOrder", salesController.createOrder);

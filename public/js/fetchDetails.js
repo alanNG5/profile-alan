@@ -60,12 +60,6 @@ window.onload = async () => {
         price.innerHTML = data[0].current_price.toLocaleString("zh-HK", {style:"currency", currency:"HKD", maximumFractionDigits: 0});
         moreInfo.innerHTML = data[0].description;
 
-        // infoPurchaseAction = {
-        //     brand: data[0].brand,
-        //     model_name: data[0].model_name,
-        //     model_no: data[0].model_no,
-        //     current_price: data[0].current_price
-        // };
         infoPurchaseAction = data[0];
 
 
@@ -98,11 +92,11 @@ window.onload = async () => {
 const buyModal = document.getElementById("buy-modal");
 document.getElementById("buy-form-popup-btn").addEventListener("click", forMemberActionOnly);
 
-async function forMemberActionOnly() {
+async function forMemberActionOnly () {
     let res = await fetch("/user");
-    let json = await res.json();
+    let jsonUser = await res.json();
 
-    if ( json.visitor != "member" ) {
+    if ( jsonUser.visitor != "member" ) {
         Swal.fire({
             position: "center",
             icon: "info",
@@ -111,21 +105,108 @@ async function forMemberActionOnly() {
             showConfirmButton: true,
           });
     } else {
-        // console.log(json);
         buyModal.style.display = "block";
-        document.getElementById("acname").innerHTML = json.username;
+        document.getElementById("acname").innerHTML = jsonUser.username;
         document.getElementById("purchase-item").innerHTML = infoPurchaseAction.brand + " " + infoPurchaseAction.model_name + " " + infoPurchaseAction.model_no;
         document.getElementById("purchase-price").innerHTML = infoPurchaseAction.current_price;
 
         infoPurchaseAction = {
             ...infoPurchaseAction,
-            ...json
+            ...jsonUser
         };
-
-        console.log("data transfer:", infoPurchaseAction);
     };
 };
 
 document.getElementById("buy-cancel").addEventListener("click", () => {
     buyModal.style.display = "none";
 });
+document.getElementById("cancel-buy-form").addEventListener("click", () => {
+    buyModal.style.display = "none";
+});
+
+document.getElementById("submit-buy-form").addEventListener("click", () => {
+
+  let currentPrice = infoPurchaseAction.current_price;
+  let formattedPrice = currentPrice.replace(/[^0-9.]+/g, "");
+  let pid = infoPurchaseAction.id;
+  let paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+  let buyForm = document.getElementById("buy-form");
+
+  infoPurchaseAction = {
+      ...infoPurchaseAction,
+      recipient: buyForm.receiver.value,
+      contact_no: buyForm.phone.value,
+      shipping_address: buyForm.address.value,
+  };
+
+  console.log("object of purchase info:", infoPurchaseAction);
+  console.log("object length: ", Object.keys(infoPurchaseAction).length);
+
+  Swal.fire({
+      title: "Confirm to buy?",
+      showCancelButton: true,
+      confirmButtonText: "Confirm",
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          const response = await fetch("/sales/newOrder" , {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              // id as product_id; accountId as user_id
+              id: pid,
+              accountId: infoPurchaseAction.accountId,
+              current_price: formattedPrice,
+              recipient: infoPurchaseAction.recipient,
+              contact_no: infoPurchaseAction.contact_no,
+              shipping_address: infoPurchaseAction.shipping_address,
+              payment_method: paymentMethod,
+
+            })
+          });
+
+          if (!response.ok) {
+            return Swal.showValidationMessage(`
+              ${JSON.stringify(await response.json())}
+            `);
+          }
+          return response.json();
+        } catch (error) {
+          Swal.showValidationMessage(`
+            Request failed: ${error}
+          `);
+        }
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    })
+    // .then((result) => {
+    //   if (result.isConfirmed) {
+
+    //     Swal.fire({
+    //       title: `${result.value.login}'s avatar`,
+    //       imageUrl: result.value.avatar_url
+    //     });
+    //   }
+    // });
+
+  // alert("Thank you for your purchase!");
+
+
+});
+
+
+// fetch('https://api.example.com/items', {
+//   method: 'POST',
+//   headers: {
+//     'Content-Type': 'application/json'
+//   },
+//   body: JSON.stringify({
+//     name: 'NewItem',
+//     description: 'This is a new item.'
+//   })
+// })
+// .then(response => response.json())
+// .then(data => console.log(data))
+// .catch(error => console.error('Error:', error));

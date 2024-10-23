@@ -21,6 +21,7 @@
     --color-sec: #fffd77;
     --color-ter: #FBFDF8;
     --color-supp: #FFBB75;
+    --color-supp-alt: #f0a500;
     /* svg as alternative */
     /* --ring-size: 260px; */
 }
@@ -319,17 +320,18 @@ header * {
     font-size: 2rem;
 }
 
-input:not(:placeholder-shown):valid {
+.input-box input:not(:placeholder-shown):valid {
     border: 2px solid lime;
 }
 
-input:not(:placeholder-shown):invalid {
+.input-box input:not(:placeholder-shown):invalid {
     border: 3px solid fuchsia;
 }
 
-input:focus:invalid {
+.input-box input:focus:invalid {
     border: 2px solid var(--color-sec);
 }
+
 #login-modal .modal-content .x-cl-btn {
     top: 5%;
     right: 5%;

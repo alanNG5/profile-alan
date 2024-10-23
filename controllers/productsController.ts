@@ -121,7 +121,7 @@ class ProductsController {
       );
       res.status(201).json({ message: "success" });
     } catch (error) {
-      console.log("Error occurred during inserting new item:", error);
+      console.log("Error occurred during inserting new item: ", error);
       res
         .status(500)
         .json({ message: "Internal server error: failed to insert new item" });

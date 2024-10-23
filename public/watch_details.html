@@ -109,21 +109,21 @@
 
                 <h4>Shipment Details</h4>
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Recipient" />
+                    <input type="text" placeholder="Recipient" name="receiver" required />
                     <div class="input-icon">
                         <i class="bx bxs-user"></i>
                     </div>
                 </div>
 
                 <div class="input-group input-group-icon">
-                    <input type="tel" placeholder="Contact Number" />
+                    <input type="tel" placeholder="Contact Number" name="phone" required />
                     <div class="input-icon">
                         <i class="bx bx-mobile"></i>
                     </div>
                 </div>
 
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Shipping Address" />
+                    <input type="text" placeholder="Shipping Address" name="address" required tabindex="0" />
                     <div class="input-icon">
                         <i class="bx bx-home-alt"></i>
                     </div>
@@ -133,21 +133,21 @@
 
             <div class="form-row">
 
-                <h4>Payment Details (Demo ONLY)</h4>
+                <h4>Payment Details (DEMO ONLY)</h4>
 
                 <div class="input-group">
 
-                    <input id="payment-method-card" type="radio" name="payment-method" value="card" checked="true" />
+                    <input id="payment-method-card" type="radio" name="payment-method" value="visa" tabindex="0" checked="true" />
                     <label for="payment-method-card">
                         <span>
-                            <i class="fa fa-cc-visa"> Credit Card</i>
+                            <i class="fa fa-cc-visa">  Credit Card</i>
                         </span>
                     </label>
 
-                    <input id="payment-method-paypal" type="radio" name="payment-method" value="paypal" />
+                    <input id="payment-method-paypal" type="radio" name="payment-method" value="paypal" tabindex="0" />
                     <label for="payment-method-paypal">
                         <span>
-                            <i class="bx bxl-paypal"> Paypal</i>
+                            <i class="bx bxl-paypal">Paypal</i>
                         </span>
                     </label>
 
@@ -155,7 +155,7 @@
 
                 <div class="input-group input-group-icon">
 
-                    <input id="card-number" type="tel" placeholder="Card Number" inputmode="numeric" pattern="[0-9\s]{14,23}"
+                    <input id="card-number" type="tel" placeholder="Card Number (DEMO ONLY)" inputmode="numeric" pattern="[0-9\s]{14,23}"
                     autocomplete="cc-number" />
                     <div class="input-icon">
                         <i class="bx bx-credit-card"></i>
@@ -183,7 +183,10 @@
 
             </div>
 
-            <button> Pay and Buy</button>
+            <div class="table-action">
+                <div id="submit-buy-form" tabindex="0">Submit</div>
+                <div id="cancel-buy-form" tabindex="0">Cancel</div>
+            </div>
         </form>
     </div>
 
@@ -298,6 +301,7 @@
       value = value.match(/.{1,4}/g)?.join(" ") || "";
       event.target.value = value;
   });
+
 </script>
 </body>
 </html>
