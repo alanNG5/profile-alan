@@ -31,6 +31,7 @@ async function submitLogin(event) {
       position: "center",
       icon: "error",
       title: json.error,
+      text: "Please try again.",
       showConfirmButton: true,
     });
 

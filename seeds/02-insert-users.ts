@@ -2,9 +2,6 @@ import { Knex } from "knex";
 import { hashPassword } from "../utils/hash";
 
 export async function seed(knex: Knex): Promise<void> {
-  // await knex("users").del();
-  // await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 1");
-
   let usersList = [
     {
       username: "controller",

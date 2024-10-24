@@ -16,3 +16,75 @@ Improvement plan:
 Contraints applied to different users.
 
 Additional transaction date as a field added to sales table.
+
+
+
+
+
+Transaction Management: running more than one SQL query as both INSERT and UPDATE are applied when sales is triggered.
+
+
+You can handle both the insertion into the Sales table and the update of the Products table within the same POST route. This approach ensures that both operations are executed together and can be rolled back if something goes wrong, maintaining data integrity.
+
+Here's a basic example using Express and a PostgreSQL client like pg:
+
+javascript
+
+複製
+const express = require('express');
+const { Pool } = require('pg');
+
+const app = express();
+app.use(express.json());
+
+const pool = new Pool({
+  user: 'yourUsername',
+  host: 'localhost',
+  database: 'yourDatabase',
+  password: 'yourPassword',
+  port: 5432,
+});
+
+app.post('/sales', async (req, res) => {
+  const client = await pool.connect();
+  try {
+    const { productId, quantitySold } = req.body;
+
+    await client.query('BEGIN');
+
+    // Insert into Sales table
+    const insertSalesQuery = `
+      INSERT INTO Sales (product_id, quantity_sold)
+      VALUES ($1, $2) RETURNING id`;
+    const salesResult = await client.query(insertSalesQuery, [productId, quantitySold]);
+
+    // Update the Products table
+    const updateProductQuery = `
+      UPDATE Products
+      SET quantity = quantity - $1
+      WHERE id = $2`;
+    await client.query(updateProductQuery, [quantitySold, productId]);
+
+    await client.query('COMMIT');
+
+    res.status(201).json({ salesId: salesResult.rows[0].id });
+  } catch (error) {
+    await client.query('ROLLBACK');
+    console.error('Error performing transaction', error);
+    res.status(500).json({ error: 'An error occurred' });
+  } finally {
+    client.release();
+  }
+});
+
+app.listen(3000, () => {
+  console.log('Server is running on port 3000');
+});
+
+
+Key Points:
+Transaction Management: Use transactions to ensure that both operations succeed or fail together. Begin a transaction before the operations and commit it if both are successful. Rollback if any operation fails.
+Single Route: You can handle both the sale and the product update in the same route. This is often simpler and ensures consistency.
+Error Handling: Make sure to handle errors and rollback transactions if something goes wrong.
+Atomicity: This setup ensures atomicity, meaning either both changes occur, or neither do.
+This approach is generally preferable for ensuring consistency and making the API simpler for clients to use, as they only need to make one request.

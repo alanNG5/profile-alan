@@ -1,9 +1,6 @@
 import { Knex } from "knex";
 
 export async function seed(knex: Knex): Promise<void> {
-  // await knex("sales").del();
-  // await knex.raw("ALTER SEQUENCE sales_id_seq RESTART WITH 101");
-
   await knex("sales").insert({
     product_id: 2,
     user_id: 3,

@@ -41,8 +41,7 @@ class SalesController {
       }
     } catch (error) {
       res.status(500).json({
-        errorMessage: "Internal server error: ",
-        errorLog: error,
+        errorMessage: "Internal server error: " + error,
       });
     }
   };

@@ -423,7 +423,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .table-action div {
-    width: 25%;
+    width: 40%;
     height: fit-content;
     background-color: var(--color-supp);
     color: var(--color-ter);
@@ -436,6 +436,7 @@ input[type=number]::-webkit-outer-spin-button {
     text-align: center;
     cursor: pointer;
     border-radius: 5px;
+    text-transform: uppercase;
 }
 
 .table-action div:last-of-type {
@@ -459,7 +460,7 @@ input[type=number]::-webkit-outer-spin-button {
     }
     /* cross sign will be supersede by cancel button */
     .table-action div:last-of-type {
-        display: inline-flex;
+        display: block;
     }
 
     .col-to-half:last-of-type {
@@ -467,6 +468,14 @@ input[type=number]::-webkit-outer-spin-button {
     display: inline-flex;
     width: 80%;
     font-size: 0.5rem;
+    }
+
+    #buy-form .input-group #card-number {
+        font-size: 1.2rem;
+    }
+
+    #buy-form .form-row .input-group label span i {
+        font-size: 1.4rem;
     }
 }
 

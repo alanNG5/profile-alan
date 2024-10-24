@@ -24,7 +24,6 @@ app.get("/", (req: Request, res: Response) => {
 
 // app.get("/watch_main.html", (req: Request, res: Response) => {
 //   console.log(
-//     "server.ts@@@ CHECKING req.session: ",
 //     req.session.username,
 //     req.session.userid,
 //     req.session.admin_role,

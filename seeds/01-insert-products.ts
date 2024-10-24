@@ -3,13 +3,13 @@ import { Knex } from "knex";
 export async function seed(knex: Knex): Promise<void> {
   // clear data from all tables. Those with foreign keys should be handled first.
   await knex("sales").del();
-  await knex.raw("ALTER SEQUENCE sales_id_seq RESTART WITH 101");
+  await knex.raw("ALTER SEQUENCE sales_id_seq RESTART WITH 1001");
   await knex("product_images").del();
   await knex.raw("ALTER SEQUENCE product_images_id_seq RESTART WITH 1");
   await knex("products").del();
   await knex.raw("ALTER SEQUENCE products_id_seq RESTART WITH 1");
   await knex("users").del();
-  await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 101");
 
   const [{ id }]: Array<{ id: number }> = await knex
     .insert({

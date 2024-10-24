@@ -126,8 +126,6 @@ document.getElementById("cancel-buy-form").addEventListener("click", () => {
 
 document.getElementById("submit-buy-form").addEventListener("click", () => {
 
-  let currentPrice = infoPurchaseAction.current_price;
-  let formattedPrice = currentPrice.replace(/[^0-9.]+/g, "");
   let pid = infoPurchaseAction.id;
   let paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
   let buyForm = document.getElementById("buy-form");
@@ -158,7 +156,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
               // id as product_id; accountId as user_id
               id: pid,
               accountId: infoPurchaseAction.accountId,
-              current_price: formattedPrice,
+              current_price: infoPurchaseAction.current_price,
               recipient: infoPurchaseAction.recipient,
               contact_no: infoPurchaseAction.contact_no,
               shipping_address: infoPurchaseAction.shipping_address,
