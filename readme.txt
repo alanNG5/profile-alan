@@ -1,10 +1,13 @@
-Hashed password is adopted with the use of package of "bcryptjs".
+Summary:
 
-Using "Invalid password or username." as an error message got from POST of login is better than separation of messages of "Username not found." and "Invalid password.", based on consideration for security of user account.
+1. Hashed password is adopted with the use of package of "bcryptjs".
 
-Validation of user registry is proceeded at front end.
+2. Using "Invalid password or username." as an error message got from POST of login is better than separation of messages of "Username not found." and "Invalid password.", based on consideration for security of user account.
 
-Stock quantity varied with Sales.
+3. Validation of user registry is proceeded at front end.
+
+4. Stock quantity varied with Sales.
+  ? check whether availability of the stock
 
 Based on MVP
 
@@ -13,6 +16,8 @@ Improvement plan:
 
     - Feature of creation of PDF file about transaction for download.
 
+    - Error handling
+
 Contraints applied to different users.
 
 Additional transaction date as a field added to sales table.
@@ -20,7 +25,7 @@ Additional transaction date as a field added to sales table.
 
 
 
-
+// 1
 Transaction Management: running more than one SQL query as both INSERT and UPDATE are applied when sales is triggered.
 
 
@@ -88,3 +93,18 @@ Single Route: You can handle both the sale and the product update in the same ro
 Error Handling: Make sure to handle errors and rollback transactions if something goes wrong.
 Atomicity: This setup ensures atomicity, meaning either both changes occur, or neither do.
 This approach is generally preferable for ensuring consistency and making the API simpler for clients to use, as they only need to make one request.
+
+Notes:
+
+Under CSS folder, any relative path to retrieve target file starts from it's own working directory. For the path coded in JS file, it must be start from the directory to which the corresponding HTML file belongs.
+
+//2 - testing
+knex
+  .select("*")
+  .from("students")
+  .then((students) => {
+    const studentNames = students.reduce((set, student) => {
+      set.add(elem.subject);
+      return set;
+    }, new Set());
+  });

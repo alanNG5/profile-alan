@@ -1,3 +1,4 @@
+
 // global error handler to listen for unhandled fetch errors:
 window.addEventListener("unhandledrejection", event => {
     console.error('Unhandled promise rejection:', event.reason);
@@ -82,3 +83,24 @@ window.onclick = function (event) {
         // buyModal is declared in fetchDetails.js
     }
 };
+
+
+
+
+
+// @ testing
+// document.getElementById("temp").addEventListener("click", () => {
+//     const adj = Swal.mixin({
+//         customClass: {
+//             title: "supernova",
+//         },
+//     });
+//     let msg = "Sales Order No.: 1001 is created for your reference.";
+//     adj.fire({
+//       title: `Thank you for your purchase!\n\n${msg}\n\nOnce the payment validation is complete, we will promptly contact you to discuss the shipment details.\n\nIf you have any questions, please feel free to reach out to us.`,
+//       imageUrl: "./images/super-watcher.jpg",
+//       imageWidth: 300,
+//       imageAlt: "Custom image",
+//       width: 400,
+//     })
+// });

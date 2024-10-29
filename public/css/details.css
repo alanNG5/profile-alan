@@ -450,6 +450,19 @@ input[type=number]::-webkit-outer-spin-button {
     box-shadow: rgba(0, 0, 0, 0.2) 0 0 8px 0 ;
 }
 
+.table-action .line {
+    width: 15%;
+    height: 2px;
+    background-color: #b9b9b9;
+}
+
+.confirm-deal-msg {
+    text-align: left;
+    padding: 5px 25px;
+    font-size: 1.6rem;
+}
+
+
 @media only screen and (max-width: 800px) {
     .col-to-half {
         width: 100%;
@@ -461,6 +474,10 @@ input[type=number]::-webkit-outer-spin-button {
     /* cross sign will be supersede by cancel button */
     .table-action div:last-of-type {
         display: block;
+    }
+
+    .table-action .line {
+        display: none;
     }
 
     .col-to-half:last-of-type {

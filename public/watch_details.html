@@ -87,7 +87,7 @@
     <div id="buy-modal" class="modal">
 
         <form id="buy-form">
-            <span id="buy-cancel" class="x-cl-btn">&times;</span>
+            <span id="buy-cancel" class="x-cl-btn cancel-buy-modal">&times;</span>
 
             <div class="form-row">
                 <div>
@@ -109,21 +109,21 @@
 
                 <h4>Shipment Details</h4>
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Recipient" name="receiver" required />
+                    <input type="text" placeholder="Recipient" name="receiver" class="for-input-validating" required />
                     <div class="input-icon">
                         <i class="bx bxs-user"></i>
                     </div>
                 </div>
 
                 <div class="input-group input-group-icon">
-                    <input type="tel" placeholder="Contact Number" name="phone" required />
+                    <input type="tel" placeholder="Contact Number" name="phone" class="for-input-validating" required />
                     <div class="input-icon">
                         <i class="bx bx-mobile"></i>
                     </div>
                 </div>
 
                 <div class="input-group input-group-icon">
-                    <input type="text" placeholder="Shipping Address" name="address" required />
+                    <input type="text" placeholder="Shipping Address" name="address" class="for-input-validating" required />
                     <div class="input-icon">
                         <i class="bx bx-home-alt"></i>
                     </div>
@@ -184,8 +184,10 @@
             </div>
 
             <div class="table-action">
+                <p class="line"></p>
                 <div id="submit-buy-form" tabindex="0">Submit</div>
-                <div id="cancel-buy-form" tabindex="0">Cancel</div>
+                <div id="cancel-buy-form" class="cancel-buy-modal" tabindex="0">Cancel</div>
+                <p class="line"></p>
             </div>
         </form>
     </div>
@@ -286,12 +288,12 @@
 
 <!-- CDN for popup-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="./js/fetchDetails.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 
 <script src="./js/general.js"></script>
 <script src="./js/auth.js"></script>
 
-<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="./js/fetchDetails.js"></script>
 
 <script>
   const cardNumberInput = document.getElementById('card-number');

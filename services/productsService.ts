@@ -11,12 +11,11 @@ export class ProductsService {
         "model_name",
         "model_no",
         "current_price",
-        // "description",
         "image_path"
       )
       .from("products")
       .innerJoin("product_images", "products.id", "product_images.product_id")
-      .where("products.stock_qtn", ">", 0)
+      // .where("products.stock_qtn", ">", 0)
       .orderBy("products.brand");
   }
 

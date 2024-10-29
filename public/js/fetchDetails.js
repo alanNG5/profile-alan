@@ -117,18 +117,54 @@ async function forMemberActionOnly () {
     };
 };
 
-document.getElementById("buy-cancel").addEventListener("click", () => {
-    buyModal.style.display = "none";
-});
-document.getElementById("cancel-buy-form").addEventListener("click", () => {
-    buyModal.style.display = "none";
-});
+
+let cancelBuyModal = document.getElementsByClassName("cancel-buy-modal");
+for (let i = 0; i < cancelBuyModal.length; i++) {
+    cancelBuyModal[i].addEventListener("click", () => {
+        buyModal.style.display = "none";
+    });
+}
 
 document.getElementById("submit-buy-form").addEventListener("click", () => {
 
-  let pid = infoPurchaseAction.id;
   let paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
   let buyForm = document.getElementById("buy-form");
+
+  // input validation for empty fields & non-numeric character in contact number:
+  let inputsAboutShipment = document.getElementsByClassName("for-input-validating");
+  let inputErrMsg = "";
+
+  for (let i = 0; i < inputsAboutShipment.length; i++) {
+    if (inputsAboutShipment[i].value === "") {
+      inputErrMsg += "> " + inputsAboutShipment[i].name + " is missing.\n";
+    };
+  };
+
+  const regexPhone = /^[0-9]*$/;
+
+  if (!regexPhone.test(buyForm.phone.value)) {
+    inputErrMsg += "> Non-numeric character(s) found in the Contact Number.";
+  }
+
+  if (inputErrMsg !== "") {
+    inputErrMsg = "Input error(s) found in the form: " + "\n\n" + inputErrMsg;
+
+    const inputErrMessage = Swal.mixin({
+      customClass: {
+        title: "confirm-deal-msg",
+      },
+    });
+
+    inputErrMessage.fire({
+      position: "center",
+      icon: "error",
+      title: inputErrMsg,
+      showConfirmButton: true,
+    });
+    return;
+  // validation ended.
+
+  } else {
 
   infoPurchaseAction = {
       ...infoPurchaseAction,
@@ -137,11 +173,8 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
       shipping_address: buyForm.address.value,
   };
 
-  console.log("object of purchase info:", infoPurchaseAction);
-  console.log("object length: ", Object.keys(infoPurchaseAction).length);
-
   Swal.fire({
-      title: "Confirm to buy?",
+      title: `Confirm to buy ${infoPurchaseAction.brand} ${infoPurchaseAction.model_name} at $ ${infoPurchaseAction.current_price}?`,
       showCancelButton: true,
       confirmButtonText: "Confirm",
       showLoaderOnConfirm: true,
@@ -153,24 +186,33 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              // id as product_id; accountId as user_id
-              id: pid,
+              // pid as product_id; accountId as user_id
+              pid: infoPurchaseAction.id,
               accountId: infoPurchaseAction.accountId,
               current_price: infoPurchaseAction.current_price,
               recipient: infoPurchaseAction.recipient,
               contact_no: infoPurchaseAction.contact_no,
               shipping_address: infoPurchaseAction.shipping_address,
               payment_method: paymentMethod,
-
             })
           });
 
+          // console.log("object length: ", Object.keys(infoPurchaseAction).length);
+
+          let json = await response.json();
+
           if (!response.ok) {
-            return Swal.showValidationMessage(`
-              ${JSON.stringify(await response.json())}
-            `);
+            return Swal.showValidationMessage(
+              json.errorMessage || "Request failed: no response from server."
+            );
+          } else if (response.json.outOfStockMessage) {
+            return Swal.showValidationMessage(
+              json.outOfStockMessage
+            );
           }
-          return response.json();
+          console.log("json: ", json);
+          return json;
+
         } catch (error) {
           Swal.showValidationMessage(`
             Request failed: ${error}
@@ -179,32 +221,23 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
       },
       allowOutsideClick: () => !Swal.isLoading()
     })
-    // .then((result) => {
-    //   if (result.isConfirmed) {
+    .then((result) => {
+      if (result.isConfirmed) {
 
-    //     Swal.fire({
-    //       title: `${result.value.login}'s avatar`,
-    //       imageUrl: result.value.avatar_url
-    //     });
-    //   }
-    // });
+        const confirmedMessage = Swal.mixin({
+          customClass: {
+            title: "confirm-deal-msg",
+          },
+        });
 
-  // alert("Thank you for your purchase!");
-
-
+        confirmedMessage.fire({
+          imageUrl: "./images/super-watcher.jpg",
+          imageWidth: 300,
+          imageAlt: "Deal is Sealed!",
+          title: `Thank you for your purchase!\n\n${result.value.success}\n\nOnce the payment validation is complete, we will promptly contact you to discuss the shipment details.\n\nIf you have any questions, please feel free to reach out to us.`,
+          width: 400,
+        });
+      }
+    });
+  };
 });
-
-
-// fetch('https://api.example.com/items', {
-//   method: 'POST',
-//   headers: {
-//     'Content-Type': 'application/json'
-//   },
-//   body: JSON.stringify({
-//     name: 'NewItem',
-//     description: 'This is a new item.'
-//   })
-// })
-// .then(response => response.json())
-// .then(data => console.log(data))
-// .catch(error => console.error('Error:', error));

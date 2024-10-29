@@ -3,6 +3,15 @@ import { Knex } from "knex";
 export class SalesService {
   constructor(private knex: Knex) {}
 
+  async checkQtnAvailability(pid: number) {
+    try {
+      return await this.knex("products").select("stock_qtn").where("id", pid);
+    } catch (error) {
+      console.error("Error performing quantity checking: ", error);
+      // throw error;
+    }
+  }
+
   async insertSales(
     pid: number,
     accountId: number,
@@ -12,6 +21,8 @@ export class SalesService {
     shipping_address: string,
     payment_method: string
   ) {
+    const trx = await this.knex.transaction();
+
     try {
       const newSalesData = {
         product_id: pid,
@@ -24,23 +35,29 @@ export class SalesService {
         order_status: "shipment_arranging",
       };
 
-      let newSales = await this.knex("sales")
+      let newSales = await trx
         .insert(newSalesData)
+        .into("sales")
         .returning("id");
 
-      let inventoryCredit = await this.knex("products")
+      let inventoryDecrement = await trx("products")
         .decrement("stock_qtn", 1)
         .where("id", pid);
-      console.log(inventoryCredit);
-      // await this.knex("products")
+      console.log("Sales Order Credited: ", inventoryDecrement);
+
+      // await trx("products")
       //   .update({ stock_qtn: this.knex.raw("?? - 1", ["stock_qtn"]) })
       //   .where("id", pid);
 
+      await trx.commit();
+
       return {
-        message: `New Sales Order No. ${newSales[0].id} is created.`,
+        message: `Sales Order No.: ${newSales[0].id} is created for your reference.`,
       };
     } catch (error) {
+      await trx.rollback();
       console.error("Error performing transaction: ", error);
+      // throw error;
     }
   }
 }

@@ -12,7 +12,7 @@ class ProductsController {
       res.status(200).json({ data: productsList });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error." });
     }
   };
 
@@ -30,10 +30,8 @@ class ProductsController {
         //   "no-store, no-cache, must-revalidate, private"
         // );
 
-        return res.status(404).json({ error: "Product not found" });
-        // res.status(404).json({ message: "Product not found" });
+        return res.status(404).json({ error: "Product not found." });
         // return res.status(404).redirect("/404.html");
-        // return res.status(404).json({ error: "Product not found" });
         // res.write("location.href = '/404.html'");
       }
 
@@ -46,7 +44,7 @@ class ProductsController {
       res.status(200).json({ data: product });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error." });
     }
   };
 
@@ -56,7 +54,7 @@ class ProductsController {
       res.status(200).json({ data: newProducts });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error." });
     }
   };
 
@@ -67,7 +65,7 @@ class ProductsController {
       res.status(200).json({ data: bestSellingProducts });
     } catch (error) {
       console.log(error);
-      res.status(500).json({ message: "Internal server error" });
+      res.status(500).json({ message: "Internal server error." });
     }
   };
 
@@ -124,7 +122,7 @@ class ProductsController {
       console.log("Error occurred during inserting new item: ", error);
       res
         .status(500)
-        .json({ message: "Internal server error: failed to insert new item" });
+        .json({ message: "Internal server error: failed to insert new item." });
     }
   };
 }

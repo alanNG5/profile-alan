@@ -15,29 +15,36 @@ class SalesController {
       payment_method,
     } = req.body;
 
-    // Validate and parse integers
-    // const parsedPid = parseInt(pid);
-    // const parsedAccountId = parseInt(accountId);
-    // const parsedPrice = parseInt(current_price);
-
     try {
-      let newOrder = await this.salesService.insertSales(
-        parseInt(pid),
-        parseInt(accountId),
-        parseInt(current_price),
-        recipient,
-        contact_no,
-        shipping_address,
-        payment_method
+      // Check if the product is still available
+      let qtnQuery = await this.salesService.checkQtnAvailability(
+        parseInt(pid)
       );
-      if (newOrder) {
-        res.status(201).json({
-          success: newOrder.message,
+
+      if (qtnQuery![0].stock_qtn < 1) {
+        res.json({
+          outOfStockMessage: "Product is out of stock.",
         });
+        return;
       } else {
-        res.status(500).json({
-          errorMessage: "Failed to create new order",
-        });
+        let newOrder = await this.salesService.insertSales(
+          parseInt(pid),
+          parseInt(accountId),
+          parseInt(current_price),
+          recipient,
+          contact_no,
+          shipping_address,
+          payment_method
+        );
+        if (newOrder) {
+          res.status(201).json({
+            success: newOrder.message,
+          });
+        } else {
+          res.status(500).json({
+            errorMessage: "Failed to create new order.",
+          });
+        }
       }
     } catch (error) {
       res.status(500).json({

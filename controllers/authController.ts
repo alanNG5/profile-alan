@@ -38,7 +38,7 @@ class AuthController {
   logout = async (req: Request, res: Response) => {
     req.session.destroy((err) => {
       if (err) {
-        res.status(400).json({ logoutError: "Failed to log out" });
+        res.status(400).json({ logoutError: "Failed to log out." });
       } else {
         res.json({ logoutMessage: "You have logged out." });
       }

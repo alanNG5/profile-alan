@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Validation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Number Input Validation</h2>
+    <input type="text" id="numberInput" placeholder="Enter numbers only" />
+    <button onclick="validateInput()">Validate</button>
+
+    <script>
+        function validateInput() {
+            const inputField = document.getElementById('numberInput');
+            const inputValue = inputField.value.trim(); // Trim whitespace
+
+            // Regular expression to check if input contains only numbers
+            const regex = /^[0-9]*$/; // Allow empty input as well
+
+            // Check if the input is empty or contains only numbers
+            if (inputValue === '') {
+                alert('Input cannot be empty.');
+            } else if (!regex.test(inputValue)) {
+                alert('Please enter numbers only.');
+                inputField.value = ''; // Clear the input field
+            } else {
+                alert('Valid input: ' + inputValue);
+            }
+        }
+    </script>
+
+</body>
+</html>
