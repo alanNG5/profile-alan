@@ -23,7 +23,7 @@ class SalesController {
 
       if (qtnQuery![0].stock_qtn < 1) {
         res.json({
-          outOfStockMessage: "Product is out of stock.",
+          outOfStockMessage: true,
         });
         return;
       } else {
@@ -38,6 +38,7 @@ class SalesController {
         );
         if (newOrder) {
           res.status(201).json({
+            outOfStockMessage: false,
             success: newOrder.message,
           });
         } else {

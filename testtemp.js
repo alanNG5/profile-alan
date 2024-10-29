@@ -17,4 +17,3 @@
 
 // let joinArr = result.join("");
 // console.log(typeof Number(joinArr));
-

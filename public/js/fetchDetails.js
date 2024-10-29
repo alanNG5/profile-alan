@@ -107,8 +107,9 @@ async function forMemberActionOnly () {
     } else {
         buyModal.style.display = "block";
         document.getElementById("acname").innerHTML = jsonUser.username;
-        document.getElementById("purchase-item").innerHTML = infoPurchaseAction.brand + " " + infoPurchaseAction.model_name + " " + infoPurchaseAction.model_no;
-        document.getElementById("purchase-price").innerHTML = infoPurchaseAction.current_price;
+        document.getElementById("purchase-item-brand").innerHTML = infoPurchaseAction.brand;
+        document.getElementById("purchase-item").innerHTML = infoPurchaseAction.model_name + " " + infoPurchaseAction.model_no;
+        document.getElementById("purchase-price").innerHTML = "$ " + infoPurchaseAction.current_price.toLocaleString();
 
         infoPurchaseAction = {
             ...infoPurchaseAction,
@@ -174,7 +175,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
   };
 
   Swal.fire({
-      title: `Confirm to buy ${infoPurchaseAction.brand} ${infoPurchaseAction.model_name} at $ ${infoPurchaseAction.current_price}?`,
+      title: `Confirm to buy ${infoPurchaseAction.brand} ${infoPurchaseAction.model_name} at HK$ ${infoPurchaseAction.current_price}?`,
       showCancelButton: true,
       confirmButtonText: "Confirm",
       showLoaderOnConfirm: true,
@@ -205,14 +206,9 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
             return Swal.showValidationMessage(
               json.errorMessage || "Request failed: no response from server."
             );
-          } else if (response.json.outOfStockMessage) {
-            return Swal.showValidationMessage(
-              json.outOfStockMessage
-            );
+          } else {
+                return json;
           }
-          console.log("json: ", json);
-          return json;
-
         } catch (error) {
           Swal.showValidationMessage(`
             Request failed: ${error}
@@ -223,21 +219,34 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
     })
     .then((result) => {
       if (result.isConfirmed) {
+        if(result.value.outOfStockMessage === false) {
 
-        const confirmedMessage = Swal.mixin({
-          customClass: {
-            title: "confirm-deal-msg",
-          },
-        });
+          const confirmedMessage = Swal.mixin({
+            customClass: {
+              title: "confirm-deal-msg",
+            },
+          });
 
-        confirmedMessage.fire({
-          imageUrl: "./images/super-watcher.jpg",
-          imageWidth: 300,
-          imageAlt: "Deal is Sealed!",
-          title: `Thank you for your purchase!\n\n${result.value.success}\n\nOnce the payment validation is complete, we will promptly contact you to discuss the shipment details.\n\nIf you have any questions, please feel free to reach out to us.`,
-          width: 400,
-        });
+          confirmedMessage.fire({
+            imageUrl: "./images/super-watcher.jpg",
+            imageWidth: 300,
+            imageAlt: "Deal is Sealed!",
+            title: `Thank you for your purchase!\n\n${result.value.success}\n\nOnce the payment validation is complete, we will promptly contact you to discuss the shipment details.\n\nIf you have any questions, please feel free to reach out to us.`,
+            width: 400,
+          });
+
+        } else {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Product is out of stock.",
+            showConfirmButton: true,
+          });
+        }
       }
     });
   };
 });
+
+
+// window.location.href = `http://localhost:8900/watch_details.html?id=${infoPurchaseAction.id}`

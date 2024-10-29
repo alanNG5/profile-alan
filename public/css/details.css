@@ -250,8 +250,13 @@ main .card {
     transform: translate(-50%, -50%);
 }
 
-.form-row h4 {
+#buy-form h4 {
+    margin: 15px auto;
     color: var(--color-supp-alt);
+}
+
+#buy-form .form-top h4 {
+    margin-bottom: 5px;
 }
 
 .form-row {
@@ -266,6 +271,47 @@ main .card {
 
 .form-row:after {
     clear: both;
+}
+
+.account-name {
+    display: flex;
+    justify-content: end;
+}
+
+.account-name span {
+    /* font-size: 1.6rem; */
+    font-weight: 500;
+    color: var(--color-supp-alt);
+}
+
+.account-name span:first-of-type {
+    margin-right: 20px;
+}
+
+.purchase-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.purchase-info div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: var(--color-basic);
+}
+
+.purchase-info div span:first-of-type{
+    color: var(--color-pri);
+}
+
+#purchase-item-brand, #purchase-price {
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+#purchase-item-brand {
+    margin: 3px 0;
 }
 
 input,
@@ -429,7 +475,7 @@ input[type=number]::-webkit-outer-spin-button {
     color: var(--color-ter);
     border: 1px solid #bd8200;
     font-family: "montserrat", sans-serif;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 500;
     letter-spacing: 0.1rem;
     padding: 10px 0;
@@ -494,5 +540,14 @@ input[type=number]::-webkit-outer-spin-button {
     #buy-form .form-row .input-group label span i {
         font-size: 1.4rem;
     }
-}
 
+    #purchase-item-brand, #purchase-price {
+        font-size: 1.8rem;
+        font-weight: 400;
+        letter-spacing: 0rem;
+    }
+
+    #purchase-item {
+        font-size: 1.2rem;
+    }
+}

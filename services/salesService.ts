@@ -8,7 +8,7 @@ export class SalesService {
       return await this.knex("products").select("stock_qtn").where("id", pid);
     } catch (error) {
       console.error("Error performing quantity checking: ", error);
-      // throw error;
+      throw error;
     }
   }
 
@@ -43,7 +43,7 @@ export class SalesService {
       let inventoryDecrement = await trx("products")
         .decrement("stock_qtn", 1)
         .where("id", pid);
-      console.log("Sales Order Credited: ", inventoryDecrement);
+      console.log("Sales Credited: ", inventoryDecrement);
 
       // await trx("products")
       //   .update({ stock_qtn: this.knex.raw("?? - 1", ["stock_qtn"]) })
@@ -57,7 +57,7 @@ export class SalesService {
     } catch (error) {
       await trx.rollback();
       console.error("Error performing transaction: ", error);
-      // throw error;
+      throw error;
     }
   }
 }

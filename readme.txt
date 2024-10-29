@@ -6,8 +6,11 @@ Summary:
 
 3. Validation of user registry is proceeded at front end.
 
-4. Stock quantity varied with Sales.
-  ? check whether availability of the stock
+4. Stock quantity varied with Sales. Item Insert and stock update proceed under same transaction unit so as to fulfill transaction principle of atomicity. Rollback is run if this process fails.
+
+5. To prevent the scenario of triggering user purchase of goods that is out of stock, database query block the item information to be fetched in frontend. On the other hand, stock availability is checked prior to creation of new sales to ensure this scenrio not to happen.
+
+6. To tackle with memory leakage due to express-session, npm package of "memorystore" is introduced.
 
 Based on MVP
 
@@ -16,7 +19,11 @@ Improvement plan:
 
     - Feature of creation of PDF file about transaction for download.
 
+    - The npm package of "connect-pg-simple" is necessary to be installed to replace "memorystore" for handling memory leakage as it stores session in PostreSQL Database so it is more suitable for production and scales better and persists session data across server restarts. As "pg" is required for connection pool, Knex configuration maybe set up again.
+
     - Error handling
+
+
 
 Contraints applied to different users.
 
