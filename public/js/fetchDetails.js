@@ -90,6 +90,7 @@ window.onload = async () => {
 };
 
 const buyModal = document.getElementById("buy-modal");
+
 document.getElementById("buy-form-popup-btn").addEventListener("click", forMemberActionOnly);
 
 async function forMemberActionOnly () {
@@ -207,6 +208,8 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
               json.errorMessage || "Request failed: no response from server."
             );
           } else {
+                buyForm.reset();
+                buyModal.style.display = "none";
                 return json;
           }
         } catch (error) {
@@ -219,7 +222,19 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
     })
     .then((result) => {
       if (result.isConfirmed) {
-        if(result.value.outOfStockMessage === false) {
+        // console.log(result.value.outOfStockMessage);
+
+        if(result.value.outOfStockMessage) {
+
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Product is out of stock.",
+            showConfirmButton: true,
+          });
+
+
+        } else {
 
           const confirmedMessage = Swal.mixin({
             customClass: {
@@ -235,18 +250,8 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
             width: 400,
           });
 
-        } else {
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Product is out of stock.",
-            showConfirmButton: true,
-          });
         }
       }
     });
   };
 });
-
-
-// window.location.href = `http://localhost:8900/watch_details.html?id=${infoPurchaseAction.id}`

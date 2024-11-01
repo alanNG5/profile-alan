@@ -15,7 +15,7 @@ export class ProductsService {
       )
       .from("products")
       .innerJoin("product_images", "products.id", "product_images.product_id")
-      // .where("products.stock_qtn", ">", 0)
+      .where("products.stock_qtn", ">", 0)
       .orderBy("products.brand");
   }
 
@@ -49,7 +49,7 @@ export class ProductsService {
       `WITH best_sold AS (SELECT products.id, brand, model_name, image_path, COUNT(sales.id) FROM products
       INNER JOIN product_images ON products.id = product_images.product_id
       INNER JOIN Sales on products.id = sales.product_id
-      GROUP BY products.id, brand, model_name, image_path)
+      GROUP BY products.id, image_path)
       SELECT id, brand, model_name, image_path FROM best_sold
       ORDER BY COUNT DESC
       LIMIT 5;`

@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { SalesService } from "../services/salesService";
+// import "../utils/session";
 
 class SalesController {
   constructor(private salesService: SalesService) {}
@@ -47,6 +48,31 @@ class SalesController {
           });
         }
       }
+    } catch (error) {
+      res.status(500).json({
+        errorMessage: "Internal server error: " + error,
+      });
+    }
+  };
+
+  getRecord = async (req: Request, res: Response) => {
+    let userId = req.session.userid;
+    let userRole = req.session.admin_role;
+
+    if (!userId) {
+      // res.json({ message: "Unauthorized access." });
+      return res.status(403).redirect("/");
+    }
+
+    if (userRole) {
+      return res
+        .status(403)
+        .json({ message: "Access to profile only for member." });
+    }
+
+    try {
+      let record = await this.salesService.getSalesRecord(userId);
+      res.status(200).json({ record });
     } catch (error) {
       res.status(500).json({
         errorMessage: "Internal server error: " + error,

@@ -31,6 +31,7 @@
                 <li><a href="watch_main.html">Home</a></li>
                 <li><a href="catalogue.html"  class="active">Catalogue</a></li>
                 <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Back to CV</a></li>
             </ul>
 
             <div>
@@ -40,6 +41,12 @@
                     <span id="role-info">role</span>
                     <span> | </span>
                     <strong id="name-info">name</strong>
+                    <div id="user-action" hidden >
+                        <div>
+                            <button id="profile-btn">Profile</button>
+                            <button id="logout-btn">Logout</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -82,6 +89,7 @@
 
 
     <div id="login-modal" class="modal">
+        <img src="images/dm101.png" class="img-demo-ac-pw"/>
 
         <div class="modal-content">
             <span id="close" class="x-cl-btn">&times;</span>
@@ -173,6 +181,21 @@
         </abbr>
         <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
     </footer>
+
+
+    <div class="back-btn"><a href="index.html">
+        <i class="bx bx-left-arrow-circle"></i>
+
+        <svg height="100%" width="100%" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297.00 297.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.00297" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+
+                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.1880000000000002"/>
+
+                <g id="SVGRepo_iconCarrier"> <g> <g> <g> <g> <circle style="fill:#24ebf9;" cx="148.5" cy="148.5" r="148.5"/> </g> </g> </g> <path style="fill:#0f8bff;" d="M179.023,37.423l-61.089,222.025l37.389,37.389c76.627-3.466,138.118-64.999,141.52-141.642 L179.023,37.423z"/> <g> <path style="fill:#32373B;" d="M127.083,264h42.833c6.397,0,11.583-5.186,11.583-11.583V44.583 c0-6.397-5.186-11.583-11.583-11.583h-42.833c-6.397,0-11.584,5.186-11.584,11.583v207.833C115.5,258.814,120.686,264,127.083,264 z"/> </g> <g> <circle style="fill:#fcf41d;" cx="148.5" cy="148.5" r="59.5"/> </g> <g> <circle style="fill:#3f403b;" cx="148.5" cy="148.5" r="49.5"/> </g> </g> </g>
+
+        </svg></a>
+    </div>
 
 <!-- CDN for popup-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

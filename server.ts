@@ -38,7 +38,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));
-app.use(requireAdmin, express.static("protected"));
+// app.use(requireAdmin, express.static("protected"));
 
 app.use((req, res) => {
   res.status(404).sendFile(path.resolve("public", "404.html"));

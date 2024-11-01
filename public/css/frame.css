@@ -168,6 +168,10 @@ header * {
     }
 }
 
+.navbar ul li:last-of-type {
+    display: none;
+}
+
 #login-btn {
     display: none;
     outline: none;
@@ -211,11 +215,65 @@ header * {
     gap: 1.6rem;
     cursor: pointer;
     font-size: 2.3rem;
+    position: relative;
 }
 
 .navbar div #user-info i {
     font-size: 3.2rem;
 }
+
+.navbar div #user-info #user-action {
+    position: absolute;
+    top: 160%;
+    width: 50%;
+}
+
+.navbar div #user-info #user-action div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.4);
+}
+
+.navbar div #user-info #user-action div button {
+    width: 100%;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    color: var(--color-basic);
+    line-height: 26px;
+    background-color: rgb(228, 230, 235);
+}
+
+.navbar div #user-info #user-action div button:first-of-type {
+    border-bottom: 1px groove var(--color-pri);
+}
+
+.navbar div #user-info #user-action div button:hover {
+    background: rgb(0, 101, 255);
+    transition-duration: 0s, 0.15s;
+    color: rgb(255, 255, 255);
+
+}
+
+.navbar div #user-info #user-action:after {
+    content: "";
+    position:absolute;
+    margin-top:-6px;
+    margin-left:-5px;
+    border-left: 16px solid transparent;
+    border-right: 16px solid transparent;
+    border-bottom: 16px solid rgb(228, 230, 235);
+    left: 3.5px;
+    top: -8px;
+    z-index: -1;
+  }
+
 
 .toggle-btn {
     display: none;
@@ -443,6 +501,16 @@ header * {
     font-size: 1.8rem;
 }
 
+.img-demo-ac-pw {
+    width: 20%;
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    transform: translateY(-50%);
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
 .footer {
     position: relative;
     width: 100%;
@@ -490,6 +558,59 @@ header * {
     letter-spacing: 0.2rem;
 }
 
+.back-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--theme-sec);
+    position: fixed;
+    z-index: 1001;
+    bottom: 30px;
+    left: 30px;
+    text-align: center;
+    opacity: 0.8;
+}
+
+.back-btn svg:hover {
+    opacity: 0;
+    transition: 1.5s;
+}
+
+.back-btn a > * {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.back-btn i {
+    font-size: 7.2rem;
+    color: var(--theme-main-alt);
+}
+
+.back-btn:hover {
+    opacity: 1;
+}
+
+.back-btn::before {
+    content: "Back to CV";
+    position: absolute;
+    font-size: 1.6rem;
+    display: block;
+    top: -100%;
+    width: 100%;
+    height: auto-fit;
+    color: var(--color-ter);
+    text-shadow: 0 0 6px var(--color-basic);
+    font-weight: 500;
+    opacity: 0;
+}
+
+.back-btn:hover::before {
+    opacity: 1;
+    transition: 1.5s;
+}
+
 @media(max-width: 1240px) {
 
     .navbar ul a {
@@ -528,6 +649,11 @@ header * {
     #login-btn {
         font-size: 1.6rem;
     }
+
+    .navbar div #user-info #user-action {
+        width: 100%;
+    }
+
 }
 
 @media(max-width: 900px) {
@@ -596,4 +722,17 @@ header * {
     .navbar .logo span {
         display: none;
     }
+
+    .navbar ul li:last-of-type {
+        display: inline;
+    }
+
+    .back-btn {
+        display: none;
+    }
+
+    .navbar div #user-info #user-action div button {
+        letter-spacing: 0.1rem;
+    }
+
 }
