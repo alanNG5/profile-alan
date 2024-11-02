@@ -11,7 +11,7 @@ export function requireLogin(req: Request, res: Response, next: NextFunction) {
 }
 
 export function requireAdmin(req: Request, res: Response, next: NextFunction) {
-  if (req.session.admin_role) {
+  if (req.session.admin_role === true) {
     next();
   } else {
     console.log("Unauthorized access attempt.");

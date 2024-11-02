@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { sessionMiddleware } from "./utils/session";
-import { requireLogin, requireAdmin } from "./utils/guard";
+// import { requireLogin, requireAdmin } from "./utils/guard";
 
 const app = express();
 
@@ -38,11 +38,12 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));
-// app.use(requireAdmin, express.static("protected"));
 
 app.use((req, res) => {
   res.status(404).sendFile(path.resolve("public", "404.html"));
 });
+
+// app.use(requireAdmin, express.static("protected"));
 
 app.listen(port, () => {
   console.log(`App is listening on port of http://localhost:${port}`);

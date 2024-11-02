@@ -24,8 +24,6 @@ export class AuthService {
       });
 
       if (compareResult) {
-        // console.log(`Login as " ${userInfoQuery[0].username} " successfully.`);
-
         return {
           flag: true,
           loginID: userInfoQuery[0].id,

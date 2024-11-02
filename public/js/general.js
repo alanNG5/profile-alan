@@ -62,17 +62,16 @@ shiftToLoginBtn.addEventListener("click", () => {
 document.getElementById("user-info").addEventListener("click", function() {
     document.getElementById("user-action").toggleAttribute("hidden");
 });
+// link appended to "profile" button is coded in auth.js
 
 // logout popup
 const logoutBtn = document.getElementById("logout-btn");
 const logoutModal = document.getElementById("logout-modal");
-
 logoutBtn.addEventListener("click", () => {
     logoutModal.style.display = "block";
 });
 
 const cancelLogout = document.getElementById("cancel-logout");
-
 cancelLogout.onclick = () => {
     logoutModal.style.display = "none";
 }

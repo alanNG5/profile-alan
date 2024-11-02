@@ -143,6 +143,20 @@ async function loadVisitorRole () {
     document.getElementById("user-info").style.display = "flex";
     document.getElementById("role-info").textContent = json.visitor;
     document.getElementById("name-info").textContent = json.username;
+
+    // let panelBtn = document.getElementById("profile-btn");
+    // if (json.visitor === "member") {
+    //   panelBtn.addEventListener("click", () => {
+    //     // window.location.href = "/purchase_record";
+    //     console.log("Member Panel");
+    //   })
+    // } else if (json.visitor === "admin") {
+    //   panelBtn.textContent = "Admin Panel";
+    //   panelBtn.addEventListener("click", () => {
+    //     console.log("Admin Panel");
+    //     // window.location.href = "/admin";
+    //   });
+    // };
   } else {
     document.getElementById("login-btn").style.display = "inline-block";
     document.getElementById("user-info").style.display = "none";
