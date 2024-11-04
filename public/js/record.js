@@ -1,4 +1,5 @@
-let ourClient;
+
+let ourClient = "Our Client";
 
 async function getUser () {
   let res = await fetch("/user");
@@ -9,101 +10,100 @@ async function getUser () {
 async function displaySalesRecord () {
 
     await fetch("/sales/record")
-        .then((response) => {
+        .then( response => {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error("Network error. No response from server.");
+                return response.json().then( errorData => {
+                  throw new Error( errorData.errorMessage );
+                })
             }
-        }).
-        then(
+        })
+        .then(
           fetchedData => {
-            console.log("Fetching success: ", fetchedData)
-
             presentingSalesContent(fetchedData.record);
-        }
-      )
-      .catch((error) => console.log("Fetching error: ", error));
+        })
+        .catch(function(error) {
+
+            Swal.fire({
+              position: "center",
+              icon: "error",
+              title: error.message,
+              showConfirmButton: false,
+              timer: 2000,
+            }).then(() => {
+              location.href = "/watch_main.html";
+            });
+
+        });
 }
+
 
 function presentingSalesContent (data) {
-  console.log(data.length);
-  // if ( data.length > 0 ) {
-
-  // }
-
   const mainBoard = document.getElementById("user-record-board");
 
-  const salesTable = document.createElement("table");
+  if ( data.length >= 1 ) {
 
-  const headRow = document.createElement("thead");
-  const trHead = document.createElement("tr");
+    const salesTable = document.createElement("table");
 
-  const bodyData = document.createElement("tbody");
-  const caption = document.createElement("caption");
+    const headRow = document.createElement("thead");
+    const trHead = document.createElement("tr");
 
-  caption.innerText = `Sales Record of ${ourClient}`;
-  salesTable.appendChild(caption);
+    const bodyData = document.createElement("tbody");
+    const caption = document.createElement("caption");
+    const remark = document.createElement("span");
 
-  headRow.appendChild(trHead);
-  salesTable.appendChild(headRow);
-  mainBoard.appendChild(salesTable);
+    caption.innerText = `Purchase of ${ourClient}`;
+    caption.appendChild(remark);
+    remark.innerText = ` ( ${data.length} records found )`;
+    salesTable.appendChild(caption);
 
-  const colNames = ["Sales No.", "Brand", "Model", "Model No.", "Purchase Price", "Order Date", "Order Status"];
-  for ( let col of colNames ) {
-      const th = document.createElement("th");
-      th.innerText = col;
-      trHead.appendChild(th);
-  };
+    headRow.appendChild(trHead);
+    salesTable.appendChild(headRow);
+    salesTable.classList.add("style-for-centering");
+    mainBoard.appendChild(salesTable);
 
-  for ( let itemData of data ) {
-    const tr = document.createElement("tr");
-    for ( let cellData in itemData) {
-        const td = document.createElement("td");
-        td.innerText = itemData[cellData];
-        tr.appendChild(td);
+
+    const colNames = ["Sales No.", "Brand", "Model", "Model No.", "Cost (HKD)", "Order Date", "Order Status"];
+    for ( let col of colNames ) {
+        const th = document.createElement("th");
+        th.innerText = col;
+        trHead.appendChild(th);
     };
-    bodyData.appendChild(tr);
+
+
+    for ( let itemData of data ) {
+      itemData.order_status = itemData.order_status === "delivered" ? "Delivered" : "Arranging Shipment";
+      itemData.selling_price = "$ " + itemData.selling_price.toLocaleString();
+      let pid = itemData.pid;
+
+      const tr = document.createElement("tr");
+      for ( let cellData in itemData) {
+          const td = document.createElement("td");
+          td.innerText = itemData[cellData];
+
+          if (cellData === "pid") {
+            td.style.display = "none";
+          }
+
+          // "pid" is only used for the purpose of linking to the watch details page, so td about it is hidden.
+
+          if (cellData === "brand" || cellData === "model_name" || cellData === "model_no") {
+            td.style.cursor = "pointer";
+            td.addEventListener("click", () => {
+              location.href = `${urlCurrent}watch_details.html?id=${pid}`;
+            });
+          }
+          tr.appendChild(td);
+      };
+      bodyData.appendChild(tr);
+    };
+      salesTable.appendChild(bodyData);
+
+  } else {
+    const noRecord = document.createElement("h2");
+    noRecord.innerText = "No sales record found.";
+    mainBoard.appendChild(noRecord);
+  };
 };
-
-salesTable.appendChild(bodyData);
-
-
-
-}
-
-
-{/* <table>
-  <thead>
-    <tr>
-      <th>Person</th>
-      <th>Amount</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Person1</td>
-      <td>$5.99</td>
-      <td>02/03/09</td>
-    </tr>
-    <tr>
-      <td>Person2</td>
-      <td>$12.99</td>
-      <td>08/15/09</td>
-    </tr>
-  </tbody>
-</table> */}
-
-
-
-// function addCell(content) {
-//   let td = document.createElement("td");
-//   let a = document.createElement("a");
-//   a.href = "user_request.html?id=" + order.id;
-//   a.textContent = content;
-
-//   td.appendChild(a);
-//   tr.appendChild(td);
-// }
 

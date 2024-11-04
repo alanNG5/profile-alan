@@ -14,49 +14,85 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-
-    main#user-record-board {
-        margin: 150px auto;
-        display: flex;
-        position: relative;
-        overflow: scroll;
-        /* top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); */
+    :root {
+        --table-frame-adj: 8px;
     }
-        thead {
-  background-color: #2c5e77;
-  color: #fff;
-}
 
-tbody {
-  background-color: #e4f0f5;
-}
+    main {
+        background-image: url("images/bkg-impetus-user.jpeg");
+        background-size: cover;
+        width: 100%;
+        height: fit-content;
+        position: relative;
+    }
 
-table {
-  border-collapse: collapse;
-  border: 2px solid rgb(140 140 140);
-  font-family: sans-serif;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-}
+    main #user-record-board {
+        display: flex;
+        overflow: scroll;
+        width: 100%;
+        margin-top: 105px;
+    }
 
-caption {
-  caption-side: top;
-  padding: 10px;
-  font-size: 1.6rem;
-}
+    table {
+        border-collapse: separate;
+        font-family:"Philosopher", sans-serif;
+        font-size: 1.2rem;
+        letter-spacing: 0.1rem;
+        border-spacing: var(--table-frame-adj);
+        text-wrap: wrap;
+        padding-bottom: 100px;
+    }
 
-th,
-td {
-  border: 1px solid rgb(160 160 160);
-  padding: 8px 10px;
-  font-size: 1.4rem;
-}
+    thead {
+        background-color: #2c5e77;
+        color: var(--color-ter);
+    }
 
-td {
-  text-align: center;
-}
+    tbody {
+        background-color: #e4f0f5;
+    }
+
+
+    caption {
+        caption-side: top;
+        margin: 28px 0;
+        margin-left: var(--table-frame-adj);
+        padding: 10px 0;
+        font-family:"Italiana", sans-serif;
+        font-size: 2.6rem;
+        font-weight: 600;
+        letter-spacing: 0.5rem;
+        background-color: var(--color-basic);
+        color: var(--color-ter);
+        width: calc(100% - 2 * var(--table-frame-adj));
+    }
+
+    caption span {
+        font-size: 1.6rem;
+        font-weight: 400;
+        letter-spacing: 0.1rem;
+    }
+
+    th,
+    td {
+        border: none;
+        padding: 8px 16px;
+        font-size: 1.6rem;
+    }
+
+    td {
+        text-align: center;
+    }
+
+    tr td:nth-of-type(5) {
+        text-align: right;
+    }
+
+    tr td:nth-of-type(6) {
+        text-align: left;
+    }
+
+
 
     </style>
 </head>
@@ -85,7 +121,7 @@ td {
                     <strong id="name-info">name</strong>
                     <div id="user-action" hidden >
                         <div>
-                            <button id="panel-btn">Profile</button>
+                            <button id="panel-btn"></button>
                             <button id="logout-btn">Logout</button>
                         </div>
                     </div>
@@ -100,8 +136,9 @@ td {
         </div>
     </header>
 
-    <main id="user-record-board"></main>
-
+    <main>
+        <div id="user-record-board"></div>
+    </main>
 
     <div id="login-modal" class="modal">
         <img src="images/dm101.png" class="img-demo-ac-pw"/>
@@ -174,7 +211,7 @@ td {
     </div>
 
 
-    <footer class="footer">
+    <footer>
         <abbr title="FOR DEMO ONLY">
             <ul class="social-icon">
                 <li class="social-icon__item">
@@ -225,68 +262,6 @@ td {
 <script>
     displaySalesRecord();
     getUser();
-
-// const mainBoard = document.getElementById("user-record-board");
-
-// const salesTable = document.createElement("table");
-
-// const headRow = document.createElement("thead");
-// const trHead = document.createElement("tr");
-
-// headRow.appendChild(trHead);
-// salesTable.appendChild(headRow);
-// mainBoard.appendChild(salesTable);
-
-// const colNames = ["Sales No.", "Brand", "Model", "Model No.", "Purchase Price", "Order Date", "Order Status"];
-// for ( let col of colNames ) {
-//     const th = document.createElement("th");
-//     th.innerText = col;
-//     trHead.appendChild(th);
-// };
-
-
-// let dataX = [
-//     {
-//     "id": 101,
-//     "brand": "Seiko",
-//     "model_name": "Lukia",
-//     "model_no": "SSVW154",
-//     "selling_price": 5200,
-//     "created_at": "2024-09-05T07:35:21.003Z",
-//     "order_status": "delivered"
-//     },
-//     {
-//     "id": 104,
-//     "brand": "Tudor",
-//     "model_name": "Black Bay Ceramic",
-//     "model_no": "M79210CNU-0007",
-//     "selling_price": 40000,
-//     "created_at": "2024-09-05T07:35:21.005Z",
-//     "order_status": "delivered"
-//     },
-// ];
-
-
-// const bodyData = document.createElement("tbody");
-
-
-
-// for ( let itemData of dataX ) {
-//     const tr = document.createElement("tr");
-//     for ( let cellData in itemData) {
-//         const td = document.createElement("td");
-//         td.innerText = itemData[cellData];
-//         tr.appendChild(td);
-//     };
-//     bodyData.appendChild(tr);
-// };
-
-// salesTable.appendChild(bodyData);
-
-
-
-
-
 </script>
 </body>
 </html>

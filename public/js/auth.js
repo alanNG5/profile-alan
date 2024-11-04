@@ -1,4 +1,6 @@
 const Swal = window.Swal;
+var urlCurrent = "https://impetus-go.me/";
+urlCurrent = "http://localhost:8900/";
 
 let loginForm = document.getElementById("login-form");
 
@@ -80,6 +82,12 @@ async function submitLogout(event) {
     title: json.logoutMessage,
     showConfirmButton: false,
     timer: 2000
+  }).then(() => {
+    if (location.href === `${urlCurrent}purchase_record.html`) {
+    location.href = "/watch_main.html";
+    } else if (location.href === `${urlCurrent}admin.html`) {
+      location.href = "/watch_main.html";
+    };
   });
 
   loadVisitorRole();
@@ -144,19 +152,14 @@ async function loadVisitorRole () {
     document.getElementById("role-info").textContent = json.visitor;
     document.getElementById("name-info").textContent = json.username;
 
-    // let panelBtn = document.getElementById("profile-btn");
-    // if (json.visitor === "member") {
-    //   panelBtn.addEventListener("click", () => {
-    //     // window.location.href = "/purchase_record";
-    //     console.log("Member Panel");
-    //   })
-    // } else if (json.visitor === "admin") {
-    //   panelBtn.textContent = "Admin Panel";
-    //   panelBtn.addEventListener("click", () => {
-    //     console.log("Admin Panel");
-    //     // window.location.href = "/admin";
-    //   });
-    // };
+    let panelBtn = document.getElementById("panel-btn");
+    panelBtn.textContent = json.visitor === "member" ? "Profile" : "Admin Panel";
+    panelBtn.onclick = json.visitor === "member" ? () => {
+      location.href = "/purchase_record.html";
+    } : () => {
+      window.location.href = "/admin.html";
+    };
+
   } else {
     document.getElementById("login-btn").style.display = "inline-block";
     document.getElementById("user-info").style.display = "none";

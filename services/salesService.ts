@@ -67,11 +67,20 @@ export class SalesService {
   async getSalesRecord(userId: Number) {
     try {
       return await this.knex
-      .select("sales.id", "brand", "model_name", "model_no", "selling_price", "sales.created_at", "order_status")
-      .from("sales")
-      .innerJoin("products", "sales.product_id", "products.id")
-      .where("sales.user_id", userId)
-      .orderBy("sales.created_at");
+        .select(
+          "sales.id",
+          "products.id as pid",
+          "brand",
+          "model_name",
+          "model_no",
+          "selling_price",
+          "sales.created_at",
+          "order_status"
+        )
+        .from("sales")
+        .innerJoin("products", "sales.product_id", "products.id")
+        .where("sales.user_id", userId)
+        .orderBy("sales.created_at");
     } catch (error) {
       console.error("Error fetching sales record: ", error);
       throw error;

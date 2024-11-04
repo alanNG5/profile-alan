@@ -1,5 +1,6 @@
-let urlCurrent = "http://localhost:8900/";
-// urlCurrent = "https://impetus-go.me/";
+// var urlCurrent = "https://impetus-go.me/";
+// urlCurrent = "http://localhost:8900/";
+
 
 async function displayProductsAtHomePage () {
 

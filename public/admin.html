@@ -1,10 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="description" content="My Portfolio">
+  <meta name="keywords" content="Demo for watch e-store">
+  <meta name="author" content="Alan Ng">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impetus Display</title>
+  <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/frame.css">
+  <link rel="stylesheet" href="./css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+      main {
+        display: flex;
+        align-items: center;
+        margin-top: 200px;
+      }
+
       thead {
         background-color: #2c5e77;
         color: #fff;
@@ -42,20 +57,182 @@
     </style>
 </head>
 <body>
-    <h2>Create New Item</h2>
-    <form id="create-item-form" enctype="multipart/form-data" action="/admin/newItem" method="post">
-      <div>Brand: <input type="text" name="brand_entry" required="required" /></div>
-      <div>Model Name: <input type="text" name="model_name_entry" required="required" /></div>
-      <div>Model Number: <input type="text" name="model_no_entry" required="required" /></div>
-      <div>Price: <input type="number" name="current_price_entry" min="1000" step="10" required="required" /></div>
-      <div>Details: <input type="text" name="description_entry" /></div>
-      <div>Stock Quantity: <input type="number" name="stock_qtn_entry" required="required" /></div>
-      <div>Pre-owned: <input type="checkbox" id="pre-owned-checkBox" name="is_pre_owned_entry" /></div>
 
-      <div>File: <input type="file" name="image_entry" multiple="multiple" required="required" /></div>
-      <input type="submit" value="Upload" />
-    </form>
+    <header>
+      <div class="navbar style-for-centering">
+          <a href="watch_main.html">
+              <div class="logo">
+                  <img src="images/logoIMP.png" alt="logo">
+                  <span>WATCH STORE</span>
+              </div>
+          </a>
+          <ul id="navList">
+              <li><a href="watch_main.html" >Home</a></li>
+              <li><a href="catalogue.html">Catalogue</a></li>
+              <li><a href="about.html" class="active">About</a></li>
+              <li><a href="index.html">Back to CV</a></li>
+          </ul>
+
+          <div>
+              <button id="login-btn">Login</button>
+              <div id="user-info">
+                  <i class='bx bxs-user-circle'></i>
+                  <span id="role-info">role</span>
+                  <span> | </span>
+                  <strong id="name-info">name</strong>
+                  <div id="user-action" hidden >
+                      <div>
+                          <button id="panel-btn"></button>
+                          <button id="logout-btn">Logout</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="toggle-btn" id="toggleBtn">
+              <div class="bar"></div>
+              <div class="bar"></div>
+              <div class="bar"></div>
+          </div>
+      </div>
+    </header>
+
+    <main>
+      <h2>Create New Item</h2>
+      <form id="create-item-form" enctype="multipart/form-data" action="/admin/newItem" method="post">
+        <div>Brand: <input type="text" name="brand_entry" required="required" /></div>
+        <div>Model Name: <input type="text" name="model_name_entry" required="required" /></div>
+        <div>Model Number: <input type="text" name="model_no_entry" required="required" /></div>
+        <div>Price: <input type="number" name="current_price_entry" min="1000" step="10" required="required" /></div>
+        <div>Details: <input type="text" name="description_entry" /></div>
+        <div>Stock Quantity: <input type="number" name="stock_qtn_entry" required="required" /></div>
+        <div>Pre-owned: <input type="checkbox" id="pre-owned-checkBox" name="is_pre_owned_entry" /></div>
+
+        <div>File: <input type="file" name="image_entry" multiple="multiple" required="required" /></div>
+        <input type="submit" value="Upload" />
+      </form>
+    </main>
+
+
+    <div id="login-modal" class="modal">
+      <img src="images/dm101.png" class="img-demo-ac-pw"/>
+
+      <div class="modal-content">
+          <span id="close" class="x-cl-btn">&times;</span>
+
+          <div class="form-container form-login">
+              <h1>Login</h1>
+              <form id="login-form" action="/user/login" method="POST">
+
+                  <div class="input-box">
+                      <input type="text" name="username" placeholder="Username" minlength="6" required/>
+                      <i class='bx bxs-user'></i>
+                  </div>
+
+                  <div class="input-box">
+                      <input type="password" name="password" placeholder="Password" minlength="6" required/>
+                      <i class='bx bxs-lock-alt' ></i>
+                  </div>
+
+                  <input type="submit" class="submit-btn" value="Login">
+
+                  <div class="account-status">
+                      <p>Don't have an account? <a href="#" id="register-link">Register Now</a></p>
+                  </div>
+              </form>
+          </div>
+
+          <div class="form-container  form-register">
+              <h1>Register</h1>
+              <form id="register-form" action="/user/register" method="POST">
+                  <div class="input-box">
+                      <input type="text" name="username" placeholder="Username" minlength="6" pattern="[a-zA-Z0-9]{6,14}$" title="Must contain either digit or letter, with a length between 6 and 14 characters" required/>
+                      <i class='bx bxs-user'></i>
+                  </div>
+
+                  <div class="input-box">
+                      <input type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must be email format. '@' and '.' should appear" required/>
+                      <i class='bx bx-envelope'></i>
+                  </div>
+
+                  <div class="input-box">
+                      <input type="password" name="password" placeholder="Password" minlength="6" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,}$" title="Must contain at least 1 digit and 1 letter, and not contain character other than digit and letter, and at least 6 or more characters" required/>
+                      <i class='bx bxs-lock-alt' ></i>
+                  </div>
+
+                  <input type="submit" class="submit-btn" value="Register">
+
+                  <div class="account-status">
+                      <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+                  </div>
+              </form>
+          </div>
+
+      </div>
+  </div>
+
+  <div id="logout-modal" class="modal">
+      <div class="modal-content">
+          <div class="form-container">
+              <h3>Are you sure to logout?</h3>
+              <form id="logout-form" action="/user/logout" method="POST">
+                  <input type="submit" value="Logout">
+                  <div id="cancel-logout">Stay Logged In</div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+  <footer>
+      <abbr title="FOR DEMO ONLY">
+          <ul class="social-icon">
+              <li class="social-icon__item">
+                  <a class="social-icon__link">
+                      <ion-icon name="logo-facebook"></ion-icon>
+                  </a></li>
+              <li class="social-icon__item">
+                  <a class="social-icon__link">
+                      <ion-icon name="logo-whatsapp"></ion-icon>
+                  </a></li>
+              <li class="social-icon__item">
+                  <a class="social-icon__link">
+                      <ion-icon name="logo-linkedin"></ion-icon>
+                  </a></li>
+              <li class="social-icon__item">
+                  <a class="social-icon__link">
+                      <ion-icon name="logo-instagram"></ion-icon>
+                  </a>
+              </li>
+          </ul>
+      </abbr>
+      <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
+  </footer>
+
+
+  <div class="back-btn"><a href="index.html">
+      <i class="bx bx-left-arrow-circle"></i>
+
+      <svg height="100%" width="100%" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297.00 297.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.00297" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+
+              <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.1880000000000002"/>
+
+              <g id="SVGRepo_iconCarrier"> <g> <g> <g> <g> <circle style="fill:#24ebf9;" cx="148.5" cy="148.5" r="148.5"/> </g> </g> </g> <path style="fill:#0f8bff;" d="M179.023,37.423l-61.089,222.025l37.389,37.389c76.627-3.466,138.118-64.999,141.52-141.642 L179.023,37.423z"/> <g> <path style="fill:#32373B;" d="M127.083,264h42.833c6.397,0,11.583-5.186,11.583-11.583V44.583 c0-6.397-5.186-11.583-11.583-11.583h-42.833c-6.397,0-11.584,5.186-11.584,11.583v207.833C115.5,258.814,120.686,264,127.083,264 z"/> </g> <g> <circle style="fill:#fcf41d;" cx="148.5" cy="148.5" r="59.5"/> </g> <g> <circle style="fill:#3f403b;" cx="148.5" cy="148.5" r="49.5"/> </g> </g> </g>
+
+      </svg></a>
+  </div>
+
+
+<!-- CDN for popup-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+<script src="./js/general.js"></script>
+<script src="./js/auth.js"></script>
 
 <script src="./js/submit.js"></script>
+
+<script></script>
 </body>
 </html>

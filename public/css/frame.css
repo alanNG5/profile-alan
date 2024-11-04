@@ -225,7 +225,7 @@ header * {
 .navbar div #user-info #user-action {
     position: absolute;
     top: 160%;
-    width: 50%;
+    width: 80%;
 }
 
 .navbar div #user-info #user-action div {
@@ -242,12 +242,13 @@ header * {
     border: 0;
     cursor: pointer;
     padding: 8px 16px;
-    font-size: 16px;
+    font-size: 1.6rem;
     font-weight: 700;
     letter-spacing: 0.3rem;
     color: var(--color-basic);
     line-height: 26px;
     background-color: rgb(228, 230, 235);
+    word-break: keep-all;
 }
 
 .navbar div #user-info #user-action div button:first-of-type {
@@ -258,7 +259,6 @@ header * {
     background: rgb(0, 101, 255);
     transition-duration: 0s, 0.15s;
     color: rgb(255, 255, 255);
-
 }
 
 .navbar div #user-info #user-action:after {
@@ -511,7 +511,7 @@ header * {
     opacity: 0.8;
 }
 
-.footer {
+footer {
     position: relative;
     width: 100%;
     background: linear-gradient(in lch, #1090d0 20%,#2612aa 100%);
@@ -549,7 +549,7 @@ header * {
     transform: translateY(-10px);
 }
 
-.footer p {
+footer p {
     color: var(--color-ter);
     margin: 15px 0 10px 0;
     font-family: "Italiano", sans-serif;
@@ -650,10 +650,6 @@ header * {
         font-size: 1.6rem;
     }
 
-    .navbar div #user-info #user-action {
-        width: 100%;
-    }
-
 }
 
 @media(max-width: 900px) {
@@ -732,7 +728,9 @@ header * {
     }
 
     .navbar div #user-info #user-action div button {
+        font-size: 1.3rem;
         letter-spacing: 0.1rem;
+        padding: 6px 10px;
     }
 
 }

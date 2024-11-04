@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { SalesService } from "../services/salesService";
-// import "../utils/session";
+import "../utils/session";
 
 class SalesController {
   constructor(private salesService: SalesService) {}
@@ -56,29 +56,45 @@ class SalesController {
   };
 
   getRecord = async (req: Request, res: Response) => {
-    let userId = req.session.userid;
+    let userId = req.session.userid as number | undefined;
     let userRole = req.session.admin_role;
 
-    if (!userId) {
-      // res.json({ message: "Unauthorized access." });
-      return res.status(403).redirect("/");
+    if (userId === undefined) {
+      return res
+        .status(400)
+        .json({ errorMessage: "Member login is required." });
     }
 
     if (userRole) {
       return res
         .status(403)
-        .json({ message: "Access to profile only for member." });
+        .json({ errorMessage: "Access Denied: for MEMBER only." });
     }
 
     try {
       let record = await this.salesService.getSalesRecord(userId);
+      for (let row of record) {
+        row.created_at = formatDate(row.created_at);
+      }
       res.status(200).json({ record });
     } catch (error) {
       res.status(500).json({
-        errorMessage: "Internal server error: " + error,
+        errorMessage: "Internal server error: " + (error as Error).message,
       });
     }
   };
 }
+
+function formatDate (date: Date): String {
+  // const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const month = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOVr","DEC"];
+  let dateOfMon = ("0" + date.getDate()).slice(-2);
+  let monthIndex = date.getMonth();
+  let hr = ("0" + date.getHours()).slice(-2);
+  let min = ("0" + date.getMinutes()).slice(-2);
+  let sec = ("0" + date.getSeconds()).slice(-2);
+  return `${dateOfMon} ${month[monthIndex]}, ${date.getFullYear()} ${hr}:${min}:${sec}`;
+};
+
 
 export { SalesController };
