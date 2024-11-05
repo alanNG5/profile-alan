@@ -1,0 +1,91 @@
+:root {
+    --table-frame-adj: 8px;
+    /* caption width aligns with table border*/
+}
+
+main {
+    background-image: url("images/bkg-impetus-user.jpeg");
+    background-size: cover;
+    width: 100%;
+    height: fit-content;
+    min-height: 100dvh;
+    position: relative;
+}
+
+main #user-record-board {
+    display: flex;
+    overflow: scroll;
+    width: 100%;
+    margin-top: 105px;
+}
+
+main #user-record-board h2 {
+    font-family:"Montserrat", sans-serif;
+    font-size: 6.4rem;
+    font-weight: 900;
+    letter-spacing: 0.6rem;
+    color: var(--color-basic);
+    text-shadow: 0 0 18px rgba(255, 255, 255, 0.8);
+    width: 100%;
+    text-align: center;
+    mix-blend-mode:overlay;
+}
+
+#user-record-board table {
+    border-collapse: separate;
+    font-family:"Philosopher", sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+    border-spacing: var(--table-frame-adj);
+    text-wrap: wrap;
+    padding-bottom: 100px;
+}
+
+#user-record-board thead {
+    background-color: var(--table-bkg);
+    color: var(--color-ter);
+}
+
+#user-record-board tbody {
+    background-color: var(--table-bkg-alt);
+}
+
+
+#user-record-board caption {
+    caption-side: top;
+    margin: 28px 0;
+    margin-left: var(--table-frame-adj);
+    padding: 10px 0;
+    font-family:"Italiana", sans-serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    background-color: var(--color-basic);
+    color: var(--color-ter);
+    width: calc(100% - 2 * var(--table-frame-adj));
+}
+
+#user-record-board caption span {
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+}
+
+#user-record-board th,
+#user-record-board td {
+    border: none;
+    padding: 8px 16px;
+    font-size: 1.6rem;
+}
+
+#user-record-board td {
+    text-align: center;
+}
+
+#user-record-board tr td:nth-of-type(5) {
+    text-align: right;
+}
+
+#user-record-board tr td:nth-of-type(6) {
+    text-align: left;
+}

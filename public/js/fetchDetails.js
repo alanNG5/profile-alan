@@ -44,6 +44,7 @@ window.onload = async () => {
         const moreInfo = document.getElementById("more-info");
         const price = document.getElementById("price-current");
         const photo = document.getElementById("image-zoom");
+        const reminder = document.querySelector("p.tag");
 
         const createImg = document.createElement("img");
         photo.appendChild(createImg);
@@ -62,6 +63,9 @@ window.onload = async () => {
 
         infoPurchaseAction = data[0];
 
+        console.log("test stock: ", data[0].outOfStock);
+        reminder.innerText = data[0].outOfStock ? "Out of Stock" : "Free Shipping";
+        reminder.style.backgroundColor = data[0].outOfStock ? "red" : "var(--theme-main-alt)";
 
         // setting up the zoom effect on the image:
         let imageZoom = document.getElementById("image-zoom");

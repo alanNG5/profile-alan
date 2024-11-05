@@ -17,10 +17,11 @@ class SalesController {
     } = req.body;
 
     try {
-      // Check if the product is still available
-      let qtnQuery = await this.salesService.checkQtnAvailability(
-        parseInt(pid)
-      );
+      // Check if the product is still available once a purchase is triggered.
+      let qtnQuery =
+        await this.salesService.finalConfirmQtnAvailabilityBeforeDeal(
+          parseInt(pid)
+        );
 
       if (qtnQuery![0].stock_qtn < 1) {
         res.json({

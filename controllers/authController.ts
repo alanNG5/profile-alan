@@ -8,6 +8,19 @@ class AuthController {
   login = async (req: Request, res: Response) => {
     let { username, password } = req.body;
 
+    const patternName = /[a-zA-Z0-9]{6,14}$/;
+    const patternPwd = /^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,}$/;
+
+    if (!patternName.test(username)) {
+      res.status(400).json({ error: "Input Error for Username." });
+      return;
+    }
+
+    if (!patternPwd.test(password)) {
+      res.status(400).json({ error: "Input Error for Password." });
+      return;
+    }
+
     let validationResult = await this.authService.login(username, password);
 
     if (validationResult.flag) {

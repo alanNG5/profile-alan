@@ -3,12 +3,12 @@ import { Knex } from "knex";
 export class SalesService {
   constructor(private knex: Knex) {}
 
-  async checkQtnAvailability(pid: number) {
+  async finalConfirmQtnAvailabilityBeforeDeal(pid: number) {
     try {
       return await this.knex
-      .select("stock_qtn")
-      .from("products")
-      .where("id", pid);
+        .select("stock_qtn")
+        .from("products")
+        .where("id", pid);
     } catch (error) {
       console.error("Error performing quantity checking: ", error);
       throw error;

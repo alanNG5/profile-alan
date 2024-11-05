@@ -24,7 +24,6 @@ async function displaySalesRecord () {
             presentingSalesContent(fetchedData.record);
         })
         .catch(function(error) {
-
             Swal.fire({
               position: "center",
               icon: "error",
@@ -104,6 +103,8 @@ function presentingSalesContent (data) {
     const noRecord = document.createElement("h2");
     noRecord.innerText = "No sales record found.";
     mainBoard.appendChild(noRecord);
+    mainBoard.style.height = "80dvh";
+    mainBoard.style.alignItems = "center";
   };
 };
 

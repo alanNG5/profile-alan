@@ -35,11 +35,9 @@ class ProductsController {
         // res.write("location.href = '/404.html'");
       }
 
-      // Setting headers to prevent caching:
-      // res.setHeader(
-      //   "Cache-Control",
-      //   "no-store, no-cache, must-revalidate, private"
-      // );
+      // checking stock quantity but not returning the number to client side
+      product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
+      delete product[0].stock_qtn;
 
       res.status(200).json({ data: product });
     } catch (error) {
