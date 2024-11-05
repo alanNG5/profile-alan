@@ -63,7 +63,6 @@ window.onload = async () => {
 
         infoPurchaseAction = data[0];
 
-        console.log("test stock: ", data[0].outOfStock);
         reminder.innerText = data[0].outOfStock ? "Out of Stock" : "Free Shipping";
         reminder.style.backgroundColor = data[0].outOfStock ? "red" : "var(--theme-main-alt)";
 

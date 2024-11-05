@@ -10,15 +10,10 @@
   <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
   <link rel="stylesheet" href="./css/reset.css">
   <link rel="stylesheet" href="./css/frame.css">
-  <link rel="stylesheet" href="./css/main.css">
+  <link rel="stylesheet" href="./css/panel.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <style>
-      main {
-        display: flex;
-        align-items: center;
-        margin-top: 200px;
-      }
 
       thead {
         background-color: #2c5e77;
@@ -69,7 +64,7 @@
           <ul id="navList">
               <li><a href="watch_main.html" >Home</a></li>
               <li><a href="catalogue.html">Catalogue</a></li>
-              <li><a href="about.html" class="active">About</a></li>
+              <li><a href="about.html">About</a></li>
               <li><a href="index.html">Back to CV</a></li>
           </ul>
 
@@ -98,19 +93,52 @@
     </header>
 
     <main>
-      <h2>Create New Item</h2>
-      <form id="create-item-form" enctype="multipart/form-data" action="/admin/newItem" method="post">
-        <div>Brand: <input type="text" name="brand_entry" required="required" /></div>
-        <div>Model Name: <input type="text" name="model_name_entry" required="required" /></div>
-        <div>Model Number: <input type="text" name="model_no_entry" required="required" /></div>
-        <div>Price: <input type="number" name="current_price_entry" min="1000" step="10" required="required" /></div>
-        <div>Details: <input type="text" name="description_entry" /></div>
-        <div>Stock Quantity: <input type="number" name="stock_qtn_entry" required="required" /></div>
-        <div>Pre-owned: <input type="checkbox" id="pre-owned-checkBox" name="is_pre_owned_entry" /></div>
+        <div class="style-for-centering">
+            <aside>
+                <button>New Product</button>
+                <button>Update Product</button>
+                <button>Report</button>
+            </aside>
 
-        <div>File: <input type="file" name="image_entry" multiple="multiple" required="required" /></div>
-        <input type="submit" value="Upload" />
-      </form>
+            <div class="view-action-board">
+                <section>
+                    <h2>Create New Product</h2>
+                    <form id="create-item-form" enctype="multipart/form-data" action="/admin/newItem" method="post">
+                        <fieldset>
+                            <legend>Product Details</legend>
+                            <div>Brand:
+                                <input type="text" name="brand_entry" required="required" />
+                            </div>
+                            <div>Model Name:
+                                <input type="text" name="model_name_entry" required="required" />
+                            </div>
+                            <div>Model Number:
+                                <input type="text" name="model_no_entry" required="required" />
+                            </div>
+                            <div>Price:
+                                <input type="number" name="current_price_entry" min="1000" step="10" required="required" />
+                            </div>
+                            <div>Details:
+                                <input type="text" name="description_entry" />
+                            </div>
+                            <div>Stock Quantity:
+                                <input type="number" name="stock_qtn_entry" required="required" />
+                            </div>
+                            <div>Pre-owned:
+                                <input type="checkbox" id="pre-owned-checkBox" name="is_pre_owned_entry" />
+                            </div>
+
+                            <div>File:
+                                <input type="file" name="image_entry" multiple="multiple" required="required" />
+                            </div>
+
+                            <input type="submit" value="Upload" />
+                        </fieldset>
+                    </form>
+                </section>
+            </div>
+
+        </div>
     </main>
 
 

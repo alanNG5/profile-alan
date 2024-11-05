@@ -1,6 +1,6 @@
 const Swal = window.Swal;
 var urlCurrent = "https://impetus-go.me/";
-// urlCurrent = "http://localhost:8900/";
+urlCurrent = "http://localhost:8900/";
 
 let loginForm = document.getElementById("login-form");
 
@@ -83,11 +83,11 @@ async function submitLogout(event) {
     showConfirmButton: false,
     timer: 2000
   }).then(() => {
-    if (location.href === `${urlCurrent}purchase_record.html`) {
-    location.href = "/watch_main.html";
-    } else if (location.href === `${urlCurrent}admin.html`) {
-      location.href = "/watch_main.html";
-    };
+
+    location.href =
+    location.href === `${urlCurrent}purchase_record.html` || location.href === `${urlCurrent}admin.html` ?
+    "/watch_main.html" : location.href;
+
   });
 
   loadVisitorRole();
