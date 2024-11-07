@@ -105,11 +105,13 @@ class ProductsController {
     } = fields;
 
     try {
+      let formatCurrency = current_price_entry.replace(/[^0-9.]+/g, "");
+
       await this.productsService.insertProduct(
         brand_entry,
         model_name_entry,
         model_no_entry,
-        parseInt(current_price_entry),
+        parseInt(formatCurrency),
         description_entry,
         parseInt(stock_qtn_entry),
         is_pre_owned_entry,
@@ -123,6 +125,45 @@ class ProductsController {
         .json({ message: "Internal server error: failed to insert new item." });
     }
   };
+
+  getBrands = async (req: Request, res: Response) => {
+    try {
+      let brandList = await this.productsService.selectBrands();
+      res.status(200).json({ brandList });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error." });
+    }
+  };
+
+  getModelNames = async (req: Request, res: Response) => {
+    try {
+      let targetBrand = capitalizeFirstLetter(req.params.selectedBrand);
+      let modelList = await this.productsService.selectModelNames(targetBrand);
+      res.status(200).json({ modelList });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
+
+  updateProductById = async (req: Request, res: Response) => {
+    try {
+      let targetId = req.params["productId"];
+      let product = await this.productsService.selectProductById(
+        parseInt(targetId)
+      );
+
+      if (!product) {
+        return res.status(404).json({ searchError: "Product not found." });
+      }
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: "Internal server error." });
+    }
+  };
+}
+
+function capitalizeFirstLetter(text: string) {
+  return String(text).charAt(0).toUpperCase() + String(text).slice(1);
 }
 
 export { ProductsController };

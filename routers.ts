@@ -18,8 +18,15 @@ const productsController = new ProductsController(productsService);
 
 routes.get("/watch/newArrivals", productsController.getNewProducts);
 routes.get("/watch/hotProducts", productsController.getBestSellingProducts);
-
 routes.get("/watch/:productId(\\d+)", productsController.getProductById);
+
+routes.get("/watch/showBrands", productsController.getBrands);
+routes.get(
+  "/watch/showModels/:selectedBrand",
+  productsController.getModelNames
+);
+routes.patch("/watch/changeInfo", productsController.updateProductById);
+
 routes.get("/watch", productsController.getAllProducts);
 
 routes.post("/admin/newItem", productsController.createProduct);

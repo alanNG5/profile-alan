@@ -35,7 +35,7 @@ async function displaySalesRecord () {
             });
 
         });
-}
+};
 
 
 function presentingSalesContent (data) {

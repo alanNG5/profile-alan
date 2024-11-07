@@ -95,4 +95,15 @@ export class ProductsService {
       console.log("Uploading Error for New Item: ", error);
     }
   }
+
+  async selectBrands() {
+    return await this.knex("products").distinct("brand").orderBy("brand");
+  }
+
+  async selectModelNames(brand: string) {
+    return await this.knex("products")
+      .select("model_name")
+      .where("brand", brand)
+      .orderBy("model_name");
+  }
 }

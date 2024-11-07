@@ -46,3 +46,5 @@ void function ff() { console.log("1999") }();
 
 void function () {} ()
 void function () {} ()
+
+
