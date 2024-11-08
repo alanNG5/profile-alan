@@ -6,6 +6,7 @@ import { AuthController } from "./controllers/authController";
 import { AuthService } from "./services/authService";
 import { SalesController } from "./controllers/salesController";
 import { SalesService } from "./services/salesService";
+// import { requireLogin, requireAdmin } from "./utils/guard";
 
 const knexConfigs = require("./knexfile");
 const configMode = process.env.NODE_ENV || "production";
@@ -25,7 +26,10 @@ routes.get(
   "/watch/showModels/:selectedBrand",
   productsController.getModelNames
 );
-routes.patch("/watch/changeInfo", productsController.updateProductById);
+routes.patch(
+  "/watch/setProduct/:productId(\\d+)",
+  productsController.updateProductById
+);
 
 routes.get("/watch", productsController.getAllProducts);
 

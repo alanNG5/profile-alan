@@ -109,10 +109,10 @@
                             <div>Brand:
                                 <input type="text" name="brand_entry" required="required" />
                             </div>
-                            <div>Model Name:
+                            <div>Model Name (unique):
                                 <input type="text" name="model_name_entry" required="required" />
                             </div>
-                            <div>Model Number:
+                            <div>Model Number (unique):
                                 <input type="text" name="model_no_entry" required="required" />
                             </div>
                             <div>Price:
@@ -153,26 +153,41 @@
                             <legend>Search by Brand and Model</legend>
                             <div class="search-panel">
                                 <div>
-                                    <label>Brand</label>
+                                    <label>Select Brand First</label>
                                     <select id="brand-pick" class="select-search">
-                                        <!-- <option value="brand1">Brand 1</option>
-                                        <option value="brand2">Brand 2</option>
-                                        <option value="brand3">Brand 3</option> -->
+                                        <option value="">-- Brand --</option>
                                     </select>
                                 </div>
                                 <div>
                                     <label>Model Name</label>
-                                    <select id="model-pick" class="select-search">
-                                        <option value="brand1">m 1</option>
-                                        <option value="brand2">m 2</option>
-                                        <option value="brand3">m 3</option>
+                                    <select inert id="model-pick" class="select-search">
+                                        <option value="">-- Model Name --</option>
                                     </select>
                                 </div>
                             </div>
+                            <button id="go-search" inert>Search</button>
 
-                            <div>Product ID:
-                                <input type="number" name="searchID" inputmode="numeric" required="required" />
+                            <hr />
+
+                            <h2>Search Result</h2>
+                            <div>
+                                <div>Product ID:
+                                    <input id="result-id" name="searchID" inert />
+                                </div>
+                                <div>Model Number:
+                                    <input id="result-model-no" name="searchID" inert />
+                                </div>
                             </div>
+                            <div>Price:
+                                <input id="result-price" name="searchID" />
+                            </div>
+                            <div>Stock Quantity:
+                                <input id="result-qtn" name="quantity" />
+                            </div>
+                            <div>description:
+                                <textarea id="result-description" name="searchID"></textarea>
+                            </div>
+
                         </fieldset>
                     </form>
                 </section>
@@ -311,7 +326,6 @@
 <script src="./js/pickAndPatch.js"></script>
 
 <script>
-    fetchBrands();
 </script>
 </body>
 </html>

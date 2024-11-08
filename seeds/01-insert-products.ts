@@ -115,7 +115,7 @@ export async function seed(knex: Knex): Promise<void> {
   const [{ id: id6 }]: Array<{ id: number }> = await knex
     .insert({
       brand: "Rolex",
-      model_name: "DAYTONA",
+      model_name: "Daytona",
       model_no: "116520-SPIKE-LEE",
       current_price: 925000,
       description:

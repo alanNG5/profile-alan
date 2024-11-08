@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { ProductsService } from "../services/productsService";
 import { formidable, File } from "formidable";
 import fs from "fs";
+import "../utils/session";
 
 class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -35,9 +36,11 @@ class ProductsController {
         // res.write("location.href = '/404.html'");
       }
 
-      // checking stock quantity but not returning the number to client side
-      product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
-      delete product[0].stock_qtn;
+      // checking stock quantity but not returning the number to client side, except for admin
+      if (!req.session.admin_role) {
+        product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
+        delete product[0].stock_qtn;
+      }
 
       res.status(200).json({ data: product });
     } catch (error) {
@@ -148,13 +151,18 @@ class ProductsController {
   updateProductById = async (req: Request, res: Response) => {
     try {
       let targetId = req.params["productId"];
-      let product = await this.productsService.selectProductById(
-        parseInt(targetId)
+      let { price_update, stock_qtn_update, description_update } = req.body;
+
+      await this.productsService.updateProductById(
+        parseInt(targetId),
+        parseInt(price_update),
+        parseInt(stock_qtn_update),
+        description_update
       );
 
-      if (!product) {
-        return res.status(404).json({ searchError: "Product not found." });
-      }
+      res.status(200).json({
+        message: `Updated successfully: ${price_update} as new price; ${stock_qtn_update} as new quantity; ${description_update} as new description.`,
+      });
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal server error." });

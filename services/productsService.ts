@@ -102,8 +102,25 @@ export class ProductsService {
 
   async selectModelNames(brand: string) {
     return await this.knex("products")
-      .select("model_name")
+      .select("id", "model_name")
       .where("brand", brand)
       .orderBy("model_name");
+  }
+
+  async updateProductById(
+    productId: number,
+    price_update: number,
+    stock_qtn_update: number,
+    description_update: string
+  ) {
+    try {
+      await this.knex("products").where("id", productId).update({
+        current_price: price_update,
+        stock_qtn: stock_qtn_update,
+        description: description_update,
+      });
+    } catch (error) {
+      console.log("Error occurred during updating product: ", error);
+    }
   }
 }

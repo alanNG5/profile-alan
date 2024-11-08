@@ -11,7 +11,6 @@ export class SalesService {
         .where("id", pid);
     } catch (error) {
       console.error("Error performing quantity checking: ", error);
-      throw error;
     }
   }
 
@@ -60,7 +59,6 @@ export class SalesService {
     } catch (error) {
       await trx.rollback();
       console.error("Error performing transaction: ", error);
-      throw error;
     }
   }
 
@@ -83,7 +81,6 @@ export class SalesService {
         .orderBy("sales.created_at");
     } catch (error) {
       console.error("Error fetching sales record: ", error);
-      throw error;
     }
   }
 }

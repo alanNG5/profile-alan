@@ -74,10 +74,17 @@ class SalesController {
 
     try {
       let record = await this.salesService.getSalesRecord(userId);
+
+      if (!record) {
+        return res.json({ record: [] });
+      }
+
       for (let row of record) {
         row.created_at = formatDate(row.created_at);
       }
+
       res.status(200).json({ record });
+
     } catch (error) {
       res.status(500).json({
         errorMessage: "Internal server error: " + (error as Error).message,
