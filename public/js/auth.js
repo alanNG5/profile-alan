@@ -1,4 +1,4 @@
-const Swal = window.Swal;
+// const Swal = window.Swal;
 var urlCurrent = "https://impetus-go.me/";
 urlCurrent = "http://localhost:8900/";
 
@@ -114,13 +114,7 @@ async function submitRegister(event) {
   let json = await res.json();
 
   if(json.error) {
-
-    Swal.fire({
-      position: "center",
-      icon: "error",
-      title: json.error,
-      showConfirmButton: true,
-    });
+    msgFailure(json.error);
 
   return;
   };

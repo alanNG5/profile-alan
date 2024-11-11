@@ -109,15 +109,17 @@ export class ProductsService {
 
   async updateProductById(
     productId: number,
-    price_update: number,
-    stock_qtn_update: number,
-    description_update: string
+    searchPrice: number,
+    searchQtn: number,
+    searchDesc: string,
+    currentTime: string
   ) {
     try {
       await this.knex("products").where("id", productId).update({
-        current_price: price_update,
-        stock_qtn: stock_qtn_update,
-        description: description_update,
+        current_price: searchPrice,
+        stock_qtn: searchQtn,
+        description: searchDesc,
+        updated_at: currentTime,
       });
     } catch (error) {
       console.log("Error occurred during updating product: ", error);

@@ -1,3 +1,5 @@
+getUser();
+displaySalesRecord();
 
 let ourClient = "Our Client";
 
@@ -72,8 +74,12 @@ function presentingSalesContent (data) {
 
 
     for ( let itemData of data ) {
+      // to adjust order status and parse price, and date to local string
       itemData.order_status = itemData.order_status === "delivered" ? "Delivered" : "Arranging Shipment";
       itemData.selling_price = "$ " + itemData.selling_price.toLocaleString();
+
+      itemData.created_at = formatDate(itemData.created_at);
+
       let pid = itemData.pid;
 
       const tr = document.createElement("tr");
@@ -81,11 +87,10 @@ function presentingSalesContent (data) {
           const td = document.createElement("td");
           td.innerText = itemData[cellData];
 
+          // @ "pid" is only used for the purpose of linking to the watch details page, so td about it is hidden.
           if (cellData === "pid") {
             td.style.display = "none";
           }
-
-          // "pid" is only used for the purpose of linking to the watch details page, so td about it is hidden.
 
           if (cellData === "brand" || cellData === "model_name" || cellData === "model_no") {
             td.style.cursor = "pointer";

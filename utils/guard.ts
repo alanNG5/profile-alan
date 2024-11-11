@@ -11,14 +11,11 @@ export function requireLogin(req: Request, res: Response, next: NextFunction) {
 }
 
 export function requireAdmin(req: Request, res: Response, next: NextFunction) {
-  if (req.session.admin_role === true) {
-    next();
-  } else {
+  if (!req.session.admin_role) {
     console.log("Unauthorized access attempt.");
     res.status(403).redirect("/");
-    // res
-    //   .status(401)
-    //   .json({ error: "You are not authorized to access this page." });
+  } else {
+    next();
   }
 }
 

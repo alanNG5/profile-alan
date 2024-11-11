@@ -151,17 +151,21 @@ class ProductsController {
   updateProductById = async (req: Request, res: Response) => {
     try {
       let targetId = req.params["productId"];
-      let { price_update, stock_qtn_update, description_update } = req.body;
+      let { searchPrice, searchQtn, searchDesc } = req.body;
+
+      let currentTime = new Date().toJSON();
 
       await this.productsService.updateProductById(
         parseInt(targetId),
-        parseInt(price_update),
-        parseInt(stock_qtn_update),
-        description_update
+        parseInt(searchPrice),
+        parseInt(searchQtn),
+        searchDesc,
+        currentTime
       );
 
       res.status(200).json({
-        message: `Updated successfully: ${price_update} as new price; ${stock_qtn_update} as new quantity; ${description_update} as new description.`,
+        message: `Updated successfully:\n\ncurrent price -> $ ${searchPrice};\n\nquantity status -> ${searchQtn};\n\nproduct description ->\n\" ${searchDesc} \".`,
+        updatedTime: currentTime,
       });
     } catch (error) {
       console.log(error);

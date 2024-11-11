@@ -78,14 +78,11 @@ main #user-record-board h2 {
     font-size: 1.6rem;
 }
 
-#user-record-board td {
-    text-align: center;
-}
-
-#user-record-board tr td:nth-of-type(5) {
-    text-align: right;
-}
-
-#user-record-board tr td:nth-of-type(6) {
+#user-record-board tr td:nth-of-type(4)~td {
     text-align: left;
+}
+
+#user-record-board tr td,
+main #user-record-board tr td:nth-last-of-type(1) {
+    text-align: center;
 }

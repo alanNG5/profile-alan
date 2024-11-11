@@ -21,19 +21,19 @@ routes.get("/watch/newArrivals", productsController.getNewProducts);
 routes.get("/watch/hotProducts", productsController.getBestSellingProducts);
 routes.get("/watch/:productId(\\d+)", productsController.getProductById);
 
-routes.get("/watch/showBrands", productsController.getBrands);
+routes.get("/admin/showBrands", productsController.getBrands);
 routes.get(
-  "/watch/showModels/:selectedBrand",
+  "/admin/showModels/:selectedBrand",
   productsController.getModelNames
 );
 routes.patch(
-  "/watch/setProduct/:productId(\\d+)",
+  "/admin/setProduct/:productId(\\d+)",
   productsController.updateProductById
 );
+routes.post("/admin/newItem", productsController.createProduct);
 
 routes.get("/watch", productsController.getAllProducts);
 
-routes.post("/admin/newItem", productsController.createProduct);
 
 const authService = new AuthService(knex);
 const authController = new AuthController(authService);

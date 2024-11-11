@@ -75,16 +75,17 @@ class SalesController {
     try {
       let record = await this.salesService.getSalesRecord(userId);
 
-      if (!record) {
-        return res.json({ record: [] });
-      }
+      // if (!record) {
+      //   return res.json({ record: [] });
+      // }
 
-      for (let row of record) {
-        row.created_at = formatDate(row.created_at);
-      }
+      // @ Date format check: time brough from databse is in UTC format with time zone +00:00. Adjustment to local time zone will be proceeded in the front-end.
+
+      // for (let row of record!) {
+      //   console.log("Sales No. ", row.id, " was created at ", row.created_at);
+      // }
 
       res.status(200).json({ record });
-
     } catch (error) {
       res.status(500).json({
         errorMessage: "Internal server error: " + (error as Error).message,
@@ -92,17 +93,5 @@ class SalesController {
     }
   };
 }
-
-function formatDate (date: Date): String {
-  // const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  const month = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOVr","DEC"];
-  let dateOfMon = ("0" + date.getDate()).slice(-2);
-  let monthIndex = date.getMonth();
-  let hr = ("0" + date.getHours()).slice(-2);
-  let min = ("0" + date.getMinutes()).slice(-2);
-  let sec = ("0" + date.getSeconds()).slice(-2);
-  return `${dateOfMon} ${month[monthIndex]}, ${date.getFullYear()} ${hr}:${min}:${sec}`;
-};
-
 
 export { SalesController };

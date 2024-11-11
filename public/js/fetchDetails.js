@@ -9,7 +9,7 @@ window.onload = async () => {
     const id = searchParams.get("id");
 
     if(id) {
-        // adding a cache-busting parameter to URL:
+        // @ adding a cache-busting parameter to URL:
         // fetch(`/watch/${id}?_=${new Date().getTime()}`)
 
         await fetch(`/watch/${id}`)
@@ -66,7 +66,7 @@ window.onload = async () => {
         reminder.innerText = data[0].outOfStock ? "Out of Stock" : "Free Shipping";
         reminder.style.backgroundColor = data[0].outOfStock ? "red" : "var(--theme-main-alt)";
 
-        // setting up the zoom effect on the image:
+        // @ setting up the zoom effect on the image:
         let imageZoom = document.getElementById("image-zoom");
 
         imageZoom.addEventListener("mousemove", (event) => {
@@ -77,7 +77,7 @@ window.onload = async () => {
             let pointer = {
                 x: (event.offsetX * 100) / imageZoom.offsetWidth,
                 y: (event.offsetY * 100) / imageZoom.offsetHeight
-                // offsetX is the distance from element's left margin to the cursor; offsetY is the distance from to margin to the cursor. These values are then divided by elements' width or height and change to % in data format. So we will have mouse position in unit.
+                // @ offsetX is the distance from element's left margin to the cursor; offsetY is the distance from to margin to the cursor. These values are then divided by elements' width or height and change to % in data format. So we will have mouse position in unit.
             };
 
             imageZoom.style.setProperty("--zoom-x", pointer.x + "%");
@@ -135,7 +135,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
   let paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
   let buyForm = document.getElementById("buy-form");
 
-  // input validation for empty fields & non-numeric character in contact number:
+  // @ input validation for empty fields & non-numeric character in contact number:
   let inputsAboutShipment = document.getElementsByClassName("for-input-validating");
   let inputErrMsg = "";
 
@@ -167,7 +167,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
       showConfirmButton: true,
     });
     return;
-  // validation ended.
+  // @ validation ended.
 
   } else {
 
@@ -191,7 +191,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              // pid as product_id; accountId as user_id
+              // @ pid as product_id; accountId as user_id
               pid: infoPurchaseAction.id,
               accountId: infoPurchaseAction.accountId,
               current_price: infoPurchaseAction.current_price,
@@ -228,14 +228,8 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
         // console.log(result.value.outOfStockMessage);
 
         if(result.value.outOfStockMessage) {
-
-          Swal.fire({
-            position: "center",
-            icon: "error",
-            title: "Product is out of stock.",
-            showConfirmButton: true,
-          });
-
+          let warningAboutStock = "Product is out of stock.";
+          msgFailure(warningAboutStock);
 
         } else {
 

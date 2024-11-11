@@ -1,15 +1,15 @@
 fetchBrands();
 
-// fetch all brands (distinct), then fetch all models for the selected brand
+// @ fetch all brands (distinct), then fetch all models for the selected brand
+// @ finally PATCH the product details pertaining to the input fields
 
 const brandSelect = document.getElementById("brand-pick");
 const modelSelect = document.getElementById("model-pick");
 const searchButton = document.getElementById("go-search");
 
-//
-// select brand
+// @ select brand
 async function fetchBrands() {
-    await fetch ("/watch/showBrands")
+    await fetch ("/admin/showBrands")
         .then((response) => {
             if (response.ok) {
                 return response.json();
@@ -35,22 +35,21 @@ function insertBrandsIntoSelectOption (data) {
     });
 };
 
-//
-// corresponding model listed for selection after selection of brand
+
+// @ corresponding model listed for selection after selection of brand
 brandSelect.addEventListener("change", function() {
 
     modelSelect.inert = false;
     searchButton.inert = false;
 
-    const optionsList = document.querySelectorAll("#model-pick option");
-    optionsList.forEach(option => option.remove());
+    clearOptions();
 
     let selectedOption = this.value;
 
     fetchModels();
 
     async function fetchModels() {
-        await fetch (`/watch/showModels/${selectedOption}`)
+        await fetch (`/admin/showModels/${selectedOption}`)
             .then((response) => {
                 if (response.ok) {
                     return response.json();
@@ -109,3 +108,67 @@ function renderProductInfo (data) {
     let properPriceFormat = data[0].current_price.toLocaleString("zh-HK");
     document.getElementById("result-price").value = properPriceFormat;
 };
+
+
+// @ patch form data
+let submitUpdateForm = document.getElementById("update-item-form");
+submitUpdateForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const form = event.target;
+    const updateFormData = new FormData(form);
+
+    let targetId = updateFormData.get("searchID");
+
+    // @ to create an object from a list of key/value pairs by Object.fromEntries.
+    let objForm = Object.fromEntries(updateFormData.entries());
+    objForm.searchPrice = objForm.searchPrice.replace(/[^0-9.]+/g, "");
+    delete objForm.searchID;
+    delete objForm.searchModNo;
+
+    patchProductInfo(targetId, objForm);
+    submitUpdateForm.reset();
+    clearOptions();
+
+});
+
+async function patchProductInfo (id, obj) {
+    await fetch (`/admin/setProduct/${id}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(obj),
+    })
+    .then((response) => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            return response.json().then( errorData => { throw new Error( errorData.message);
+            })
+        }
+    })
+    .then( function (resJson) {
+        const swalMsgBox = Swal.mixin({
+            customClass: {
+                title: "update-success-msg",
+                footer: "update-time",
+            },
+        });
+
+        swalMsgBox.fire({
+            position: "center",
+            icon: "success",
+            title: resJson.message,
+            footer: `Updated at ${formatDate(resJson.updatedTime)}`,
+            showConfirmButton: false,
+            width: 400,
+        })
+    })
+    .catch( error => msgFailure(error));
+};
+
+function clearOptions () {
+    const optionsList = document.querySelectorAll("#model-pick option");
+    optionsList.forEach(option => option.remove());
+}

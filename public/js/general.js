@@ -1,5 +1,6 @@
+const Swal = window.Swal;
 
-// global error handler to listen for unhandled fetch errors:
+// @ global error handler to listen for unhandled fetch errors:
 window.addEventListener("unhandledrejection", event => {
     console.error('Unhandled promise rejection:', event.reason);
     window.location.href = "/404.html";
@@ -7,7 +8,7 @@ window.addEventListener("unhandledrejection", event => {
 
 
 
-// navbar toggle
+// @ navbar toggle
 let navList = document.getElementById("navList");
 let toggleBtn = document.getElementById("toggleBtn");
 
@@ -16,7 +17,7 @@ toggleBtn.addEventListener("click", () => {
 });
 
 
-// scroll down effect
+// @ scroll down effect
 const header = document.querySelector("header");
 const scrollWatcher = document.createElement("div");
 
@@ -30,7 +31,7 @@ const navObserver = new IntersectionObserver((entries) => {
 
 navObserver.observe(scrollWatcher);
 
-// login popup
+// @ login popup
 const loginBtn = document.getElementById("login-btn");
 const loginModal = document.getElementById("login-modal");
 
@@ -45,7 +46,7 @@ closeBtn.onclick = () => {
     loginModal.style.display = "none";
 };
 
-// toggle for login-register
+// @ toggle for login-register
 const shiftToRegisterBtn = document.getElementById("register-link");
 const shiftToLoginBtn = document.getElementById("login-link");
 const modalStatus = document.querySelector(".modal-content");
@@ -58,13 +59,13 @@ shiftToLoginBtn.addEventListener("click", () => {
     modalStatus.classList.toggle("active");
 });
 
-// toggle the hidden element if user clicks on user-info
+// @ toggle the hidden element if user clicks on user-info
 document.getElementById("user-info").addEventListener("click", function() {
     document.getElementById("user-action").toggleAttribute("hidden");
 });
-// link appended to "profile" button is coded in auth.js
+// @ link appended to "profile" button is coded in auth.js
 
-// logout popup
+// @ logout popup
 const logoutBtn = document.getElementById("logout-btn");
 const logoutModal = document.getElementById("logout-modal");
 logoutBtn.addEventListener("click", () => {
@@ -79,7 +80,7 @@ cancelLogout.onclick = () => {
 
 const buyFormModal = document.getElementById("buy-modal");
 
-// close modal by clicking outside
+// @ close modal by clicking outside
 window.onclick = function (event) {
     if (event.target === loginModal) {
         loginModal.style.display = "none";
@@ -89,3 +90,54 @@ window.onclick = function (event) {
         buyFormModal.style.display = "none";
     }
 };
+
+
+
+// @ parse Date object from database to readable format
+var formatDate = function (dateToBeFormatted) {
+    let date = new Date(dateToBeFormatted);
+
+    // const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    const month = [
+      "JAN",
+      "FEB",
+      "MAR",
+      "APR",
+      "MAY",
+      "JUN",
+      "JUL",
+      "AUG",
+      "SEP",
+      "OCT",
+      "NOV",
+      "DEC",
+    ];
+    let dateOfMon = ("0" + date.getDate()).slice(-2);
+    let monthIndex = date.getMonth();
+    let hr = ("0" + date.getHours()).slice(-2);
+    let min = ("0" + date.getMinutes()).slice(-2);
+    let sec = ("0" + date.getSeconds()).slice(-2);
+    return `${dateOfMon} ${
+      month[monthIndex]
+    } ${date.getFullYear()} ${hr}:${min}:${sec}`;
+  }
+
+
+// @ popup message box reused
+var msgFailure = function (txtMsg) {
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: txtMsg,
+        showConfirmButton: true,
+    });
+}
+
+ var msgSuccess = function (txtMsg) {
+    Swal.fire({
+        position: "center",
+        icon: "success",
+        title: txtMsg,
+        showConfirmButton: false,
+      });
+}
