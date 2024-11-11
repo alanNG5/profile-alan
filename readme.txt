@@ -12,6 +12,8 @@ Summary:
 
 6. To tackle with memory leakage due to express-session, npm package of "memorystore" is introduced.
 
+7. The object of date is handled in frontend after response from database. It allows adjustment of date based on the local format in client side. In practise, input of date is parsed in JSON and output of date string is proceeded by constructor.
+
 Based on MVP
 
 Improvement plan:

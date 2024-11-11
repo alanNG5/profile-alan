@@ -1,4 +1,5 @@
 fetchBrands();
+let itemInfo = {};
 
 // @ fetch all brands (distinct), then fetch all models for the selected brand
 // @ finally PATCH the product details pertaining to the input fields
@@ -95,6 +96,7 @@ searchButton.addEventListener("click", function(event) {
             })
         .then( fetchedData => {
             renderProductInfo(fetchedData.data);
+            itemInfo = fetchedData.data[0];
         })
         .catch( error => console.error("Error from fetching product item: ", error));
     }
@@ -126,13 +128,28 @@ submitUpdateForm.addEventListener("submit", async function (event) {
     delete objForm.searchID;
     delete objForm.searchModNo;
 
-    patchProductInfo(targetId, objForm);
+    // @ message box on no change made
+    compareP = itemInfo.current_price.toString() === objForm.searchPrice ? true : false;
+    compareQ = itemInfo.stock_qtn.toString() === objForm.searchQtn ? true : false;
+    compareD = itemInfo.description === objForm.searchDesc ? true : false;
+    if (compareP && compareQ && compareD) {
+        Swal.fire({
+            position: "center",
+            icon: "info",
+            title: "You have not made any change.",
+            showConfirmButton: true,
+            width: 400,
+        });
+        return;
+    };
+
+    patchProductInfo(targetId, objForm, compareP, compareQ, compareD);
     submitUpdateForm.reset();
     clearOptions();
 
 });
 
-async function patchProductInfo (id, obj) {
+async function patchProductInfo (id, obj, P, Q, D) {
     await fetch (`/admin/setProduct/${id}`, {
         method: "PATCH",
         headers: {
@@ -155,11 +172,16 @@ async function patchProductInfo (id, obj) {
                 footer: "update-time",
             },
         });
+        console.log(itemInfo);
+        let msgContent = "Following information updated:\n\n";
+        P ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
+        Q ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
+        D ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
 
         swalMsgBox.fire({
             position: "center",
             icon: "success",
-            title: resJson.message,
+            title: msgContent,
             footer: `Updated at ${formatDate(resJson.updatedTime)}`,
             showConfirmButton: false,
             width: 400,
@@ -171,4 +193,4 @@ async function patchProductInfo (id, obj) {
 function clearOptions () {
     const optionsList = document.querySelectorAll("#model-pick option");
     optionsList.forEach(option => option.remove());
-}
+};

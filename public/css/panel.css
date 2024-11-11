@@ -213,24 +213,29 @@ fieldset legend {
 
 #go-search {
     display: inline-block;
+    align-items:  center;
+    margin-left: 100%;
+    transform: translateX(-100%);
+    margin-top: 25px;
     outline: 0;
     border: none;
     box-shadow: none;
     cursor: pointer;
     padding: 9px 22px;
-    font-size: 22px;
-    height: 50px;
+    font-size: 2.2rem;
+    height: 55px;
+    width: 200px;
     font-weight: 400;
-    color: #fff;
+    color: var(--color-ter);
     text-align: center;
     line-height: normal;
     background: linear-gradient(90deg,#5522fa 0,#0074e4 100%);
     border-radius: 50px;
-    transition: color .2s ease,background-color .2s ease,box-shadow .2s ease;
+    transition: color 0.2s ease,background-color 0.2s ease,box-shadow 0.2s ease;
 }
 
 #go-search:hover {
-    box-shadow: 0 0 0 0.15rem #5ceace;
+    box-shadow: 0 0 2px 3px #5ceace;
 }
 
 .action-view-board form fieldset h2~div:has(div) div{
@@ -251,6 +256,10 @@ h2~div div:has(#result-id),
 h2~div div:has(#result-model-no)
 {
     cursor: not-allowed;
+}
+
+#update-item-form input[type="submit"] {
+    margin-top: 28px;
 }
 
 .update-success-msg {

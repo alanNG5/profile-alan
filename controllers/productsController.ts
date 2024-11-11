@@ -3,6 +3,7 @@ import { ProductsService } from "../services/productsService";
 import { formidable, File } from "formidable";
 import fs from "fs";
 import "../utils/session";
+import { up } from "../migrations/20240902042436_create-products";
 
 class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -164,7 +165,9 @@ class ProductsController {
       );
 
       res.status(200).json({
-        message: `Updated successfully:\n\ncurrent price -> $ ${searchPrice};\n\nquantity status -> ${searchQtn};\n\nproduct description ->\n\" ${searchDesc} \".`,
+        updatedPrice: searchPrice,
+        updatedQtn: searchQtn,
+        updatedDesc: searchDesc,
         updatedTime: currentTime,
       });
     } catch (error) {
