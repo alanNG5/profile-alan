@@ -133,7 +133,7 @@ var msgFailure = function (txtMsg) {
     });
 }
 
- var msgSuccess = function (txtMsg) {
+var msgSuccess = function (txtMsg) {
     Swal.fire({
         position: "center",
         icon: "success",
@@ -141,3 +141,11 @@ var msgFailure = function (txtMsg) {
         showConfirmButton: false,
       });
 }
+
+var swalMsgBox = Swal.mixin({
+    customClass: {
+        title: "update-success-msg",
+        footer: "update-time",
+    },
+});
+

@@ -19,6 +19,8 @@ document.getElementById("create-item-form").addEventListener("submit", async fun
         body: formData,
     });
 
+    // @ notes: not necessary to set Content-Type since the type is implied by the FormData class, the browser would automatically set it to multipart/form-data. Thus, JSON.stringify() is not required as data is not the content type of application/json.
+
     const result = await res.json();
 
     if (result.error) {
@@ -27,3 +29,4 @@ document.getElementById("create-item-form").addEventListener("submit", async fun
     }
     alert("Item was created successfully.");
 });
+

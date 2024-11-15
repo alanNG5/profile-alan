@@ -17,9 +17,7 @@ window.onload = async () => {
             if(response.ok) {
                 return response.json();
             } else if (response.status === 404) {
-
                 window.location.href = "/404.html";
-
             } else {
                 throw new Error("Network error. No response from server.");
             }
@@ -185,7 +183,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
       showLoaderOnConfirm: true,
       preConfirm: async () => {
         try {
-          const response = await fetch("/sales/newOrder" , {
+          const response = await fetch("/sales/record" , {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

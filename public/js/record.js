@@ -52,11 +52,8 @@ function presentingSalesContent (data) {
 
     const bodyData = document.createElement("tbody");
     const caption = document.createElement("caption");
-    const remark = document.createElement("span");
 
-    caption.innerText = `Purchase of ${ourClient}`;
-    caption.appendChild(remark);
-    remark.innerText = ` ( ${data.length} records found )`;
+    caption.innerText = `Purchase Record of ${ourClient}`;
     salesTable.appendChild(caption);
 
     headRow.appendChild(trHead);
@@ -74,7 +71,7 @@ function presentingSalesContent (data) {
 
 
     for ( let itemData of data ) {
-      // to adjust order status and parse price, and date to local string
+      // @ to adjust order status and parse price, and date to local string
       itemData.order_status = itemData.order_status === "delivered" ? "Delivered" : "Arranging Shipment";
       itemData.selling_price = "$ " + itemData.selling_price.toLocaleString();
 
@@ -85,24 +82,40 @@ function presentingSalesContent (data) {
       const tr = document.createElement("tr");
       for ( let cellData in itemData) {
           const td = document.createElement("td");
-          td.innerText = itemData[cellData];
+
+          if (cellData === "brand" || cellData === "model_name" || cellData === "model_no") {
+            let hyperlink = document.createElement("a");
+            hyperlink.href = `${urlCurrent}watch_details.html?id=${pid}`;
+            hyperlink.innerText = itemData[cellData];
+            td.appendChild(hyperlink);
+          } else {
+            td.innerText = itemData[cellData];
+          }
 
           // @ "pid" is only used for the purpose of linking to the watch details page, so td about it is hidden.
           if (cellData === "pid") {
             td.style.display = "none";
           }
 
-          if (cellData === "brand" || cellData === "model_name" || cellData === "model_no") {
-            td.style.cursor = "pointer";
-            td.addEventListener("click", () => {
-              location.href = `${urlCurrent}watch_details.html?id=${pid}`;
-            });
-          }
           tr.appendChild(td);
       };
       bodyData.appendChild(tr);
     };
       salesTable.appendChild(bodyData);
+
+      const footer = document.createElement("tfoot");
+      const tRow = document.createElement("tr");
+      const td = document.createElement("td")
+
+      let totalResult = `Found ${data.length} result.`;
+      if (data.length > 1) {
+        totalResult = totalResult.slice(0, -1) + "s.";
+      }
+      td.innerText = totalResult;
+      td.setAttribute("colspan",7);
+      tRow.appendChild(td);
+      footer.appendChild(tRow);
+      salesTable.appendChild(footer);
 
   } else {
     const noRecord = document.createElement("h2");

@@ -92,6 +92,39 @@ class SalesController {
       });
     }
   };
+
+  getAllSales = async (req: Request, res: Response) => {
+    try {
+      let salesList = await this.salesService.selectAllSales();
+      res.status(200).json({ salesList });
+    } catch (error) {
+      res.status(500).json({
+        errorMessage: "Internal server error: " + error,
+      });
+    }
+  };
+
+  updateDeliveryStatus = async (req: Request, res: Response) => {
+    try {
+      let { salesOrderChecked } = req.body;
+
+      let currentTime = new Date().toJSON();
+
+      await this.salesService.patchDeliveryStatus(
+        salesOrderChecked,
+        currentTime
+      );
+
+      res.status(200).json({
+        updatedSalesDeliveryStatus: salesOrderChecked.join(", "),
+        updatedTime: currentTime,
+      });
+    } catch (error) {
+      res.status(500).json({
+        errorMessage: "Internal server error: " + error,
+      });
+    }
+  };
 }
 
 export { SalesController };

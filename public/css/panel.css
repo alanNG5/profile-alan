@@ -61,14 +61,16 @@ aside button:hover {
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 2px 2px 8px 2px;
+    overflow-x: scroll;
 }
 
 /* 2. section of creation */
 
-.action-view-board section h2 {
+section h2 {
     font-size: 2.8rem;
     letter-spacing: 0.6rem;
     text-align: center;
+    text-shadow: var(--color-pri) 2px 3px 6px ;
 }
 
 fieldset {
@@ -126,7 +128,6 @@ fieldset legend {
     transition: none;
 }
 
-
 .action-view-board form fieldset div input:valid {
     background: rgb(220, 225, 250);
 }
@@ -150,7 +151,8 @@ fieldset legend {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.action-view-board form input[type="submit"] {
+.action-view-board form input[type="submit"],
+.action-view-board #change-status {
     display: inline-block;
     margin-left: 100%;
     transform: translateX(-100%);
@@ -170,7 +172,8 @@ fieldset legend {
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
-.action-view-board form input[type="submit"]:hover {
+.action-view-board form input[type="submit"]:hover,
+.action-view-board #change-status:hover {
     box-shadow: 0px 4px 12px rgb(45 35 66 / 55%), 0px 9px 15px -3px rgb(45 35 66 / 50%), inset 0px -3px 0px #d6d6e7;
     transform: translate(-100%, 6px);
 }
@@ -182,7 +185,7 @@ fieldset legend {
     margin: 0 0 20px;
 }
 
-/* 3. section of update */
+/* 3. section of update: product item */
 
 .search-panel {
     width: 100%;
@@ -213,7 +216,6 @@ fieldset legend {
 
 #go-search {
     display: inline-block;
-    align-items:  center;
     margin-left: 100%;
     transform: translateX(-100%);
     margin-top: 25px;
@@ -222,9 +224,8 @@ fieldset legend {
     box-shadow: none;
     cursor: pointer;
     padding: 9px 22px;
-    font-size: 2.2rem;
     height: 55px;
-    width: 200px;
+    width: 180px;
     font-weight: 400;
     color: var(--color-ter);
     text-align: center;
@@ -238,8 +239,31 @@ fieldset legend {
     box-shadow: 0 0 2px 3px #5ceace;
 }
 
+#go-search div {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#go-search svg {
+    display: inline-block;
+}
+
+hr {
+    margin: 18px;
+}
+
+h2+div {
+    margin-top: 30px;
+}
+
 .action-view-board form fieldset h2~div:has(div) div{
-            width: 20%;
+    width: clamp(90px, 32%, 200px);
+    letter-spacing: 0rem;
+}
+
+.action-view-board form fieldset h2~div:has(div) div:last-of-type{
+    width: 60%;
 }
 
 #result-description {
@@ -262,12 +286,122 @@ h2~div div:has(#result-model-no)
     margin-top: 28px;
 }
 
-.update-success-msg {
-    text-align: left;
-    font-size: 2rem;
+/* 4. section of sales update: delivery status */
+
+#pending-record table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    width: 100%;
 }
 
-.update-time {
-    text-align: right;
-    font-size: 1.6rem;
+#pending-record table thead {
+    background-color: rgb(94, 139, 164);
+    color:honeydew;
+}
+
+#pending-record table tbody tr:nth-child(odd) {
+    background-color: rgb(202,231,249);
+    color:midnightblue;
+}
+
+#pending-record table tbody tr:nth-child(even) {
+    background-color: rgb(160,196,215);
+    color:rebeccapurple;
+}
+
+#pending-record table th,
+#pending-record table td {
+    border: none;
+    padding: 8px;
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.action-view-board #change-status {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1080px) {
+    aside button {
+        height: 80px;
+        padding: 14px 0;
+    }
+}
+
+@media (max-width: 900px) {
+
+    main > div {
+        flex-direction: column;
+    }
+
+    main div aside {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    aside button {
+        width: 23%;
+        font-size: 1.8rem;
+        font-weight: 500;
+        letter-spacing: 0.2rem;
+    }
+
+    .action-view-board {
+        width: 100%;
+    }
+
+    @media (max-width: 600px) {
+        .action-view-board section h2 {
+            font-size: 2.2rem;
+            letter-spacing: 0.3rem;
+        }
+
+        .action-view-board form legend, .action-view-board form fieldset div {
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+        }
+
+        aside button {
+            font-size: 1.4rem;
+            font-weight: 400;
+            letter-spacing: 0rem;
+            overflow: hidden;
+            width: 25%;
+            border-bottom: none;
+            border-radius: 0;
+        }
+
+        .action-view-board form fieldset div:has(select) {
+            flex-direction: column;
+            justify-content: flex-start;
+                div {
+                    width: 100%;
+                }
+        }
+
+        .action-view-board form fieldset h2~div:has(div) div {
+            width: 40%;
+            font-size: 1.4rem;
+            position: relative;
+        }
+
+        .action-view-board form fieldset h2~div:has(div) div span {
+            display: none;
+        }
+
+        .action-view-board form fieldset h2~div:has(div) div::after {
+            position: absolute;
+            top: -13px;
+            content: 'ID';
+        }
+
+        .action-view-board form fieldset h2~div:has(div) div:last-of-type::after {
+            content: 'Model No.';
+        }
+    }
 }

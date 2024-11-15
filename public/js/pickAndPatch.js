@@ -15,7 +15,7 @@ async function fetchBrands() {
             if (response.ok) {
                 return response.json();
             } else {
-                return response.json().then( errorData => { throw new Error( errorData.message);
+                return response.json().then( errorData => { throw new Error (errorData.message);
                 })
             }
     })
@@ -149,13 +149,14 @@ submitUpdateForm.addEventListener("submit", async function (event) {
 
 });
 
-async function patchProductInfo (id, obj, P, Q, D) {
+async function patchProductInfo (id, obj, unchangeP, unchangeQ, unchangeD) {
     await fetch (`/admin/setProduct/${id}`, {
         method: "PATCH",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(obj),
+        // @ finally the FormData class is restructured to an object, so Content-Type is set and body is stringified.
     })
     .then((response) => {
         if (response.ok) {
@@ -166,17 +167,11 @@ async function patchProductInfo (id, obj, P, Q, D) {
         }
     })
     .then( function (resJson) {
-        const swalMsgBox = Swal.mixin({
-            customClass: {
-                title: "update-success-msg",
-                footer: "update-time",
-            },
-        });
-        console.log(itemInfo);
+
         let msgContent = "Following information updated:\n\n";
-        P ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
-        Q ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
-        D ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
+        unchangeP ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
+        unchangeQ ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
+        unchangeD ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
 
         swalMsgBox.fire({
             position: "center",

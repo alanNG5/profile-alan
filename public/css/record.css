@@ -41,7 +41,7 @@ main #user-record-board h2 {
     padding-bottom: 100px;
 }
 
-#user-record-board thead {
+#user-record-board thead, #user-record-board tfoot {
     background-color: var(--table-bkg);
     color: var(--color-ter);
 }
@@ -65,12 +65,6 @@ main #user-record-board h2 {
     width: calc(100% - 2 * var(--table-frame-adj));
 }
 
-#user-record-board caption span {
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: 0.1rem;
-}
-
 #user-record-board th,
 #user-record-board td {
     border: none;
@@ -78,11 +72,21 @@ main #user-record-board h2 {
     font-size: 1.6rem;
 }
 
-#user-record-board tr td:nth-of-type(4)~td {
+#user-record-board tbody tr td:nth-of-type(4)~td {
     text-align: left;
 }
 
-#user-record-board tr td,
-main #user-record-board tr td:nth-last-of-type(1) {
+#user-record-board tbody tr td,
+main #user-record-board tbody tr td:nth-last-of-type(1) {
     text-align: center;
+}
+
+
+main #user-record-board tfoot tr td {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5rem;
+    text-align: right;
+    padding: 10px;
+    font-family: "Italiano", sans-serif;
 }

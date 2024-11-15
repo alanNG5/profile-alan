@@ -3,7 +3,6 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import path from "path";
 import { sessionMiddleware } from "./utils/session";
-// import { requireLogin, requireAdmin } from "./utils/guard";
 
 const app = express();
 
@@ -15,6 +14,7 @@ dotenv.config();
 const port = process.env.PORT;
 
 import { routes } from "./routers";
+import { requireAdmin } from "./utils/guard";
 app.use("/", routes);
 
 app.get("/", (req: Request, res: Response) => {
@@ -38,12 +38,14 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));
+app.use(requireAdmin, express.static("protected"));
+// app.get('/protected-page', requireAdmin, (req, res) => {
+//   res.sendFile(path.resolve('public', 'protected_page.html'));
+// });
 
 app.use((req, res) => {
   res.status(404).sendFile(path.resolve("public", "404.html"));
 });
-
-// app.use(requireAdmin, express.static("protected"));
 
 app.listen(port, () => {
   console.log(`App is listening on port of http://localhost:${port}`);

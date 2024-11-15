@@ -83,4 +83,34 @@ export class SalesService {
       console.error("Error fetching sales record: ", error);
     }
   }
+
+  async selectAllSales() {
+    return await this.knex
+      .select(
+        "sales.id AS sid",
+        "users.id AS uid",
+        "username",
+        "products.id AS pid",
+        "brand",
+        "model_name",
+        "model_no",
+        "selling_price",
+        "sales.created_at",
+        "order_status",
+        "sales.updated_at"
+      )
+      .from("sales")
+      .innerJoin("products", "sales.product_id", "products.id")
+      .innerJoin("users", "sales.user_id", "users.id");
+  }
+
+  async patchDeliveryStatus(salesOrderChecked: number[], currentTime: string) {
+    try {
+      return await this.knex("sales")
+        .update({ order_status: "delivered", updated_at: currentTime })
+        .whereIn("id", salesOrderChecked);
+    } catch (error) {
+      console.error("Error updating delivery status: ", error);
+    }
+  }
 }

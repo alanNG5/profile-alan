@@ -3,7 +3,6 @@ import { ProductsService } from "../services/productsService";
 import { formidable, File } from "formidable";
 import fs from "fs";
 import "../utils/session";
-import { up } from "../migrations/20240902042436_create-products";
 
 class ProductsController {
   constructor(private productsService: ProductsService) {}
@@ -37,16 +36,16 @@ class ProductsController {
         // res.write("location.href = '/404.html'");
       }
 
-      // checking stock quantity but not returning the number to client side, except for admin
+      // @@
+      // client side can access boolean of stock instead of exact quantity, except for admin
+      product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
       if (!req.session.admin_role) {
-        product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
         delete product[0].stock_qtn;
       }
-
       res.status(200).json({ data: product });
     } catch (error) {
-      console.log(error);
-      res.status(500).json({ message: "Internal server error." });
+      // console.log(error);
+      res.status(404).json({ message: error });
     }
   };
 

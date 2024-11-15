@@ -20,6 +20,7 @@ const productsController = new ProductsController(productsService);
 routes.get("/watch/newArrivals", productsController.getNewProducts);
 routes.get("/watch/hotProducts", productsController.getBestSellingProducts);
 routes.get("/watch/:productId(\\d+)", productsController.getProductById);
+routes.get("/watch", productsController.getAllProducts);
 
 routes.get("/admin/showBrands", productsController.getBrands);
 routes.get(
@@ -32,9 +33,6 @@ routes.patch(
 );
 routes.post("/admin/newItem", productsController.createProduct);
 
-routes.get("/watch", productsController.getAllProducts);
-
-
 const authService = new AuthService(knex);
 const authController = new AuthController(authService);
 
@@ -46,5 +44,8 @@ routes.post("/user/register", authController.register);
 const salesService = new SalesService(knex);
 const salesController = new SalesController(salesService);
 
-routes.post("/sales/newOrder", salesController.createOrder);
+routes.post("/sales/record", salesController.createOrder);
 routes.get("/sales/record", salesController.getRecord);
+
+routes.get("/admin/sales/status", salesController.getAllSales);
+routes.patch("/admin/sales/status", salesController.updateDeliveryStatus);

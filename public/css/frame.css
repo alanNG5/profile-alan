@@ -737,3 +737,15 @@ footer p {
     }
 
 }
+
+/* for Swal popup */
+
+.update-success-msg {
+    text-align: left;
+    font-size: 2rem;
+}
+
+.update-time {
+    text-align: right;
+    font-size: 1.6rem;
+}
