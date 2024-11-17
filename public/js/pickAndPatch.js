@@ -114,6 +114,7 @@ function renderProductInfo (data) {
 
 // @ patch form data
 let submitUpdateForm = document.getElementById("update-item-form");
+
 submitUpdateForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
@@ -128,11 +129,17 @@ submitUpdateForm.addEventListener("submit", async function (event) {
     delete objForm.searchID;
     delete objForm.searchModNo;
 
-    // @ message box on no change made
-    compareP = itemInfo.current_price.toString() === objForm.searchPrice ? true : false;
-    compareQ = itemInfo.stock_qtn.toString() === objForm.searchQtn ? true : false;
-    compareD = itemInfo.description === objForm.searchDesc ? true : false;
-    if (compareP && compareQ && compareD) {
+
+    // @ message box about change made if any
+    let msgContent = "Are you sure to update following information?\n\n";
+
+    let compareP = itemInfo.current_price.toString() === objForm.searchPrice ? null : msgContent += `- Price changed from $ ${ itemInfo.current_price } to $ ${ objForm.searchPrice } .\n\n`;
+
+    let compareQ = itemInfo.stock_qtn.toString() === objForm.searchQtn ? null : msgContent += `- Quantity changed from ${ itemInfo.stock_qtn } to ${ objForm.searchQtn } .\n\n`;
+
+    let compareD = itemInfo.description === objForm.searchDesc ? null : msgContent += `- Product description revised to: \n\" ${ objForm.searchDesc } \" .`;
+
+    if (compareP === null && compareQ === null && compareD === null) {
         Swal.fire({
             position: "center",
             icon: "info",
@@ -143,49 +150,100 @@ submitUpdateForm.addEventListener("submit", async function (event) {
         return;
     };
 
-    patchProductInfo(targetId, objForm, compareP, compareQ, compareD);
-    submitUpdateForm.reset();
-    clearOptions();
+    patchProductInfo(targetId, objForm, msgContent);
 
 });
 
-async function patchProductInfo (id, obj, unchangeP, unchangeQ, unchangeD) {
-    await fetch (`/admin/setProduct/${id}`, {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(obj),
-        // @ finally the FormData class is restructured to an object, so Content-Type is set and body is stringified.
+async function patchProductInfo (id, obj, msg) {
+
+    swalMsgBox.fire({
+        title: msg,
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
+            try {
+                const response = await fetch (`/admin/setProduct/${id}`, {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(obj),
+                    // @ finally the FormData class is restructured to an object, so Content-Type is set and body is stringified.
+                });
+
+                let json = await response.json();
+
+                if (!response.ok) {
+                    return Swal.showValidationMessage(
+                      json.message || "Request failed: no response from server."
+                    )};
+
+                return json;
+
+            } catch (error) {
+                Swal.showValidationMessage(`
+                    Request failed: ${error}
+                  `);
+            };
+        }, allowOutsideClick: () => !Swal.isLoading()
     })
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return response.json().then( errorData => { throw new Error( errorData.message);
+    .then((result) => {
+        if (result.isConfirmed) {
+
+            swalMsgBox.fire({
+                position: "center",
+                icon: "success",
+                title: "Product information is updated successfully!",
+                footer: `Updated at ${formatDate(result.value.updatedTime)}`,
+                showConfirmButton: false,
             })
-        }
-    })
-    .then( function (resJson) {
 
-        let msgContent = "Following information updated:\n\n";
-        unchangeP ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
-        unchangeQ ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
-        unchangeD ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
+            submitUpdateForm.reset();
+            clearOptions();
 
-        swalMsgBox.fire({
-            position: "center",
-            icon: "success",
-            title: msgContent,
-            footer: `Updated at ${formatDate(resJson.updatedTime)}`,
-            showConfirmButton: false,
-            width: 400,
-        })
-    })
-    .catch( error => msgFailure(error));
+        };
+    });
 };
 
 function clearOptions () {
     const optionsList = document.querySelectorAll("#model-pick option");
     optionsList.forEach(option => option.remove());
 };
+
+// async function patchProductInfo (id, obj, unchangeP, unchangeQ, unchangeD) {
+
+//     await fetch (`/admin/setProduct/${id}`, {
+//         method: "PATCH",
+//         headers: {
+//             "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(obj),
+//         // @ finally the FormData class is restructured to an object, so Content-Type is set and body is stringified.
+//     })
+//     .then((response) => {
+//         if (response.ok) {
+//             return response.json();
+//         } else {
+//             return response.json().then( errorData => { throw new Error( errorData.message);
+//             })
+//         }
+//     })
+//     .then( function (resJson) {
+
+//         let msgContent = "Following information updated:\n\n";
+//         unchangeP ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
+//         unchangeQ ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
+//         unchangeD ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
+
+//         swalMsgBox.fire({
+//             position: "center",
+//             icon: "success",
+//             title: msgContent,
+//             footer: `Updated at ${formatDate(resJson.updatedTime)}`,
+//             showConfirmButton: false,
+//             width: 400,
+//         })
+//     })
+//     .catch( error => msgFailure(error));
+// };

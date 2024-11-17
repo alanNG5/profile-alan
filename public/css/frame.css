@@ -740,12 +740,17 @@ footer p {
 
 /* for Swal popup */
 
-.update-success-msg {
+.swal-update-success-msg {
+    width: 540px;
     text-align: left;
     font-size: 2rem;
 }
 
-.update-time {
+.swal-btn {
+    font-size: 1.6rem;
+}
+
+.swal-update-time {
     text-align: right;
     font-size: 1.6rem;
 }

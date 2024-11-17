@@ -144,8 +144,12 @@ var msgSuccess = function (txtMsg) {
 
 var swalMsgBox = Swal.mixin({
     customClass: {
-        title: "update-success-msg",
-        footer: "update-time",
+        popup: "swal-update-success-msg",
+        title: "swal-update-success-msg",
+        confirmButton: "swal-btn",
+        cancelButton: "swal-btn",
+        footer: "swal-update-time",
     },
 });
+
 

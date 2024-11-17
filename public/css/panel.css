@@ -296,17 +296,17 @@ h2~div div:has(#result-model-no)
 
 #pending-record table thead {
     background-color: rgb(94, 139, 164);
-    color:honeydew;
+    color:  honeydew;
 }
 
-#pending-record table tbody tr:nth-child(odd) {
+#pending-record table tbody tr {
     background-color: rgb(202,231,249);
-    color:midnightblue;
+    color:  midnightblue;
 }
 
-#pending-record table tbody tr:nth-child(even) {
+#pending-record table tbody tr:has(input:checked) {
     background-color: rgb(160,196,215);
-    color:rebeccapurple;
+    color:  rebeccapurple;
 }
 
 #pending-record table th,
@@ -318,10 +318,61 @@ h2~div div:has(#result-model-no)
     text-align: center;
 }
 
-.action-view-board #change-status {
-    margin-top: 20px;
-    margin-bottom: 15px;
+.change-status-div {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
 }
+
+.action-view-board p {
+    font-size: 1.4rem;
+    line-height: 200%;
+    text-wrap: wrap;
+}
+
+.action-view-board p span {
+    font-size: 2.8rem;
+}
+
+.action-view-board p span:nth-last-child(1) {
+    display: none;
+}
+
+.action-view-board #change-status {
+    margin-left: 0;
+    transform: translateX(0%);
+    margin-top: 20px;
+    margin-bottom: 13px;
+}
+
+.action-view-board #change-status:hover {
+    transform: translate(0%, 6px);
+}
+
+#unselct-checkbox {
+    margin-top: 10px;
+    cursor: pointer;
+    outline: 0;
+    display: block;
+    font-weight: 500;
+    line-height: 1.5;
+    text-align: center;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 1.4rem;
+    border-radius: 0.5rem;
+    transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
+    color: var(--theme-main-alt);
+    border-color: var(--theme-main-alt);
+}
+
+#unselct-checkbox:hover {
+    color: var(--color-ter);
+    background-color: var(--theme-main-alt);
+    border-color: var(--theme-main-alt);
+}
+
 
 @media (max-width: 1080px) {
     aside button {
@@ -353,55 +404,79 @@ h2~div div:has(#result-model-no)
     .action-view-board {
         width: 100%;
     }
+}
 
-    @media (max-width: 600px) {
-        .action-view-board section h2 {
-            font-size: 2.2rem;
-            letter-spacing: 0.3rem;
-        }
+@media (max-width: 600px) {
+    .action-view-board section h2 {
+        font-size: 2.2rem;
+        letter-spacing: 0.3rem;
+    }
 
-        .action-view-board form legend, .action-view-board form fieldset div {
-            font-size: 1.4rem;
-            font-weight: 500;
-            letter-spacing: 0.1rem;
-        }
+    .action-view-board form legend, .action-view-board form fieldset div {
+        font-size: 1.4rem;
+        font-weight: 500;
+        letter-spacing: 0.1rem;
+    }
 
-        aside button {
-            font-size: 1.4rem;
-            font-weight: 400;
-            letter-spacing: 0rem;
-            overflow: hidden;
-            width: 25%;
-            border-bottom: none;
-            border-radius: 0;
-        }
+    aside button {
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 0rem;
+        overflow: hidden;
+        width: 25%;
+        border-bottom: none;
+        border-radius: 0;
+    }
 
-        .action-view-board form fieldset div:has(select) {
-            flex-direction: column;
-            justify-content: flex-start;
-                div {
-                    width: 100%;
-                }
-        }
+    .action-view-board form fieldset div:has(select) {
+        flex-direction: column;
+        justify-content: flex-start;
+            div {
+                width: 100%;
+            }
+    }
 
-        .action-view-board form fieldset h2~div:has(div) div {
-            width: 40%;
-            font-size: 1.4rem;
-            position: relative;
-        }
+    .action-view-board form fieldset h2~div:has(div) div {
+        width: 40%;
+        font-size: 1.4rem;
+        position: relative;
+    }
 
-        .action-view-board form fieldset h2~div:has(div) div span {
-            display: none;
-        }
+    .action-view-board form fieldset h2~div:has(div) div span {
+        display: none;
+    }
 
-        .action-view-board form fieldset h2~div:has(div) div::after {
-            position: absolute;
-            top: -13px;
-            content: 'ID';
-        }
+    .action-view-board form fieldset h2~div:has(div) div::after {
+        position: absolute;
+        top: -13px;
+        content: 'ID';
+    }
 
-        .action-view-board form fieldset h2~div:has(div) div:last-of-type::after {
-            content: 'Model No.';
-        }
+    .action-view-board form fieldset h2~div:has(div) div:last-of-type::after {
+        content: 'Model No.';
+    }
+
+    .action-view-board form input[type="submit"],
+    .action-view-board #change-status {
+        font-size: 1.8rem;
+    }
+
+    .change-status-div {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .action-view-board p span:nth-last-child(1) {
+        display: inline;
+        font-size: 2.6rem;
+    }
+
+    .action-view-board p span:first-of-type {
+        display: none;
+    }
+
+    .action-view-board p {
+        font-size: 1.2rem;
     }
 }

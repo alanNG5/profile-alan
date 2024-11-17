@@ -1,5 +1,3 @@
-// var urlCurrent = "https://impetus-go.me/";
-// urlCurrent = "http://localhost:8900/";
 
 let infoPurchaseAction = {};
 
@@ -200,8 +198,6 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
             })
           });
 
-          // console.log("object length: ", Object.keys(infoPurchaseAction).length);
-
           let json = await response.json();
 
           if (!response.ok) {
@@ -217,7 +213,7 @@ document.getElementById("submit-buy-form").addEventListener("click", () => {
           Swal.showValidationMessage(`
             Request failed: ${error}
           `);
-        }
+        };
       },
       allowOutsideClick: () => !Swal.isLoading()
     })

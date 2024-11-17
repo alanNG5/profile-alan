@@ -91,49 +91,68 @@ function clickToPatchArray (event)  {
 
     let orderSelection = { salesOrderChecked: arrOfSelected };
 
-    fetch("/admin/sales/status", {
-        method: "PATCH",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(orderSelection)
+    let msgBeforePatch = `Please make sure that delivery is completed successfully.\n\nIf it's okay, please click "confirm" to update order status for Sales No.: #${arrOfSelected.join(" , #")} ?`;
+
+    swalMsgBox.fire({
+        title: msgBeforePatch,
+        showCancelButton: true,
+        confirmButtonText: "Confirm",
+        showLoaderOnConfirm: true,
+        preConfirm: async () => {
+            try {
+
+                const response = await fetch("/admin/sales/status", {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(orderSelection)
+                });
+
+                let json = await response.json();
+
+                if (!response.ok) {
+                    return Swal.showValidationMessage(
+                      json.errorMessage || "Request failed: no response from server."
+                    )};
+
+                return json;
+
+            } catch (error) {
+                Swal.showValidationMessage(`
+                    Request failed: ${error}
+                  `);
+            };
+        }, allowOutsideClick: () => !Swal.isLoading()
     })
-    .then((response) => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return response.json().then( errorData => { throw new Error (errorData.message);
-            })
-        }
-    })
-    .then( responseContent => {
+    .then((result) => {
+        if (result.isConfirmed) {
 
-        let watch = arrOfSelected.length > 1 ? "watches" : "watch";
-        let order = arrOfSelected.length > 1 ? "orders" : "order";
+            let watch = arrOfSelected.length > 1 ? "watches" : "watch";
+            let order = arrOfSelected.length > 1 ? "orders" : "order";
 
-        swalMsgBox.fire({
-            position: "center",
-            icon: "success",
-            title: `Delivery of ${watch} confirmed; status of sales ${order} No. ${responseContent.updatedSalesDeliveryStatus} updated.`,
-            footer: `Updated at ${formatDate(responseContent.updatedTime)}`,
-            showConfirmButton: false,
-            width: 400,
-        });
+            swalMsgBox.fire({
+                position: "center",
+                icon: "success",
+                title: `Delivery of ${watch} confirmed;\n\nstatus of sales ${order} No. #${result.value.updatedSalesDeliveryStatus} updated.`,
+                footer: `Updated at ${formatDate(result.value.updatedTime)}`,
+                showConfirmButton: false,
+            });
 
-    })
-    .catch( error => console.error("Error from fetching sales record: ", error));
+                // @ refresh the table
+            deliveryBoard.removeChild(deliveryBoard.lastChild);
+            fetchSales();
 
-    // @ refresh the table
-    deliveryBoard.removeChild(deliveryBoard.lastChild);
-    fetchSales();
+        };
+    });
+
 
 };
 
-
-
-// const parentList = document.getElementById("parent-list");
-// parentList.addEventListener("click", (event) => {
-//     if (event.target.match("li")) {
-//         event.target.style.textDecoration="line-through"
-//     }
-// })
+const unselect = document.getElementById("unselct-checkbox");
+unselect.addEventListener("click", () => {
+    let selectedBox = document.querySelectorAll("#pending-record input:checked");
+    for (let item of selectedBox) {
+        item.checked = false;
+    };
+});

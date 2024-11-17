@@ -164,9 +164,6 @@ class ProductsController {
       );
 
       res.status(200).json({
-        updatedPrice: searchPrice,
-        updatedQtn: searchQtn,
-        updatedDesc: searchDesc,
         updatedTime: currentTime,
       });
     } catch (error) {

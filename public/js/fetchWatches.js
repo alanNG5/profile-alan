@@ -1,6 +1,3 @@
-// var urlCurrent = "https://impetus-go.me/";
-// urlCurrent = "http://localhost:8900/";
-
 
 async function displayProductsAtHomePage () {
 

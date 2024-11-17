@@ -116,7 +116,7 @@ class SalesController {
       );
 
       res.status(200).json({
-        updatedSalesDeliveryStatus: salesOrderChecked.join(", "),
+        updatedSalesDeliveryStatus: salesOrderChecked.join(" , #"),
         updatedTime: currentTime,
       });
     } catch (error) {
