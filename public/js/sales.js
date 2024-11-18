@@ -11,14 +11,14 @@ async function fetchSales() {
             }
         })
         .then( fetchedData => {
-            recordOfPendingForDelivery(fetchedData.salesList);
+            generateRecordOfPendingForDelivery(fetchedData.salesList);
         })
         .catch( error => console.error("Error from fetching sales record: ", error));
 };
 
 const deliveryBoard = document.getElementById("pending-record");
 
-function recordOfPendingForDelivery (data) {
+function generateRecordOfPendingForDelivery (data) {
     const reorganizedData = dataHandler(data);
 
     const salesTable = document.createElement("table");

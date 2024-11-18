@@ -14,7 +14,7 @@ dotenv.config();
 const port = process.env.PORT;
 
 import { routes } from "./routers";
-// import { requireAdmin } from "./utils/guard";
+import { requireAdmin } from "./utils/guard";
 app.use("/", routes);
 
 app.get("/", (req: Request, res: Response) => {
@@ -38,9 +38,9 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));
-// app.use(requireAdmin, express.static("protected"));
-// app.get('/protected-page', requireAdmin, (req, res) => {
-//   res.sendFile(path.resolve('public', 'protected_page.html'));
+app.use(requireAdmin, express.static("protected"));
+// app.get("/protected-page", requireAdmin, (req, res) => {
+//   res.sendFile(path.resolve("public", "protected_page.html"));
 // });
 
 app.use((req, res) => {

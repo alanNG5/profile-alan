@@ -92,36 +92,36 @@ window.onclick = function (event) {
 };
 
 
-
+// const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+const monthRef = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+];
 // @ parse Date object from database to readable format
 var formatDate = function (dateToBeFormatted) {
     let date = new Date(dateToBeFormatted);
 
-    // const month = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-    const month = [
-      "JAN",
-      "FEB",
-      "MAR",
-      "APR",
-      "MAY",
-      "JUN",
-      "JUL",
-      "AUG",
-      "SEP",
-      "OCT",
-      "NOV",
-      "DEC",
-    ];
     let dateOfMon = ("0" + date.getDate()).slice(-2);
     let monthIndex = date.getMonth();
     let hr = ("0" + date.getHours()).slice(-2);
     let min = ("0" + date.getMinutes()).slice(-2);
     let sec = ("0" + date.getSeconds()).slice(-2);
     return `${dateOfMon} ${
-      month[monthIndex]
+      monthRef[monthIndex]
     } ${date.getFullYear()} ${hr}:${min}:${sec}`;
-  }
+}
 
+var refThisMonth = monthRef[new Date().getMonth()];
 
 // @ popup message box reused
 var msgFailure = function (txtMsg) {

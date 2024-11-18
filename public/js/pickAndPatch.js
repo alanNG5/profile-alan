@@ -211,39 +211,3 @@ function clearOptions () {
     optionsList.forEach(option => option.remove());
 };
 
-// async function patchProductInfo (id, obj, unchangeP, unchangeQ, unchangeD) {
-
-//     await fetch (`/admin/setProduct/${id}`, {
-//         method: "PATCH",
-//         headers: {
-//             "Content-Type": "application/json",
-//         },
-//         body: JSON.stringify(obj),
-//         // @ finally the FormData class is restructured to an object, so Content-Type is set and body is stringified.
-//     })
-//     .then((response) => {
-//         if (response.ok) {
-//             return response.json();
-//         } else {
-//             return response.json().then( errorData => { throw new Error( errorData.message);
-//             })
-//         }
-//     })
-//     .then( function (resJson) {
-
-//         let msgContent = "Following information updated:\n\n";
-//         unchangeP ? null : msgContent += `Price -> from $ ${itemInfo.current_price} to $ ${resJson.updatedPrice}.\n\n`;
-//         unchangeQ ? null : msgContent += `Quantity -> from ${itemInfo.stock_qtn} to ${resJson.updatedQtn}.\n\n`;
-//         unchangeD ? null : msgContent += `Product Description -> revised to\n\" ${resJson.updatedDesc} \".`;
-
-//         swalMsgBox.fire({
-//             position: "center",
-//             icon: "success",
-//             title: msgContent,
-//             footer: `Updated at ${formatDate(resJson.updatedTime)}`,
-//             showConfirmButton: false,
-//             width: 400,
-//         })
-//     })
-//     .catch( error => msgFailure(error));
-// };

@@ -113,4 +113,48 @@ export class SalesService {
       console.error("Error updating delivery status: ", error);
     }
   }
+
+  async getDeliveryStatusStats() {
+    try {
+      let today = new Date();
+      let thisYear = today.getFullYear();
+
+      let thisMonth = today.getMonth() + 1;
+      // 0 as the date inside the Date constructor will return the last day of the previous month
+      let previousMonth =
+        new Date(thisYear, today.getMonth(), 0).getMonth() + 1;
+      let twoMonthsAgo =
+        new Date(thisYear, today.getMonth() - 1, 0).getMonth() + 1;
+
+      let recentMonth: number[] = [twoMonthsAgo, previousMonth, thisMonth];
+      let recentMonthArr: string[] = [];
+      for (let month of recentMonth) {
+        recentMonthArr.push(("0" + month).slice(-2));
+      }
+
+      let data = await this.knex.raw(
+        `WITH Subtotal AS
+        (SELECT order_status,
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[0]}-01' THEN 1 ELSE 0 END) AS "two_months_ago",
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[1]}-01' THEN 1 ELSE 0 END) AS "last_month",
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[2]}-01' THEN 1 ELSE 0 END) AS "this_month",
+        COUNT(*) AS status_count
+        FROM sales
+        WHERE created_at >= '${thisYear}-01-01' AND created_at <= '${thisYear}-12-31'
+        GROUP BY order_status)
+        SELECT * FROM Subtotal
+        UNION ALL
+        SELECT 'monthly_count' AS order_status,
+        SUM("two_months_ago") AS "two_months_ago",
+        SUM("last_month") AS "last_month",
+        SUM("this_month") AS "this_month",
+        SUM(status_count) AS total_count
+        FROM Subtotal;`
+      );
+
+      return data.rows;
+    } catch (error) {
+      console.error("Error generating statistics of delivery status: ", error);
+    }
+  }
 }

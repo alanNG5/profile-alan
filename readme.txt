@@ -14,6 +14,8 @@ Summary:
 
 7. The object of date is handled in frontend after response from database. It allows adjustment of date based on the local format in client side. In practise, input of date is parsed in JSON and output of date string is proceeded by constructor.
 
+8. dynamic report, date
+
 Based on MVP
 
 Improvement plan:

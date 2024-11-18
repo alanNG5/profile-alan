@@ -288,29 +288,29 @@ h2~div div:has(#result-model-no)
 
 /* 4. section of sales update: delivery status */
 
-#pending-record table {
+.action-view-board table {
     border-collapse: separate;
     border-spacing: 5px;
     width: 100%;
 }
 
-#pending-record table thead {
+.action-view-board table thead {
     background-color: rgb(94, 139, 164);
     color:  honeydew;
 }
 
-#pending-record table tbody tr {
+.action-view-board table tbody tr {
     background-color: rgb(202,231,249);
     color:  midnightblue;
 }
 
-#pending-record table tbody tr:has(input:checked) {
+.action-view-board table tbody tr:has(input:checked) {
     background-color: rgb(160,196,215);
     color:  rebeccapurple;
 }
 
-#pending-record table th,
-#pending-record table td {
+.action-view-board table th,
+.action-view-board table td {
     border: none;
     padding: 8px;
     font-size: 1.4rem;
