@@ -59,11 +59,11 @@
 
     <main>
         <div class="style-for-centering">
-            <aside>
-                <button>New Product</button>
-                <button>Update Product</button>
-                <button>Non-delivery</button>
-                <button>Report</button>
+            <aside id="aside-menu-btn">
+                <button data-index="0">New Product</button>
+                <button data-index="1">Update Product</button>
+                <button data-index="2">Non-delivery</button>
+                <button data-index="3">Report</button>
             </aside>
 
             <div class="action-view-board">
@@ -100,7 +100,7 @@
                                 <input type="file" name="image_entry" multiple="multiple" required="required" />
                             </div>
                             <p class="file-upload-note">
-                                <strong>Important Note:</strong></br>
+                                <strong>Caveat:</strong></br>
                                 - Image with clear background is higly recommended.</br>
                                 - Size of image should be at least 600 x 600; Shape should be square.</br>
                                 - .avif format of image file is not allowed.</br>
@@ -112,7 +112,7 @@
                     </form>
                 </section>
 
-                <section>
+                <section hidden>
                     <h2>Update Product Info</h2>
                     <form id="update-item-form" enctype="multipart/form-data">
 
@@ -171,7 +171,7 @@
                     </form>
                 </section>
 
-                <section>
+                <section hidden>
                     <h2>Sales Order Pending for Delivery</h2>
                     <div id="pending-record"></div>
                     <button id="unselct-checkbox">Unselect</button>
@@ -182,21 +182,46 @@
                 </section>
 
 
-                <section>
+                <section id="report-sec" hidden>
+
                     <h2>Report</h2>
-                    <div>
-                        <table id="delivery-summary-table">
+                    <div id="delivery-summary-table">
+                        <table>
                             <thead>
                                 <tr>
                                     <th>Order Status</th>
-                                    <th>2 Months Ago</th>
-                                    <th>Last Month</th>
-                                    <th>This Month</th>
+                                    <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
+                                    <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                    <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
                                     <th>Total</th>
                                 </tr>
                             </thead>
                         </table>
                     </div>
+
+                    <div id="turnover-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Sales Summary</th>
+                                    <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
+                                    <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                    <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Turnover</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </section>
 
 
@@ -327,7 +352,7 @@
 <script src="./js/submit.js"></script>
 <script src="./js/pickAndPatch.js"></script>
 <script src="./js/sales.js"></script>
-<script src="./js/report.js"></script>
+<script src="./js/orderReport.js"></script>
 
 <script>
 </script>

@@ -172,6 +172,7 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
     padding: 90px 0;
+    margin-top: 40px;
 }
 
 .watch-card {
@@ -314,6 +315,7 @@ body {
 @media (min-width: 730px) and (max-width: 900px) {
     #display-board {
         gap: 50px;
+        margin-top: 25px;
     }
 
     .watch-item img {
@@ -367,9 +369,6 @@ body {
 
     #data-structuring-panel select {
         justify-content: center;
-    }
-
-    #data-structuring-panel select {
         width: 285px;
         font-size: 1.6rem;
     }

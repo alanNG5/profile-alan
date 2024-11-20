@@ -16,9 +16,9 @@ main > div {
     padding: 135px 0 60px;
 }
 
-main div div section:nth-of-type(n+2) {
+/* main div div section:nth-of-type(n+2) {
     display: none;
-}
+} */
 
 main div aside {
     display: flex;
@@ -288,29 +288,29 @@ h2~div div:has(#result-model-no)
 
 /* 4. section of sales update: delivery status */
 
-.action-view-board table {
+#pending-record table {
     border-collapse: separate;
     border-spacing: 5px;
     width: 100%;
 }
 
-.action-view-board table thead {
+#pending-record table thead {
     background-color: rgb(94, 139, 164);
     color:  honeydew;
 }
 
-.action-view-board table tbody tr {
+#pending-record table tbody tr {
     background-color: rgb(202,231,249);
     color:  midnightblue;
 }
 
-.action-view-board table tbody tr:has(input:checked) {
+#pending-record table tbody tr:has(input:checked) {
     background-color: rgb(160,196,215);
     color:  rebeccapurple;
 }
 
-.action-view-board table th,
-.action-view-board table td {
+#pending-record table th,
+#pending-record table td {
     border: none;
     padding: 8px;
     font-size: 1.4rem;
@@ -374,6 +374,51 @@ h2~div div:has(#result-model-no)
 }
 
 
+/* 5. section of report */
+
+#report-sec table {
+    border-collapse: separate;
+    border-spacing: 5px;
+    width: 100%;
+    overflow: scroll;
+}
+
+@media (min-width: 600px) {
+    #report-sec table {
+        table-layout: fixed;
+    }
+}
+
+
+#report-sec table thead {
+    background-color: var(--theme-main);
+    color: var(--color-ter);
+}
+
+#report-sec table tbody tr {
+    background-color: var(--color-ter);
+    color: var(--color-basic);
+}
+
+#report-sec table th,
+#report-sec table td {
+    border: none;
+    padding: 10px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-align: center;
+    text-wrap: wrap;
+    border-radius: 6px;
+    line-height: 1.5;
+    box-shadow: rgba(0, 0, 230, 0.8) 0 0 2px;
+}
+
+#report-sec table tbody tr:hover {
+    background-color: rgb(223, 236, 255);
+    transition: 0.4s ease-in-out;
+}
+
+
 @media (max-width: 1080px) {
     aside button {
         height: 80px;
@@ -385,6 +430,7 @@ h2~div div:has(#result-model-no)
 
     main > div {
         flex-direction: column;
+        justify-content: flex-start;
     }
 
     main div aside {
@@ -404,6 +450,18 @@ h2~div div:has(#result-model-no)
     .action-view-board {
         width: 100%;
     }
+
+    #report-sec thead tr th>span,
+    #report-sec thead tr th>br {
+        display: none;
+    }
+
+    #report-sec table th,
+    #report-sec table td {
+        font-size: 1.4rem;
+        font-weight: 500;
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -478,5 +536,10 @@ h2~div div:has(#result-model-no)
 
     .action-view-board p {
         font-size: 1.2rem;
+    }
+
+    #report-sec table {
+        table-layout: none;
+        overflow: scroll;
     }
 }

@@ -10,8 +10,9 @@ async function fetchSales() {
                 })
             }
         })
-        .then( fetchedData => {
+        .then( (fetchedData) => {
             generateRecordOfPendingForDelivery(fetchedData.salesList);
+            filterDataByMonth(fetchedData.salesList);
         })
         .catch( error => console.error("Error from fetching sales record: ", error));
 };
@@ -64,8 +65,16 @@ function generateRecordOfPendingForDelivery (data) {
     submitChangingDeliveryStatus.addEventListener("click", clickToPatchArray);
 };
 
+
 function dataHandler (dataset) {
-    const sortData = dataset.sort((a, b) => {
+
+    let deepCopy = dataset.map(obj => ({...obj}));
+    // @ Caution: Deep Copy!
+    // swift to selective deep copy if possible
+    // Other methods for deep copy are: JSON.parse(JSON.stringify(arrayOfObjects)) and library like "lodash"
+    // JSON.stsringify not recommended because it involves serialization and deserialization processesor; and it causes loss of functionality of object like Dates:
+
+    const sortData = deepCopy.sort((a, b) => {
         return a.sid - b.sid;
     });
 
@@ -156,3 +165,61 @@ unselect.addEventListener("click", () => {
         item.checked = false;
     };
 });
+
+let turnoverStats = [];
+
+function filterDataByMonth (data) {
+
+    for (let monthYear of arrOfRecentMonths) {
+        let filteredData = data.filter( item => {
+            let dateOfSales = new Date(item.created_at);
+            return dateOfSales.getMonth() === monthYear.monIndex && dateOfSales.getFullYear() === monthYear.yrIndex;
+        });
+        generateSalesReport(filteredData);
+    };
+
+    turnoverStats.push(turnoverStats.reduce(( accumulator, eachSum ) => { return accumulator + eachSum}, 0));
+    let turnoverDisplay = document.querySelectorAll("#turnover-table table tbody tr td:nth-child(n+2)");
+    turnoverStats.forEach( (stats, index) => {
+        turnoverDisplay[index].innerText = stats.toLocaleString();
+    });
+};
+
+function generateSalesReport (dataForSum) {
+    let displaySum = dataForSum.map( item => item.selling_price).reduce((accumulator, eachPrice) => {
+        // @ selling_price returned is already a number
+        return accumulator + eachPrice;
+    });
+    turnoverStats.push(displaySum);
+};
+
+
+let ff = {
+"salesList": [
+{
+"sid": 101,
+"uid": 3,
+"username": "prudent",
+"pid": 2,
+"brand": "Seiko",
+"model_name": "Lukia",
+"model_no": "SSVW154",
+"selling_price": 5200,
+"created_at": "2024-09-05T07:35:21.003Z",
+"order_status": "delivered",
+"updated_at": "2024-09-05T07:35:21.003Z"
+},
+{
+"sid": 102,
+"uid": 2,
+"username": "client101",
+"pid": 9,
+"brand": "Tudor",
+"model_name": "Royal",
+"model_no": "M28603-0001",
+"selling_price": 30400,
+"created_at": "2024-09-05T07:35:21.004Z",
+"order_status": "delivered",
+"updated_at": "2024-09-05T07:35:21.004Z"
+}
+]};

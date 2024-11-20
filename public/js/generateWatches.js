@@ -100,6 +100,7 @@ async function displayWatches () {
             const itemDiv = document.createElement("div");
             const btn = document.createElement("button");
             const btnText = document.createElement("span");
+            const btnLink = document.createElement("a");
             const effectDiv = document.createElement("div");
 
             const watchImage = document.createElement("img");
@@ -112,8 +113,9 @@ async function displayWatches () {
             displayBoard.appendChild(watchCard);
             watchCard.appendChild(itemDiv);
             watchCard.appendChild(btn);
-            btn.appendChild(btnText);
-            btn.appendChild(effectDiv);
+            btnLink.appendChild(btnText);
+            btnLink.appendChild(effectDiv);
+            btn.appendChild(btnLink);
 
             itemDiv.appendChild(watchImage);
             itemDiv.appendChild(itemDoc);
@@ -136,9 +138,11 @@ async function displayWatches () {
             watchModel.innerHTML = watch.model_name;
             watchPrice.innerHTML = "HK$ " + watch.current_price.toLocaleString();
 
-            btn.addEventListener("click", () => {
-                window.location.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
-            });
+            btnLink.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
+            // @ avoid using addEventListener inside forEach iteration as possible
+            // btn.addEventListener("click", () => {
+            //     window.location.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
+            // });
         });
     };
 

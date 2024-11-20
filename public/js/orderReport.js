@@ -1,9 +1,3 @@
-// const parentList = document.getElementById("parent-list");
-// parentList.addEventListener("click", (event) => {
-//     if (event.target.match("li")) {
-//         event.target.style.textDecoration="line-through"
-//     }
-// })
 
 fetchDeliveryReport();
 
@@ -25,12 +19,14 @@ async function fetchDeliveryReport() {
 }
 
 function generateReportOfDelivery (data) {
-  let devTable = document.getElementById("delivery-summary-table");
+
+  let devTable = document.querySelector("#delivery-summary-table table");
 
   const devTBody = document.createElement("tbody");
 
   for ( let row of data) {
     const tr = document.createElement("tr");
+    row.order_status = row.order_status === "delivered" ? "Delivered" : row.order_status === "shipment_arranging" ? "Pending" : row.order_status;
       for ( let item in row) {
         const td = document.createElement("td");
         td.innerText = row[item];
@@ -42,30 +38,17 @@ function generateReportOfDelivery (data) {
   devTable.appendChild(devTBody);
 };
 
-console.log(refThisMonth);
 
-let summary = {
-    "collectionStatus": [
-      {
-        "order_status": "delivered",
-        "two_months_ago": "5",
-        "last_month": "1",
-        "this_month": "0",
-        "status_count": "6"
-      },
-      {
-        "order_status": "shipment_arranging",
-        "two_months_ago": "1",
-        "last_month": "7",
-        "this_month": "1",
-        "status_count": "9"
-      },
-      {
-        "order_status": "monthly_count",
-        "two_months_ago": "6",
-        "last_month": "8",
-        "this_month": "1",
-        "status_count": "15"
-      }
-    ]
-  }
+let spanAboutMonths = document.querySelectorAll("#delivery-summary-table table th:has(span) b");
+let spanAboutMonths2 = document.querySelectorAll("#turnover-table table th:has(span) b");
+
+function insertMonthYearCode (selector) {
+  for ( let i = 0; i < selector.length; i++) {
+      let span = document.createElement("span");
+      span.innerText = `${arrOfRecentMonths[i].monCode} ${arrOfRecentMonths[i].yrIndex.toString().slice(-2)}`;
+      selector[i].appendChild(span);
+    };
+}
+
+insertMonthYearCode(spanAboutMonths);
+insertMonthYearCode(spanAboutMonths2);

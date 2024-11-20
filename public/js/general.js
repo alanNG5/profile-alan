@@ -121,7 +121,30 @@ var formatDate = function (dateToBeFormatted) {
     } ${date.getFullYear()} ${hr}:${min}:${sec}`;
 }
 
-var refThisMonth = monthRef[new Date().getMonth()];
+// @ get recent months
+// @ 0 of date object is the last day of the previous month
+let thisMon = new Date();
+let lastMon = new Date(new Date().getFullYear(), new Date().getMonth(), 0);
+let twoMonAgo = new Date(new Date().getFullYear(), new Date().getMonth() - 1, 0);
+
+var arrOfRecentMonths = [
+    {
+        monIndex: twoMonAgo.getMonth(),
+        yrIndex: twoMonAgo.getFullYear(),
+        monCode: monthRef[twoMonAgo.getMonth()],
+    },
+    {
+        monIndex: lastMon.getMonth(),
+        yrIndex: lastMon.getFullYear(),
+        monCode: monthRef[lastMon.getMonth()],
+    },
+    {
+        monIndex: thisMon.getMonth(),
+        yrIndex: thisMon.getFullYear(),
+        monCode: monthRef[thisMon.getMonth()],
+    },
+];
+
 
 // @ popup message box reused
 var msgFailure = function (txtMsg) {
@@ -151,5 +174,4 @@ var swalMsgBox = Swal.mixin({
         footer: "swal-update-time",
     },
 });
-
 

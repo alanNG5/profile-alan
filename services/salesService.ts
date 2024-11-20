@@ -45,7 +45,7 @@ export class SalesService {
       let inventoryDecrement = await trx("products")
         .decrement("stock_qtn", 1)
         .where("id", pid);
-      console.log("Sales Credited: ", inventoryDecrement);
+      console.log("Inventory Credited: ", inventoryDecrement);
 
       // await trx("products")
       //   .update({ stock_qtn: this.knex.raw("?? - 1", ["stock_qtn"]) })
@@ -116,17 +116,29 @@ export class SalesService {
 
   async getDeliveryStatusStats() {
     try {
-      let today = new Date();
-      let thisYear = today.getFullYear();
+      let thisdate = new Date().getDate();
+      let thisMonth = new Date().getMonth() + 1;
+      let thisYear = new Date().getFullYear();
 
-      let thisMonth = today.getMonth() + 1;
-      // 0 as the date inside the Date constructor will return the last day of the previous month
-      let previousMonth =
-        new Date(thisYear, today.getMonth(), 0).getMonth() + 1;
-      let twoMonthsAgo =
-        new Date(thisYear, today.getMonth() - 1, 0).getMonth() + 1;
+      let today: string = ("0" + thisdate).slice(-2);
 
-      let recentMonth: number[] = [twoMonthsAgo, previousMonth, thisMonth];
+      // @ set date as 0 will return the last day of the previous month
+      // @ get the index of date of last 2 months; turn it into concrete month; get the corresponding year
+
+      let setPrevMon = new Date().setDate(0);
+      let prevMon = new Date(setPrevMon).getMonth() + 1;
+      let yrOfPrevMon = new Date(setPrevMon).getFullYear();
+
+      let set2MonAgo = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth() - 2,
+        1
+      );
+      let twoMonAgo = new Date(set2MonAgo).getMonth() + 1;
+      let yrOf2MonAgo = new Date(set2MonAgo).getFullYear();
+
+      let yearArr: number[] = [yrOf2MonAgo, yrOfPrevMon, thisYear];
+      let recentMonth: number[] = [twoMonAgo, prevMon, thisMonth];
       let recentMonthArr: string[] = [];
       for (let month of recentMonth) {
         recentMonthArr.push(("0" + month).slice(-2));
@@ -135,16 +147,16 @@ export class SalesService {
       let data = await this.knex.raw(
         `WITH Subtotal AS
         (SELECT order_status,
-        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[0]}-01' THEN 1 ELSE 0 END) AS "two_months_ago",
-        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[1]}-01' THEN 1 ELSE 0 END) AS "last_month",
-        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '2024-${recentMonthArr[2]}-01' THEN 1 ELSE 0 END) AS "this_month",
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[0]}-${recentMonthArr[0]}-01' THEN 1 ELSE 0 END) AS "two_months_ago",
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[1]}-${recentMonthArr[1]}-01' THEN 1 ELSE 0 END) AS "last_month",
+        SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[2]}-${recentMonthArr[2]}-01' THEN 1 ELSE 0 END) AS "this_month",
         COUNT(*) AS status_count
         FROM sales
-        WHERE created_at >= '${thisYear}-01-01' AND created_at <= '${thisYear}-12-31'
+        WHERE created_at >= '${yearArr[0]}-${recentMonthArr[0]}-01' AND created_at <= '${yearArr[2]}-${recentMonthArr[2]}-${today}'
         GROUP BY order_status)
         SELECT * FROM Subtotal
         UNION ALL
-        SELECT 'monthly_count' AS order_status,
+        SELECT 'Monthly Total' AS order_status,
         SUM("two_months_ago") AS "two_months_ago",
         SUM("last_month") AS "last_month",
         SUM("this_month") AS "this_month",
