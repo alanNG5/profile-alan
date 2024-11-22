@@ -98,7 +98,7 @@ body {
     margin-top: 20px;
 }
 
-#brand-list .brand {
+#brand-list .brand, #brand-list #undo-filter {
     display: inline-flex;
     cursor: pointer;
     width: fit-content;
@@ -113,8 +113,13 @@ body {
     text-shadow: var(--color-basic) 4px 0 9px;
 }
 
-#brand-list .brand#undo-filter {
+#brand-list #undo-filter {
     color: var(--color-supp);
+}
+
+#brand-list .brand.selected {
+    background-color: rgba(20, 20, 20, 0.6);
+    cursor: none;
 }
 
 #catalogue {
@@ -354,8 +359,8 @@ body {
         letter-spacing: 0.3rem;
     }
 
-    #brand-list .brand {
-        font-size: 1.9rem;
+    #brand-list .brand, #brand-list #undo-filter {
+        font-size: 1.8rem;
         letter-spacing: 0;
     }
 }
@@ -383,5 +388,4 @@ body {
         position: absolute;
         left: 5%;
     }
-
 }

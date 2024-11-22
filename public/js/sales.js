@@ -68,19 +68,18 @@ function generateRecordOfPendingForDelivery (data) {
 
 function dataHandler (dataset) {
 
-    let deepCopy = dataset.map(obj => ({...obj}));
+    const itemPendingToBeDelivered = dataset.sort((a, b) => {
+        return a.sid - b.sid;
+    }).filter( item => {
+        return item.order_status === "shipment_arranging";
+    });
+    return itemPendingToBeDelivered.map( obj => ({...obj}));
+
     // @ Caution: Deep Copy!
     // swift to selective deep copy if possible
     // Other methods for deep copy are: JSON.parse(JSON.stringify(arrayOfObjects)) and library like "lodash"
     // JSON.stsringify not recommended because it involves serialization and deserialization processesor; and it causes loss of functionality of object like Dates:
 
-    const sortData = deepCopy.sort((a, b) => {
-        return a.sid - b.sid;
-    });
-
-    return sortData.filter( item => {
-        return item.order_status === "shipment_arranging";
-    });
 };
 
 
@@ -166,60 +165,80 @@ unselect.addEventListener("click", () => {
     };
 });
 
+
 let turnoverStats = [];
+let topBrand = [];
 
 function filterDataByMonth (data) {
-
     for (let monthYear of arrOfRecentMonths) {
         let filteredData = data.filter( item => {
             let dateOfSales = new Date(item.created_at);
             return dateOfSales.getMonth() === monthYear.monIndex && dateOfSales.getFullYear() === monthYear.yrIndex;
         });
+
         generateSalesReport(filteredData);
+        getTopBrand(filteredData);
     };
 
+    getTopBrand(data);
+
     turnoverStats.push(turnoverStats.reduce(( accumulator, eachSum ) => { return accumulator + eachSum}, 0));
-    let turnoverDisplay = document.querySelectorAll("#turnover-table table tbody tr td:nth-child(n+2)");
+
+    let turnoverDisplay = document.querySelectorAll("#sales-performance-table tbody tr td:nth-child(n+2)");
+
     turnoverStats.forEach( (stats, index) => {
-        turnoverDisplay[index].innerText = stats.toLocaleString();
+        turnoverDisplay[index].innerText = "$ " + stats.toLocaleString();
     });
+
+    appendDataToTable(...topBrand);
+    let addCell = document.querySelector("#sales-performance-table tbody tr:nth-child(2)").insertCell(0);
+    addCell.innerText = "Top Selling Brand";
 };
 
 function generateSalesReport (dataForSum) {
-    let displaySum = dataForSum.map( item => item.selling_price).reduce((accumulator, eachPrice) => {
+
+    let displaySum = dataForSum.length > 0 ?
+    dataForSum.map( item => item.selling_price).reduce((accumulator, eachPrice) => {
         // @ selling_price returned is already a number
         return accumulator + eachPrice;
-    });
+    })
+    : 0;
     turnoverStats.push(displaySum);
 };
 
 
-let ff = {
-"salesList": [
-{
-"sid": 101,
-"uid": 3,
-"username": "prudent",
-"pid": 2,
-"brand": "Seiko",
-"model_name": "Lukia",
-"model_no": "SSVW154",
-"selling_price": 5200,
-"created_at": "2024-09-05T07:35:21.003Z",
-"order_status": "delivered",
-"updated_at": "2024-09-05T07:35:21.003Z"
-},
-{
-"sid": 102,
-"uid": 2,
-"username": "client101",
-"pid": 9,
-"brand": "Tudor",
-"model_name": "Royal",
-"model_no": "M28603-0001",
-"selling_price": 30400,
-"created_at": "2024-09-05T07:35:21.004Z",
-"order_status": "delivered",
-"updated_at": "2024-09-05T07:35:21.004Z"
-}
-]};
+function getTopBrand (data) {
+    // @ generating an object with brand as key and frequency as value
+    let listFrequentBrand = data.length > 0 ? data.reduce((acc, cur) => {
+            acc[cur.brand] = (acc[cur.brand] || 0) + 1;
+            return acc;
+        }, {}) : {};
+
+    // @ converting object to array of arrays and sorting by frequency
+    let getMostFrequentBrand = Object.entries(listFrequentBrand).sort((a,b) => b[1] - a[1]);
+
+    getMostFrequentBrand = getMostFrequentBrand.length > 0 ?
+        topBrand.push(`${getMostFrequentBrand[0][0]} ( ${getMostFrequentBrand[0][1]} )`)
+        : topBrand.push("-- Nil --");
+
+    // let brandList = data.map( item => item.brand);
+    // let brandCount = brandList.reduce((accumulator, brand) => {
+    //     accumulator[brand] = (accumulator[brand] || 0) + 1;
+    //     return accumulator;
+    // }, {});
+
+    // let maxCount = Math.max(...Object.values(brandCount));
+    // let mostFrequentBrand = Object.keys(brandCount).find( brand => brandCount[brand] === maxCount);
+    // return mostFrequentBrand;
+
+};
+
+function appendDataToTable (value2MonAgo, valueLastMon, valueThisMon, recentInTotal) {
+    let tBody = document.querySelector("#sales-performance-table tbody");
+    let tr = document.createElement("tr");
+    tr.insertCell(0).innerText = value2MonAgo;
+    tr.insertCell(-1).innerText = valueLastMon;
+    tr.insertCell(-1).innerText = valueThisMon;
+    tr.insertCell(-1).innerText = recentInTotal;
+    tBody.appendChild(tr);
+};

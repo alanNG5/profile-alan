@@ -29,7 +29,7 @@ formatDollarInput (priceUpdate);
 //     });
 // };
 
-// @ 1 addEventListener at parent element
+// @ addEventListener at parent element
 const menu = document.getElementById("aside-menu-btn");
 menu.addEventListener("click", (event) => {
     if (event.target.matches("button")) {

@@ -154,6 +154,7 @@ async function displayWatches () {
         brandFilter.appendChild(listOfBrands);
         listOfBrands.setAttribute("id", "brand-list");
 
+
         retrieveBrands.forEach( (brand) => {
             const brandTag = document.createElement("div");
 
@@ -162,11 +163,16 @@ async function displayWatches () {
             brandTag.classList.add("brand");
             brandTag.innerHTML = brand;
 
-            brandTag.addEventListener("click", (e) => {
+        });
 
-                document.getElementById("undo-filter")?.remove();
+        listOfBrands.addEventListener("click", (event) => {
 
-                let brandName = e.target.textContent;
+            document.getElementById("undo-filter")?.remove();
+            document.querySelector(".selected")?.classList.remove("selected");
+
+            if(event.target.matches(".brand")) {
+
+                let brandName = event.target.textContent;
                 let filteredWatches = data.filter( (watch) => watch.brand === brandName);
                 document.getElementById("display-board").remove();
 
@@ -177,7 +183,6 @@ async function displayWatches () {
                 listOfBrands.appendChild(reset);
                 reset.innerHTML = "Reset";
                 reset.setAttribute("id", "undo-filter");
-                reset.classList.add("brand");
 
                 reset.addEventListener("click", () => {
                     document.getElementById("display-board").remove();
@@ -185,8 +190,11 @@ async function displayWatches () {
                     rankPrice(data);
                     reset.remove();
                 });
-            });
+
+                event.target.classList.toggle("selected");
+            };
         });
+
     };
 
     function rankPrice (value) {

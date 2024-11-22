@@ -20,7 +20,7 @@ async function fetchDeliveryReport() {
 
 function generateReportOfDelivery (data) {
 
-  let devTable = document.querySelector("#delivery-summary-table table");
+  let devTable = document.getElementById("delivery-summary-table");
 
   const devTBody = document.createElement("tbody");
 
@@ -39,8 +39,8 @@ function generateReportOfDelivery (data) {
 };
 
 
-let spanAboutMonths = document.querySelectorAll("#delivery-summary-table table th:has(span) b");
-let spanAboutMonths2 = document.querySelectorAll("#turnover-table table th:has(span) b");
+let spanAboutMonths = document.querySelectorAll("#delivery-summary-table th:has(span) b");
+let spanAboutMonths2 = document.querySelectorAll("#sales-performance-table th:has(span) b");
 
 function insertMonthYearCode (selector) {
   for ( let i = 0; i < selector.length; i++) {

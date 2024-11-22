@@ -78,3 +78,9 @@ q[0].b=256;
 console.log("q: ", q);
 console.log("z: ",z);
 
+function arr(p1){
+    console.log("yoyo: ", p1);
+}
+
+let tqqq = [["apple", 200],["tesla", 400],["google", 500]];
+arr(...tqqq);
