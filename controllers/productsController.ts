@@ -171,6 +171,15 @@ class ProductsController {
       res.status(500).json({ message: "Internal server error." });
     }
   };
+
+  getInventoryLevel = async (req: Request, res: Response) => {
+    try {
+      let inventoryLevel = await this.productsService.selectStockQuantity();
+      res.status(200).json({ inventoryLevel });
+    } catch (error) {
+      res.status(500).json({ message: "Internal server error." });
+    }
+  };
 }
 
 function capitalizeFirstLetter(text: string) {

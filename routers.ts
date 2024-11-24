@@ -32,6 +32,7 @@ routes.patch(
   productsController.updateProductById
 );
 routes.post("/admin/newItem", productsController.createProduct);
+routes.get("/admin/inventoryLv", productsController.getInventoryLevel);
 
 const authService = new AuthService(knex);
 const authController = new AuthController(authService);

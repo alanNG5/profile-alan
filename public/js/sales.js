@@ -150,11 +150,8 @@ function clickToPatchArray (event)  {
                 // @ refresh the table
             deliveryBoard.removeChild(deliveryBoard.lastChild);
             fetchSales();
-
         };
     });
-
-
 };
 
 const unselect = document.getElementById("unselct-checkbox");
@@ -165,9 +162,10 @@ unselect.addEventListener("click", () => {
     };
 });
 
-
+// @ Push filtered data into array for appending to table
 let turnoverStats = [];
 let topBrand = [];
+let topModel = [];
 
 function filterDataByMonth (data) {
     for (let monthYear of arrOfRecentMonths) {
@@ -176,26 +174,29 @@ function filterDataByMonth (data) {
             return dateOfSales.getMonth() === monthYear.monIndex && dateOfSales.getFullYear() === monthYear.yrIndex;
         });
 
-        generateSalesReport(filteredData);
-        getTopBrand(filteredData);
+        getSalesBalance(filteredData);
+        getLeadingStats(filteredData, "brand", topBrand);
+        getLeadingStats(filteredData, "model_name", topModel);
     };
-
-    getTopBrand(data);
-
+    // @ push the stats for recent 3 months into the arrays
     turnoverStats.push(turnoverStats.reduce(( accumulator, eachSum ) => { return accumulator + eachSum}, 0));
+    turnoverStats = turnoverStats.map( stats => "$ " + stats.toLocaleString() );
 
-    let turnoverDisplay = document.querySelectorAll("#sales-performance-table tbody tr td:nth-child(n+2)");
+    getLeadingStats(data, "brand", topBrand);
+    getLeadingStats(data, "model_name", topModel);
 
-    turnoverStats.forEach( (stats, index) => {
-        turnoverDisplay[index].innerText = "$ " + stats.toLocaleString();
-    });
+    // @ formulating the table
+    appendDataToTable(...turnoverStats);
+    document.querySelector("#sales-performance-table tbody tr:nth-of-type(1)").insertCell(0).innerText = "Turnover";
 
     appendDataToTable(...topBrand);
-    let addCell = document.querySelector("#sales-performance-table tbody tr:nth-child(2)").insertCell(0);
-    addCell.innerText = "Top Selling Brand";
+    document.querySelector("#sales-performance-table tbody tr:nth-of-type(2)").insertCell(0).innerText = "Best Brand";
+
+    appendDataToTable(...topModel);
+    document.querySelector("#sales-performance-table tbody tr:nth-of-type(3)").insertCell(0).innerText = "Best Model";
 };
 
-function generateSalesReport (dataForSum) {
+function getSalesBalance (dataForSum) {
 
     let displaySum = dataForSum.length > 0 ?
     dataForSum.map( item => item.selling_price).reduce((accumulator, eachPrice) => {
@@ -207,19 +208,20 @@ function generateSalesReport (dataForSum) {
 };
 
 
-function getTopBrand (data) {
+function getLeadingStats (data, criteria, targetArray) {
     // @ generating an object with brand as key and frequency as value
     let listFrequentBrand = data.length > 0 ? data.reduce((acc, cur) => {
-            acc[cur.brand] = (acc[cur.brand] || 0) + 1;
+            let thisProperty = cur[criteria];
+            acc[thisProperty] = (acc[thisProperty] || 0) + 1;
             return acc;
-        }, {}) : {};
+        }, {} ) : {};
 
     // @ converting object to array of arrays and sorting by frequency
     let getMostFrequentBrand = Object.entries(listFrequentBrand).sort((a,b) => b[1] - a[1]);
 
     getMostFrequentBrand = getMostFrequentBrand.length > 0 ?
-        topBrand.push(`${getMostFrequentBrand[0][0]} ( ${getMostFrequentBrand[0][1]} )`)
-        : topBrand.push("-- Nil --");
+        targetArray.push(`${getMostFrequentBrand[0][0]} ( ${getMostFrequentBrand[0][1]} )`)
+        : targetArray.push("-- Nil --");
 
     // let brandList = data.map( item => item.brand);
     // let brandCount = brandList.reduce((accumulator, brand) => {

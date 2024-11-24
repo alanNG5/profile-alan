@@ -125,4 +125,11 @@ export class ProductsService {
       console.log("Error occurred during updating product: ", error);
     }
   }
+
+  async selectStockQuantity() {
+    return await this.knex("products")
+      .select("products.id", "brand", "model_name", "model_no", "stock_qtn")
+      .where("stock_qtn", "<=", 5)
+      .orderBy("stock_qtn", "asc");
+  }
 }
