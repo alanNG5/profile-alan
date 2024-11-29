@@ -162,7 +162,6 @@ async function displayWatches () {
 
             brandTag.classList.add("brand");
             brandTag.innerHTML = brand;
-
         });
 
         listOfBrands.addEventListener("click", (event) => {
@@ -195,7 +194,36 @@ async function displayWatches () {
             };
         });
 
+
+        // @ hidden select meun displayed on small screen
+        const select = document.getElementById("rwd-menu-brand");
+        retrieveBrands.forEach( (brand) => {
+            const option = document.createElement("option");
+            option.innerText = brand;
+            select.appendChild(option);
+        });
+
+        select.addEventListener("change", (event) => {
+                let brandName = event.target.value;
+                let selectText = document.getElementById("for-all-brands");
+                selectText.style.display = "block";
+
+                selectText.innerText = "All Brands";
+
+                let filteredWatches = data.filter( (watch) => watch.brand === brandName);
+                document.getElementById("display-board").remove();
+
+                if (brandName === "All Brands") {
+                    renderingWatches(data);
+                    rankPrice(data);
+                    selectText.style.display = "none";
+                } else {
+                    renderingWatches(filteredWatches);
+                    rankPrice(filteredWatches);
+                };
+        });
     };
+
 
     function rankPrice (value) {
 

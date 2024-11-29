@@ -185,51 +185,61 @@
                 <section id="report-sec" hidden>
 
                     <h2>Report</h2>
-                    <div>
-                        <table id="delivery-summary-table">
-                            <thead>
-                                <tr>
-                                    <th>Order Status</th>
-                                    <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
 
-                    <div>
-                        <table id="sales-performance-table">
-                            <thead>
-                                <tr>
-                                    <th>Sales Summary</th>
-                                    <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
-                                    <th>Total</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                    <details open name="report-table">
+                        <summary>Watch Delivery Summary</summary>
+                        <div>
+                            <table id="delivery-summary-table">
+                                <thead>
+                                    <tr>
+                                        <th>Order Status</th>
+                                        <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </details>
 
-                    <div>
-                        <table id="shortage-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Brand</th>
-                                    <th>Model Name</th>
-                                    <th>Model No.</th>
-                                    <th>Stock Quantity</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
+                    <details name="report-table">
+                        <summary>Sales Statement</summary>
+                        <div>
+                            <table id="sales-performance-table">
+                                <thead>
+                                    <tr>
+                                        <th>Sales Summary</th>
+                                        <th><span>2 Months Ago</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th><span>Last Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th><span>This Month</span><br /><span>(</span><b></b><span>)</span></th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
+
+                    <details name="report-table">
+                        <summary>Insufficient Supply</summary>
+                        <div>
+                            <table id="shortage-table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Brand</th>
+                                        <th>Model Name</th>
+                                        <th>Model No.</th>
+                                        <th>Stock Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </details>
                 </section>
 
 
@@ -362,7 +372,6 @@
 <script src="./js/sales.js"></script>
 <script src="./js/orderReport.js"></script>
 <script src="./js/inventoryLevel.js"></script>
-
 <script>
 </script>
 </body>

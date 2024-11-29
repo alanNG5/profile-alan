@@ -30,12 +30,10 @@ class ProductsController {
         //   "Cache-Control",
         //   "no-store, no-cache, must-revalidate, private"
         // );
-
         return res.status(404).json({ error: "Product not found." });
         // return res.status(404).redirect("/404.html");
         // res.write("location.href = '/404.html'");
       }
-
       // @@
       // client side can access boolean of stock instead of exact quantity, except for admin
       product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;

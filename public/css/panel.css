@@ -418,6 +418,82 @@ h2~div div:has(#result-model-no)
     transition: 0.4s ease-in-out;
 }
 
+#report-sec h2 {
+    margin-bottom: 36px;
+}
+
+#report-sec details {
+    margin-bottom: 35px;
+}
+
+#report-sec details[open] > *:not(summary) {
+    animation: details-display 0.6s ease-in-out;
+}
+
+@keyframes details-display {
+    from {
+      opacity:0;
+      transform: translateY(8px);
+    }
+}
+
+#report-sec summary {
+    position: relative;
+    padding-inline: 35px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: 0.2rem;
+    cursor: pointer;
+    margin-bottom: 35px;
+}
+
+#report-sec summary::marker {
+    content: none;
+}
+
+#report-sec summary::before {
+    content: '⧨';
+    position: absolute;
+    transition: rotate 1s;
+    inset-inline-start: 10px;
+    inset-block-start: -1px;
+    font-size: 1.6rem;
+}
+
+#report-sec summary::after {
+    content: '';
+    border-right: 80px ridge var(--color-basic);
+    height: 3px;
+    background: var(--theme-main);
+    position: absolute;
+    width: 50%;
+    bottom: -50%;
+    left: 30px;
+}
+
+#report-sec summary:hover::after {
+    animation: power 1.4s linear infinite;
+}
+
+@keyframes power {
+    to {
+        border-right: 260px dashed black;
+    }
+}
+
+#report-sec details[open] summary::before {
+    rotate: -90deg;
+}
+
+#report-sec details[open] summary {
+    padding-inline: 0px;
+    text-align: center;
+}
+
+#report-sec details[open] summary::after {
+    display: none;
+}
+
 
 @media (max-width: 1080px) {
     aside button {
@@ -543,3 +619,4 @@ h2~div div:has(#result-model-no)
         overflow: scroll;
     }
 }
+

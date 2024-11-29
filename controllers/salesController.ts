@@ -104,6 +104,20 @@ class SalesController {
     }
   };
 
+  getSalesById = async (req: Request, res: Response) => {
+    try {
+      let targetId = req.params["salesId"];
+      let sales = await this.salesService.selectSalesInfoById(
+        parseInt(targetId)
+      );
+      res.status(200).json({ sales });
+    } catch (error) {
+      res.status(500).json({
+        errorMessage: "Internal server error: " + error,
+      });
+    }
+  };
+
   updateDeliveryStatus = async (req: Request, res: Response) => {
     try {
       let { salesOrderChecked } = req.body;

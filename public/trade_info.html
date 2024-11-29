@@ -3,21 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="My Portfolio">
-    <meta name="keywords" content="Demo for watch e-store">
+    <meta name="keywords" content="Demo watch e-store">
     <meta name="author" content="Alan Ng">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impetus Display</title>
     <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/frame.css">
-    <link rel="stylesheet" href="./css/catalogue.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
     <style>
+        .container {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+        }
+
+        .sales-info {
+            height: 320px;
+            background-color: lightblue;
+        }
+
+        .user-info {
+            background-color: violet;
+        }
+
+        .delivery-info {
+            background-color:darkgrey;
+        }
+
+        .container > * {
+            padding: 8px;
+            margin: 8px;
+            flex: 1 100%;
+        }
+        @media all and (min-width: 600px) {
+            .dynamic-block {
+                flex: 1;
+            }
+        }
+
+        @media all and (min-width: 800px) {
+            .sales-info {
+                flex: 3;
+                order: 2;
+            }
+            .user-info {
+                order: 1;
+            }
+            .delivery-info {
+                order: 2;
+            }
+        }
+
     </style>
 </head>
-
 <body>
     <header>
         <div class="navbar style-for-centering">
@@ -28,9 +68,9 @@
                 </div>
             </a>
             <ul id="navList">
-                <li><a href="watch_main.html">Home</a></li>
-                <li><a href="catalogue.html"  class="active">Catalogue</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="watch_main.html" >Home</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="about.html" class="active">About</a></li>
                 <li><a href="index.html">Back to CV</a></li>
             </ul>
 
@@ -58,44 +98,11 @@
         </div>
     </header>
 
-
-    <div class="anti-hero">
-        <div class="backdrop-container">
-            <img src="images/bkg-impetus-wave.jpeg" class="background" />
-            <div class="foreground-container">
-                <img src="images/impetus-cat-vcgold.png" class="foreground" />
-                <img src="images/impetus-cat-hublot_spirit-1.png" class="foreground" />
-                <img src="images/impetus-cat-seikoR.png" class="foreground "/>
-                <img src="images/impetus-alt-0clear_seiko_4.png" class="foreground" />
-            </div>
-            <h1 class="title">Seize the Day</h1>
-        </div>
-
-
-        <main id="catalogue">
-
-            <section id="brand-filter"></section>
-
-            <div id="data-structuring-panel">
-                <div id="rwd-menu-brand-div">
-                    <label for="rwd--brand-sorting">Brand Sorting:</label>
-                    <select id="rwd-menu-brand">
-                        <option id="for-all-brands">-- Please select an option --</option>
-                    </select>
-                </div>
-                <div>
-                    <label for="price-sorting">Price Sorting:</label>
-                    <select id="select-menu">
-                        <option value="">-- Please select an option --</option>
-                        <option value="low-to-high">Lowest to highest</option>
-                        <option value="high-to-low">Highest to lowest</option>
-                    </select>
-                </div>
-            </div>
-
-        </main>
+    <div class="container">
+        <div class="sales-info"></div>
+        <div class="dynamic-block user-info">Left</div>
+        <div class="dynamic-block delivery-info">Right</div>
     </div>
-
 
     <div id="login-modal" class="modal">
         <img src="images/dm101.png" class="img-demo-ac-pw"/>
@@ -213,9 +220,8 @@
 <script src="./js/general.js"></script>
 <script src="./js/auth.js"></script>
 
-<script src="./js/generateWatches.js"></script>
+<script src="./js/salesDetails.js"></script>
 <script>
-    displayWatches();
 </script>
 </body>
 </html>

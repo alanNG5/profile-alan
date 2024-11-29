@@ -50,4 +50,5 @@ routes.get("/sales/record", salesController.getRecord);
 
 routes.get("/admin/sales/status", salesController.getAllSales);
 routes.patch("/admin/sales/status", salesController.updateDeliveryStatus);
+routes.get("/admin/sales/order/:salesId(\\d+)", salesController.getSalesById);
 routes.get("/admin/report/delivery", salesController.getDeliveryStatusReport);

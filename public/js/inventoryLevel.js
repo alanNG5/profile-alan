@@ -31,6 +31,11 @@ function displayShortage (data) {
                 let td = document.createElement("td");
                 td.innerText = item[cell];
                 tr.appendChild(td);
+                if (cell === "stock_qtn") {
+                    if (item[cell] < 1) {
+                        tr.style.color = "red";
+                    }
+                }
         };
         tBody.appendChild(tr);
     };

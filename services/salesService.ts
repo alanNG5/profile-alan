@@ -104,6 +104,34 @@ export class SalesService {
       .innerJoin("users", "sales.user_id", "users.id");
   }
 
+  async selectSalesInfoById(salesId: Number) {
+    return await this.knex
+      .select(
+        "users.id AS uid",
+        "username",
+        "email",
+        "users.created_at AS user_created_at",
+        "products.id AS pid",
+        "brand",
+        "model_name",
+        "model_no",
+        "current_price",
+        "sales.id AS sid",
+        "selling_price",
+        "recipient",
+        "contact_no",
+        "shipping_address",
+        "payment_method",
+        "order_status",
+        "sales.created_at AS sales_created_at",
+        "sales.updated_at AS sales_updated_at"
+      )
+      .from("sales")
+      .leftOuterJoin("products", "sales.product_id", "products.id")
+      .leftOuterJoin("users", "sales.user_id", "users.id")
+      .where("sales.id", salesId);
+  }
+
   async patchDeliveryStatus(salesOrderChecked: number[], currentTime: string) {
     try {
       return await this.knex("sales")
