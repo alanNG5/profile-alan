@@ -11,6 +11,13 @@ export async function seed(knex: Knex): Promise<void> {
     },
 
     {
+      username: "jobseeker",
+      email: "watcher@w3.org",
+      password: "hired2org",
+      is_admin: false,
+    },
+
+    {
       username: "client101",
       email: "client101@tecky.com",
       password: "clientserver0",

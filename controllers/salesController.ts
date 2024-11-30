@@ -143,7 +143,6 @@ class SalesController {
   getDeliveryStatusReport = async (req: Request, res: Response) => {
     try {
       let collectionStatus = await this.salesService.getDeliveryStatusStats();
-
       res.status(200).json({ collectionStatus });
     } catch (error) {
       res.status(500).json({
