@@ -10,52 +10,10 @@
     <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/sales.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-        .container {
-            display: flex;
-            flex-flow: row wrap;
-            text-align: center;
-        }
-
-        .sales-info {
-            height: 320px;
-            background-color: lightblue;
-        }
-
-        .user-info {
-            background-color: violet;
-        }
-
-        .delivery-info {
-            background-color:darkgrey;
-        }
-
-        .container > * {
-            padding: 8px;
-            margin: 8px;
-            flex: 1 100%;
-        }
-        @media all and (min-width: 600px) {
-            .dynamic-block {
-                flex: 1;
-            }
-        }
-
-        @media all and (min-width: 800px) {
-            .sales-info {
-                flex: 3;
-                order: 2;
-            }
-            .user-info {
-                order: 1;
-            }
-            .delivery-info {
-                order: 2;
-            }
-        }
-
     </style>
 </head>
 <body>
@@ -98,11 +56,71 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="sales-info"></div>
-        <div class="dynamic-block user-info">Left</div>
-        <div class="dynamic-block delivery-info">Right</div>
+
+    <div class="statement-container style-for-centering">
+
+        <div class="user-info">
+            <h1>User Info</h1>
+            <div>
+                <div>User ID:</div>
+                <div id="user-id"></div>
+            </div>
+            <div>
+                <div>Username:</div>
+                <div id="username"></div>
+            </div>
+            <div>
+                <div>Email:</div>
+                <div id="email"></div>
+            </div>
+            <div>
+                <div>Register Date:</div>
+                <div id="user-create-date"></div>
+            </div>
+        </div>
+
+        <div class="delivery-info">
+            <h1>Delivery Info</h1>
+            <div>
+                <div>Contact Person:</div>
+                <div id="contact-person"></div>
+            </div>
+            <div>
+                <div>Contact No.:</div>
+                <div id="contact-no"></div>
+            </div>
+            <div>
+                <div>Shipping Address:</div>
+                <div id="address"></div>
+            </div>
+            <div>
+                <div>Order Status:</div>
+                <div id="delivery-status"></div>
+            </div>
+            <div>
+                <div>Delivery Date:</div>
+                <div id="delivery-date"></div>
+            </div>
+        </div>
+
+        <div class="sales-info">
+            <h1>Sales Info</h1>
+            <div><div>Order ID:</div><div id="sales-id"></div></div>
+            <div><div>Order Date:</div><div id="sales-create-date"></div></div>
+
+            <h4>Product</h4>
+            <div><div>Product ID:</div><div id="product-id"></div></div>
+            <div><div>Brand:</div><div id="brand"></div></div>
+            <div><div>Model Name:</div><div id="model-name"></div></div>
+            <div><div>Model No:</div><div id="model-no"></div></div>
+
+            <div><div>Selling Price:</div><div id="selling-price"></div></div>
+            <div><div>Payment Method:</div><div id="payment-method"></div></div>
+            <div><div>Current Price:</div><div id="current-price"></div></div>
+        </div>
+
     </div>
+
 
     <div id="login-modal" class="modal">
         <img src="images/dm101.png" class="img-demo-ac-pw"/>

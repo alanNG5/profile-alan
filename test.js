@@ -32,7 +32,7 @@ let obj = {
     "deal": false
 }
 
-let x = (obj.deal) ? console.log("sold") : console.log("pending");
+let fxTest = (obj.brand) ? console.log("sold") : console.log("pending");
 
 let ts = [] + {};
 let fx = {} + [];
@@ -77,12 +77,3 @@ let q = z.map(obj => ({...obj}));
 q[0].b=256;
 console.log("q: ", q);
 console.log("z: ",z);
-
-// function arr(p1){
-//     console.log("param: ", p1);
-// }
-
-// let tqqq = [["apple", 200],["tesla", 400],["google", 500]];
-// arr(...tqqq);
-
-

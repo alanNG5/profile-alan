@@ -421,7 +421,7 @@ body {
     }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 420px) {
 
     #data-structuring-panel select {
         padding-top: 20px;
@@ -435,5 +435,13 @@ body {
 
     #data-structuring-panel div::before {
         line-height: 55px;
+    }
+
+    #display-board {
+        overflow: scroll;
+        padding-left: 6%;
+    }
+    .style-for-centering {
+        width: 100%;
     }
 }

@@ -144,11 +144,8 @@ export class SalesService {
 
   async getDeliveryStatusStats() {
     try {
-      let thisdate = new Date().getDate();
       let thisMonth = new Date().getMonth() + 1;
       let thisYear = new Date().getFullYear();
-
-      let today: string = ("0" + thisdate).slice(-2);
 
       // @ set date as 0 will return the last day of the previous month
       // @ get the index of date of last 2 months; turn it into concrete month; get the corresponding year
@@ -172,13 +169,36 @@ export class SalesService {
         recentMonthArr.push(("0" + month).slice(-2));
       }
 
+      let setNextDate = new Date(
+        new Date().getFullYear(),
+        new Date().getMonth(),
+        new Date().getDate() + 1
+      );
+
+      let tmr = new Date(setNextDate).getDate();
+      let tmrStr = ("0" + tmr).slice(-2);
+      let monthTmr = new Date(setNextDate).getMonth() + 1;
+      let monthTmrStr = ("0" + monthTmr).slice(-2);
+      let yrTmr = new Date(setNextDate).getFullYear();
+
       let data = await this.knex.raw(
         `WITH Subtotal AS
         (SELECT order_status,
         SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[0]}-${recentMonthArr[0]}-01' THEN 1 ELSE 0 END) AS "two_months_ago",
         SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[1]}-${recentMonthArr[1]}-01' THEN 1 ELSE 0 END) AS "last_month",
         SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[2]}-${recentMonthArr[2]}-01' THEN 1 ELSE 0 END) AS "this_month",
-        COUNT(*) AS "status_count" FROM sales WHERE created_at >= '${yearArr[0]}-${recentMonthArr[0]}-01' AND created_at <= '${yearArr[2]}-12-31' GROUP BY order_status) SELECT * FROM Subtotal UNION ALL SELECT 'monthly_count' AS order_status, SUM("two_months_ago") AS "twoMonthsAgo", SUM("last_month") AS "lastMonth", SUM("this_month") AS "thisMonth", SUM("status_count") AS "total_count" FROM Subtotal;`
+        COUNT(*) AS "status_count"
+        FROM sales
+        WHERE created_at >= '${yearArr[0]}-${recentMonthArr[0]}-01' AND created_at < '${yrTmr}-${monthTmrStr}-${tmrStr}'
+        GROUP BY order_status)
+        SELECT * FROM Subtotal
+        UNION ALL
+        SELECT 'monthly_count' AS order_status,
+        SUM("two_months_ago") AS "twoMonthsAgo",
+        SUM("last_month") AS "lastMonth",
+        SUM("this_month") AS "thisMonth",
+        SUM("status_count") AS "total_count"
+        FROM Subtotal;`
       );
 
       return data.rows;
@@ -187,25 +207,3 @@ export class SalesService {
     }
   }
 }
-
-
-
-
-
-// `WITH Subtotal AS
-// (SELECT order_status,
-// SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[0]}-${recentMonthArr[0]}-01' THEN 1 ELSE 0 END) AS "two_months_ago",
-// SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[1]}-${recentMonthArr[1]}-01' THEN 1 ELSE 0 END) AS "last_month",
-// SUM(CASE WHEN DATE_TRUNC('month', created_at) = '${yearArr[2]}-${recentMonthArr[2]}-01' THEN 1 ELSE 0 END) AS "this_month",
-// COUNT(*) AS status_count
-// FROM sales
-// WHERE created_at >= '${yearArr[0]}-${recentMonthArr[0]}-01' AND created_at <= '${yearArr[2]}-${recentMonthArr[2]}-${today}'
-// GROUP BY order_status)
-// SELECT * FROM Subtotal
-// UNION ALL
-// SELECT 'Monthly Total' AS order_status,
-// SUM("two_months_ago") AS "two_months_ago",
-// SUM("last_month") AS "last_month",
-// SUM("this_month") AS "this_month",
-// SUM(status_count) AS total_count
-// FROM Subtotal;`

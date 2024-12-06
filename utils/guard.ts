@@ -12,7 +12,7 @@ export function requireLogin(req: Request, res: Response, next: NextFunction) {
 
 export function requireAdmin(req: Request, res: Response, next: NextFunction) {
   if (!req.session.admin_role) {
-    console.log("Unauthorized access attempt.");
+    // console.log("Unauthorized access attempt.");
     res.status(403).redirect("/");
   } else {
     next();

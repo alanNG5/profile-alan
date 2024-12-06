@@ -533,7 +533,6 @@ footer {
     align-items: center;
     margin: 10px 0;
     padding: 0;
-    flex-wrap: wrap;
 }
 
 .social-icon__item {

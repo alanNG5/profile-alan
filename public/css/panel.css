@@ -349,7 +349,7 @@ h2~div div:has(#result-model-no)
     transform: translate(0%, 6px);
 }
 
-#unselct-checkbox {
+#unselect-checkbox {
     margin-top: 10px;
     cursor: pointer;
     outline: 0;
@@ -367,12 +367,44 @@ h2~div div:has(#result-model-no)
     border-color: var(--theme-main-alt);
 }
 
-#unselct-checkbox:hover {
+#unselect-checkbox:hover {
     color: var(--color-ter);
     background-color: var(--theme-main-alt);
     border-color: var(--theme-main-alt);
 }
 
+#input-order-no {
+    position: relative;
+    font-size: 1.6rem;
+    line-height: 20px;
+    padding: 0 28px;
+    height: 48px;
+    background-color: var(--color-ter);
+    border: 1px solid var(--color-pri);
+    border-radius: 23px;
+    color: var(--color-basic);
+    box-shadow: inset 0 1px 4px 0 rgb(119 122 175 / 30%);
+    overflow: hidden;
+    transition: all 100ms ease-in-out;
+}
+
+#input-order-no:focus {
+    border-color: var(--theme-main);
+    box-shadow: 0 1px 0 0 rgb(35 38 59 / 5%);
+}
+
+.subtitle-search-sales-id {
+    font-size: 1.6rem;
+    font-weight: 600;
+    padding: 25px 0px 10px;
+}
+
+@media (max-width: 480px) {
+    .subtitle-search-sales-id,
+    #input-order-no {
+        width: 100%;
+        font-size: 1.4rem;
+}
 
 /* 5. section of report */
 
@@ -473,6 +505,10 @@ h2~div div:has(#result-model-no)
 
 #report-sec summary:hover::after {
     animation: power 1.4s linear infinite;
+}
+
+#shortage-table tbody td:nth-child(4) {
+    word-wrap: break-word;
 }
 
 @keyframes power {

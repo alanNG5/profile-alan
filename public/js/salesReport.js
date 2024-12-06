@@ -50,12 +50,19 @@ function generateRecordOfPendingForDelivery (data) {
         for ( let cell in item) {
             if (cellEntries.includes(cell)) {
                 const td = document.createElement("td");
-                td.innerText = item[cell];
+                const aLink = document.createElement("a");
+
+                aLink.href = `${urlCurrent}trade_info.html?id=${item.sid}`;
+                aLink.innerText = item[cell];
+
+                td.appendChild(aLink);
                 tRow.appendChild(td);
             };
         };
+
         let lastCell = tRow.insertCell(-1);
         lastCell.innerHTML = `<input type="checkbox" name="${item.sid}">`;
+
         tableBody.appendChild(tRow);
     };
     salesTable.appendChild(tableBody);
@@ -154,13 +161,45 @@ function clickToPatchArray (event)  {
     });
 };
 
-const unselect = document.getElementById("unselct-checkbox");
+const unselect = document.getElementById("unselect-checkbox");
 unselect.addEventListener("click", () => {
     let selectedBox = document.querySelectorAll("#pending-record input:checked");
     for (let item of selectedBox) {
         item.checked = false;
     };
 });
+
+
+document.getElementById("input-order-no").addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+    let input = document.getElementById("input-order-no");
+    let inputVal = input.value;
+    input.value = "";
+    window.location.href = `${urlCurrent}trade_info.html?id=${inputVal}`;}
+});
+
+
+// @ search function for sales order (pending for delivery)
+// document.getElementById("sales-order-search").addEventListener("input", () => {
+//     let input, filter, table, tr, td, i, txtValue;
+//     input = document.getElementById("sales-order-search");
+//     filter = input.value.toUpperCase();
+//     table = document.getElementById("pending-record");
+//     tr = table.getElementsByTagName("tr");
+
+//     for (i = 0; i < tr.length; i++) {
+//         td = tr[i].getElementsByTagName("td")[0];
+//         if (td) {
+//             txtValue = td.innerText;
+//             if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//                 tr[i].style.display = "";
+//             } else {
+//                 tr[i].style.display = "none";
+//             };
+//         };
+//     };
+// });
+
 
 // @ Push filtered data into array for appending to table
 let turnoverStats = [];
