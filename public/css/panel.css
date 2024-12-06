@@ -404,6 +404,7 @@ h2~div div:has(#result-model-no)
     #input-order-no {
         width: 100%;
         font-size: 1.4rem;
+    }
 }
 
 /* 5. section of report */
@@ -655,4 +656,3 @@ h2~div div:has(#result-model-no)
         overflow: scroll;
     }
 }
-
