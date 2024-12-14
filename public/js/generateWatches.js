@@ -70,6 +70,16 @@ async function displayProductsAtHomePage () {
     };
 };
 
+
+const itemPerPage = 12;
+let currentPage = 1;
+let arrOfWatches = [];
+let calTotalPage = function () {
+    return Math.ceil(arrOfWatches.length / itemPerPage);
+}
+const displayBoard = document.getElementById("display-board");
+
+
 async function displayWatches () {
 
     await fetch ("/watch")
@@ -81,19 +91,48 @@ async function displayWatches () {
             }
         })
         .then( fetchedData => {
-            renderingWatches(fetchedData.data);
+            arrOfWatches = [...fetchedData.data];
             setBrandFilter(fetchedData.data);
-            rankPrice(fetchedData.data);
         })
         .catch((error) => console.log("Fetching error: ", error));
 
-    function renderingWatches (data) {
+    // let totalPage = Math.ceil(arrOfWatches.length / itemPerPage);
 
-        const mainboard = document.getElementById("catalogue");
-        const displayBoard = document.createElement("div");
-        mainboard.appendChild(displayBoard);
-        displayBoard.setAttribute("id", "display-board");
-        displayBoard.classList.add("style-for-centering");
+    function setPagination () {
+        let startIndex = (currentPage - 1) * itemPerPage;
+        let endIndex = currentPage * itemPerPage;
+        let pageData = arrOfWatches.slice(startIndex, endIndex);
+
+        displayBoard.innerHTML = "";
+        renderingWatches(pageData);
+
+        // document.getElementById("current-page").textContent = `Page ${currentPage}`;
+        document.querySelector("#current-page span:first-of-type").textContent = `Page ${currentPage}`;
+        document.querySelector("#current-page span:last-of-type").textContent = ` / ${calTotalPage()}`;
+
+        document.getElementById("prev-page-btn").style.display = currentPage === 1 ? "none" : "block";
+        document.getElementById("next-page-btn").style.display = currentPage === calTotalPage() ? "none" : "block";
+    };
+
+    function turnPageButtons () {
+
+        document.getElementById("prev-page-btn").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                setPagination();
+            };
+        });
+
+        document.getElementById("next-page-btn").addEventListener("click", () => {
+            if (currentPage < calTotalPage()) {
+                currentPage++;
+                setPagination();
+            };
+        });
+    };
+
+
+    function renderingWatches (data) {
 
         data.forEach( (watch) => {
             const watchCard = document.createElement("div");
@@ -140,9 +179,6 @@ async function displayWatches () {
 
             btnLink.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
             // @ avoid using addEventListener inside forEach iteration as possible
-            // btn.addEventListener("click", () => {
-            //     window.location.href = `${urlCurrent}watch_details.html?id=${watch.id}`;
-            // });
         });
     };
 
@@ -150,10 +186,10 @@ async function displayWatches () {
         let retrieveBrands = [...new Set (data.map( (watch) => watch.brand ))];
         const brandFilter = document.getElementById("brand-filter");
         const listOfBrands = document.createElement("div");
+
         brandFilter.classList.add("style-for-centering");
         brandFilter.appendChild(listOfBrands);
         listOfBrands.setAttribute("id", "brand-list");
-
 
         retrieveBrands.forEach( (brand) => {
             const brandTag = document.createElement("div");
@@ -164,6 +200,8 @@ async function displayWatches () {
             brandTag.innerHTML = brand;
         });
 
+        let defaultOption = document.querySelector("#catalogue #select-menu option:first-of-type");
+
         listOfBrands.addEventListener("click", (event) => {
 
             document.getElementById("undo-filter")?.remove();
@@ -172,11 +210,13 @@ async function displayWatches () {
             if(event.target.matches(".brand")) {
 
                 let brandName = event.target.textContent;
-                let filteredWatches = data.filter( (watch) => watch.brand === brandName);
-                document.getElementById("display-board").remove();
+                arrOfWatches = data.filter( (watch) => watch.brand === brandName);
 
-                renderingWatches(filteredWatches);
-                rankPrice(filteredWatches);
+                currentPage = 1;
+                rankPrice();
+                setPagination();
+
+                defaultOption.selected = true;
 
                 const reset = document.createElement("div");
                 listOfBrands.appendChild(reset);
@@ -184,9 +224,12 @@ async function displayWatches () {
                 reset.setAttribute("id", "undo-filter");
 
                 reset.addEventListener("click", () => {
-                    document.getElementById("display-board").remove();
-                    renderingWatches(data);
-                    rankPrice(data);
+                    displayBoard.innerHTML = "";
+                    arrOfWatches = [...data];
+                    currentPage = 1;
+                    setPagination();
+                    rankPrice();
+                    defaultOption.selected = true;
                     reset.remove();
                 });
 
@@ -195,7 +238,7 @@ async function displayWatches () {
         });
 
 
-        // @ hidden select meun displayed on small screen
+        // @ hidden select menu displayed on small screen
         const select = document.getElementById("rwd-menu-brand");
         retrieveBrands.forEach( (brand) => {
             const option = document.createElement("option");
@@ -210,22 +253,28 @@ async function displayWatches () {
 
                 selectText.innerText = "All Brands";
 
-                let filteredWatches = data.filter( (watch) => watch.brand === brandName);
-                document.getElementById("display-board").remove();
+                arrOfWatches = data.filter( (watch) => watch.brand === brandName);
+                displayBoard.innerHTML = "";
 
                 if (brandName === "All Brands") {
-                    renderingWatches(data);
-                    rankPrice(data);
+                    displayBoard.innerHTML = "";
+                    arrOfWatches = [...data];
+                    currentPage = 1;
+                    setPagination();
+                    rankPrice();
+                    defaultOption.selected = true;
                     selectText.style.display = "none";
                 } else {
-                    renderingWatches(filteredWatches);
-                    rankPrice(filteredWatches);
+                    currentPage = 1;
+                    setPagination();
+                    rankPrice();
+                    defaultOption.selected = true;
                 };
         });
     };
 
 
-    function rankPrice (value) {
+    function rankPrice () {
 
         let selectMenu = document.getElementById("select-menu");
         selectMenu.addEventListener("change", selectSort);
@@ -234,20 +283,26 @@ async function displayWatches () {
             const switchValue = this.value;
 
             if (switchValue === "low-to-high") {
-                document.getElementById("display-board")?.remove();
+                displayBoard.innerHTML = "";
 
-                let sortedData = value.sort( ( x, y ) => x.current_price - y.current_price );
-                renderingWatches(sortedData);
+                arrOfWatches.sort( ( x, y ) => x.current_price - y.current_price );
+                currentPage = 1;
+                setPagination();
 
             } else if (switchValue === "high-to-low") {
-                document.getElementById("display-board")?.remove();
+                displayBoard.innerHTML = "";
 
-                let sortedData = value.sort( ( x, y ) => y.current_price - x.current_price);
-                renderingWatches(sortedData);
+                arrOfWatches.sort( ( x, y ) => y.current_price - x.current_price);
+                currentPage = 1;
+                setPagination();
 
             } else {
                 return;
             };
         };
     };
+
+    setPagination();
+    turnPageButtons();
+    rankPrice();
 };

@@ -303,6 +303,35 @@ body {
     cursor: pointer;
 }
 
+.pagination {
+    position: relative;
+    justify-content: center;
+    display: flex;
+    font-size: 2.8rem;
+    letter-spacing: 0.6rem;
+    color: var(--color-ter);
+    font-weight: 500;
+    padding-bottom: 50px;
+    line-height: 150%;
+    text-shadow: var(--color-basic) 4px 0 9px;
+}
+
+.pagination button {
+    background-color: transparent;
+    border: none;
+    font-size: 4.2rem;
+    color: var(--color-ter);
+}
+
+#current-page {
+    margin: 0 20px;
+}
+
+#current-page span:last-of-type {
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
+}
+
 @keyframes flow {
     0% {
       transform: translate(-50%, -75%) rotate(0deg);
