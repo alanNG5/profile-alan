@@ -16,10 +16,6 @@ main > div {
     padding: 135px 0 60px;
 }
 
-/* main div div section:nth-of-type(n+2) {
-    display: none;
-} */
-
 main div aside {
     display: flex;
     flex-direction: column;
@@ -421,7 +417,6 @@ h2~div div:has(#result-model-no)
         table-layout: fixed;
     }
 }
-
 
 #report-sec table thead {
     background-color: var(--theme-main);
