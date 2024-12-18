@@ -57,6 +57,7 @@ class SalesController {
   };
 
   getRecord = async (req: Request, res: Response) => {
+
     let userId = req.session.userid as number | undefined;
     let userRole = req.session.admin_role;
 
@@ -71,6 +72,7 @@ class SalesController {
         .status(403)
         .json({ errorMessage: "Access Denied: for MEMBER only." });
     }
+
 
     try {
       let record = await this.salesService.getSalesRecord(userId);

@@ -1,19 +1,256 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page Not Found</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="My Portfolio">
+    <meta name="keywords" content="Demo watch e-store">
+    <meta name="author" content="Alan Ng">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impetus Display</title>
+    <link rel="icon" type="image/x-icon" href="./images/briefcase.svg">
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/error.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
-      img {
-        max-width: 100%;
-      }
     </style>
-  </head>
-  <body>
-    <img
-      src="https://internetdevels.com/sites/default/files/public/blog_preview/404_page_cover.jpg"
-    />
-    <a href="/watch_main.html">Returning to home page</a>
-  </body>
+</head>
+<body>
+    <header>
+        <div class="navbar style-for-centering">
+            <a href="watch_main.html">
+                <div class="logo">
+                    <img src="images/logoIMP.png" alt="logo">
+                    <span>WATCH STORE</span>
+                </div>
+            </a>
+            <ul id="navList">
+                <li><a href="watch_main.html" >Home</a></li>
+                <li><a href="catalogue.html">Catalogue</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Back to CV</a></li>
+            </ul>
+
+            <div>
+                <button id="login-btn">Login</button>
+                <div id="user-info">
+                    <i class='bx bxs-user-circle'></i>
+                    <span id="role-info">role</span>
+                    <span> | </span>
+                    <strong id="name-info">name</strong>
+                    <div id="user-action" hidden >
+                        <div>
+                            <button id="panel-btn"></button>
+                            <button id="logout-btn">Logout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="toggle-btn" id="toggleBtn">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+    </header>
+
+    <div>
+        <div class="msg-container" id="http-error-container">
+            <div>
+                <h2>404 Not Found</h2>
+                <i class="bx bx-burst">
+                    <img src="images/defect.webp" alt="Client Error">
+                </i>
+            </div>
+
+            <span style="--i:0;"></span>
+            <span style="--i:1;"></span>
+            <span style="--i:2;"></span>
+            <span style="--i:3;"></span>
+            <span style="--i:4;"></span>
+            <span style="--i:5;"></span>
+            <span style="--i:6;"></span>
+            <span style="--i:7;"></span>
+            <span style="--i:8;"></span>
+            <span style="--i:9;"></span>
+            <span style="--i:10;"></span>
+            <span style="--i:11;"></span>
+            <span style="--i:12;"></span>
+            <span style="--i:13;"></span>
+            <span style="--i:14;"></span>
+            <span style="--i:15;"></span>
+            <span style="--i:16;"></span>
+            <span style="--i:17;"></span>
+            <span style="--i:18;"></span>
+            <span style="--i:19;"></span>
+            <span style="--i:20;"></span>
+            <span style="--i:21;"></span>
+            <span style="--i:22;"></span>
+            <span style="--i:23;"></span>
+            <span style="--i:24;"></span>
+            <span style="--i:25;"></span>
+            <span style="--i:26;"></span>
+            <span style="--i:27;"></span>
+            <span style="--i:28;"></span>
+            <span style="--i:29;"></span>
+            <span style="--i:30;"></span>
+            <span style="--i:31;"></span>
+            <span style="--i:32;"></span>
+            <span style="--i:33;"></span>
+            <span style="--i:34;"></span>
+            <span style="--i:35;"></span>
+            <span style="--i:36;"></span>
+            <span style="--i:37;"></span>
+            <span style="--i:38;"></span>
+            <span style="--i:39;"></span>
+            <!-- <span style="--i:40;"></span>
+            <span style="--i:41;"></span>
+            <span style="--i:42;"></span>
+            <span style="--i:43;"></span>
+            <span style="--i:44;"></span>
+            <span style="--i:45;"></span>
+            <span style="--i:46;"></span>
+            <span style="--i:47;"></span>
+            <span style="--i:48;"></span>
+            <span style="--i:49;"></span>
+            <span style="--i:50;"></span>
+            <span style="--i:51;"></span>
+            <span style="--i:52;"></span>
+            <span style="--i:53;"></span>
+            <span style="--i:54;"></span>
+            <span style="--i:55;"></span>
+            <span style="--i:56;"></span>
+            <span style="--i:57;"></span>
+            <span style="--i:58;"></span>
+            <span style="--i:59;"></span> -->
+
+        </div>
+    </div>
+
+    <div id="login-modal" class="modal">
+        <img src="images/dm101.png" class="img-demo-ac-pw"/>
+
+        <div class="modal-content">
+            <span id="close" class="x-cl-btn">&times;</span>
+
+            <div class="form-container form-login">
+                <h1>Login</h1>
+                <form id="login-form" action="/user/login" method="POST">
+
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Login">
+
+                    <div class="account-status">
+                        <p>Don't have an account? <a href="#" id="register-link">Register Now</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container  form-register">
+                <h1>Register</h1>
+                <form id="register-form" action="/user/register" method="POST">
+                    <div class="input-box">
+                        <input type="text" name="username" placeholder="Username" minlength="6" pattern="[a-zA-Z0-9]{6,14}$" title="Must contain either digit or letter, with a length between 6 and 14 characters" required/>
+                        <i class='bx bxs-user'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="email" name="email" placeholder="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" title="Must be email format. '@' and '.' should appear" required/>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+
+                    <div class="input-box">
+                        <input type="password" name="password" placeholder="Password" minlength="6" pattern="^(?=.*[0-9])(?=.*[a-zA-Z])[a-zA-Z0-9]{6,}$" title="Must contain at least 1 digit and 1 letter, and not contain character other than digit and letter, and at least 6 or more characters" required/>
+                        <i class='bx bxs-lock-alt' ></i>
+                    </div>
+
+                    <input type="submit" class="submit-btn" value="Register">
+
+                    <div class="account-status">
+                        <p>Already have an account? <a href="#" id="login-link">Login</a></p>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="logout-modal" class="modal">
+        <div class="modal-content">
+            <div class="form-container">
+                <h3>Are you sure to logout?</h3>
+                <form id="logout-form" action="/user/logout" method="POST">
+                    <input type="submit" value="Logout">
+                    <div id="cancel-logout">Stay Logged In</div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <abbr title="FOR DEMO ONLY">
+            <ul class="social-icon">
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-whatsapp"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a></li>
+                <li class="social-icon__item">
+                    <a class="social-icon__link">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </li>
+            </ul>
+        </abbr>
+        <p>&copy;2024 Alan Ng | Portfolio | All Rights Reserved</p>
+    </footer>
+
+
+    <div class="back-btn"><a href="index.html">
+        <i class="bx bx-left-arrow-circle"></i>
+
+        <svg height="100%" width="100%" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 297.00 297.00" xml:space="preserve" fill="#000000" stroke="#000000" stroke-width="0.00297" transform="rotate(0)matrix(1, 0, 0, 1, 0, 0)">
+
+                <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.1880000000000002"/>
+
+                <g id="SVGRepo_iconCarrier"> <g> <g> <g> <g> <circle style="fill:#24ebf9;" cx="148.5" cy="148.5" r="148.5"/> </g> </g> </g> <path style="fill:#0f8bff;" d="M179.023,37.423l-61.089,222.025l37.389,37.389c76.627-3.466,138.118-64.999,141.52-141.642 L179.023,37.423z"/> <g> <path style="fill:#32373B;" d="M127.083,264h42.833c6.397,0,11.583-5.186,11.583-11.583V44.583 c0-6.397-5.186-11.583-11.583-11.583h-42.833c-6.397,0-11.584,5.186-11.584,11.583v207.833C115.5,258.814,120.686,264,127.083,264 z"/> </g> <g> <circle style="fill:#fcf41d;" cx="148.5" cy="148.5" r="59.5"/> </g> <g> <circle style="fill:#3f403b;" cx="148.5" cy="148.5" r="49.5"/> </g> </g> </g>
+
+        </svg></a>
+    </div>
+
+<!-- CDN for popup-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+
+<script src="./js/general.js"></script>
+<script src="./js/auth.js"></script>
+
+<script>
+    let spanLen = document.querySelectorAll(".msg-container span").length;
+
+    let getQuantityOfSpan = document.getElementById("http-error-container");
+    getQuantityOfSpan.style.setProperty("--span-count", spanLen);
+
+</script>
+</body>
 </html>

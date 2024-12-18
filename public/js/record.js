@@ -7,6 +7,8 @@ async function getUser () {
   let res = await fetch("/user");
   let json = await res.json();
   ourClient = json.username;
+
+  ourClient = ourClient == undefined ? "Logged Out User" : ourClient;
 }
 
 async function displaySalesRecord () {

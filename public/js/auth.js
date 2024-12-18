@@ -87,9 +87,9 @@ async function submitLogout(event) {
     location.href === `${urlCurrent}purchase_record.html` || location.href === `${urlCurrent}admin.html` ?
     "/watch_main.html" : location.href;
 
-  });
+  })
 
-  loadVisitorRole();
+  // loadVisitorRole();
 };
 
 

@@ -6,7 +6,7 @@ import { AuthController } from "./controllers/authController";
 import { AuthService } from "./services/authService";
 import { SalesController } from "./controllers/salesController";
 import { SalesService } from "./services/salesService";
-// import { requireLogin, requireAdmin } from "./utils/guard";
+import { requireLogin, requireAdmin } from "./utils/guard";
 
 const knexConfigs = require("./knexfile");
 const configMode = process.env.NODE_ENV || "production";
@@ -51,4 +51,8 @@ routes.get("/sales/record", salesController.getRecord);
 routes.get("/admin/sales/status", salesController.getAllSales);
 routes.patch("/admin/sales/status", salesController.updateDeliveryStatus);
 routes.get("/admin/sales/order/:salesId(\\d+)", salesController.getSalesById);
-routes.get("/admin/report/delivery", salesController.getDeliveryStatusReport);
+routes.get(
+  "/admin/report/delivery",
+  requireAdmin,
+  salesController.getDeliveryStatusReport
+);
