@@ -79,20 +79,40 @@ export class ProductsService {
         is_pre_owned: is_pre_owned_entry,
       };
 
-      let newProduct = await this.knex("products")
-        .insert(newProductData)
-        .returning("id");
+      // let checkModelName = await this.knex("products")
+      //   .select("model_name")
+      //   .where("model_name", model_name_entry);
 
-      if (imagePath) {
-        let imagePathSaved = {
-          product_id: newProduct[0].id,
-          image_path: imagePath,
+      let checkModelNo = await this.knex("products")
+        .select("model_no")
+        .where("model_no", model_no_entry);
+
+      if (checkModelNo.length > 0) {
+        return {
+          flag: false,
+          message: `The model number of "${model_no_entry}" is already in use.`,
         };
-        await this.knex("product_images").insert(imagePathSaved);
-        console.log("Image saved. Uploading completed.");
+      } else {
+        let newProduct = await this.knex("products")
+          .insert(newProductData)
+          .returning("id");
+
+        if (imagePath) {
+          let imagePathSaved = {
+            product_id: newProduct[0].id,
+            image_path: imagePath,
+          };
+          await this.knex("product_images").insert(imagePathSaved);
+          console.log(`Image of ${imagePath} saved. Uploading completed.`);
+        }
+
+        return {
+          flag: true,
+          message: `New product of "${brand_entry} - ${model_name_entry}" has been created successfully.`,
+        };
       }
     } catch (error) {
-      console.log("Uploading Error for New Item: ", error);
+      console.log("Error of Inserting New Item: ", error);
     }
   }
 

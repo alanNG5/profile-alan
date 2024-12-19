@@ -4,8 +4,9 @@ checkbox.addEventListener("change", () => {
   checkbox.value = checkbox.checked;
 });
 
+let createItemForm = document.getElementById("create-item-form");
 
-document.getElementById("create-item-form").addEventListener("submit", async function (event) {
+createItemForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
     const form = event.target;
@@ -23,10 +24,18 @@ document.getElementById("create-item-form").addEventListener("submit", async fun
 
     const result = await res.json();
 
-    if (result.error) {
-        alert(result.error);
+    if (result.duplicatedItemMessage) {
+        msgFailure(result.duplicatedItemMessage);
         return;
     }
-    alert("Item was created successfully.");
+    if (result.successMessage) {
+        msgSuccess(result.successMessage);
+        createItemForm.reset();
+        return;
+    }
+    if (result.errorMessage) {
+        msgFailure(result.errorMessage);
+        return;
+    }
 });
 

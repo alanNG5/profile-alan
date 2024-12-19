@@ -22,9 +22,10 @@ routes.get("/watch/hotProducts", productsController.getBestSellingProducts);
 routes.get("/watch/:productId(\\d+)", productsController.getProductById);
 routes.get("/watch", productsController.getAllProducts);
 
-routes.get("/admin/showBrands", productsController.getBrands);
+routes.get("/admin/showBrands", requireAdmin, productsController.getBrands);
 routes.get(
   "/admin/showModels/:selectedBrand",
+  requireAdmin,
   productsController.getModelNames
 );
 routes.patch(
@@ -32,7 +33,11 @@ routes.patch(
   productsController.updateProductById
 );
 routes.post("/admin/newItem", productsController.createProduct);
-routes.get("/admin/inventoryLv", productsController.getInventoryLevel);
+routes.get(
+  "/admin/inventoryLv",
+  requireAdmin,
+  productsController.getInventoryLevel
+);
 
 const authService = new AuthService(knex);
 const authController = new AuthController(authService);
@@ -48,9 +53,17 @@ const salesController = new SalesController(salesService);
 routes.post("/sales/record", salesController.createOrder);
 routes.get("/sales/record", salesController.getRecord);
 
-routes.get("/admin/sales/status", salesController.getAllSales);
-routes.patch("/admin/sales/status", salesController.updateDeliveryStatus);
-routes.get("/admin/sales/order/:salesId(\\d+)", salesController.getSalesById);
+routes.get("/admin/sales/status", requireAdmin, salesController.getAllSales);
+routes.patch(
+  "/admin/sales/status",
+  requireAdmin,
+  salesController.updateDeliveryStatus
+);
+routes.get(
+  "/admin/sales/order/:salesId(\\d+)",
+  requireAdmin,
+  salesController.getSalesById
+);
 routes.get(
   "/admin/report/delivery",
   requireAdmin,

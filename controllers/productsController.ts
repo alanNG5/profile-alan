@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
 import { ProductsService } from "../services/productsService";
 import { formidable, File } from "formidable";
-import fs from "fs";
+// import fs from "fs";
+import { promises as fs } from "fs";
 import "../utils/session";
 
 class ProductsController {
@@ -27,8 +28,8 @@ class ProductsController {
       if (!product) {
         return res.status(404).json({ error: "Product not found." });
       }
-      // @@
-      // client side can access boolean of stock instead of exact quantity, except for admin
+      //
+      // @ client side can access boolean of stock instead of exact quantity, except for admin
       product[0].outOfStock = product[0].stock_qtn < 1 ? true : false;
       if (!req.session.admin_role) {
         delete product[0].stock_qtn;
@@ -63,7 +64,7 @@ class ProductsController {
 
   createProduct = async (req: Request, res: Response) => {
     const uploadDir = "uploads";
-    fs.mkdirSync(uploadDir, { recursive: true });
+    await fs.mkdir(uploadDir, { recursive: true });
 
     const form = formidable({
       uploadDir,
@@ -84,9 +85,10 @@ class ProductsController {
       });
     });
 
-    const imagePath = files.image_entry.newFilename;
-
-    console.log("File name created:", imagePath);
+    const imagePath = files.image_entry?.newFilename;
+    // @ full path of the uploaded image
+    // functions of fs.unlink require the complete path to the file to know where to look. Node.js cannot find and delete the file under the current working directory.
+    const fullImagePath = `${uploadDir}/${files.image_entry?.newFilename}`;
 
     let {
       brand_entry,
@@ -101,7 +103,7 @@ class ProductsController {
     try {
       let formatCurrency = current_price_entry.replace(/[^0-9.]+/g, "");
 
-      await this.productsService.insertProduct(
+      let createNewItem = await this.productsService.insertProduct(
         brand_entry,
         model_name_entry,
         model_no_entry,
@@ -111,12 +113,30 @@ class ProductsController {
         is_pre_owned_entry,
         imagePath
       );
-      res.status(201).json({ message: "success" });
+
+      // @ Check if the file exists before trying to unlink it
+      await fs.stat(fullImagePath);
+
+      if (!createNewItem) {
+        await fs.unlink(fullImagePath);
+        res.status(500).json({
+          errorMessage: "Internal server error: failure to create new item.",
+        });
+      } else if (!createNewItem.flag) {
+        await fs.unlink(fullImagePath);
+        res.status(400).json({ duplicatedItemMessage: createNewItem.message });
+      } else if (createNewItem.flag) {
+        res.status(201).json({ successMessage: createNewItem.message });
+      }
     } catch (error) {
-      console.log("Error occurred during inserting new item: ", error);
-      res
-        .status(500)
-        .json({ message: "Internal server error: failed to insert new item." });
+      try {
+        // @ Checking file existence before deletion
+        await fs.stat(fullImagePath);
+        await fs.unlink(fullImagePath);
+      } catch (unlinkError) {
+        console.error(`Failed to delete file: ${unlinkError}`);
+      }
+      res.status(500).json({ message: "Internal server error: ", error });
     }
   };
 

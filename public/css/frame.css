@@ -348,6 +348,10 @@ header * {
     left: 0;
 }
 
+.modal-content .form-container.form-register #register-form {
+    width: 300px;
+}
+
 .modal-content.active .form-container.form-login {
     transform: translateY(-480px);
 }
@@ -734,7 +738,9 @@ footer p {
         letter-spacing: 0.1rem;
         padding: 6px 10px;
     }
-
+    .modal-content .form-container.form-register #register-form {
+        width: 80%;
+    }
 }
 
 /* for Swal popup */

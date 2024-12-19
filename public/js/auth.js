@@ -114,8 +114,7 @@ async function submitRegister(event) {
 
   if(json.error) {
     msgFailure(json.error);
-
-  return;
+    return;
   };
 
   document.getElementById("login-modal").style.display = "none";

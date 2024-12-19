@@ -55,8 +55,9 @@ void function () {} ()
 // console.log("prev month: ", prevMon);
 // console.log("yr of last mth: ", yrOfPrevMon);
 
-// let set2MonAgo = new Date(new Date().getFullYear(), new Date().getMonth()-2, 1);
-// console.log("set2MonAgo: ", set2MonAgo.toLocaleString());
+let set2MonAgo = new Date(new Date().getFullYear(), new Date().getMonth()-12, 1);
+console.log("set2MonAgo: ", set2MonAgo.toLocaleString());
+console.log("get2MonAgo: ", set2MonAgo.getFullYear(), set2MonAgo.getMonth()+1);
 // let  twoMonAgo = new Date(set2MonAgo).getMonth() + 1;
 // let  yrOf2MonAgo = new Date(set2MonAgo).getFullYear();
 

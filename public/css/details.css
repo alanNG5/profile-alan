@@ -220,6 +220,7 @@ main .card {
         width: 260px;
         height: 65px;
         font-size: 1.6rem;
+        background-size: 540px;
     }
 
     #image-zoom, .card-content {
