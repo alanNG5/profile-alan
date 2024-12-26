@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head></head>
+<head>
     <meta charset="UTF-8">
     <meta name="description" content="My Portfolio">
     <meta name="keywords" content="Demo watch e-store">
@@ -13,37 +13,123 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <style>
+
         body {
             width: 100%;
             height: 100dvh;
+            background: url(images/1gear-x.webp) no-repeat center center;
+
+                /* linear-gradient(
+                    rgba(129, 207, 224, 0.8),
+                    rgb(120, 165, 168, 0.1),
+                    rgba(200, 200, 255, 0.6)
+                ), */
+                ;
+            background-size: cover;
         }
 
-        .view-container {
+        aside {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20%;
+            height: 100%;
+            padding-top: 150px;
             display: flex;
-            justify-content: center;
-            /* align-items: center; */
-            flex-wrap: wrap;
-            width: 100%;
-            /* height: 100dvh; */
+            flex-direction: column;
+            background-color: rgba(0, 0, 0, 0.1);
+            align-items: center;
         }
 
-        .board-block {
-            animation: rising 5s linear;
-            animation-timeline: view();
-            /* to launch the animation when element begins to be visible on the screen. */
-            animation-range: entry 0% cover 60%;
-            /* to let animation start from bottom and end at 40vh of screen. */
+        aside div {
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.6);
+            width: 80%;
+            height: fit-content;
+            color: var(--color-basic);
+            font-size: 1.8rem;
+            font-weight: 500;
+            letter-spacing: 0.1rem;
+            padding: 25px 10px;
+            margin-bottom: 15px;
+            transition: 1s;
+        }
 
-            height: 500px;
-            width: 60%;
-            margin: 50px;
-            background-color: bisque;
+        aside div.active {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: var(--color-ter);
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.3rem;
+        }
+
+        aside div:first-of-type.active {
+            border-right: 8px solid var(--color-sec);
+        }
+
+        aside div:nth-child(2).active {
+            border-right: 8px solid aqua;
+        }
+
+        aside div:last-of-type.active {
+            border-right: 8px solid var(--color-supp);
+        }
+
+        main {
+            display: flex;
+            float: right;
+            flex-wrap: wrap;
+            width: 80%;
+            justify-content: center;
+        }
+
+        .about-this {
+            background-color: white;
+            /* position: relative; */
+            margin: 150px 80px 0;
+            width: 100%;
+            padding: 20px;
+
             border: 0.5mm solid black;
+            border-radius: 6px;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
             rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
             rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 
+        }
+
+        h4 {
+            font-size: 1.8rem;
+        }
+
+        article {
+            animation: rising 5s linear;
+            animation-timeline: view();
+            /* to launch the animation when element begins to be visible on the screen. */
+            animation-range: entry 0% cover 40%;
+            /* to let animation start from bottom and end at 40vh of screen. */
+
+            min-height: 80dvh;
+            width: 100%;
+            margin: 80px;
+            padding: 20px;
+            background-color: rgb(252, 248, 203);
+            border: 0.5mm solid black;
+            border-radius: 6px;
+            box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+            rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+            rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+        }
+
+        article:nth-of-type(2) {
+            background-color: rgb(100, 149, 239);
+            color: var(--color-ter);
+        }
+
+        ol li {
             font-size: 1.6rem;
+            margin: 10px 0;
+            line-height: 200%;
         }
 
         @keyframes rising {
@@ -53,10 +139,43 @@
             }
             to {
                 opacity: 1;
-                scale: 1;}
+                scale: 1;
+            }
         }
+
+        @media  (min-width: 1600px) {
+            body {
+                background:
+                    linear-gradient(
+                        rgb(120, 165, 168, 0.85),
+                        rgba(200, 200, 255, 0.7)
+                    ),
+                    url(images/1gear-x.webp) no-repeat center center;
+                background-size: cover;
+            }
+        }
+
+
+
+        aside button {
+            width: 80%;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.6);
+            color: black;
+            font-size: 1.6rem;
+        }
+
+        .test-1 {
+            position: absolute;
+            left: var(--tracker-x);
+            top: var(--tracker-y);
+            width: 100px;
+            z-index: 999;
+        }
+
     </style>
 </head>
+
 <body>
     <header>
         <div class="navbar style-for-centering">
@@ -97,12 +216,68 @@
         </div>
     </header>
 
-
-    <div class="view-container">
-        <div class="board-block"><h2>Features of the Web App</h2></div>
-        <div class="board-block"><h2>Entity Relation Diagram for Database</h2></div>
-        <div class="board-block"><h2>Future Improvement</h2></div>
+    <div class="test-1" style="--tracker-x: 1000px; --tracker-y: 100px;">
+        <img src="images/taijiSkull.png">
     </div>
+
+    <aside>
+        <div data-index="0">Features</div>
+        <div data-index="1">ERD</div>
+        <div data-index="2">Improvement</div>
+        <button></button>
+        <button></button>
+    </aside>
+
+    <main class="view-container">
+
+        <div class="about-this">
+            <h4>This web page is built for the purpose of demonstration and practise. Visitior can create a non-admin a/c or sign in admin a/c provided in the page. The programmes applied included:</h4>
+        </div>
+
+        <article>
+            <h2>Features of the Web App</h2>
+            <ol>
+                <li>Based on the approach of Responsive Web Design, the website can adapt the screen width of at least 300px but is also better for the width not larger than 1920px.</li>
+                <li>User's password-hashing is implemented by the "bcrypt".</li>
+                <li>Input validation with the use of regular expression for user registration is proceeded at frontend. Check for duplication of username and email is handled at backend. </li>
+                <li>A vague message of "Invalid password or username" will pop up as a result of input error in login form, no matter which field is invalid. It is better than separating the response into specified messages of "Username not found" and "Invalid password" resulting from corresponding input error. Because this practise can prevent other user to find out other correct usernames based on failed attempts.</li>
+                <li>Stock quantity varied with new Sales. Inserting new sales and updating stock are operated under same "transaction" unit so as to fulfill transaction property of atomicity, a database principle of ACID. Rollback is run if this process fails.</li>
+                <li>Regarding to the product which is out of stock, database query will block the item information to be fetched and rendered in web page. On the other hand, an extra check for stock availability prior to submission of sales form to database is necessary to prevent the occurrence of scenario that one product is purchased by two or more user at same time so that the quantity will be below 0 when 2 sales item are created.</li>
+                <li>To tackle with memory leakage due to express-session, npm package of "memorystore" was introduced.</li>
+                <li>The object of date is handled in frontend after response from database. It allows adjustment of timestamp based on the local format in client side. In practise, input of date is parsed in JSON and output of date string is proceeded by constructor.</li>
+                <li>In the admin's report, consecutive "months" crossing the years are handled dynamically instead of hard code.</li>
+            </ol>
+        </article>
+
+        <article>
+            <h2>Entity Relationship Diagram for SQL</h2>
+            <img src="images/impetus-erd.png">
+        </article>
+
+        <article>
+            <h2>Further Improvement</h2>
+            <p>This web app is developed based on the concept of Minimum Viable Product (MVP) as additional features and improvement will be sustained to deploy. Any other suggestion are welcome via <a href="mailto:ng_lc5@hotmail.com">my email box</a>. And these plans are listed as follows: </p>
+            <ol>
+                <li>Features to be added:
+                    <ol>
+                        <li>Generating PDF file about sales for user to download.</li>
+                        <li>User's wishlist and shopping cart.</li>
+                        <li>Pre-owned (Secondhand) as a product type. Tables and columns maybe normalised and re-structured.</li>
+                        <li>Comment section for product and website itself.</li>
+                        <li>Goods return. Tables and routes about returns, stock, etc..</li>
+                        <li>Utilising trained AI model to assess whether the image uploaded from admin a/c in the product creation page meet the requirement of image shape and clear background. Tensorflow API will be adopted to train the model.</li>
+                    </ol>
+                </li>
+                <li>To minimise the amount of using event listeners which may affect the performance. Utilising event delegation as an alternative to capture event.</li>
+                <li>To replace "memorystore" with the npm package of "connect-pg-simple" to handle memory leakage as it stores session in PostreSQL Database so it is more suitable for production and scales better and persists session data across server restarts. As "pg" is required for connection pool, Knex configuration maybe set up again.</li>
+                <li>Error handling: too reliance on "try-catch" which should be replaced by Promise.</li>
+
+
+                <li>For the sake of security, the password should be hashed in frontend before sending to backend. It is because the password is sent in plain text to server, and then hashed by bcrypt. If the password is hashed in frontend, the plain text password will not be sent to server. However, the hashed password will be sent to server. It is still secure because the hashed password is not reversible. </li>
+            </ol>
+        </article>
+    </main>
+
 
     <div id="login-modal" class="modal">
         <img src="images/dm101.png" class="img-demo-ac-pw"/>
@@ -221,6 +396,59 @@
 <script src="./js/auth.js"></script>
 
 <script>
+    const viewData = document.querySelectorAll("aside button");
+    const showScrollHeightNow = document.documentElement.scrollTop;
+    viewData[0].innerHTML = showScrollHeightNow;
+    document.body.addEventListener("mousemove", () => {
+        const x = event.clientX;
+        const y = event.clientY;
+        viewData[1].innerHTML = x + " , " + y;
+    });
+
+    const mouseTarget = document.querySelector(".test-1");
+    document.body.addEventListener("mousemove", (event) => {
+        const x = event.clientX;
+        const y = event.clientY;
+        mouseTarget.style.setProperty("--tracker-x", x + "px");
+        mouseTarget.style.setProperty("--tracker-y", y + "px");
+    });
+
+
+    const articles = document.querySelectorAll("article");
+    const sidebar = document.querySelectorAll("aside div");
+
+    // @ get the height of header, margin of first article which are used for calculating the top position of article.
+    const headerHeight = document.querySelector("header").offsetHeight;
+    const getArticle = getComputedStyle(articles[0]);
+    const getMargin = parseInt(getArticle.getPropertyValue("margin"));
+
+    function sidebarEffectByScrolling () {
+        let currentScrollingPosition = document.documentElement.scrollTop || document.body.scrollTop;
+
+        articles.forEach((article, index) => {
+            let articleTop = article.offsetTop;
+            let articleHeight = article.clientHeight;
+
+            if ( currentScrollingPosition >= (articleTop - headerHeight - getMargin) && currentScrollingPosition < articleTop + articleHeight) {
+                sidebar.forEach( item => item.classList.remove("active"));
+                sidebar[index].classList.add("active");
+            };
+        });
+    }
+
+    window.addEventListener("scroll", sidebarEffectByScrolling);
+    sidebarEffectByScrolling();
+
+    const asideBlock = document.querySelector("aside");
+    asideBlock.addEventListener("click", (event) => {
+
+        if (event.target.matches("div")) {
+            let showSection = event.target.getAttribute("data-index");
+            articles[showSection].scrollIntoView( {behavior: "smooth", block: "end", inline: "nearest" });
+        };
+    });
+
+    // @ offsetHeight includes scrollbar and border, clientHeight doesn't.
 </script>
 </body>
 </html>

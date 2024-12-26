@@ -81,7 +81,7 @@ class SalesController {
       //   return res.json({ record: [] });
       // }
 
-      // @ Date format check: time brough from databse is in UTC format with time zone +00:00. Adjustment to local time zone will be proceeded in the front-end.
+      // @ Date format check: time brought from databse is in UTC format with time zone +00:00. Adjustment to local time zone will be proceeded in the front-end.
 
       // for (let row of record!) {
       //   console.log("Sales No. ", row.id, " was created at ", row.created_at);
