@@ -22,20 +22,6 @@ app.get("/", (req: Request, res: Response) => {
   return;
 });
 
-// app.get("/watch_main.html", (req: Request, res: Response) => {
-//   console.log(
-//     req.session.username,
-//     req.session.userid,
-//     req.session.admin_role,
-//     req.session.id
-//   );
-//   const isLoggedIn = req.session.username ? true : false;
-//   res.sendFile(path.resolve("public", "watch_main.html"), {
-//     headers: { "X-Is-Logged-In": isLoggedIn },
-//   });
-//   return;
-// });
-
 app.use(
   express.static("public", {
     setHeaders: (res, path) => {
@@ -43,7 +29,9 @@ app.use(
     },
   })
 );
+
 app.use(express.static("uploads"));
+
 app.use(
   requireAdmin,
   express.static("protected", {

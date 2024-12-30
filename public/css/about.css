@@ -1,0 +1,402 @@
+body {
+    width: 100%;
+    height: 100dvh;
+    background: url(./../images/1gear-x.webp) no-repeat center center;
+    background-size: cover;
+}
+
+aside,
+main {
+    font-family: "Italiano";
+}
+
+aside {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 20%;
+    height: 100%;
+    padding-top: 150px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.3);
+    align-items: center;
+}
+
+aside div {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.6);
+    width: 80%;
+    height: fit-content;
+    color: var(--color-basic);
+    font-size: 1.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+    padding: 25px 10px;
+    margin-bottom: 15px;
+    transition: 1s;
+}
+
+aside div.active {
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--color-ter);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+}
+
+aside div:first-of-type.active {
+    border-right: 8px solid var(--color-sec);
+}
+
+aside div:nth-child(2).active {
+    border-right: 8px solid aqua;
+}
+
+aside div:last-of-type.active {
+    border-right: 8px solid var(--color-supp);
+}
+
+aside div:last-of-type span:last-of-type {
+    display: none;
+}
+
+main {
+    display: flex;
+    float: right;
+    flex-wrap: wrap;
+    width: 80%;
+    justify-content: center;
+}
+
+.about-this {
+    background-color: rgba(255, 255, 255, 0.6);
+    margin: 150px 50px 0;
+    width: 100%;
+    padding: 20px;
+    border: 2px solid var(--color-basic);
+    border-radius: 5px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 5px 0px inset;
+}
+
+h4 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    line-height: 175%;
+}
+
+.pg-lang {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pg-lang > img {
+    width: 15%;
+}
+
+.pg-lang div {
+    width: 15%;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.pg-lang div img {
+    width: 78%;
+}
+
+article {
+    animation: rising 5s linear;
+    animation-timeline: view();
+    /* to launch the animation when element begins to be visible on the screen. */
+    animation-range: entry 0% cover 32%;
+    /* to let animation start from bottom and end at 32vh of screen. */
+
+    min-height: 80dvh;
+    width: 100%;
+    margin: 50px;
+    padding: 20px;
+    background-color: rgb(252, 248, 203);
+    border: 2px solid var(--color-basic);
+    border-radius: 3px;
+}
+
+@keyframes rising {
+    from {
+        opacity: 0;
+        scale: 0.1;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+
+article:nth-of-type(2) {
+    background-color: rgb(100, 149, 239);
+    color: var(--color-ter);
+    min-height: min-content;
+}
+
+article:nth-of-type(3) {
+    background-color: rgb(218, 218, 218);
+    color: var(--color-basic);
+}
+
+h2:first-child {
+    text-align: center;
+    font-size: 2.3rem;
+    letter-spacing: 0.6rem;
+    text-shadow: rgba(20, 20, 20, 0.3) 3px 2px 2px;
+}
+
+ol li,
+article:nth-of-type(3) p {
+    font-size: 1.6rem;
+    letter-spacing: 0.2rem;
+    margin: 10px 0;
+    line-height: 200%;
+}
+
+ol {
+    counter-reset: numPoint;
+    list-style-type: none;
+}
+
+ol li {
+    position: relative;
+}
+
+ol li::before {
+    counter-increment: numPoint;
+    content: counter(numPoint) ".";
+    border-radius: 50%;
+    height: 28px;
+    width: 28px;
+    background-color: var(--theme-main);
+    color: var(--color-ter);
+    position: absolute;
+    left: -40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 500;
+    padding-left: 3px;
+}
+
+ol li ol li::before {
+    content: counter(numPoint, upper-roman) ".";
+    background-color: rgb(146, 148, 230);
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+article:last-of-type p a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+.erd-remark {
+    display: inline-flex;
+}
+
+.erd-remark img {
+    border: 15px solid white;
+    height: 90px;
+}
+
+article:nth-of-type(2) p {
+    font-size: 1.6rem;
+}
+
+article:nth-of-type(2) p:last-child {
+    margin: 0 15px;
+}
+
+article:last-of-type {
+    min-height:min-content;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    font-family: "Philosopher", sans-serif;
+    font-size: 12rem;
+    font-weight: 900;
+    letter-spacing: 1rem;
+    color:azure;
+    font-style: oblique;
+    text-align: center;
+    text-shadow: blue 4px 4px 2px;
+    mix-blend-mode: overlay;
+    margin: 100px 0;
+}
+
+@media  (min-width: 1600px) {
+    body {
+        background:
+            linear-gradient(
+                rgb(120, 165, 168, 0.85),
+                rgba(200, 200, 255, 0.7)
+            ),
+            url(./../images/1gear-x.webp) no-repeat center center;
+        background-size: cover;
+    }
+}
+
+@media (max-width: 1200px) {
+    aside div {
+        letter-spacing: 0rem;
+    }
+
+    aside div.active {
+        letter-spacing: 0rem;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    aside div {
+        width: 100%;
+        font-size: 1.6rem;
+        font-weight: 400;
+    }
+
+    aside div.active {
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    .about-this {
+        margin: 150px 0 0;
+        border-radius: 0;
+        border: none;
+        background-color:rgba(198, 220, 255, 0.3);
+    }
+
+    article {
+        margin: 0;
+        border-radius: 0;
+        padding: 10px;
+        border: none;
+        animation-range: entry 0% cover 30%;
+    }
+
+    article:nth-of-type(2) p {
+        font-size: 1.4rem;
+    }
+}
+
+@media (max-width: 680px) {
+    aside div:last-of-type span:last-of-type {
+        display: block;
+    }
+
+    aside div:last-of-type span:first-of-type {
+        display: none;
+    }
+
+    article:nth-of-type(2) {
+        overflow: scroll;
+    }
+
+    .erd-img,
+    .erd-remark,
+    article:nth-of-type(2) h2 {
+        min-width: 500px;
+    }
+
+    h2:first-child {
+        font-size: 2rem;
+        letter-spacing: 0.2rem;
+    }
+
+    ol li,
+    article:nth-of-type(3) p {
+        font-size: 1.4rem;
+    }
+
+    article:last-of-type {
+        font-size: 8.4rem;
+        font-weight: 600;
+        letter-spacing: 0.8rem;
+    }
+}
+
+@media (max-width: 540px) {
+    aside div {
+        padding: 15px 5px;
+    }
+
+    h4 {
+        font-weight: 500;
+        line-height: 150%;
+    }
+
+    aside div,
+    aside div.active,
+    h2:first-child {
+        font-size: 1.4rem;
+        letter-spacing: 0;
+    }
+
+    ol li,
+    article:nth-of-type(3) p {
+        font-size: 1.2rem;
+        letter-spacing: 0.1rem;
+        line-height: 175%;
+    }
+
+    ol li::before{
+        height: 20px;
+        width: 20px;
+        left: -30px;
+        font-size: 1.2rem;
+    }
+
+    article:last-of-type {
+        font-size: 6.4rem;
+        letter-spacing: 0.6rem;
+    }
+}
+
+@media (max-width: 400px) {
+    aside div:first-of-type {
+        font-size: 1.2rem;
+    }
+
+    aside#aside-nav div.active {
+        border-right-width: 5px;
+    }
+
+    aside#aside-nav div:first-of-type.active {
+        border-right-color:chartreuse;
+    }
+
+    h4 {
+        font-size: 1.6rem;
+        letter-spacing: 0.1rem;
+    }
+
+    .about-this,
+    article {
+        padding: 8px;
+    }
+}
+
+@media (max-width: 360px) {
+    aside div:first-of-type {
+        font-size: 1rem;
+        word-wrap: break-word;
+    }
+
+    article:last-of-type {
+        font-size: 4.8rem;
+        letter-spacing: 0.5rem;
+    }
+}
