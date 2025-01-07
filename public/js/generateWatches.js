@@ -96,7 +96,6 @@ async function displayWatches () {
         })
         .catch((error) => console.log("Fetching error: ", error));
 
-    // let totalPage = Math.ceil(arrOfWatches.length / itemPerPage);
 
     function setPagination () {
         let startIndex = (currentPage - 1) * itemPerPage;
@@ -106,7 +105,6 @@ async function displayWatches () {
         displayBoard.innerHTML = "";
         renderingWatches(pageData);
 
-        // document.getElementById("current-page").textContent = `Page ${currentPage}`;
         document.querySelector("#current-page span:first-of-type").textContent = `Page ${currentPage}`;
         document.querySelector("#current-page span:last-of-type").textContent = ` / ${calTotalPage()}`;
 

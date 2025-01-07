@@ -5,329 +5,203 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume</title>
     <link rel="stylesheet" href="./css/reset.css">
-
+    <link rel="stylesheet" href="./css/frame.css">
+    <link rel="stylesheet" href="./css/index.css">
     <style>
-        body {
-            background-color: #D5D5D5;
-            font-family: system-ui;
-        }
-
-        .container {
-            background-color: #E9E7EA;
-            width: 1000px;
-            max-width: 100%;
-            margin: auto;
-            padding: 50px;
-            box-shadow: 0 10px 50px #858585;
-            display: grid;
-            grid-template-columns: 35% 60%;
-            column-gap: 5%;
-            row-gap: 30px;
-        }
-
-        .avatar img {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .avatar {
-            display: flex;
-            justify-content: end;
-        }
-
-        .name {
-            padding-left: 30px;
-            border-left: 1px solid #000;
-        }
-
-        .name h1 {
-            font-weight: 300;
-            font-size: xxx-large;
-            margin: 0 0 5px;
-        }
-
-        .name .specialize {
-            margin: 0;
-            font-weight: bold;
-            letter-spacing: 3px;
-        }
-
-        .name .contact {
-            padding: 0;
-            list-style: none;
-        }
-
-        .name .contact span {
-            display: inline-block;
-            background-color: #000;
-            color: #fff;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: small;
-            margin-right: 20px;
-        }
-
-        .name .contact li {
-            padding: 5px 0;
-            transform: translate(-40px);
-            /* 30px as padding-left + 20px as width of span divided by 2 */
-            background-color: #E9E7EA;
-        }
-
-        .info ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            text-align:right;
-            line-height: 30px;
-        }
-
-        .intro {
-            padding-left: 30px;
-            border-left: 1px solid #000;
-            text-align: justify;
-        }
-
-        h2 {
-            padding: 0;
-            margin: 0 0 20px;
-        }
-
-        .exp {
-            text-align: right;
-        }
-
-        .exp h4 {
-            margin: 20px 0 10px;
-        }
-
-        .skills {
-            margin-top: 50px;
-        }
-
-        .exp ul {
-            padding: 0;
-            margin: 0;
-            list-style: none;
-            line-height: 35px;
-        }
-
-        .project {
-            padding-left: 30px;
-            text-align: justify;
-            border-left: 1px solid #000;
-        }
-
-        .project .web {
-            color: green;
-            padding: 10px 0;
-        }
-
-        .project .location {
-            font-weight: 500;
-            padding: 10px 0;
-        }
-
-        .project .item {
-            position: relative;
-        }
-
-        .project .item::before {
-            content: "";
-            position: absolute;
-            width: 13px;
-            height: 13px;
-            background-color: #000;
-            border-radius: 50%;
-            left: -37px;
-        }
     </style>
 </head>
 <body>
     <div class="container">
 
-        <div class="avatar">
-            <img src="" alt="" />
+        <div class="profile">
+            <h1>ALAN</h1>
+            <h2>L. C. &nbsp NG</h2>
         </div>
 
-        <div class="name">
-            <a href="watch_main.html"><h1>Alan Ng</h1></a>
-            <div class="specialize">
-                never say never
-            </div>
-            <ul class="contact">
+        <div class="contact-info">
+            <ul class="particulars">
                 <li>
-                    <span>M</span>mobile no. here
+                    <ion-icon name="watch-sharp"></ion-icon>
+                    <div>
+                        <a href="watch_main.html">
+                            <span>Demo Watch Store:</span>
+                            <span>https://impetus-go.me/</span>
+                        </a>
+                    </div>
                 </li>
                 <li>
-                    <span>E</span>ng_lc5@hotmail.com
+                    <ion-icon name="logo-whatsapp"></ion-icon>
+                    <span>6177-5789</span>
                 </li>
                 <li>
-                    <span>G</span>alanNG5.github.io
+                    <ion-icon name="mail-open-outline"></ion-icon>
+                    <span>ng_lc5@hotmail.com</span>
+                </li>
+                <li>
+                    <ion-icon name="logo-github"></ion-icon>
+                    <a href="https://github.com/alanNG5">
+                        <span>alanNG5</span>
+                    </a>
                 </li>
             </ul>
         </div>
 
-        <div class="info">
-            <ul>
-                <li>
-                    From <b>Hong Kong</b> - ThisNation
-                </li>
-                <li>
-                    xx/xx/xxxx
-                </li>
-                <li>
-                    empty
-                </li>
-            </ul>
+
+        <div class="learning-path">
+
+            <section class="skills">
+                <h2>Software Skills</h2>
+                <div class="lang-icons" data-lang-type="Frontend">
+                    <div data-lang="HTML">
+                        <img src="images/languages/html.svg" alt="HTML" />
+                    </div>
+                    <div data-lang="CSS">
+                        <img src="images/languages/css.svg" alt="CSS" />
+                    </div>
+                    <div data-lang="Javascript">
+                        <img src="images/languages/javascript.svg" alt="Javascript" />
+                    </div>
+                    <div data-lang="React">
+                        <img src="images/languages/react.svg" alt="React" />
+                    </div>
+                </div>
+
+                <div class="lang-icons" data-lang-type="Backend">
+                    <div data-lang="Typescript">
+                        <img src="images/languages/typescript.svg" alt="Typescript" />
+                    </div>
+                    <div data-lang="Node.js">
+                        <img src="images/languages/nodejs.svg" alt="Node.js" />
+                    </div>
+                    <div data-lang="Express">
+                        <img src="images/languages/expressjs.png" alt="Express" />
+                    </div>
+                </div>
+
+                <div class="lang-icons" data-lang-type="Database">
+                    <div data-lang="Knex">
+                        <img src="images/languages/knex.svg" alt="Knex" />
+                    </div>
+                    <div data-lang="PostgreSQL">
+                        <img src="images/languages/postgresql.svg" alt="PostgreSQL" />
+                    </div>
+                    <div data-lang="MongoDB">
+                        <img src="images/languages/mongodb.svg" alt="MongoDB" />
+                    </div>
+                </div>
+
+                <div class="lang-icons" data-lang-type="Other">
+                    <div data-lang="Python">
+                        <img src="images/languages/python.svg" alt="Python" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="edu-sec">
+                <h2>Education Qualifications</h2>
+
+
+                <div class="cv-content">
+                    <span class="year">2024</span>
+                    <details>
+                        <summary>
+                            <span>
+                                <b> Tecky Academy</b>
+                                <i class="bx bx-expand-vertical bx-burst-hover"></i>
+                                <i class="bx bx-collapse-vertical bx-burst-hover"></i>
+                            </span>
+                            <p>MicroMaster in A.I. and Programming </p>
+                        </summary>
+                        <p>Study Period: OCT 2023 - MAR 2024</p>
+                        <p>Status: Completed with certificate</p>
+                        <p>Main duties: Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptatem minus, veniam sed in accusantium? Dicta, odio autem fugiat quas quibusdam laborum eius ab ullam veritatis, doloribus blanditiis ipsa vero.</p>
+                    </details>
+                    <img src="images/logo/tecky.png" class="img-bkg"></img>
+                </div>
+
+                <div class="cv-content">
+                    <span class="year">2009</span>
+                    <details>
+                        <summary>
+                            <span>
+                                <b>The City University of Hong Kong</b>
+                                <i class="bx bx-expand-vertical bx-burst-hover"></i>
+                                <i class="bx bx-collapse-vertical bx-burst-hover"></i>
+                            </span>
+                            <p>Bachelor of Business Administration (Honours) in Business Management </p>
+                        </summary>
+                        <p>Study Period: SEP 2006 - AUG 2009</p>
+                        <p>Main duties: Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptatem minus, veniam sed in accusantium? Dicta, odio autem fugiat quas quibusdam laborum eius ab ullam veritatis, doloribus blanditiis ipsa vero.</p>
+                        <p>Classification: Upper Second Class Honours</p>
+                        <p>Remarks: part-time mode</p>
+                    </details>
+                    <img src="images/logo/cityU.webp" class="img-bkg"></img>
+                </div>
+
+                <div class="cv-content">
+                    <span class="year">2005</span>
+                    <details>
+                        <summary>
+                            <span>
+                                <b>The City University of Hong Kong</b>
+                                <i class="bx bx-expand-vertical bx-burst-hover"></i>
+                                <i class="bx bx-collapse-vertical bx-burst-hover"></i>
+                            </span>
+                            <p>Associate of Social Science in Public Administration and Management  </p>
+                        </summary>
+                        <p>Study Period: SEP 2003 - JUN 2005</p>
+                        <p>Main duties: Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptatem minus, veniam sed in accusantium? Dicta, odio autem fugiat quas quibusdam laborum eius ab ullam veritatis, doloribus blanditiis ipsa vero.</p>
+                        <p>Classification: Credit</p>
+                    </details>
+                    <img src="images/logo/cityU.webp" class="img-bkg"></img>
+                </div>
+
+
+            </section>
+
         </div>
 
-        <div class="intro">
-            <h2>INTRO</h2>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eos aspernatur voluptas minus similique neque quisquam nesciunt a suscipit! Impedit veniam incidunt magnam velit vel similique quam maiores aliquam. Eum, culpa.
 
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut dolorum vero ab praesentium, molestiae mollitia quis natus illo illum expedita nulla ipsam esse quidem magnam dicta sapiente dolor ducimus! Quia!
-        </div>
-
-        <div class="exp">
-            <h2>EXPERIENCE</h2>
-
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">
-                    <span>
-                        2010 - 2012
-                    </span>
-                    <span>
-                        xxx
-                    </span>
-                </div>
-                <div class="desc">xxx</div>
+        <div class="job-path">
+            <!-- <i class="bx bx-briefcase"></i> -->
+            <span>Sort by: </span>
+            <div class="buttonGroup">
+                <button class="btn" id="btn-asc">Chronological Order</button>
+                <button class="btn btn--active" id="btn-desc">Reverse Chronological Order</button>
             </div>
+            <!-- <div class="sort-btns">
+                <p>Sort by:</p>
+                <button id="btn-asc">Chronological Order</button>
+                <button class="current-sorting-state" id="btn-desc">Reverse Chronological Order</button>
+            </div> -->
 
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">
-                    <span>
-                        2012 - 2013
-                    </span>
-                    <span>
-                        xxx
-                    </span>
-                </div>
-                <div class="desc">xxx</div>
-            </div>
+            <section class="experience" id="history">
+                <h2>Employment History</h2>
 
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">
-                    <span>
-                        2013
-                    </span>
-                    <span>
-                        xxx
-                    </span>
-                </div>
-                <div class="desc">xxx</div>
-            </div>
+                <!-- <div class="cv-content">
+                    <span class="year">2018</span>
+                    <details>
+                        <summary>
+                            <span>
+                                <b>Company ABC</b>
+                                <i class="bx bx-expand-vertical bx-burst-hover"></i>
+                                <i class="bx bx-collapse-vertical bx-burst-hover"></i>
+                            </span>
+                            <p>Title: Programmer</p>
+                        </summary>
+                        <p>Company nature: Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consequatur est rem libero distinctio eligendi nam quo quibusdam repellat nemo adipisci ratione natus neque placeat et, incidunt, eos maiores sed beatae?</p>
+                        <p>Job stint:</p>
+                        <p>Main duties: Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus voluptatem minus, veniam sed in accusantium? Dicta, odio autem fugiat quas quibusdam laborum eius ab ullam veritatis, doloribus blanditiis ipsa vero.</p>
+                    </details>
+                    <img src="images/logo/wahtat.gif" class="img-bkg"></img>
+                </div> -->
 
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">
-                    <span>
-                        2013 - 2015
-                    </span>
-                    <span>
-                        xxx
-                    </span>
-                </div>
-                <div class="desc">xxx</div>
-            </div>
-
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">
-                    <span>
-                        2015 - 2024
-                    </span>
-                    <span>
-                        xxx
-                    </span>
-                </div>
-                <div class="desc">xxx</div>
-            </div>
-
-            <h2 class="skills">Skills</h2>
-            <ul>
-                <li>HTML</li>
-                <li>CSS</li>
-                <li>Javascript</li>
-                <li>Typescript</li>
-                <li>PostgreSQL</li>
-                <li>Knex</li>
-                <li>Python</li>
-                <li>Express</li>
-                <li>Node.js</li>
-            </ul>
-
-        </div>
-
-        <div class="project">
-            <h2>Honours</h2>
-
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">2008 - 2024</div>
-                <div class="web">xxx</div>
-                <div class="location">xxx</div>
-                <div class="desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum aspernatur hic omnis iure perferendis nesciunt voluptas, tempora sequi vitae, praesentium architecto est repudiandae autem reprehenderit enim tenetur iusto amet voluptates.
-                    <ul>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">2010 - 2024</div>
-                <div class="web">xxx</div>
-                <div class="location">xxx</div>
-                <div class="desc">xxx
-                    <ul>
-                        <li>xxx</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="item">
-                <h4>xxx</h4>
-                <div class="time">2012 - 2024</div>
-                <div class="web">xxx</div>
-                <div class="location">xxx</div>
-                <div class="desc">xxx
-                    <ul>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                        <li>xxx</li>
-                    </ul>
-                </div>
-            </div>
-
+            </section>
         </div>
 
     </div>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script src="./js/exp.js"></script>
 </body>
 </html>
