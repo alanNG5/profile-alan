@@ -187,8 +187,8 @@ btnForAscOrder.addEventListener("click", function() {
         return new Date(a.lastDateOfEmployment) - new Date(b.lastDateOfEmployment);
     });
     setCareerTimeline(sortedByDate);
-    btnForDescOrder.classList.toggle("btn--active");
-    btnForAscOrder.classList.toggle("btn--active");
+    btnForDescOrder.classList.remove("btn--active");
+    btnForAscOrder.classList.add("btn--active");
 });
 
 btnForDescOrder.addEventListener("click", function() {
@@ -196,6 +196,6 @@ btnForDescOrder.addEventListener("click", function() {
         return new Date(b.lastDateOfEmployment) - new Date(a.lastDateOfEmployment);
     });
     setCareerTimeline(sortedByDate);
-    btnForDescOrder.classList.toggle("btn--active");
-    btnForAscOrder.classList.toggle("btn--active");
+    btnForDescOrder.classList.add("btn--active");
+    btnForAscOrder.classList.remove("btn--active");
 });
