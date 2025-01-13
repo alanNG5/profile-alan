@@ -78,3 +78,8 @@ let q = z.map(obj => ({...obj}));
 q[0].b=256;
 console.log("q: ", q);
 console.log("z: ",z);
+
+
+for ( let i = 0; i <= 5; i = i + 5) {
+    console.log(i);
+}

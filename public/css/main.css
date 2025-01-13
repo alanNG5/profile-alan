@@ -181,10 +181,14 @@ main .backdrop:nth-last-child(1) {
     position: absolute;
     left: 100%;
     /* left as 100%: starting from outside */
-    animation: sliderRun 10s linear infinite;
-    animation-delay: calc(10s / var(--slider-quantity) * (var(--place) - 1))!important;
+    animation: sliderRun calc( 2s * var(--slider-quantity) ) linear infinite;
+    animation-delay: calc( calc( 2s * var(--slider-quantity) ) / var(--slider-quantity) * (var(--place) - var(--slider-quantity)))!important;
+    /*
+    running time / quantity to get time distance; this distance * position to get time delayed
+    */
     transition: filter 0.5s;
 }
+
 
 .carousel .product-line .item::after {
     content: attr(data-text);
@@ -313,7 +317,7 @@ main .backdrop:nth-last-child(1) {
 
 .hexagons {
     grid-column: 1/3;
-    font-size: 0; /*disable white space between inline block element */
+    font-size: 0; /* disable white space between inline block element */
     height: 150%;
 
     box-shadow:rgba(0, 0, 0, 0.8) 0 0 15px;
@@ -321,9 +325,9 @@ main .backdrop:nth-last-child(1) {
     padding-top: 10px;
 }
 
-.hexagons::before{
+.hexagons::before {
     content: "";
-    width: calc(var(--size)/2 + var(--margin-horizontal));
+    width: calc(var(--size) / 2 + var(--margin-horizontal));
     float: left;
     height: 120%;
     shape-outside: repeating-linear-gradient(#0000 0 calc(var(--f) - 2px),#000  0 var(--f));
@@ -332,7 +336,7 @@ main .backdrop:nth-last-child(1) {
 .hexagons div {
     width: var(--size);
     margin: var(--margin-vertical) var(--margin-horizontal);
-    height: calc(var(--size)*var(--ratio));
+    height: calc(var(--size) * var(--ratio));
     display: inline-block;
     font-size:initial;
     clip-path: polygon(var(--horizontal-clip) 0, calc(100% - var(--horizontal-clip)) 0,100% var(--vertical-clip),100% calc(100% - var(--vertical-clip)), calc(100% - var(--horizontal-clip)) 100%,var(--horizontal-clip) 100%,0 calc(100% - var(--vertical-clip)),0 var(--vertical-clip));
@@ -345,15 +349,46 @@ main .backdrop:nth-last-child(1) {
     margin-bottom: calc(var(--margin-vertical) - var(--vertical-clip));
 }
 
-.hexagons div:nth-child(odd) {
+.hexagons div:nth-of-type(odd) {
     background: linear-gradient(in lch, var(--theme-sec), var(--color-pri));
 }
 
+.hexagons p {
+    position: absolute;
+    transform: translateY(-50%);
+    height: fit-content;
+    width: fit-content;
+    max-width: 200px;
+    z-index: -1;
+    padding: 10px;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    background-color: var(--theme-main-alt);
+    border-radius: 15px;
+    border: 2px solid var(--theme-main-alt);
+    box-shadow: inset 0 0 0 2px var(--theme-sec);
+    text-wrap: wrap;
+}
+
+.hexagons p span:first-of-type {
+    font-size: 1.8rem;
+    color: var(--color-sec);
+    font-weight: 600;
+    letter-spacing: 0.2rem;
+    line-height: 200%;
+}
+
+.hexagons p span:last-of-type {
+    font-size: 1.4rem;
+    color: var(--theme-sec);
+}
+
 .hexagons div img {
-        position: absolute;
-        width: var(--size);
-        min-width: var(--size);
-        object-fit: cover;
+    position: absolute;
+    width: var(--size);
+    min-width: var(--size);
+    object-fit: cover;
 }
 
 .hexagons div img:hover {
@@ -363,34 +398,56 @@ main .backdrop:nth-last-child(1) {
 
 .img-caption {
     position: absolute;
-    width: fit-content;
-    max-width: 230px;
-    text-wrap: wrap;
-    border-radius: 15px;
-    display: flex;
-    text-align: end;
-    flex-direction: column;
-    bottom: -40%;
-    right: 5%;
-    background-color: var(--theme-main-alt);
-    font-weight: 600;
-    line-height: 10px;
-    letter-spacing: 0.5rem;
-    padding: 15px;
-    border: 2px solid var(--theme-sec);
+    bottom: -45%;
+    right: 2.5%;
     opacity: 0;
-    z-index: 890;
 }
 
-.img-caption h2 {
-    font-size: 2.8rem;
-    color: var(--color-sec);
+.price-tag {
+    position: relative;
+	display: inline-block;
+    width: auto;
+	height: 62px;
+	background-color: #2d3d54;
+	-webkit-border-radius: 3px 4px 4px 3px;
+	-moz-border-radius: 3px 4px 4px 3px;
+	border-radius: 3px 4px 4px 3px;
+    line-height: 62px;
+	color: var(--color-ter);
+	font-weight: 300;
+	font-size: 2.3rem;
+    letter-spacing: 0.3rem;
+	padding: 0 10px 0 10px;
+    box-shadow:rgb(200, 200, 200) 2px 3px 0px;
+
+	margin-left: 31px;
 }
 
-.img-caption p {
-    font-size: 1.8rem;
-    color: var(--theme-sec);
-    line-height: 150%;
+/* triangle */
+.price-tag:before {
+	content: "";
+	position: absolute;
+	display: block;
+	left: -31px;
+	width: 0;
+	height: 0;
+	border-top: 31px solid transparent;
+	border-bottom: 31px solid transparent;
+	border-right: 31px solid #2d3d54;
+}
+
+/* circle inside triangle */
+.price-tag:after {
+	content: "";
+    position: absolute;
+	display: block;
+	background-color: var(--color-ter);
+	border-radius: 50%;
+	width: 6px;
+	height: 6px;
+	left: -10px;
+	top: 50%;
+    transform: translateY(-50%);
 }
 
 @media (max-width: 1024px) {
@@ -431,6 +488,20 @@ main .backdrop:nth-last-child(1) {
         width: 100%;
         font-size: 4.8rem;
     }
+
+    .hexagons-board {
+        justify-content: center;
+    }
+
+    .img-caption {
+        right: 18%;
+    }
+}
+
+@media (max-width: 850px) {
+    .img-caption {
+        right: 12%;
+    }
 }
 
 @media (max-width: 650px) {
@@ -448,8 +519,6 @@ main .backdrop:nth-last-child(1) {
     }
 
     .img-caption {
-        position: absolute;
-        bottom: 0;
         display: none;
     }
 }

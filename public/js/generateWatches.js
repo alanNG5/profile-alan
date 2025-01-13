@@ -20,14 +20,14 @@ async function displayProductsAtHomePage () {
         const watchCaptions = document.querySelectorAll(".carousel .product-line .item");
         const watchBrands = document.querySelectorAll(".carousel .product-line .item .brand");
 
-        data.forEach( (watch, index) => {
-            watchImages[index].src = `${urlCurrent}${watch.image_path}`;
-            watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
-            imageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
-            imageLinks[index].setAttribute("tabindex", "-1");
-            watchCaptions[index].setAttribute("data-text", `${watch.model_name}`);
-            watchBrands[index].innerHTML = `${watch.brand}`;
-        });
+            data.forEach( (watch, index) => {
+                watchImages[index].src = `${urlCurrent}${watch.image_path}`;
+                watchImages[index].alt = `${watch.brand} ${watch.model_name}`;
+                imageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`;
+                imageLinks[index].setAttribute("tabindex", "-1");
+                watchCaptions[index].setAttribute("data-text", `${watch.model_name}`);
+                watchBrands[index].innerHTML = `${watch.brand}`;
+            });
     };
 
     await fetch("watch/newArrivals")
@@ -47,25 +47,42 @@ async function displayProductsAtHomePage () {
         const hexagons = document.querySelectorAll(".hexagons div a img");
         const hexaImageLinks = document.querySelectorAll(".hexagons div a");
         const caption = document.querySelector(".img-caption");
-        const captionBrand = document.querySelector(".img-caption h2");
-        const captionModel = document.querySelector(".img-caption p");
+        const captionPrice = document.querySelector(".img-caption .price-tag");
+
+        const capShowingInfo = document.querySelectorAll(".hexagons p");
+        const showBrand = document.querySelectorAll(".hexagons p span:first-of-type");
+        const showModel = document.querySelectorAll(".hexagons p span:last-of-type");
 
         data.forEach( (watch, index) => {
             hexagons[index].src = `${urlCurrent}${watch.image_path}`;
             hexagons[index].alt = `${watch.brand} ${watch.model_name}`;
-            hexaImageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`
-            hexagons[index].addEventListener("mouseenter", (e) => {
-                caption.setAttribute("style", "opacity: 1");
+            hexaImageLinks[index].href = `${urlCurrent}watch_details.html?id=${watch.id}`;
 
-                let altText = e.target.alt;
-                let stringBeforeSpace = altText.slice(0, altText.indexOf(" "));
-                let stringAfterSpace = altText.slice(altText.indexOf(" "), altText.length);
-                captionBrand.innerHTML = stringBeforeSpace;
-                captionModel.innerHTML = stringAfterSpace;
+            showBrand[index].innerText = `${watch.brand}`;
+            showModel[index].innerText = `${watch.model_name}`;
+
+            hexagons[index].addEventListener("mouseover", (e) => {
+
+                capShowingInfo[index].setAttribute("style", "opacity: 1; z-index: 1000");
+                capShowingInfo[index].style.setProperty("left", `${ e.target.offsetLeft + e.target.offsetWidth + 10}px`);
+                capShowingInfo[index].style.setProperty("top", `${ hexagons[index].offsetTop + e.target.offsetHeight / 2 }px`);
+
+
+                caption.setAttribute("style", "opacity: 1");
+                captionPrice.innerText = `${watch.current_price.toLocaleString("zh-HK", { style: "currency", currency: "HKD", maximumFractionDigits: 0 })}`;
+
+                // let altText = e.target.alt;
+                // let stringBeforeSpace = altText.slice(0, altText.indexOf(" "));
+                // let stringAfterSpace = altText.slice(altText.indexOf(" "), altText.length);
+                // captionBrand.innerHTML = stringBeforeSpace;
+                // captionModel.innerHTML = stringAfterSpace;
             });
+
             hexagons[index].addEventListener("mouseleave", () => {
+                capShowingInfo[index].setAttribute("style", "opacity: 0");
                 caption.setAttribute("style", "opacity: 0");
             });
+
         });
     };
 };

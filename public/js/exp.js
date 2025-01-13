@@ -5,8 +5,8 @@ const career = [
         jobTitle: "Executive Assistant IIIA",
         stintOfEmployment: "MAR 2018 – SEP 2023",
         lastDateOfEmployment: "2023-09-19",
-        companyNature: "Outreach nursing service",
-        duties: "Co-ordinate with vendors regarding to asset management, documentation for medical record",
+        companyNature: "Outreach nursing service in Tai Po",
+        duties: "To coordinate with various stakeholders, including medical staff, patients, vendors and care center staff, to facilitate the provision of nursing services in the community; to proceed medical records and handle public inquiries.",
         remarks: "as a full-time staff until February 2023; turned to be part-time since March 2023",
         logo: "ha.png"
     },
@@ -17,7 +17,7 @@ const career = [
         stintOfEmployment: "MAY 2017 – JUL 2017",
         lastDateOfEmployment: "2017-07-02",
         companyNature: "Food production and supply",
-        duties: "Facilitate food supply from factory to restaurant",
+        duties: "To facilitate daily food supply from factory to restaurant",
         remarks: null,
         logo: "leiGarden.png"
     },
@@ -28,7 +28,7 @@ const career = [
         stintOfEmployment: "NOV 2014 – JAN 2017",
         lastDateOfEmployment: "2017-01-15",
         companyNature: "Electrical maintenance at airport",
-        duties: "Clerical support for payment settlement",
+        duties: "Document preparation for payment settlement and expenses reimbursement",
         remarks: "hired via subcontractor, RNB Engineering Hong Kong Ltd.",
         logo: "emsd.png"
     },
@@ -39,7 +39,7 @@ const career = [
         stintOfEmployment: "JUN 2013 – JAN 2014",
         lastDateOfEmployment: "2014-01-29",
         companyNature: "Optical fiber manufacturing",
-        duties: "Product’s quality assurance",
+        duties: "Product’s quality assurance for optical fiber",
         remarks: null,
         logo: "transtech.png"
     },
@@ -50,7 +50,7 @@ const career = [
         stintOfEmployment: "OCT 2011 – AUG 2012",
         lastDateOfEmployment: "2012-08-10",
         companyNature: "Audit service",
-        duties: "Clerical support in various marketing activities",
+        duties: "To assist in preparation for various marketing activities",
         remarks: "hired via job hunting agency, Job-Hunter Employment Agency",
         logo: "pwc.png"
     },
@@ -61,7 +61,7 @@ const career = [
         stintOfEmployment: "MAY 2010 – APR 2011",
         lastDateOfEmployment: "2011-04-02",
         companyNature: "Repairing service for electronic products",
-        duties: "Data entry, invoice verification",
+        duties: "To handle data input, verify invoice submitted by customers",
         remarks: null,
         logo: null
     },
@@ -72,7 +72,7 @@ const career = [
         stintOfEmployment: "DEC 2009 – FEB 2010",
         lastDateOfEmployment: "2010-02-04",
         companyNature: "Civil service",
-        duties: "Clerical support, assisting in administrating gallery",
+        duties: "To assist in administrating gallery, provide clerical support",
         remarks: "hired via job hunting agency, Bravo Personnel Consultancy Limited",
         logo: "eb.png"
     },
@@ -83,7 +83,7 @@ const career = [
         stintOfEmployment: "JUL 2006 – JUL 2007",
         lastDateOfEmployment: "2007-07-02",
         companyNature: "Civil service",
-        duties: "Clerical support, assisting in preparing seminars",
+        duties: "To assist in preparing seminars, generate reports",
         remarks: null,
         logo: "eb.png"
     },
@@ -94,7 +94,7 @@ const career = [
         stintOfEmployment: "OCT 2005 – MAY 2006",
         lastDateOfEmployment: "2006-05-10",
         companyNature: "Stationery wholesaling",
-        duties: "Leaflet design, routine warehouse tasks",
+        duties: "To design leaflet , handle routine warehouse tasks",
         remarks: null,
         logo: "wahtat.gif"
     },

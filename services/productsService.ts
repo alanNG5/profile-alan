@@ -38,7 +38,13 @@ export class ProductsService {
 
   async selectNewProducts() {
     return await this.knex
-      .select("products.id", "brand", "model_name", "image_path")
+      .select(
+        "products.id",
+        "brand",
+        "model_name",
+        "current_price",
+        "image_path"
+      )
       .from("products")
       .innerJoin("product_images", "products.id", "product_images.product_id")
       .orderBy("products.created_at", "DESC")

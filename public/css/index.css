@@ -26,7 +26,7 @@ body {
     position: relative;
     background-image: url(../images/bg-slash.gif);
     width: 222.22%;
-    height: 265px;
+    height: fit-content;
     border-bottom: 2px solid #000;
 }
 
@@ -49,7 +49,7 @@ body {
 
 .profile h2 {
     font-size: 6.8rem;
-    margin-top: 30px;
+    margin-top: 55px;
     padding-left: 3%;
     font-stretch:extra-expanded;
     letter-spacing: 2.3rem;
@@ -62,7 +62,7 @@ body {
     letter-spacing: 0.1rem;
     font-stretch: expanded;
     padding-left: 14%;
-    transform: translateY(-60%);
+    transform: translateY(-50%);
     text-wrap: nowrap;
     text-shadow: -5px -3px 0px rgba(0, 0, 0, 0.2);
 }
@@ -72,7 +72,7 @@ body {
     border-left: 2px solid #000;
     position: relative;
     z-index: 1;
-    margin: 20px 0;
+    margin: 25px 0;
     height: fit-content;
 }
 
@@ -156,7 +156,7 @@ section > h2::after {
     transition: background 0.3s ease-in-out;
     position: relative;
     z-index: 9;
-    background-color: rgba(251, 253, 248, 0.9);
+    background-color: rgba(251, 253, 248, 0.85);
 }
 
 .cv-content details:hover {
@@ -304,8 +304,9 @@ summary::marker {
     opacity: 1;
 }
 
-.learning-path .lang-icons:nth-of-type(3) div:nth-of-type(1) img {
-    width: 83%;
+.learning-path .lang-icons:nth-of-type(3) div:nth-of-type(1) img,
+.learning-path .lang-icons:nth-of-type(4) div:nth-of-type(2) img {
+    width: 80%;
 }
 
 .learning-path .lang-icons:nth-of-type(2) div:nth-of-type(3) img,
@@ -376,17 +377,17 @@ summary::marker {
     border-right: 4px solid yellow;
     border-bottom: 4px solid yellow;
     border-bottom-right-radius: 8px;
-    background-color: rgba(251, 253, 248, 0.8);
+    background-color: rgba(251, 253, 248, 0.75);
 }
 
 .edu-sec .cv-content details:hover {
-    background-color: rgba(230, 230, 230, 0.65);
+    background-color: rgba(230, 230, 230, 0.7);
     backdrop-filter: contrast(0.4) brightness(1.4);
 }
 
 .img-bkg {
     display: none;
-    min-width: 200px;
+    /* min-width: 200px; */
     max-width: 280px;
     max-height: 200px;
     position: absolute;
@@ -394,6 +395,7 @@ summary::marker {
     transform: translateY(-50%);
     right: 15px;
     z-index: 1;
+    overflow: hidden;
 }
 
 .cv-content:has(details[open]) {
@@ -710,11 +712,21 @@ section.experience h2 {
     .profile h2 {
         font-size: 4.4rem;
         letter-spacing: 1rem;
+        margin-top: 0px;
     }
 
     .profile h1 {
         font-size: 6rem;
         letter-spacing: 0;
+        padding-left: calc( 30px + var(--circle-size) / 2 + var(--indent-left) );
+        margin: 0;
+        text-align:unset;
+    }
+
+    .profile h3 {
+        letter-spacing: 0.6rem;
+        top: 0;
+        font-size: 1.4rem;
     }
 
     .contact-info .particulars {
@@ -773,11 +785,19 @@ section.experience h2 {
     .img-bkg {
         min-width: 0;
         max-width: 160px;
-        /* max-height: 160px; */
     }
 }
 
 @media (max-width: 320px) {
+    .profile h1,
+    .profile h2 {
+        padding-left: calc( 10px + var(--circle-size) / 2 + var(--indent-left) );
+    }
+
+    .profile h1 {
+        font-size: 5.2rem;
+    }
+
     .job-path > span:first-of-type {
         left: calc( var(--indent-left) + var(--circle-size) / 2 );
     }
