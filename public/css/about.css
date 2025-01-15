@@ -234,6 +234,22 @@ article:last-of-type {
     text-shadow: blue 4px 4px 2px;
     mix-blend-mode: overlay;
     margin: 100px 0;
+    padding-bottom: 100px;
+}
+
+article:last-of-type::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 200px;
+    background-image: linear-gradient(to right, white 30%, rgba(255,255,255,0) 20%);
+    background-position: bottom;
+    background-size: 90px 30px;
+    background-repeat: repeat-x;
+
 }
 
 @media  (min-width: 1600px) {
