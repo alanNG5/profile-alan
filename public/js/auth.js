@@ -1,4 +1,5 @@
 var urlCurrent = "https://impetus-go.me/";
+var urlCurrent = "http://localhost:8900/";
 
 let loginForm = document.getElementById("login-form");
 

@@ -72,10 +72,10 @@ function insertModelsIntoSelectOption (data) {
         const option = document.createElement("option");
         option.value = model.model_name;
         option.innerText = model.model_name;
-        option.setAttribute("data-id", model.id); // products.id
+        option.setAttribute("data-id", model.id);
         modelSelect.appendChild(option);
     });
-}
+};
 
 
 searchButton.addEventListener("click", function(event) {
