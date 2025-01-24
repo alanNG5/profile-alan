@@ -94,7 +94,7 @@ const career = [
         stintOfEmployment: "OCT 2005 – MAY 2006",
         lastDateOfEmployment: "2006-05-10",
         companyNature: "Stationery wholesaling",
-        duties: "To design leaflet , handle routine warehouse tasks",
+        duties: "To design leaflet, handle routine warehouse tasks",
         remarks: null,
         logo: "wahtat.gif"
     },
