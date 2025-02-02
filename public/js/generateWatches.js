@@ -93,7 +93,7 @@ let currentPage = 1;
 let arrOfWatches = [];
 let calTotalPage = function () {
     return Math.ceil(arrOfWatches.length / itemPerPage);
-}
+};
 const displayBoard = document.getElementById("display-board");
 
 
@@ -131,11 +131,14 @@ async function displayWatches () {
 
     function turnPageButtons () {
 
+        const catalogue = document.getElementById("catalogue");
+
         document.getElementById("prev-page-btn").addEventListener("click", () => {
             if (currentPage > 1) {
                 currentPage--;
                 setPagination();
             };
+            catalogue.scrollIntoView();
         });
 
         document.getElementById("next-page-btn").addEventListener("click", () => {
@@ -143,6 +146,7 @@ async function displayWatches () {
                 currentPage++;
                 setPagination();
             };
+            catalogue.scrollIntoView();
         });
     };
 

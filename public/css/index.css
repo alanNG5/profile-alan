@@ -703,6 +703,15 @@ section.experience h2 {
     }
 }
 
+@media (max-width: 480px) {
+    .profile h1 {
+        padding-left: calc( 30px + var(--circle-size) / 2 + var(--indent-left) );
+        margin: 0;
+        text-align:unset;
+    }
+}
+
+
 @media (max-width: 400px) {
     :root {
         --indent-left: 28px;
@@ -718,9 +727,6 @@ section.experience h2 {
     .profile h1 {
         font-size: 6rem;
         letter-spacing: 0;
-        padding-left: calc( 30px + var(--circle-size) / 2 + var(--indent-left) );
-        margin: 0;
-        text-align:unset;
     }
 
     .profile h3 {
@@ -788,14 +794,18 @@ section.experience h2 {
     }
 }
 
-@media (max-width: 320px) {
+@media (max-width: 360px) {
     .profile h1,
     .profile h2 {
         padding-left: calc( 10px + var(--circle-size) / 2 + var(--indent-left) );
     }
 
+    .profile h2 {
+        font-size: 4rem;
+    }
+
     .profile h1 {
-        font-size: 5.2rem;
+        font-size: 5rem;
     }
 
     .job-path > span:first-of-type {
