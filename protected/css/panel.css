@@ -262,10 +262,12 @@ h2+div {
     width: 60%;
 }
 
-#result-description {
-    text-wrap: wrap;
+textarea#result-description {
+    word-wrap: break-word;
     width: 100%;
-    height: fit-content;
+    max-width: 680px;
+    min-height: 56px;
+    field-sizing: content;
 }
 
 [inert] {
@@ -570,6 +572,10 @@ h2~div div:has(#result-model-no)
         font-weight: 500;
     }
 
+    textarea#result-description {
+        max-width: 680px;
+    }
+
 }
 
 @media (max-width: 600px) {
@@ -650,4 +656,16 @@ h2~div div:has(#result-model-no)
         table-layout: none;
         overflow: scroll;
     }
+
+    textarea#result-description {
+        max-width: 400px;
+    }
+
+}
+
+@media (max-width: 540px) {
+    textarea#result-description {
+        field-sizing: unset;
+    }
+
 }

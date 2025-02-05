@@ -11,10 +11,11 @@ async function displayProductsAtHomePage () {
         })
         .then( fetchedData => {
             displayTopSold(fetchedData.data);
+            loadImg();
         })
         .catch((error) => console.error("Fetching error: ", error));
 
-     function displayTopSold (data) {
+    function displayTopSold (data) {
         const watchImages = document.querySelectorAll(".carousel .product-line .item a img");
         const imageLinks = document.querySelectorAll(".carousel .product-line .item a");
         const watchCaptions = document.querySelectorAll(".carousel .product-line .item");
@@ -110,6 +111,7 @@ async function displayWatches () {
         .then( fetchedData => {
             arrOfWatches = [...fetchedData.data];
             setBrandFilter(fetchedData.data);
+            loadImg();
         })
         .catch((error) => console.log("Fetching error: ", error));
 
@@ -191,6 +193,7 @@ async function displayWatches () {
 
             watchImage.src = `${urlCurrent}${watch.image_path}`;
             watchImage.alt = `${watch.brand} ${watch.model_name}`;
+            watchImage.setAttribute("loading", "lazy");
 
             watchBrand.innerHTML = watch.brand;
             watchModel.innerHTML = watch.model_name;
@@ -325,3 +328,13 @@ async function displayWatches () {
     turnPageButtons();
     rankPrice();
 };
+
+
+function loadImg () {
+    const images = document.getElementsByTagName("img");
+    console.log(images);
+
+    for ( let i = 0; i < images.length; i++ ) {
+        images[i].setAttribute("loading", "lazy");
+    };
+}
