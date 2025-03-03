@@ -1,11 +1,39 @@
-Notes:
+# Alan's Portfolio Web App
 
-1/  Under CSS folder, any relative path to retrieve target file starts from it's own working directory. For the path coded in JS file, it must start from the directory to which the corresponding HTML file belongs.
+## Overview
+This project serves as a portfolio and personal practice for web development. It showcases a demo online store for watches, providing users with a seamless shopping experience.
 
-2/  Code snippet outside the async-await function does not take effect because of timing of code execution. For example, the code manipulating the DOM will execute before completion of fetch of data, null reference is then encountered. This snippet should be ensured to put in the sequence following the async function for which promise has resolved.
+## Features
+- ** Home Page **: Displays best-selling products and new arrivals.
+- ** Product Page **: Catalogue listing all goods available for sale; Product page provides detailed information for each product.
+- ** User Authentication **: Features login functionality using session cookies. Password hashing is conducted.
+- ** Admin Account **: Accessible after login, allowing management of inventory and sales reports.
+- ** Client Account **: Users can view their personal sales records.
+- ** Resume Page **: An online version of my resume is also included in index.html.
 
-3/  For the sake of security, the password should be hashed in frontend before sending to backend. It is because the password is sent in plain text to server, and then hashed by bcrypt. If the password is hashed in frontend, the plain text password will not be sent to server. However, the hashed password will be sent to server. It is still secure because the hashed password is not reversible.
+## Tech Stack
+- ** Frontend **: JavaScript, HTML, CSS
+- ** Backend **: Node.js, Express
+- ** Database **: PostgreSQL (with Knex for query building)
 
-    But some argued that it is not best practise because of lack of Salt Management.
+## APIs
+The application connects to a server with an SQL database via various APIs, ensuring smooth data transactions.
 
+## Installation
+1.  Clone the repository:
+    git clone https://github.com/alanNG5/profile-alan.git
 
+2.  Navigate to the project directory:
+    cd your-folder
+
+3.  Install dependencies:
+    npm install
+
+4.  Set up your database and environment variables as needed.
+        - setup "env" file and assign port number
+        - Knex migration and seed
+
+5.  Usage
+    Start the server:
+    npm start
+    Open your browser and navigate to specified port of localhost
