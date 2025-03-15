@@ -250,7 +250,7 @@ summary::marker {
     gap: 5%;
     border-bottom: 3px solid var(--color-ter);
     margin-block-end: 10px;
-    padding-bottom: 10px;
+    padding-bottom: 20px;
     position: relative;
 }
 
@@ -304,8 +304,11 @@ summary::marker {
     opacity: 1;
 }
 
-.learning-path .lang-icons:nth-of-type(3) div:nth-of-type(1) img,
-.learning-path .lang-icons:nth-of-type(4) div:nth-of-type(2) img {
+.learning-path :where(
+    .lang-icons:nth-of-type(2) div:nth-of-type(1),
+    .learning-path .lang-icons:nth-of-type(3) div:nth-of-type(1),
+    .learning-path .lang-icons:nth-of-type(4) div:nth-of-type(2)
+    ) img {
     width: 80%;
 }
 
@@ -700,6 +703,7 @@ section.experience h2 {
         justify-content: space-between;
         padding-left: 2.5%;
         padding-right: 2.5%;
+        padding-bottom: 10px;
     }
 }
 
