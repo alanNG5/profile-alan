@@ -15,6 +15,7 @@ const port = process.env.PORT;
 
 import { routes } from "./routers";
 import { requireAdmin } from "./utils/guard";
+
 app.use("/", routes);
 
 app.get("/", (req: Request, res: Response) => {
