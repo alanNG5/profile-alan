@@ -1,5 +1,16 @@
 const career = [
     {
+        year: 2025,
+        companyName: "Uo Man Ltd.",
+        jobTitle: "E-Commerce Operation Administrator",
+        stintOfEmployment: "MAR 2025 – SEP 2025",
+        lastDateOfEmployment: "2025-09-18",
+        companyNature: "E-commerce & Food Supply",
+        duties: "To design and manage web scrapers for market data extraction, while overseeing e-commerce platform operations (including product listings, dynamic pricing, inventory updates), and providing support for daily warehouse workflows.",
+        remarks: null,
+        logo: "npf.jpg"
+    },
+    {
         year: 2023,
         companyName: "Hospital Authority",
         jobTitle: "Executive Assistant IIIA",
